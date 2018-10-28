@@ -69,6 +69,7 @@ export default {
 
   .generator-wrapper
     display: flex
+    max-height: 100vh
 
   .gradient-list
     width: 100%
