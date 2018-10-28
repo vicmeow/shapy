@@ -1,17 +1,27 @@
 <template>
-  <div class="input">
-    <input 
+  <div 
+    class="input-wrapper" 
+    :class="{'canvas-input': name === 'canvas-width'}">
+    <label 
+      :for="name" 
+      class="label">{{ label }} <template v-if="type !== 'text'">({{ value }}{{ unit }})</template></label>
+    <input
+      v-if="type === 'range'"
       :class="{'range-input': type === 'range'}"
-      :type="type" 
+      :type="type"
       :name="name"
       :value="value"
       :id="name"
       :min="rangeMin"
       :max="rangeMax"
       @input="$emit('input', $event.target.value)">
-    <label 
-      :for="name" 
-      class="label">{{ label }} <template v-if="type !== 'text'">({{ value }}{{ unit }})</template></label>
+    <input
+      v-else
+      :type="type"
+      :name="name"
+      :value="value"
+      :id="name"
+      @input="$emit('input', $event.target.value)">
   </div>
 </template>
 <script>
@@ -57,16 +67,20 @@ export default {
 </script>
 
 <style lang="sass">
+
   .input
     display: flex
     flex-direction: column
     flex-basis: 50%
     padding: 0 1rem
-    text-align: center
 
-    .label
-      padding-top: .2rem
+    input
+      text-align: right
+      width: 100px
   
+  .label
+    min-width: 100px
+
   .range-input
     width: 100%
 </style>

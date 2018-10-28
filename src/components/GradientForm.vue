@@ -3,8 +3,24 @@
     <form 
       class="form" 
       @submit.prevent>
+      <form-fieldset 
+        :legend="'Canvas'" 
+        :desc="'The size of your canvas'" 
+        class="fieldset-canvas">
+        <form-input 
+          :label="'width'" 
+          :type="'text'" 
+          v-model="canvas.x" 
+          :name="'canvas-height'"/>
+        <form-input 
+          :label="'height'" 
+          :type="'text'" 
+          v-model="canvas.y" 
+          :name="'canvas-width'"/>
+      </form-fieldset>
       <!-- TYPE OF GRADIENT SHAPE (ROUND VS. RECTANGULAR) -->
       <form-fieldset 
+        class="fieldset-gradient"
         :legend="'Gradient type'" 
         :desc="'Radial gradients create round shapes and linear gradients create rectangular shapes.'">
         <form-radio 
@@ -16,9 +32,14 @@
           :label="'radial'" 
           :value="'linear'"
           v-model="gradient.type" 
-          :name="'gradient-shape'"/></form-fieldset>
+          :name="'gradient-shape'"/>
+        <form-checkbox 
+          :label="'repeating'" 
+          v-model="gradient.repeat" 
+          :name="'gradient-repeat'"/></form-fieldset>
       <!-- COLOR OF GRADIENT SHAPE -->
       <form-fieldset 
+        class="fieldset-colors"
         :legend="'Colors'" 
         :desc="'The color of your gradient shape and canvas background.'">
         <form-input 
@@ -109,9 +130,6 @@
       <button @click="register">Register shape</button>
       <button @click="resetList">Delete all shapes</button>
     </form>
-    <div class="code-output">
-      {{ gradientString }}
-    </div>
   </div>
 </template>
 
@@ -120,13 +138,15 @@ import FormFieldset from '@/components/FormFieldset'
 import FormInput from '@/components/FormInput'
 import FormRadio from '@/components/FormRadio'
 import FormSelect from '@/components/FormSelect'
+import FormCheckbox from '@/components/FormCheckbox'
 export default {
   name: 'Form',
   components: {
     FormFieldset,
     FormInput,
     FormRadio,
-    FormSelect
+    FormSelect,
+    FormCheckbox
   },
   props: {
     canvas: {
@@ -152,7 +172,7 @@ export default {
   data: () => ({
     gradient: {
       type: 'linear',
-      repeat: 'no-repeat',
+      repeat: false,
       box: {
         color: '#94ADCF',
         size: {
@@ -193,7 +213,14 @@ export default {
     gradientString() {
       // Gradient type, linear/radial
       const type = this.gradient.type
-      const repeat = this.gradient.repeat
+      // Repeating gradient
+
+      let repeat
+      if (this.gradient.repeat) {
+        repeat = 'repeat'
+      } else {
+        repeat = 'no-repeat'
+      }
 
       // Shape color
       const color = this.gradient.shape.color
@@ -233,6 +260,22 @@ export default {
 </script>
 
 <style lang="sass">
+
+  .form-wrapper
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+    max-width: 400px
+    padding: 1.5rem
+    background: white
+    overflow: scroll
+
+  input
+    font-size: 1rem
+    border: 0
+    font-family: $font
+    color: $black
+
   .submit-input
     background: $black
     border: 0

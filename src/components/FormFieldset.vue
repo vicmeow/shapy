@@ -29,10 +29,19 @@ export default {
     border: 0
     display: flex
     flex-wrap: wrap
-    margin-bottom: 1.5rem
+    margin-bottom: 1rem
+
+  .fieldset-colors .input-wrapper
+    justify-content: space-between
+    flex-direction: row
+    flex-basis: 100%
+    padding: 0
+
+  .fieldset-gradient .input
+    justify-content: space-between
 
   .fieldset-legend
-    font-size: 1.5rem
+    font-size: 1.2rem
     font-weight: 500
 
   .fieldset-desc
@@ -40,4 +49,8 @@ export default {
     font-size: .95rem
     font-style: italic
     margin: .5rem 0
+  
+  .fieldset-canvas .input-wrapper
+
+
 </style>

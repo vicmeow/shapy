@@ -5,16 +5,21 @@
       @register="registerGradient" 
       @previewGradient="previewGradient"
       @resetList="resetList"/>
-    <gradient-canvas 
-      :gradient="gradient"
-      :preview="preview"
-      :size="canvas"/>
-    <ul class="gradient-list">
-      <li 
-        class="gradient" 
-        v-for="(gradient, index) in gradientList" 
-        :key="gradient.index">{{ index }} - {{ gradient }}</li>
-    </ul>
+    <div class="wrapper">
+      <gradient-canvas 
+        :gradient="gradient"
+        :canvas="canvas"
+        :preview="preview"/>
+      <ul class="gradient-list">
+        <li v-if="preview !== ''">background: </li>
+        <li v-if="preview !== ''">{{ preview }}</li>
+        <li 
+          v-if="!preview"
+          class="gradient" 
+          v-for="gradient in gradientList" 
+          :key="gradient.index">{{ gradient }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -29,13 +34,12 @@ export default {
   },
   data: () => ({
     gradientList: [],
-    gradient:
-      'radial-gradient(circle,rgba(255,255,255,0.6) 50%,transparent 50%) no-repeat 4px 4px / 13px 33px',
+    gradient: '',
     preview: '',
     canvas: {
       unit: 'px',
-      x: 500,
-      y: 500
+      x: 250,
+      y: 250
     }
   }),
   methods: {
@@ -57,35 +61,32 @@ export default {
 
 <style lang="sass">
 
-  .generator-wrapper
-    min-height: 100vh
-    display: grid
-    margin: auto
-    grid-template-columns: minmax(400px, 1fr) 3fr minmax(400px, 1fr)
-    grid-grap: 1rem
-
-  .form-wrapper
-    display: flex
-    flex-direction: column
-    height: 100%
-    width: 100%
-    padding: 1rem
-    background: white
-  
   .wrapper
     display: flex
     flex-direction: column
-    align-items: center
-    justify-content: center
-  
+    min-height: 100vh
+    width: 100%
+
+  .generator-wrapper
+    display: flex
+
   .gradient-list
+    width: 100%
+    height: 200px
+    margin-bottom: 0
+    display: flex
     background: $black
     list-style-type: none
     padding: 1rem
     margin: 0
     color: white
+    overflow: scroll
 
     li
       line-height: 1.3
       margin-bottom: .5rem
+      margin-right: .5rem
+      align-self: flex-start
+      &:hover:not(:first-child)
+        outline: 1px dashed white
 </style>

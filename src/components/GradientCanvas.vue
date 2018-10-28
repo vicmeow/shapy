@@ -1,6 +1,8 @@
 <template>
-  <div class="wrapper">
-    <div class="canvas-wrapper">
+  <div class="gradient-wrapper">
+    <div 
+      class="canvas-wrapper" 
+      :style="{width: canvas.x + canvas.unit, height: canvas.y+ canvas.unit}">
       <div 
         class="preview-canvas"
         :style="{ background: preview }"/>
@@ -28,8 +30,8 @@ export default {
       default() {
         return {
           unit: 'px',
-          x: 500,
-          y: 500
+          x: 250,
+          y: 250
         }
       }
     },
@@ -43,22 +45,29 @@ export default {
 </script>
 
 <style lang="sass">
+  .gradient-wrapper
+    height: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
   .canvas-size
     margin-top: 1rem
-  
+
   .canvas-wrapper
     position: relative
-    height: 500px
-    width: 500px
-    outline-color: $black
+    outline-color: white
+    outline-offset: 2px
     outline-style: dashed
     outline-width: 2px
-  
+    background: white
+
   .canvas
     position: absolute
     height: 100%
     width: 100%
-  
+
   .preview-canvas
     position: absolute
     height: 100%

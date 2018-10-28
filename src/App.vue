@@ -24,7 +24,7 @@ export default {
 
   body
     font-family: $font
-    font-size: 20px
+    font-size: 18px
     color: $black
-    background: #EDF4FF
+    background: $black
 </style>
