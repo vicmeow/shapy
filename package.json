@@ -26,12 +26,25 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/strongly-recommended",
       "@vue/prettier"
     ],
-    "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
+    },
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "semi": false
+        }
+      ],
+      "vue/attributes-order": "warning",
+      "vue/html-quotes": "warning",
+      "vue/this-in-template": "error",
+      "vue/html-closing-bracket-newline": "error",
+      "vue/prop-name-casing": "warning"
     }
   },
   "postcss": {
