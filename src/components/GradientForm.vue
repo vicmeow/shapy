@@ -29,20 +29,23 @@
         class="fieldset-gradient"
         :legend="'Gradient type'" 
         :desc="'Radial gradients create round shapes and linear gradients create rectangular shapes.'">
-        <form-radio 
-          :label="'linear'" 
-          :value="'linear'"
+        <form-radio
+          :label="'linear-gradient'"
           v-model="gradient.type" 
           :name="'gradient-shape'"/>
         <form-radio 
-          :label="'radial'" 
-          :value="'linear'"
+          :label="'radial-gradient'"
           v-model="gradient.type" 
           :name="'gradient-shape'"/>
-        <form-checkbox 
-          :label="'repeating'" 
+        <form-radio
+          :label="'repeat'"
           v-model="gradient.repeat" 
-          :name="'gradient-repeat'"/></form-fieldset>
+          :name="'repeating-gradient'"/>
+        <form-radio 
+          :label="'no-repeat'"
+          v-model="gradient.repeat" 
+          :name="'repeating-gradient'"/>
+      </form-fieldset>
       <!-- COLOR OF GRADIENT SHAPE -->
       <form-fieldset 
         class="fieldset-colors"
@@ -50,12 +53,12 @@
         :desc="'The color of your gradient shape and canvas background.'">
         <form-input 
           :label="'box color'" 
-          :type="'text'" 
+          :type="'color'" 
           v-model="gradient.box.color" 
           :name="'box-color'"/>
         <form-input 
           :label="'shape color'" 
-          :type="'text'" 
+          :type="'color'" 
           v-model="gradient.shape.color" 
           :name="'gradient-color'"/></form-fieldset>
       <!-- BOX ON CANVAS -->
@@ -91,7 +94,7 @@
           :unit="gradient.box.size.unit"/></form-fieldset>
       <!-- ANGLE OF SHAPE IN BOX -->
       <form-fieldset 
-        v-if="gradient.type === 'linear'"
+        v-if="gradient.type === 'linear-gradient'"
         :legend="'Shape degree'" 
         :desc="'The degree of your shape'">
         <form-input 
@@ -103,7 +106,7 @@
           :name="'shape-deg'"/></form-fieldset>
       <!-- SIZE OF SHAPE IN BOX -->
       <form-fieldset 
-        v-if="gradient.type === 'radial'"
+        v-if="gradient.type === 'radial-gradient'"
         :legend="'Shape size'" 
         :desc="'Shape size'">
         <select 
@@ -150,15 +153,13 @@ import FormFieldset from '@/components/FormFieldset'
 import FormInput from '@/components/FormInput'
 import FormRadio from '@/components/FormRadio'
 import FormSelect from '@/components/FormSelect'
-import FormCheckbox from '@/components/FormCheckbox'
 export default {
   name: 'Form',
   components: {
     FormFieldset,
     FormInput,
     FormRadio,
-    FormSelect,
-    FormCheckbox
+    FormSelect
   },
   props: {
     canvas: {
@@ -166,6 +167,7 @@ export default {
       required: false,
       default() {
         return {
+          color: 'transparent',
           x: {
             size: 500,
             unit: 'px'
@@ -184,12 +186,13 @@ export default {
     },
     register() {
       this.$emit('register', this.gradientString)
+      this.gradientString = ''
     }
   },
   data: () => ({
     gradient: {
-      type: 'linear',
-      repeat: false,
+      type: 'linear-gradient',
+      repeat: 'no-repeat',
       box: {
         color: 'transparent',
         size: {
@@ -231,13 +234,7 @@ export default {
       // Gradient type, linear/radial
       const type = this.gradient.type
       // Repeating gradient
-
-      let repeat
-      if (this.gradient.repeat) {
-        repeat = 'repeat'
-      } else {
-        repeat = 'no-repeat'
-      }
+      const repeat = this.gradient.repeat
 
       // Shape color
       const color = this.gradient.shape.color
@@ -264,12 +261,12 @@ export default {
       const boxX = this.gradient.box.coord.x
       const boxY = this.gradient.box.coord.y
 
-      if (type === 'radial') {
-        return `${type}-gradient(${shapeWidth}${shapeUnit} ${shapeHeight}${shapeUnit} at ${shapeX}% ${shapeY}%, ${color} 49.8%, ${boxColor} 50%) ${repeat} ${boxX}% ${boxY}% / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
-      } else if (type === 'linear' && deg > 0) {
-        return `${type}-gradient(${deg}deg, ${color} 49%, ${boxColor} 50%) ${repeat} ${boxX}% ${boxY}% / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
-      } else if (type === 'linear') {
-        return `${type}-gradient(${color} 99.99%, ${boxColor} 100%) ${repeat} ${boxX}% ${boxY}% / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
+      if (type === 'radial-gradient') {
+        return `${type}(${shapeWidth}${shapeUnit} ${shapeHeight}${shapeUnit} at ${shapeX}% ${shapeY}%, ${color} 49.8%, ${boxColor} 50%) ${repeat} ${boxX}${boxUnit} ${boxY}${boxUnit} / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
+      } else if (type === 'linear-gradient' && deg > 0) {
+        return `${type}(${deg}deg, ${color} 49%, ${boxColor} 50%) ${repeat} ${boxX}${boxUnit} ${boxY}${boxUnit} / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
+      } else if (type === 'linear-gradient') {
+        return `${type}(${color} 99.99%, ${boxColor} 100%) ${repeat} ${boxX}${boxUnit} ${boxY}${boxUnit} / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
       }
     }
   }
@@ -283,6 +280,7 @@ export default {
     flex-direction: column
     min-height: 100vh
     max-width: 400px
+    min-width: 400px
     padding: 1.5rem
     background: $white
     overflow: scroll
