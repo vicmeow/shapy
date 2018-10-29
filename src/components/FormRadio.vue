@@ -41,11 +41,5 @@ export default {
 
 <style lang="sass">
 
-  .radio-group
-    display: flex
-    margin-right: 2rem
-  
-  .radio-input
-    margin-right: .5rem
 
 </style>

@@ -10,7 +10,7 @@
         class="canvas" 
         :style="{ background: gradient }"/>
     </div>
-    <div class="canvas-size">
+    <div class="size">
       {{ canvas.x }}{{ canvas.unit }} x {{ canvas.y }}{{ canvas.unit }}
     </div>
   </div>
@@ -52,7 +52,7 @@ export default {
     align-items: center
     justify-content: center
 
-  .canvas-size
+  .size
     margin-top: 1rem
 
   .canvas-wrapper

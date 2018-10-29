@@ -7,14 +7,18 @@
         :legend="'Canvas'" 
         :desc="'The size of your canvas'" 
         class="fieldset-canvas">
+        <!-- TODO: add unit switch -->
         <form-input 
+          class="canvas-size"
           :label="'width'" 
-          :type="'text'" 
+          :type="'number'" 
           v-model="canvas.x" 
           :name="'canvas-height'"/>
+        <span class="x">x</span>
         <form-input 
+          class="canvas-size"
           :label="'height'" 
-          :type="'text'" 
+          :type="'number'" 
           v-model="canvas.y" 
           :name="'canvas-width'"/>
       </form-fieldset>
@@ -54,6 +58,7 @@
           :name="'gradient-color'"/></form-fieldset>
       <!-- BOX ON CANVAS -->
       <form-fieldset 
+        class="fieldset-box"
         :legend="'Box'" 
         :desc="'Placement of the box on the main canvas. Think of it as a canvas within your canvas.'">
         <form-input 
@@ -267,23 +272,6 @@ export default {
     min-height: 100vh
     max-width: 400px
     padding: 1.5rem
-    background: white
+    background: $white
     overflow: scroll
-
-  input
-    font-size: 1rem
-    border: 0
-    font-family: $font
-    color: $black
-
-  .submit-input
-    background: $black
-    border: 0
-    min-height: 40px
-    min-width: 120px
-    border-radius: 30px
-    font-size: 1rem
-    color: white
-    font-weight: 500
-    text-transform: uppercase
 </style>
