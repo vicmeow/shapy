@@ -14,10 +14,9 @@
         <li v-if="preview !== ''">background: </li>
         <li v-if="preview !== ''">{{ preview }}</li>
         <li 
-          v-if="!preview"
           class="gradient" 
           v-for="gradient in gradientList" 
-          :key="gradient.index">{{ gradient }}</li>
+          :key="gradient.index">{{ gradient }}, </li>
       </ul>
     </div>
   </div>
@@ -76,14 +75,17 @@ export default {
     height: 200px
     margin-bottom: 0
     display: flex
+    flex-wrap: wrap
     background: $black
     list-style-type: none
     padding: 1rem
     margin: 0
     color: white
     overflow: scroll
+    align-content: flex-start
 
     li
+      flex-shrink: 0
       line-height: 1.3
       margin-bottom: .5rem
       margin-right: .5rem

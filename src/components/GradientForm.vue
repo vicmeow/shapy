@@ -252,7 +252,7 @@ export default {
       } else if (type === 'linear' && deg > 0) {
         return `${type}-gradient(${deg}deg, ${color} 49%, ${boxColor} 50%) ${repeat} ${boxX}% ${boxY}% / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
       } else if (type === 'linear') {
-        return `${type}-gradient(${color} 98%, ${boxColor} 99%) ${repeat} ${boxX}% ${boxY}% / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
+        return `${type}-gradient(${color} 99.99%, ${boxColor} 100%) ${repeat} ${boxX}% ${boxY}% / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
       }
     }
   }
