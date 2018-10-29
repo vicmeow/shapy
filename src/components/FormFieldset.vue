@@ -2,7 +2,7 @@
   <fieldset class="fieldset">
     <legend class="legend">{{ legend }}<slot name="select-unit"/></legend>
     <p class="desc">{{ desc }}</p>
-    <slot/>
+    <slot :range="range"/>
   </fieldset>
 </template>
 
@@ -18,6 +18,16 @@ export default {
       type: String,
       required: false,
       default: 'Description'
+    },
+    range: {
+      type: Object,
+      required: false,
+      default() {
+        return {
+          min: 0,
+          max: 100
+        }
+      }
     }
   }
 }

@@ -1,17 +1,20 @@
 <template>
   <div class="gradient-wrapper">
     <div 
-      class="canvas-wrapper" 
-      :style="{width: canvas.x + canvas.unit, height: canvas.y+ canvas.unit}">
+      class="canvas-wrapper">
       <div 
-        class="preview-canvas"
-        :style="{ background: preview }"/>
-      <div 
-        class="canvas" 
-        :style="{ background: gradient }"/>
+        class="sized-canvas" 
+        :style="{width: canvas.x.size + canvas.x.unit, height: canvas.y.size + canvas.y.unit}">
+        <div 
+          class="preview-canvas"
+          :style="{ background: preview }"/>
+        <div 
+          class="canvas" 
+          :style="{ background: gradient }"/>
+      </div>
     </div>
     <div class="size">
-      {{ canvas.x }}{{ canvas.unit }} x {{ canvas.y }}{{ canvas.unit }}
+      {{ canvas.x.size + canvas.x.unit }} x {{ canvas.y.size + canvas.y.unit }}
     </div>
   </div>
 </template>
@@ -29,9 +32,14 @@ export default {
       required: false,
       default() {
         return {
-          unit: 'px',
-          x: 250,
-          y: 250
+          x: {
+            size: 500,
+            unit: 'px'
+          },
+          y: {
+            size: 500,
+            unit: 'px'
+          }
         }
       }
     },
@@ -53,18 +61,28 @@ export default {
     justify-content: center
 
   .size
+    color: $white
     margin-top: 1rem
 
   .canvas-wrapper
     position: relative
-    outline-color: white
-    outline-offset: 2px
-    outline-style: dashed
-    outline-width: 2px
     background: white
+    height: 520px
+    width: 520px
+    display: flex
+    justify-content: center
+    align-items: center
+
+  .sized-canvas
+    display: flex
+    margin: auto
+    position: absolute
+    outline-color: $black
+    outline-style: dashed
+    outline-width: 1px
 
   .canvas
-    position: absolute
+    position: relative
     height: 100%
     width: 100%
 

@@ -5,21 +5,23 @@
       @submit.prevent>
       <form-fieldset 
         :legend="'Canvas'" 
-        :desc="'The size of your canvas'" 
+        :desc="'The size of your canvas. Only accepts px for now.'" 
         class="fieldset-canvas">
         <!-- TODO: add unit switch -->
         <form-input 
           class="canvas-size"
           :label="'width'" 
           :type="'number'" 
-          v-model="canvas.x" 
+          v-model="canvas.x.size" 
+          :range="{max: 500, min: 0}"
           :name="'canvas-height'"/>
         <span class="x">x</span>
         <form-input 
           class="canvas-size"
           :label="'height'" 
           :type="'number'" 
-          v-model="canvas.y" 
+          v-model="canvas.y.size" 
+          :range="{max: 500, min: 0}"
           :name="'canvas-width'"/>
       </form-fieldset>
       <!-- TYPE OF GRADIENT SHAPE (ROUND VS. RECTANGULAR) -->
@@ -64,24 +66,26 @@
         <form-input 
           :label="'x-axis'" 
           :type="'range'" 
+          :unit="'%'"
           v-model.number="gradient.box.coord.x" 
           :name="'box-x-axis'"/>
         <form-input 
           :label="'y-axis'" 
           :type="'range'" 
+          :unit="'%'"
           v-model.number="gradient.box.coord.y" 
           :name="'box-y-axis'"/>
         <form-input 
           :label="'width'" 
           :type="'range'" 
-          :range-max="maxRange"
+          :range="{max: canvas.x.size, min: 0}"
           v-model.number="gradient.box.size.x" 
           :name="'box-width'"
           :unit="gradient.box.size.unit"/>
         <form-input 
           :label="'height'" 
           :type="'range'" 
-          :range-max="maxRange"
+          :range="{max: canvas.y.size, min: 0}"
           v-model.number="gradient.box.size.y" 
           :name="'box-height'"
           :unit="gradient.box.size.unit"/></form-fieldset>
@@ -91,9 +95,10 @@
         :legend="'Shape degree'" 
         :desc="'The degree of your shape'">
         <form-input 
-          :label="'deg'" 
+          :label="'degree'" 
           :type="'range'"
-          :range-max="360"
+          :range="{max: 360, min: 0}"
+          :unit="'deg'"
           v-model.number="gradient.shape.deg" 
           :name="'shape-deg'"/></form-fieldset>
       <!-- SIZE OF SHAPE IN BOX -->
@@ -111,24 +116,26 @@
         <form-input 
           :label="'Shape width'" 
           :type="'range'" 
-          :range-max="gradient.box.size.x"
+          :range="{max: gradient.box.size.x, min: 0}"
           v-model.number="gradient.shape.size.x" 
           :name="'shape-width'"
           :unit="gradient.shape.size.unit"/>
         <form-input 
           :label="'Shape height'" 
           :type="'range'" 
-          :range-max="gradient.box.size.y"
+          :range="{max: gradient.box.size.y, min: 0}"
           v-model.number="gradient.shape.size.y" 
           :name="'shape-height'"
           :unit="gradient.shape.size.unit"/>
         <form-input 
           :label="'x-axis'" 
           :type="'range'"
+          :unit="'%'"
           v-model.number="gradient.shape.coord.x" 
           :name="'shape-x-axis'"/>
         <form-input 
           :label="'y-axis'" 
+          :unit="'%'"
           :type="'range'"
           v-model.number="gradient.shape.coord.y" 
           :name="'shape-y-axis'"/></form-fieldset>
@@ -159,9 +166,14 @@ export default {
       required: false,
       default() {
         return {
-          x: 500,
-          y: 500,
-          unit: 'px'
+          x: {
+            size: 500,
+            unit: 'px'
+          },
+          y: {
+            size: 500,
+            unit: 'px'
+          }
         }
       }
     }
@@ -179,7 +191,7 @@ export default {
       type: 'linear',
       repeat: false,
       box: {
-        color: '#94ADCF',
+        color: 'transparent',
         size: {
           unit: 'px',
           x: 100,
@@ -192,7 +204,7 @@ export default {
       },
       shape: {
         deg: 0,
-        color: '#FFEAF5',
+        color: '#00c6b8',
         size: {
           unit: 'px',
           x: 100,
@@ -212,7 +224,7 @@ export default {
   },
   computed: {
     maxRange() {
-      if (this.gradient.box.size.unit === 'px') return this.canvas.x
+      if (this.gradient.box.size.unit === 'px') return this.canvas.x.size
       if (this.gradient.box.size.unit === '%') return 100
     },
     gradientString() {
@@ -253,7 +265,7 @@ export default {
       const boxY = this.gradient.box.coord.y
 
       if (type === 'radial') {
-        return `${type}-gradient(${shapeWidth}${shapeUnit} ${shapeHeight}${shapeUnit} at ${shapeX}% ${shapeY}%, ${color} 49%, ${boxColor} 50%) ${repeat} ${boxX}% ${boxY}% / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
+        return `${type}-gradient(${shapeWidth}${shapeUnit} ${shapeHeight}${shapeUnit} at ${shapeX}% ${shapeY}%, ${color} 49.8%, ${boxColor} 50%) ${repeat} ${boxX}% ${boxY}% / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
       } else if (type === 'linear' && deg > 0) {
         return `${type}-gradient(${deg}deg, ${color} 49%, ${boxColor} 50%) ${repeat} ${boxX}% ${boxY}% / ${boxWidth}${boxUnit} ${boxHeight}${boxUnit}`
       } else if (type === 'linear') {

@@ -3,15 +3,21 @@
     class="input-wrapper">
     <label 
       :for="name" 
-      class="label">{{ label }} <template v-if="type !== 'text'">({{ value }}{{ unit }})</template></label>
+      class="label">{{ label }} <template v-if="type === 'range'">({{ value }}</template><template v-if="type !== 'text'">{{ unit }})</template></label>
     <input
       :type="type"
       :name="name"
       :value="value"
       :id="name"
-      :min="rangeMin"
-      :max="rangeMax"
+      :max="range.max"
       @input="$emit('input', $event.target.value)">
+      <!-- <input
+      v-else
+      :type="type"
+      :name="name"
+      :value="value"
+      :id="name"
+      @input="$emit('input', $event.target.value)"> -->
   </div>
 </template>
 <script>
@@ -37,20 +43,20 @@ export default {
       required: false,
       default: ''
     },
-    rangeMin: {
-      type: Number,
+    range: {
+      type: Object,
       required: false,
-      default: 0
-    },
-    rangeMax: {
-      type: Number,
-      required: false,
-      default: 500
+      default() {
+        return {
+          min: 0,
+          max: 100
+        }
+      }
     },
     unit: {
       type: String,
       required: false,
-      default: '%'
+      default: 'px'
     }
   }
 }
@@ -73,9 +79,12 @@ export default {
 
   .canvas-size
     max-width: 50%
+    display: flex
+    flex-direction: column-reverse
 
     label
-      display: none
+      text-align: center
+      margin-top: .2rem
 
     input
       border-radius: 2rem

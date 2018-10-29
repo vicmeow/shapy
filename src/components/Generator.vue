@@ -36,9 +36,14 @@ export default {
     gradient: '',
     preview: '',
     canvas: {
-      unit: 'px',
-      x: 250,
-      y: 250
+      x: {
+        size: 500,
+        unit: 'px'
+      },
+      y: {
+        size: 500,
+        unit: 'px'
+      }
     }
   }),
   methods: {
