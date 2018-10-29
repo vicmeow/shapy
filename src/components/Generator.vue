@@ -36,6 +36,7 @@ export default {
     gradient: '',
     preview: '',
     canvas: {
+      color: 'transparent',
       x: {
         size: 500,
         unit: 'px'
