@@ -1,101 +1,54 @@
 <template>
   <div class="generator-wrapper">
-    <gradient-form 
-      :canvas="canvas" 
-      @register="registerGradient" 
-      @previewGradient="previewGradient"
-      @resetList="resetList"/>
-    <div class="wrapper">
-      <gradient-canvas 
-        :gradient="gradient"
-        :canvas="canvas"
-        :preview="preview"/>
-      <ul class="gradient-list">
-        <li v-if="preview !== ''">background: </li>
-        <li v-if="preview !== ''">{{ preview }}</li>
-        <li 
-          class="gradient" 
-          v-for="gradient in gradientList" 
-          :key="gradient.index">{{ gradient }}, </li>
-      </ul>
-    </div>
+    <gradient-form/>
+    <gradient-canvas/>
+    <ul class="gradient-list">
+      <li>background: </li>
+      <li>{{ previewGradient }}</li>
+      <li 
+        v-for="gradient in gradientList" 
+        :key="gradient.index">{{ gradient }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
 import GradientForm from '@/components/GradientForm'
 import GradientCanvas from '@/components/GradientCanvas'
+import { mapState } from 'vuex'
 export default {
   name: 'Generator',
   components: {
     GradientForm,
     GradientCanvas
   },
-  data: () => ({
-    gradientList: [],
-    gradient: '',
-    preview: '',
-    canvas: {
-      color: 'transparent',
-      x: {
-        size: 500,
-        unit: 'px'
-      },
-      y: {
-        size: 500,
-        unit: 'px'
-      }
-    }
-  }),
-  methods: {
-    resetList() {
-      this.gradientList = []
-      this.gradient = ''
-      this.preview = ''
-    },
-    previewGradient(gradient) {
-      this.preview = gradient
-    },
-    registerGradient(gradient) {
-      this.gradientList.unshift(gradient)
-      this.gradient = this.gradientList.join(', ')
-    }
+  computed: {
+    ...mapState({
+      gradientList: 'gradientList',
+      previewGradient: 'previewGradient'
+    })
   }
 }
 </script>
 
 <style lang="sass">
 
-  .wrapper
-    display: flex
-    flex-direction: column
-    min-height: 100vh
-    width: 100%
-
   .generator-wrapper
-    display: flex
-    max-height: 100vh
+    display: grid
+    grid-template-columns: 400px 1fr 400px
 
   .gradient-list
     width: 100%
-    height: 200px
-    margin-bottom: 0
-    display: flex
-    flex-wrap: wrap
-    background: $black
     list-style-type: none
-    padding: 1rem
-    margin: 0
+    overflow-y: scroll
     color: white
-    overflow: scroll
-    align-content: flex-start
+    padding: 1rem 0
 
     li
-      flex-shrink: 0
+      display: inline-block
       line-height: 1.3
       margin-bottom: .5rem
       margin-right: .5rem
-      align-self: flex-start
       &:hover:not(:first-child)
         outline: 1px dashed white
 </style>
