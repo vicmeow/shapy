@@ -27,4 +27,5 @@ export default {
     font-size: 18px
     color: $black
     background: $black
+    font-smooth: subpixel-antialiased
 </style>
