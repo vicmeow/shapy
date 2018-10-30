@@ -12,7 +12,7 @@
         type="radio"
         name="gradient-type"
         value="linear-gradient"
-        id="'gradient-linear">
+        id="gradient-linear">
       <label 
         for="gradient-linear" 
         class="label">linear-gradient</label>
@@ -23,7 +23,7 @@
         type="radio"
         name="gradient-type"
         value="radial-gradient"
-        id="'gradient-radial">
+        id="gradient-radial">
       <label 
         for="gradient-radial" 
         class="label">radial-gradient</label>
@@ -36,7 +36,7 @@
         type="radio"
         name="repeating-gradient"
         value="no-repeat"
-        id="'gradient-no-repeat">
+        id="gradient-no-repeat">
       <label 
         for="gradient-no-repeat" 
         class="label">no-repeat</label>
@@ -47,7 +47,7 @@
         type="radio"
         name="repeating-gradient"
         value="repeat"
-        id="'gradient-repeat">
+        id="gradient-repeat">
       <label 
         for="gradient-repeat" 
         class="label">repeat</label>
@@ -75,37 +75,8 @@ export default {
 
   .fieldset-gradient
     flex-direction: row
-
-  input[type="radio"]
-    position: absolute
-    height: 100%
-    width: 100%
-    opacity: 0
-    z-index: 2
-
+  
   .radio-wrapper
-    position: relative
-    display: flex
-    margin: .3rem 0
     flex-basis: 50%
-
-  label
-    display: flex
-    align-items: center
-
-  input[type="radio"] + label::before
-    position: relative
-    content: ''
-    bottom: 0
-    display: inline-block
-    position relative
-    height: 16px
-    width: 16px
-    border: 1.5px solid $green
-    border-radius: 50%
-    margin-right: .5rem
-
-  input[type="radio"]:checked + label::before
-    background: radial-gradient(85% 85% at 50% 50%, $green 40%, $white 41%) no-repeat 50% 50% / 100% 100%
 
 </style>

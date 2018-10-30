@@ -36,6 +36,7 @@ export default {
   .generator-wrapper
     display: grid
     grid-template-columns: 400px 1fr 400px
+    min-height: 100vh
 
   .gradient-list
     width: 100%

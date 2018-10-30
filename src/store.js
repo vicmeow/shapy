@@ -26,12 +26,12 @@ const state = {
     color: 'transparent',
     size: {
       x: {
-        unit: 'px',
-        size: 250
+        unit: '%',
+        size: 50
       },
       y: {
-        unit: 'px',
-        size: 250
+        unit: '%',
+        size: 50
       }
     },
     coord: {

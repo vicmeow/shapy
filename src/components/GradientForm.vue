@@ -3,7 +3,7 @@
     <form 
       class="form" 
       @submit.prevent>
-      <!-- <fieldset-canvas/> -->
+      <fieldset-canvas/>
       <fieldset-gradient/>
       <fieldset-box/>
       <fieldset-shape/>
@@ -83,13 +83,12 @@ export default {
 
   .range-wrapper
     display: flex
-    flex-direction: column-reverse
+    flex-direction: column
     text-align: center
     width: 50%
 
     label
       font-size: .95rem
-      margin: .5rem 0
 
   input
     font-family: $font
@@ -106,5 +105,36 @@ export default {
     border-bottom: 1px solid $black
     &:focus
       border-color: $green
+
+  .radio-wrapper
+    position: relative
+    display: flex
+    margin: .3rem 0
+
+    label
+      display: flex
+      align-items: center
+
+  input[type="radio"]
+    position: absolute
+    height: 100%
+    width: 100%
+    opacity: 0
+    z-index: 2
+
+  input[type="radio"] + label::before
+    position: relative
+    content: ''
+    bottom: 0
+    display: inline-block
+    position relative
+    height: 16px
+    width: 16px
+    border: 1.5px solid $green
+    border-radius: 50%
+    margin-right: .5rem
+
+  input[type="radio"]:checked + label::before
+    background: radial-gradient(85% 85% at 50% 50%, $green 40%, $white 41%) no-repeat 50% 50% / 100% 100%
 
 </style>
