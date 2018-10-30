@@ -1,20 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { getField, updateField } from 'vuex-map-fields'
 
 Vue.use(Vuex)
 
 const state = {
-  gradientString: '',
   gradientList: [],
-  gradientPreview: '',
+  previewGradient: '',
+  comment: 'This is a comment',
   canvas: {
     x: {
       unit: 'px',
-      x: 500
+      size: 500
     },
     y: {
       unit: 'px',
-      y: 500
+      size: 500
     }
   },
   gradient: {
@@ -26,80 +27,72 @@ const state = {
     size: {
       x: {
         unit: 'px',
-        x: 500
+        size: 250
       },
       y: {
         unit: 'px',
-        y: 500
+        size: 250
       }
     },
     coord: {
       x: {
         unit: '%',
-        x: 100
+        size: 50
       },
       y: {
         unit: '%',
-        y: 100
+        size: 50
       }
     }
   },
   shape: {
-    color: 'transparent',
+    color: '#00978D',
+    deg: 0,
     size: {
       x: {
         unit: '%',
-        x: 100
+        size: 100
       },
       y: {
         unit: '%',
-        y: 100
+        size: 100
       }
     },
     coord: {
       x: {
         unit: '%',
-        x: 100
+        size: 50
       },
       y: {
         unit: '%',
-        y: 100
+        size: 50
       }
     }
   }
 }
 
 const getters = {
-  gradientString() {
-    return state.gradientString
-  },
   gradientList() {
     return state.gradientList
   },
-  gradientPreview() {
-    return state.gradientPreview
+  previewGradient() {
+    return state.previewGradient
   },
-  canvas() {
-    return state.canvas
-  },
-  gradient() {
-    return state.gradient
-  },
-  box() {
-    return state.box
-  },
-  shape() {
-    return state.shape
-  }
+  getField
 }
 
-const mutations = {}
-
-const actions = {}
+const mutations = {
+  updateField,
+  addGradient(state, gradient) {
+    state.gradientList.unshift(gradient)
+  },
+  previewGradient(state, gradient) {
+    state.previewGradient = gradient
+  }
+}
 
 export default new Vuex.Store({
   state,
   getters,
-  mutations,
-  actions
+  mutations
 })
