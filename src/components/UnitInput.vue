@@ -1,20 +1,20 @@
 <template>
   <div class="unit-wrapper">
     <div class="radio-wrapper">
-      <input 
+      <input
         value="px"
-        type="radio" 
-        :name="name" 
+        type="radio"
+        :name="name"
         @input="$emit('input', $event.target.value)">
-      <label :for="name + 'px'">px</label>
+      <label :for="name + '-px'">px</label>
     </div>
     <div class="radio-wrapper">
-      <input 
+      <input
         value="%"
-        type="radio" 
-        :name="name" 
+        type="radio"
+        :name="name"
         @input="$emit('input', $event.target.value)">
-      <label :for="name + 'per'">%</label>
+      <label :for="name + '-per'">%</label>
     </div>
   </div>
 </template>
@@ -23,6 +23,10 @@
 export default {
   props: {
     name: {
+      type: String,
+      required: true
+    },
+    value: {
       type: String,
       required: true
     }
@@ -41,6 +45,7 @@ export default {
       margin: 0 .5rem
 
   input[type="radio"] + label::before
+    font-size: 1rem
     height: 10px
     width: 10px
     margin-right: .2rem

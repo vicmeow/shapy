@@ -13,88 +13,45 @@
         type="text" 
         name="box-color" 
         id="box-color">
-      
     </div>
 
     <!-- WIDTH INPUT (%/px) -->
-    <div class="range-wrapper">
-      <label 
-        for="box-width" 
-        class="label">Width ({{ box.size.x.unit }})</label>
-      <input
-        v-model="box.size.x.size"
-        type="range" 
-        class="slider"
-        name="box-width"
-        id="box-width"
-        max="100">
-      <unit-input 
-        v-model="box.size.x.unit" 
-        name="box-size-x-unit"/>
-    </div>
+    <input-wrapper
+      v-model="box.size.x"
+      :label="'Width'"
+      :name="'box-size-x'"
+      :what="box.size.x"/>
 
     <!-- HEIGHT INPUT (%/px) -->
-    <div class="range-wrapper">
-      <label 
-        for="box-height" 
-        class="label">Height ({{ box.size.y.unit }})</label>
-      <input
-        v-model="box.size.y.size"
-        type="range" 
-        class="slider"
-        name="box-height"
-        id="box-height"
-        max="100">
-      <unit-input 
-        v-model="box.size.y.unit" 
-        name="box-size-y-unit"/>
-    </div>
+    <input-wrapper
+      v-model="box.size.y"
+      :label="'Height'"
+      :name="'box-size-y'"
+      :what="box.size.y"/>
 
     <!-- X AXIS (%) -->
-    <div class="range-wrapper">
-      <label 
-        for="box-x-axis" 
-        class="label">X-axis ({{ box.coord.x.unit }})</label>
-      <input
-        v-model="box.coord.x.size"
-        type="range" 
-        class="slider"
-        name="box-x-axis"
-        id="box-x-axis"
-        min="-100"
-        max="100">
-      <unit-input 
-        v-model="box.coord.x.unit" 
-        name="box-coord-x-unit"/>
-    </div>
+    <input-wrapper
+      v-model="box.coord.x"
+      :label="'X-axis'"
+      :name="'box-x'"
+      :what="box.coord.x"/>
 
     <!-- Y AXIS (%) -->
-    <div class="range-wrapper">
-      <label 
-        for="box-y-axis" 
-        class="label">Y-axis ({{ box.coord.y.unit }})</label>
-      <input
-        v-model="box.coord.y.size"
-        type="range" 
-        class="slider"
-        name="box-y-axis"
-        id="box-y-axis"
-        min="-100"
-        max="100">
-      <unit-input 
-        v-model="box.coord.y.unit" 
-        name="box-coord-y-unit"/>
-    </div>
+    <input-wrapper
+      v-model="box.coord.y"
+      :label="'Y-axis'"
+      :name="'box-y'"
+      :what="box.coord.y"/>
   </fieldset>
 </template>
 
 <script>
-import UnitInput from '@/components/UnitInput'
+import InputWrapper from '@/components/InputWrapper'
 import { mapFields } from 'vuex-map-fields'
 export default {
   name: 'Box',
   components: {
-    UnitInput
+    InputWrapper
   },
   data: () => ({
     title: 'Box',
@@ -110,5 +67,4 @@ export default {
 <style lang="sass" scoped>
   .fieldset-box
     flex-direction: row
-    flex-wrap: no-wrap
 </style>

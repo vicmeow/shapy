@@ -8,93 +8,53 @@
     <!-- SHAPE COLOR -->
     <div class="input-wrapper input-text">
       <label for="shape-color">Shape color</label>
-      <input 
+      <input
         v-model="shape.color"
-        type="text" 
-        name="shape-color" 
+        type="text"
+        name="shape-color"
         id="shape-color">
     </div>
 
     <template v-if="gradient.type === 'radial-gradient'">
-      <!-- WIDTH INPUT (%) -->
-      <div class="range-wrapper">
-        <label 
-          for="shape-width" 
-          class="label">Width ({{ shape.size.x.unit }})</label>
-        <input
-          v-model="shape.size.x.size"
-          type="range" 
-          class="slider"
-          name="shape-width"
-          id="shape-width"
-          max="100">
-        <unit-input 
-          v-model="shape.size.x.unit" 
-          name="shape-size-x-unit"/>
-      </div>
+      <!-- WIDTH INPUT (%/px) -->
+      <input-wrapper
+        v-model="shape.size.x"
+        :label="'Width'"
+        :name="'shape-size-x'"
+        :what="shape.size.x"/>
 
-      <!-- HEIGHT INPUT (%) -->
-      <div class="range-wrapper">
-        <label 
-          for="shape-height" 
-          class="label">Height ({{ shape.size.y.unit }})</label>
-        <input
-          v-model="shape.size.y.size"
-          type="range" 
-          class="slider"
-          name="shape-height"
-          id="shape-height"
-          max="100">
-        <unit-input 
-          v-model="shape.size.y.unit" 
-          name="shape-size-y-unit"/>
-      </div>
+      <!-- HEIGHT INPUT (%/px) -->
+      <input-wrapper
+        v-model="shape.size.y"
+        :label="'Height'"
+        :name="'shape-size-y'"
+        :what="shape.size.y"/>
 
       <!-- X AXIS (%) -->
-      <div class="range-wrapper">
-        <label 
-          for="shape-x-axis" 
-          class="label">X-axis ({{ shape.coord.x.unit }})</label>
-        <input
-          v-model="shape.coord.x.size"
-          type="range" 
-          class="slider"
-          name="shape-x-axis"
-          id="shape-x-axis"
-          max="100">
-        <unit-input 
-          v-model="shape.coord.x.unit" 
-          name="shape-coord-x-unit"/>
-      </div>
+      <input-wrapper
+        v-model="shape.coord.x"
+        :label="'X-axis'"
+        :name="'shape-x'"
+        :what="shape.coord.x"/>
 
       <!-- Y AXIS (%) -->
-      <div class="range-wrapper">
-        <label 
-          for="shape-y-axis" 
-          class="label">Y-axis ({{ shape.coord.x.unit }})</label>
-        <input
-          v-model="shape.coord.y.size"
-          type="range" 
-          class="slider"
-          name="shape-y-axis"
-          id="shape-y-axis"
-          max="100">
-        <unit-input 
-          v-model="shape.coord.y.unit" 
-          name="shape-coord-y-unit"/>
-      </div>
+      <input-wrapper
+        v-model="shape.coord.y"
+        :label="'Y-axis'"
+        :name="'shape-y'"
+        :what="shape.coord.y"/>
     </template>
 
     <!-- DEG INPUT (%/px) IF LINEAR  -->
-    <div 
-      class="range-wrapper" 
+    <div
+      class="range-wrapper"
       v-if="gradient.type === 'linear-gradient'">
-      <label 
-        for="shape-degree" 
+      <label
+        for="shape-degree"
         class="label">degree</label>
       <input
         v-model="shape.deg"
-        type="range" 
+        type="range"
         class="slider"
         name="shape-degree"
         id="shape-degree"
@@ -104,12 +64,12 @@
 </template>
 
 <script>
-import UnitInput from '@/components/UnitInput'
+import InputWrapper from '@/components/InputWrapper'
 import { mapFields } from 'vuex-map-fields'
 export default {
   name: 'Shape',
   components: {
-    UnitInput
+    InputWrapper
   },
   data: () => ({
     title: 'Shape',
