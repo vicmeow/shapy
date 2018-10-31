@@ -1,18 +1,21 @@
 <template>
-  <div class="range-wrapper">
+  <div class="input-wrapper">
     <size-input
       :label="label"
       v-model.number="what.size"
       :name="name"
-      :unit="what.unit"/>
+      :unit="what.unit">
+      <unit-input
+        slot="unit"
+        v-model="what.unit"
+        :unit="what.unit"
+        :name="name + '-size-unit'"/>
+    </size-input>
     <range-input
       v-model.number="what.size"
       :name="name + '-axis'"
       :min="min"
       :max="max"/>
-    <unit-input
-      v-model="what.unit"
-      :name="name + '-size-unit'"/>
   </div>
 </template>
 
@@ -59,3 +62,11 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  .input-wrapper
+    display: flex
+    flex-direction: column
+    text-align: center
+    flex-basis: 50%
+</style>
