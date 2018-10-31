@@ -40,16 +40,18 @@ export default {
 
   .gradient-list
     width: 100%
+    max-height: 100vh
+    overflow-y: scroll
     list-style-type: none
     overflow-y: scroll
     color: white
-    padding: 1rem 0
+    padding: 1rem
 
     li
       display: inline-block
       line-height: 1.3
       margin-bottom: .5rem
-      margin-right: .5rem
+      padding: 0 .5rem
       &:hover:not(:first-child)
         outline: 1px dashed white
 </style>
