@@ -1,19 +1,19 @@
 <template>
-  <div class="number-wrapper">
+  <div class="size-wrapper">
     <label
       :for="name + '-id'"
       class="label">{{ label }}:</label>
-    <div class="number-edit">
+    <div class="size-edit">
       <input
         @input="$emit('input', $event.target.value)"
-        class="label-number"
+        class="size-input"
         :value="value"
         type="text"
         :name="name"
         :id="name + '-id'"
         :min="min"
         :max="max">
-      <slot name="unit"/>
+      <slot/>
     </div>
   </div>
 </template>
@@ -52,22 +52,24 @@ export default {
 </script>
 
 <style lang="sass">
-  .number-wrapper
+  .size-wrapper
     display: flex
     align-items: center
+    width: 100%
     justify-content: space-between
+    margin-bottom: .2em
 
-    .label-number
+    .size-input
       display: flex
       padding: 0
       min-width: 0
-      max-width: 2.9rem
+      max-width: 2.9em
       text-align: right
-      padding: 0 .2rem
+      padding: 0 .2em
       border: 0
       margin: 0
 
-  .number-edit
+  .size-edit
     display: flex
     justify-content: flex-end
 </style>

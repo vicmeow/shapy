@@ -38,7 +38,7 @@ export default {
   input[type=range]
     -webkit-appearance: none
     width: 100%
-    margin: 7px 0
+    margin: 0
 
   input[type=range]:focus
     outline: none
@@ -61,7 +61,7 @@ export default {
     background: radial-gradient(85% 85% at 50% 50%, $black 38%, $white 39%) no-repeat 50% 50% / 100% 100%
     cursor: pointer
     -webkit-appearance: none
-    margin-top: -7px
+    margin-top: 0
 
   input[type=range]:focus::-webkit-slider-runnable-track
     background: $green

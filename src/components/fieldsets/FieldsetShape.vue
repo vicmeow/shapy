@@ -5,15 +5,16 @@
     <legend class="legend">{{ title }}</legend>
     <p class="desc">{{ desc }}</p>
 
-    <!-- SHAPE COLOR -->
-    <div class="input-wrapper input-text">
-      <label for="shape-color">Shape color</label>
-      <input
-        v-model="shape.color"
-        type="text"
-        name="shape-color"
-        id="shape-color">
-    </div>
+    <!-- DEGREE IF LINEAR GRADIENT -->
+    <input-wrapper
+      v-if="gradient.type === 'linear-gradient'"
+      class="degree-range"
+      v-model="gradient.degree"
+      :label="'Degree'"
+      :name="'gradient-degree'"
+      :what="gradient.degree"
+      :min="0"
+      :max="360"/>
 
     <template v-if="gradient.type === 'radial-gradient'">
       <!-- WIDTH INPUT (%/px) -->
@@ -44,22 +45,13 @@
         :name="'shape-y'"
         :what="shape.coord.y"/>
     </template>
-
-    <!-- DEG INPUT (%/px) IF LINEAR  -->
-    <div
-      class="range-wrapper"
-      v-if="gradient.type === 'linear-gradient'">
-      <label
-        for="shape-degree"
-        class="label">degree</label>
-      <input
-        v-model="shape.deg"
-        type="range"
-        class="slider"
-        name="shape-degree"
-        id="shape-degree"
-        max="360">
-    </div>
+    <!-- SHAPE COLOR -->
+    <input-wrapper
+      v-model="shape.color"
+      :color="shape.color"
+      :label="'Color'"
+      :what="{color: shape.color}"
+      :name="'shape-color'"/>
   </fieldset>
 </template>
 
@@ -73,8 +65,7 @@ export default {
   },
   data: () => ({
     title: 'Shape',
-    desc:
-      'This adjusts the actual shape of your gradient and it will be placed inside the box/mini-canvas.'
+    desc: 'Edit the shape of your radial gradient inside its box.'
   }),
   computed: {
     ...mapFields(['shape', 'gradient'])

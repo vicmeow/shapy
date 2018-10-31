@@ -6,12 +6,15 @@
     <p class="desc">{{ desc }}</p>
 
     <!-- COMMENT -->
-    <div class="input-wrapper input-text">
-      <label for="input-comment">Shape title/description</label>
-      <input 
-        v-model="comment" 
-        type="text" 
+    <div class="input-wrapper">
+      <input
+        v-model="comment"
+        type="text"
+        max="50"
         id="input-comment">
+      <label 
+        class="input-text-label" 
+        for="input-comment">Shape title/description</label>
     </div>
   </fieldset>
 </template>

@@ -5,16 +5,6 @@
     <legend class="legend">{{ title }}</legend>
     <p class="desc">{{ desc }}</p>
 
-    <!-- BOX COLOR -->
-    <div class="input-wrapper input-text">
-      <label for="box-color">Box color</label>
-      <input 
-        v-model="box.color"
-        type="text" 
-        name="box-color" 
-        id="box-color">
-    </div>
-
     <!-- WIDTH INPUT (%/px) -->
     <input-wrapper
       v-model="box.size.x"
@@ -42,6 +32,14 @@
       :label="'Y-axis'"
       :name="'box-y'"
       :what="box.coord.y"/>
+
+    <!-- BOX COLOR -->
+    <input-wrapper
+      v-model="box.color"
+      :color="box.color"
+      :label="'Color'"
+      :what="false"
+      :name="'box-color'"/>
   </fieldset>
 </template>
 
@@ -55,8 +53,7 @@ export default {
   },
   data: () => ({
     title: 'Box',
-    desc:
-      'This is the box on the canvas that your shape goes into. Think of it as a mini-canvas.'
+    desc: 'The box your shape goes into.'
   }),
   computed: {
     ...mapFields(['box'])
