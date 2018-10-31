@@ -29,3 +29,96 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  ::-moz-focus-inner, ::-moz-focus-outer
+    border: 0
+    background: $green
+
+  input[type=range]
+    -webkit-appearance: none
+    width: 100%
+    margin: 7px 0
+
+  input[type=range]:focus
+    outline: none
+
+  input[type=range]::-webkit-slider-runnable-track
+    width: 100%
+    height: 2px
+    cursor: pointer
+    box-shadow: 0
+    background: $black
+    &:focus
+      background: $green
+
+  input[type=range]::-webkit-slider-thumb
+    box-shadow: 0
+    border: 1.4px solid $black
+    height: 17px
+    width: 17px
+    border-radius: 100%
+    background: radial-gradient(85% 85% at 50% 50%, $black 38%, $white 39%) no-repeat 50% 50% / 100% 100%
+    cursor: pointer
+    -webkit-appearance: none
+    margin-top: -7px
+
+  input[type=range]:focus::-webkit-slider-runnable-track
+    background: $green
+
+  input[type=range]::-moz-range-track
+    width: 100%
+    height: 2px
+    cursor: pointer
+    box-shadow: 0
+    background: $black
+    border: 0
+
+  input[type=range]::-moz-range-track:focus
+    background: $green
+
+  ::-moz-range-progress
+    height: 2px
+
+  input[type=range]::-moz-range-thumb
+    box-shadow: 0
+    border: 1.4px solid $black
+    height: 17px
+    width: 17px
+    border-radius: 100%
+    background: radial-gradient(85% 85% at 50% 50%, $green 38%, $white 39%) no-repeat 50% 50% / 100% 100%
+    cursor: pointer
+
+  input[type=range]::-ms-track
+    width: 100%
+    height: 2px
+    cursor: pointer
+    background: transparent
+    border-color: transparent
+    color: transparent
+    &:focus
+      background: $green
+
+  input[type=range]::-ms-fill-lower
+    background: $black
+    border: 0
+    box-shadow: 0
+    &:focus
+      background: $green
+
+  input[type=range]::-ms-thumb
+    box-shadow: 0
+    border: 0
+    height: 17px
+    width: 17px
+    border-radius: 100%
+    background: $black
+    cursor: pointer
+    height: 2px
+
+  input[type=range]:focus::-ms-fill-lower
+    background: $green
+
+  input[type=range]:focus::-ms-fill-upper
+    background: $green
+</style>
