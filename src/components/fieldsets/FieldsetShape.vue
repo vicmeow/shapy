@@ -11,10 +11,10 @@
     <input-wrapper
       v-if="gradient.type === 'linear-gradient'"
       class="degree-range"
-      v-model="gradient.degree"
+      v-model="shape.degree"
       :label="'Degree'"
       :name="'gradient-degree'"
-      :what="gradient.degree"
+      :what="shape.degree"
       :min="0"
       :max="360"/>
 

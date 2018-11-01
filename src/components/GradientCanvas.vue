@@ -73,8 +73,6 @@ export default {
       const type = this.gradient.type
       const repeat = this.gradient.repeat
       const comment = this.comment
-      const degreeSize = this.gradient.degree.size
-      const degreeUnit = this.gradient.degree.unit
 
       // BOX INFO
       const boxColor = this.box.color.color
@@ -93,6 +91,9 @@ export default {
 
       // SHAPE INFO
       const shapeColor = this.shape.color.color
+      // degree info
+      const degreeSize = this.shape.degree.size
+      const degreeUnit = this.shape.degree.unit
       // shape width + unit
       const shapeWidth = this.shape.size.x.size
       const shapeWidthUnit = this.shape.size.x.unit

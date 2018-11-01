@@ -22,11 +22,7 @@ const state = {
   },
   gradient: {
     type: 'linear-gradient',
-    repeat: 'no-repeat',
-    degree: {
-      unit: 'deg',
-      size: 0
-    }
+    repeat: 'no-repeat'
   },
   box: {
     color: {
@@ -56,6 +52,10 @@ const state = {
   shape: {
     color: {
       color: '#00978D'
+    },
+    degree: {
+      unit: 'deg',
+      size: 0
     },
     size: {
       x: {
