@@ -1,5 +1,7 @@
 <template>
-  <fieldset class="fieldset fieldset-shape">
+  <div 
+    role="group" 
+    class="fieldset fieldset-shape">
 
     <!-- TITLE & DESCRIPTION -->
     <legend class="legend">{{ title }}</legend>
@@ -48,11 +50,11 @@
     <!-- SHAPE COLOR -->
     <input-wrapper
       v-model="shape.color"
-      :color="shape.color"
       :label="'Color'"
-      :what="{color: shape.color}"
+      :what="shape.color"
+      :color="true"
       :name="'shape-color'"/>
-  </fieldset>
+  </div>
 </template>
 
 <script>
@@ -72,9 +74,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-  .fieldset-shape
-    flex-direction: row
-    flex-wrap: no-wrap
-</style>

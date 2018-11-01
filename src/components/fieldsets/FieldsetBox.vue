@@ -1,5 +1,7 @@
 <template>
-  <fieldset class="fieldset fieldset-box">
+  <div 
+    role="group" 
+    class="fieldset fieldset-box">
 
     <!-- TITLE & DESCRIPTION -->
     <legend class="legend">{{ title }}</legend>
@@ -35,12 +37,13 @@
 
     <!-- BOX COLOR -->
     <input-wrapper
+      class="color-wrapper"
       v-model="box.color"
-      :color="box.color"
       :label="'Color'"
-      :what="false"
+      :what="box.color"
+      :color="true"
       :name="'box-color'"/>
-  </fieldset>
+  </div>
 </template>
 
 <script>

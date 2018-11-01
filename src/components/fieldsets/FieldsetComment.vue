@@ -1,5 +1,7 @@
 <template>
-  <fieldset class="fieldset fieldset-comment">
+  <div 
+    role="group" 
+    class="fieldset fieldset-comment">
 
     <!-- TITLE & DESCRIPTION -->
     <legend class="legend">{{ title }}</legend>
@@ -16,7 +18,7 @@
         class="input-text-label" 
         for="input-comment">Shape title/description</label>
     </div>
-  </fieldset>
+  </div>
 </template>
 
 <script>
@@ -33,7 +35,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-  
-</style>

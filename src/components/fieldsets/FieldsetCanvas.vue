@@ -1,58 +1,59 @@
 <template>
-  <fieldset class="fieldset fieldset-canvas">
+  <div 
+    role="group" 
+    class="fieldset fieldset-canvas">
 
     <!-- TITLE & DESCRIPTION -->
     <legend class="legend">{{ title }}</legend>
     <p class="desc">{{ desc }}</p>
 
     <!-- WIDTH INPUT -->
-    <div class="canvas-size">
-      <label 
-        for="canvas-width" 
-        class="label canvas-label">width</label>
-      <input
-        v-model="canvas.x.size"
-        type="number"
-        name="canvas-width"
-        id="canvas-width"
-        max="500">
-    </div>
+    <input-wrapper
+      v-model="canvas.x"
+      :label="'Width'"
+      :name="'canvas-width'"
+      :what="canvas.x"
+      :max="maxX"/>
 
     <!-- HEIGHT INPUT -->
-    <div class="canvas-size">
-      <label 
-        for="canvas-height" 
-        class="label">height</label>
-      <input
-        v-model="canvas.y.size"
-        type="number"
-        name="canvas-height"
-        id="canvas-height"
-        max="500">
-    </div>
-  </fieldset>
+    <input-wrapper
+      v-model="canvas.y"
+      :label="'Height'"
+      :name="'canvas-height'"
+      :what="canvas.y"
+      :max="maxY"/>
+  </div>
 </template>
 
 <script>
+import InputWrapper from '@/components/InputWrapper'
+import { mapState } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 export default {
   name: 'Canvas',
+  components: {
+    InputWrapper
+  },
   data: () => ({
     title: 'Canvas',
-    desc: 'The size of your canvas (px). Current max value is 500.'
+    desc: 'Edit the size of your canvas in percentages or pixels.'
   }),
   computed: {
-    ...mapFields(['canvas'])
+    ...mapFields(['canvas']),
+    ...mapState(['canvas']),
+    maxX() {
+      if (this.canvas.x.unit === 'px') return this.canvas.x.max - 32
+      else return 100
+    },
+    maxY() {
+      if (this.canvas.y.unit === 'px') return this.canvas.y.max - 32
+      else return 100
+    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-
-  .fieldset-canvas
-    flex-direction: row
-    flex-wrap: no-wrap
-    justify-content: space-around
 
   .canvas-size
     max-width: 50%

@@ -1,5 +1,7 @@
 <template>
-  <fieldset class="fieldset fieldset-degree">
+  <div 
+    role="group" 
+    class="fieldset fieldset-degree">
 
     <!-- TITLE & DESCRIPTION -->
     <legend class="legend">{{ title }}</legend>
@@ -17,7 +19,7 @@
         id="shape-degree"
         max="360">
     </div>
-  </fieldset>
+  </div>
 </template>
 
 <script>

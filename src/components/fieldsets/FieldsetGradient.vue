@@ -1,5 +1,7 @@
 <template>
-  <fieldset class="fieldset fieldset-gradient">
+  <div 
+    role="group" 
+    class="fieldset fieldset-gradient">
 
     <!-- TITLE & DESCRIPTION -->
     <legend class="legend">{{ title }}</legend>
@@ -26,7 +28,7 @@
       :label="'repeat'"
       v-model="gradient.repeat"
       :name="'repeating-gradient'"/>
-  </fieldset>
+  </div>
 </template>
 
 <script>
@@ -53,8 +55,9 @@ export default {
 <style lang="sass" scoped>
 
   .fieldset-gradient
-    flex-direction: row
-  
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
+
   .degree-range
     margin-top: .5rem
 
