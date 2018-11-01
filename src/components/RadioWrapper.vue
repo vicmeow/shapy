@@ -15,20 +15,27 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   model: {
     prop: 'value',
     event: 'input'
   },
+  computed: {
+    ...mapState(['gradient']),
+    checked() {
+      if (
+        this.label === this.gradient.type ||
+        this.label === this.gradient.repeat
+      )
+        return true
+      else false
+    }
+  },
   props: {
     label: {
       type: String,
       required: true
-    },
-    checked: {
-      type: Boolean,
-      required: false,
-      default: false
     },
     name: {
       type: String,

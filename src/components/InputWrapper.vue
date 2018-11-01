@@ -15,6 +15,7 @@
       <range-input
         v-model.number="what.size"
         :name="name + '-range'"
+        :value="what.size"
         :min="min"
         :max="max"/>
     </template>

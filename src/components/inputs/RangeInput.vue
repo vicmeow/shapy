@@ -1,6 +1,7 @@
 <template>
   <input
     @input="$emit('input', $event.target.value)"
+    :value="value"
     type="range"
     class="slider"
     :name="name"
@@ -12,6 +13,11 @@
 <script>
 export default {
   props: {
+    value: {
+      type: Number,
+      required: true,
+      default: 0
+    },
     name: {
       type: String,
       required: true
