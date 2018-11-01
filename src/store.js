@@ -26,12 +26,12 @@ const state = {
   },
   colors: {
     stop1: {
-      size: 100,
+      size: 50,
       color: '#00978D',
       unit: '%'
     },
     stop2: {
-      size: 100,
+      size: 50,
       color: 'transparent',
       unit: '%'
     }
