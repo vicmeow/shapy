@@ -2,31 +2,20 @@
   <div class="generator-wrapper">
     <gradient-form/>
     <gradient-canvas/>
-    <ul class="gradient-list">
-      <li>background: </li>
-      <li>{{ previewGradient }}</li>
-      <li 
-        v-for="gradient in gradientList" 
-        :key="gradient.index">{{ gradient }}</li>
-    </ul>
+    <gradient-snippet/>
   </div>
 </template>
 
 <script>
 import GradientForm from '@/components/GradientForm'
 import GradientCanvas from '@/components/GradientCanvas'
-import { mapState } from 'vuex'
+import GradientSnippet from '@/components/GradientSnippet'
 export default {
   name: 'Generator',
   components: {
     GradientForm,
-    GradientCanvas
-  },
-  computed: {
-    ...mapState({
-      gradientList: 'gradientList',
-      previewGradient: 'previewGradient'
-    })
+    GradientCanvas,
+    GradientSnippet
   }
 }
 </script>
@@ -35,23 +24,10 @@ export default {
 
   .generator-wrapper
     display: grid
-    grid-template-columns: 400px 1fr 400px
-    min-height: 100vh
-
-  .gradient-list
-    width: 100%
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))
+    grid-template-rows: 1fr minmax(300px, max-content)
     max-height: 100vh
-    overflow-y: scroll
-    list-style-type: none
-    overflow-y: scroll
-    color: white
-    padding: 1rem
+    grid-gap: 1em
+    padding: 1em
 
-    li
-      display: inline-block
-      line-height: 1.3
-      margin-bottom: .5rem
-      padding: 0 .5rem
-      &:hover:not(:first-child)
-        outline: 1px dashed white
 </style>

@@ -82,5 +82,5 @@ export default {
     border: 1px solid red
 
   input[type="radio"].radio:checked + label::before
-    background: radial-gradient(85% 85% at 50% 50%, $green 38%, $white 39%) no-repeat 50% 50% / 100% 100%
+    background: radial-gradient(85% 85% at 50% 50%, $black 38%, $white 39%) no-repeat 50% 50% / 100% 100%
 </style>

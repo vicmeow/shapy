@@ -38,7 +38,7 @@ export default {
   input[type=range]
     -webkit-appearance: none
     width: 100%
-    margin: 0
+    margin: 7px 0
 
   input[type=range]:focus
     outline: none
@@ -55,13 +55,13 @@ export default {
   input[type=range]::-webkit-slider-thumb
     box-shadow: 0
     border: 1.4px solid $black
-    height: 17px
-    width: 17px
+    height: .9em
+    width: .9em
     border-radius: 100%
     background: radial-gradient(85% 85% at 50% 50%, $black 38%, $white 39%) no-repeat 50% 50% / 100% 100%
     cursor: pointer
     -webkit-appearance: none
-    margin-top: 0
+    margin-top: -7px
 
   input[type=range]:focus::-webkit-slider-runnable-track
     background: $green
@@ -83,10 +83,10 @@ export default {
   input[type=range]::-moz-range-thumb
     box-shadow: 0
     border: 1.4px solid $black
-    height: 17px
-    width: 17px
+    height: .9em
+    width: .9em
     border-radius: 100%
-    background: radial-gradient(85% 85% at 50% 50%, $green 38%, $white 39%) no-repeat 50% 50% / 100% 100%
+    background: radial-gradient(85% 85% at 50% 50%, $black 38%, $white 39%) no-repeat 50% 50% / 100% 100%
     cursor: pointer
 
   input[type=range]::-ms-track
@@ -109,8 +109,8 @@ export default {
   input[type=range]::-ms-thumb
     box-shadow: 0
     border: 0
-    height: 17px
-    width: 17px
+    height: .9em
+    width: .9em
     border-radius: 100%
     background: $black
     cursor: pointer
@@ -121,4 +121,5 @@ export default {
 
   input[type=range]:focus::-ms-fill-upper
     background: $green
+
 </style>
