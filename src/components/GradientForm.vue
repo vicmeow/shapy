@@ -3,7 +3,7 @@
     <form 
       class="form" 
       @submit.prevent>
-      <!-- <fieldset-canvas/> -->
+      <fieldset-canvas/>
       <fieldset-gradient/>
       <fieldset-shape/>
       <fieldset-box/>
@@ -37,19 +37,19 @@ export default {
 <style lang="sass">
 
   .form-wrapper
+    grid-column: 1
+    grid-row: 1 / -1
     display: flex
     flex-direction: column
-    max-height: 100vh
-    max-width: 400px
-    min-width: 400px
     padding: 1rem
     background: $white
     overflow-y: scroll
+    border-radius: 5px
 
   .fieldset
-    display: flex
-    flex-direction: column
-    flex-wrap: wrap
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
+    grid-gap: .5em 1em
     border: 0
     margin-bottom: 1rem
 
@@ -58,6 +58,7 @@ export default {
     font-weight: 500
 
   .desc
+    grid-column: 1 / -1
     width: 100%
     flex-basis: 100%
     font-size: .95em

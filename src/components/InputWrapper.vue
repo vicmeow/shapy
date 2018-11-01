@@ -1,34 +1,49 @@
 <template>
   <div class="input-wrapper">
-    <size-input
+    <template v-if="what.size || what.unit">
+      <size-input
+        :label="label"
+        v-model.number="what.size"
+        :name="name"
+        :unit="what.unit">
+        <unit-input
+          v-model="what.unit"
+          :unit="what.unit"
+          :name="name + '-size-unit'"/>
+      </size-input>
+      <range-input
+        v-model.number="what.size"
+        :name="name + '-range'"
+        :min="min"
+        :max="max"/>
+    </template>
+    <text-input
+      v-else
+      v-model="what.color"
       :label="label"
-      v-model.number="what.size"
       :name="name"
-      :unit="what.unit">
-      <unit-input
-        slot="unit"
-        v-model="what.unit"
-        :unit="what.unit"
-        :name="name + '-size-unit'"/>
-    </size-input>
-    <range-input
-      v-model.number="what.size"
-      :name="name + '-axis'"
-      :min="min"
-      :max="max"/>
+      :color="what.color"
+      :color-value="what.color"/>
   </div>
 </template>
 
 <script>
-import RangeInput from '@/components/RangeInput'
-import SizeInput from '@/components/SizeInput'
-import UnitInput from '@/components/UnitInput'
-
+import RangeInput from '@/components/inputs/RangeInput'
+import SizeInput from '@/components/inputs/SizeInput'
+import UnitInput from '@/components/inputs/UnitInput'
+import TextInput from '@/components/inputs/TextInput'
+import { mapState } from 'vuex'
 export default {
   components: {
     UnitInput,
     SizeInput,
-    RangeInput
+    RangeInput,
+    TextInput
+  },
+  computed: {
+    ...mapState({
+      canvas: 'canvas'
+    })
   },
   props: {
     label: {
@@ -39,34 +54,36 @@ export default {
       type: String,
       required: true
     },
+    color: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    min: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    max: {
+      type: Number,
+      required: false,
+      default: 100
+    },
     what: {
-      type: Object,
-      required: true,
+      type: Object | Boolean,
+      required: false,
       default() {
         return {
           size: 100,
           unit: '%'
         }
       }
-    },
-    min: {
-      type: Number,
-      required: false,
-      default: -100
-    },
-    max: {
-      type: Number,
-      required: false,
-      default: 200
     }
   }
 }
 </script>
 
 <style lang="sass">
-  .input-wrapper
-    display: flex
-    flex-direction: column
-    text-align: center
-    flex-basis: 50%
+  .color-wrapper
+    grid-column: 1 / -1
 </style>

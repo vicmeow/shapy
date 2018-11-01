@@ -1,64 +1,83 @@
 <template>
   <div class="gradient-wrapper">
-    <div 
+    <div
       class="canvas-wrapper">
-      <div 
-        class="sized-canvas" 
-        :style="{width: canvas.x.size + 'px', height: canvas.y.size + 'px'}">
-        <div 
-          class="preview-canvas" 
+      <div id="canvas-max"/>
+      <div
+        class="canvas-outline"
+        :style="{width: canvasCurrent.x, height: canvasCurrent.y}">
+        <div
+          class="canvas-preview"
           :style="{background: previewGradient}"/>
-        <div 
-          class="canvas" 
+        <div
+          class="canvas-gradients"
           :style="{background: gradientShapes}"/>
       </div>
     </div>
-    <button 
-      class="btn" 
-      @click="addGradient">Add shape</button>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 export default {
-  data: () => ({
-    gradientPreview: ''
-  }),
   watch: {
     gradientString() {
+      // Watch the gradient string for updates to update the CSS string for the preview canvas
+      // Commit the changes to the store
       this.$store.commit('previewGradient', this.gradientString)
     }
   },
   methods: {
-    addGradient() {
-      this.$store.commit('addGradient', this.gradientString)
+    updateMax() {
+      // Update the max canvas size (px) based on the browser size
+      const width = document.getElementById('canvas-max').offsetWidth
+      const height = document.getElementById('canvas-max').offsetHeight
+      // Commit the new max values to the stire
+      this.$store.commit('updateMax', { x: width, y: height })
     }
   },
   created() {
+    // Show a shape on initial load
     this.$store.commit('previewGradient', this.gradientString)
+    // Add an event listener for calculating canvas max size (px)
+    window.addEventListener('resize', this.updateMax)
+  },
+  mounted() {
+    // update the max canvas size based on canvas wrapper
+    this.updateMax()
   },
   computed: {
-    ...mapState({
-      previewGradient: 'previewGradient',
-      gradientList: 'gradientList',
-      comment: 'comment',
-      canvas: 'canvas',
-      box: 'box',
-      shape: 'shape',
-      gradient: 'gradient'
-    }),
+    canvasCurrent() {
+      // Add size and unit together for canvas size on load
+      const width = this.canvas.x.size + this.canvas.x.unit
+      const height = this.canvas.y.size + this.canvas.y.unit
+      return { x: width, y: height }
+    },
+    // Things we need from the store
+    ...mapState([
+      'previewGradient',
+      'gradientList',
+      'comment',
+      'box',
+      'shape',
+      'gradient',
+      'canvas'
+    ]),
     gradientShapes() {
+      // make the gradient list into a css string
       return this.gradientList.join(', ')
     },
     gradientString() {
+      /* TODO: Move string creation to the store */
       // GRADIENT INFO
       const type = this.gradient.type
       const repeat = this.gradient.repeat
       const comment = this.comment
+      const degreeSize = this.gradient.degree.size
+      const degreeUnit = this.gradient.degree.unit
 
       // BOX INFO
-      const boxColor = this.box.color
+      const boxColor = this.box.color.color
       // box width + unit
       const boxWidth = this.box.size.x.size
       const boxWidthUnit = this.box.size.x.unit
@@ -73,8 +92,7 @@ export default {
       const boxYUnit = this.box.coord.y.unit
 
       // SHAPE INFO
-      const shapeColor = this.shape.color
-      const shapeDeg = this.shape.deg
+      const shapeColor = this.shape.color.color
       // shape width + unit
       const shapeWidth = this.shape.size.x.size
       const shapeWidthUnit = this.shape.size.x.unit
@@ -90,8 +108,8 @@ export default {
 
       if (type === 'radial-gradient') {
         return `/* ${comment} */ ${type}(${shapeWidth}${shapeWidthUnit} ${shapeHeight}${shapeHeightUnit} at ${shapeX}${shapeXUnit} ${shapeY}${shapeYUnit}, ${shapeColor} 49.8%, ${boxColor} 50%) ${repeat} ${boxX}${boxXUnit} ${boxY}${boxYUnit} / ${boxWidth}${boxWidthUnit} ${boxHeight}${boxHeightUnit}`
-      } else if (type === 'linear-gradient' && shapeDeg > 0) {
-        return `/* ${comment} */ ${type}(${shapeDeg}deg, ${shapeColor} 49%, ${boxColor} 50%) ${repeat} ${boxX}${boxXUnit} ${boxY}${boxYUnit} / ${boxWidth}${boxWidthUnit} ${boxHeight}${boxHeightUnit}`
+      } else if (type === 'linear-gradient' && degreeSize > 0) {
+        return `/* ${comment} */ ${type}(${degreeSize}${degreeUnit}, ${shapeColor} 49%, ${boxColor} 50%) ${repeat} ${boxX}${boxXUnit} ${boxY}${boxYUnit} / ${boxWidth}${boxWidthUnit} ${boxHeight}${boxHeightUnit}`
       } else if (type === 'linear-gradient') {
         return `/* ${comment} */ ${type}(${shapeColor} 99.99%, ${boxColor} 100%) ${repeat} ${boxX}${boxXUnit} ${boxY}${boxYUnit} / ${boxWidth}${boxWidthUnit} ${boxHeight}${boxHeightUnit}`
       }
@@ -102,61 +120,43 @@ export default {
 
 <style lang="sass">
 
-  .heading
-    font-size: 1.2rem
-
   .gradient-wrapper
-    display: flex
-    flex-direction: column
-    align-items: center
-    margin: auto
-    max-height: 100vh
-
-  .gradient-preview
-    color: $white
-    margin-bottom: 1rem
-    width: 100%
+    grid-column: 2 / -1
 
   .canvas-wrapper
-    position: relative
-    background: white
-    height: 520px
-    width: 520px
     display: flex
     justify-content: center
     align-items: center
+    position: relative
+    background: white
+    height: 100%
+    width: 100%
+    border-radius: 5px
+    padding: 16px
 
-  .sized-canvas
-    display: flex
-    margin: auto
+  #canvas-max
     position: absolute
+    min-height: 100%
+    min-width: 100%
+
+  .canvas-outline
+    position: relative
     outline-color: $black
     outline-style: dashed
     outline-width: 1.5px
+    outline-offset: 1.5px
+    max-width: 100%
+    max-height: 100%
 
-  .canvas
-    position: relative
-    height: 100%
-    width: 100%
-
-  .preview-canvas
+  .canvas-preview
     position: absolute
     height: 100%
     width: 100%
-    z-index: 99
-  
-  .btn
-    cursor: pointer
-    border: 0
-    background: #00c6b8
-    color: $white
-    font-weight: 500
-    text-transform: uppercase
-    padding: .8rem 1.5rem
-    font-size: 1.2rem
-    font-family: $font
-    border-radius: 2rem
-    margin-top: 1rem
-    &:active
-      transform: translate3d(0,2px,0)
+    z-index: 2
+
+  .canvas-gradients
+    position: absolute
+    height: 100%
+    width: 100%
+
 </style>

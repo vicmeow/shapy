@@ -7,23 +7,31 @@ Vue.use(Vuex)
 const state = {
   gradientList: [],
   previewGradient: '',
-  comment: 'This is a comment',
+  comment: 'Comment',
   canvas: {
     x: {
-      unit: 'px',
-      size: 500
+      unit: '%',
+      size: 50,
+      max: false
     },
     y: {
-      unit: 'px',
-      size: 500
+      unit: '%',
+      size: 50,
+      max: false
     }
   },
   gradient: {
     type: 'linear-gradient',
-    repeat: 'no-repeat'
+    repeat: 'no-repeat',
+    degree: {
+      unit: 'deg',
+      size: 0
+    }
   },
   box: {
-    color: 'transparent',
+    color: {
+      color: '#B3FFF6'
+    },
     size: {
       x: {
         unit: '%',
@@ -46,8 +54,9 @@ const state = {
     }
   },
   shape: {
-    color: '#00978D',
-    deg: 0,
+    color: {
+      color: '#00978D'
+    },
     size: {
       x: {
         unit: '%',
@@ -83,6 +92,10 @@ const getters = {
 
 const mutations = {
   updateField,
+  updateMax(state, max) {
+    state.canvas.x.max = max.x
+    state.canvas.y.max = max.y
+  },
   addGradient(state, gradient) {
     state.gradientList.unshift(gradient)
   },
