@@ -4,38 +4,48 @@
     class="fieldset fieldset-canvas">
 
     <!-- TITLE & DESCRIPTION -->
-    <legend class="legend">{{ title }}</legend>
-    <p class="desc">{{ desc }}</p>
+    <legend 
+      class="legend" 
+      @click="hidden = !hidden">{{ title }}</legend>
+    <group-toggle 
+      @click.native="hidden = !hidden" 
+      :hidden="hidden"/>
+    <template v-if="!hidden">
+      <p class="desc">{{ desc }}</p>
 
-    <!-- WIDTH INPUT -->
-    <input-wrapper
-      v-model="canvas.x"
-      :label="'Width'"
-      :name="'canvas-width'"
-      :what="canvas.x"
-      :max="maxX"/>
+      <!-- WIDTH INPUT -->
+      <input-wrapper
+        v-model="canvas.x"
+        :label="'Width'"
+        :name="'canvas-width'"
+        :what="canvas.x"
+        :max="maxX"/>
 
-    <!-- HEIGHT INPUT -->
-    <input-wrapper
-      v-model="canvas.y"
-      :label="'Height'"
-      :name="'canvas-height'"
-      :what="canvas.y"
-      :max="maxY"/>
+      <!-- HEIGHT INPUT -->
+      <input-wrapper
+        v-model="canvas.y"
+        :label="'Height'"
+        :name="'canvas-height'"
+        :what="canvas.y"
+        :max="maxY"/>
+    </template>
   </div>
 </template>
 
 <script>
 import InputWrapper from '@/components/InputWrapper'
+import GroupToggle from '@/components/GroupToggle'
 import { mapState } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 export default {
   name: 'Canvas',
   components: {
-    InputWrapper
+    InputWrapper,
+    GroupToggle
   },
   data: () => ({
-    title: 'Canvas size',
+    hidden: true,
+    title: 'Canvas Size',
     desc: 'Edit the size of your canvas in percentages or pixels.'
   }),
   computed: {
