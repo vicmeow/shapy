@@ -11,7 +11,7 @@
           :style="{background: previewGradient}"/>
         <div
           class="canvas-gradients"
-          :style="{background: gradientShapes}"/>
+          :style="{background: gradientStrings}"/>
       </div>
     </div>
   </div>
@@ -57,6 +57,7 @@ export default {
     ...mapState([
       'previewGradient',
       'gradientList',
+      'gradientStrings',
       'comment',
       'box',
       'shape',
@@ -64,10 +65,6 @@ export default {
       'canvas',
       'colors'
     ]),
-    gradientShapes() {
-      // make the gradient list into a css string
-      return this.gradientList.join(', ')
-    },
     gradientString() {
       /* TODO: Move string creation to the store */
       // GRADIENT INFO
@@ -124,6 +121,7 @@ export default {
     padding-top: 1em
     padding-right: 1em
     grid-column: 2 / -1
+    min-height: 100%
 
   .canvas-wrapper
     display: flex

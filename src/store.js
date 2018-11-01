@@ -7,6 +7,7 @@ Vue.use(Vuex)
 const state = {
   gradientList: [],
   previewGradient: '',
+  gradientStrings: '',
   comment: 'Comment',
   canvas: {
     x: {
@@ -93,6 +94,9 @@ const getters = {
   previewGradient() {
     return state.previewGradient
   },
+  gradientStrings() {
+    return state.gradientStrings
+  },
   getField
 }
 
@@ -102,8 +106,25 @@ const mutations = {
     state.canvas.x.max = max.x
     state.canvas.y.max = max.y
   },
-  addGradient(state, gradient) {
+  addShape(state, gradient) {
     state.gradientList.unshift(gradient)
+    let newList = []
+    state.gradientList.forEach(item => {
+      newList.unshift(item.string)
+    })
+    state.gradientStrings = newList.join(', ')
+  },
+  undoShape(state) {
+    state.gradientList.shift()
+    let newList = []
+    state.gradientList.forEach(item => {
+      newList.unshift(item.string)
+    })
+    state.gradientStrings = newList.join(', ')
+  },
+  deleteShapes(state) {
+    state.gradientList = []
+    state.gradientStrings = ''
   },
   previewGradient(state, gradient) {
     state.previewGradient = gradient

@@ -1,10 +1,12 @@
 <template>
   <ul class="gradient-list">
     <li>Current shape: <code>{{ previewGradient }}</code></li>
-    <li>Added shaapes:</li>
+    <li>Your shapes:</li>
     <li
       v-for="gradient in gradientList"
-      :key="gradient.index"><code>{{ gradient }}</code></li>
+      :key="gradient.index">
+      <code>{{ gradient.string }}</code>
+    </li>
   </ul>
 </template>
 
