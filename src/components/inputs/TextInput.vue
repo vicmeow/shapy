@@ -1,8 +1,5 @@
 <template>
   <div :class="{'color-input-wrapper': color, 'text-wrapper': !color}">
-    <label
-      class="input-text-label"
-      :for="name + '-id'">{{ label }}:</label>
     <input
       :value="colorValue"
       :class="{'color-input': color, 'text-input': !color}"

@@ -24,10 +24,19 @@ const state = {
     type: 'linear-gradient',
     repeat: 'no-repeat'
   },
-  box: {
-    color: {
-      color: '#B3FFF6'
+  colors: {
+    stop1: {
+      size: 100,
+      color: '#00978D',
+      unit: '%'
     },
+    stop2: {
+      size: 100,
+      color: 'transparent',
+      unit: '%'
+    }
+  },
+  box: {
     size: {
       x: {
         unit: '%',
@@ -50,22 +59,9 @@ const state = {
     }
   },
   shape: {
-    color: {
-      color: '#00978D'
-    },
     degree: {
       unit: 'deg',
-      size: 0,
-      stops: [
-        {
-          stop: 50,
-          color: '#00978D'
-        },
-        {
-          stop: 50,
-          color: 'transparent'
-        }
-      ]
+      size: 0
     },
     size: {
       x: {

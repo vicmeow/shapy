@@ -26,7 +26,7 @@ export default {
     display: grid
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))
     grid-template-rows: 1fr minmax(300px, max-content)
-    max-height: 100vh
+    min-height: 100vh
     grid-gap: 1em
     padding: 1em
 

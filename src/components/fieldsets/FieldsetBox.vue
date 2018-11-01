@@ -35,14 +35,16 @@
       :name="'box-y'"
       :what="box.coord.y"/>
 
-    <!-- BOX COLOR -->
+    <!-- DEGREE IF LINEAR GRADIENT -->
     <input-wrapper
-      class="color-wrapper"
-      v-model="box.color"
-      :label="'Color'"
-      :what="box.color"
-      :color="true"
-      :name="'box-color'"/>
+      v-if="gradient.type === 'linear-gradient'"
+      class="degree-range"
+      v-model="shape.degree"
+      :label="'Degree'"
+      :name="'gradient-degree'"
+      :what="shape.degree"
+      :min="0"
+      :max="360"/>
   </div>
 </template>
 
@@ -59,7 +61,7 @@ export default {
     desc: 'The box your shape goes into.'
   }),
   computed: {
-    ...mapFields(['box'])
+    ...mapFields(['box', 'shape', 'gradient'])
   }
 }
 </script>

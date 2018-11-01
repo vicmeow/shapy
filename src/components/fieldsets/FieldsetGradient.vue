@@ -7,27 +7,33 @@
     <legend class="legend">{{ title }}</legend>
     <p class="desc">{{ desc }}</p>
 
-    <!-- GRADIENT TYPES -->
-    <radio-wrapper
-      :label="'linear-gradient'"
-      v-model="gradient.type"
-      :name="'gradient-type'"
-      :checked="true"/>
-    <radio-wrapper
-      :label="'radial-gradient'"
-      v-model="gradient.type"
-      :name="'gradient-type'"/>
+    <div class="type-wrapper">
+      <!-- GRADIENT TYPES -->
+      <radio-wrapper
+        :label="'linear-gradient'"
+        v-model="gradient.type"
+        :name="'gradient-type'"
+        :checked="true"/>
+      <radio-wrapper
+        :label="'radial-gradient'"
+        v-model="gradient.type"
+        :name="'gradient-type'"/>
+    </div>
 
     <!-- REPEAT VS NO-REPEAT GRADIENT -->
-    <radio-wrapper
-      :label="'no-repeat'"
-      v-model="gradient.repeat"
-      :name="'repeating-gradient'"
-      :checked="true"/>
-    <radio-wrapper
-      :label="'repeat'"
-      v-model="gradient.repeat"
-      :name="'repeating-gradient'"/>
+    <div class="repeating-wrapper">
+      <radio-wrapper
+        class="repeat"
+        :label="'no-repeat'"
+        v-model="gradient.repeat"
+        :name="'repeating-gradient'"
+        :checked="true"/>
+      <radio-wrapper
+        class="repeat"
+        :label="'repeat'"
+        v-model="gradient.repeat"
+        :name="'repeating-gradient'"/>
+    </div>
   </div>
 </template>
 
@@ -54,11 +60,7 @@ export default {
 
 <style lang="sass" scoped>
 
-  .fieldset-gradient
-    display: grid
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
-
-  .degree-range
-    margin-top: .5rem
+  .type-wrapper
+    border-right: 1.4px solid $black
 
 </style>

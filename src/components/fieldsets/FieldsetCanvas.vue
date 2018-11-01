@@ -35,7 +35,7 @@ export default {
     InputWrapper
   },
   data: () => ({
-    title: 'Canvas',
+    title: 'Canvas size',
     desc: 'Edit the size of your canvas in percentages or pixels.'
   }),
   computed: {

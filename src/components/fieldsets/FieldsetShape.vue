@@ -1,59 +1,39 @@
 <template>
-  <div 
-    role="group" 
+  <div
+    role="group"
     class="fieldset fieldset-shape">
 
     <!-- TITLE & DESCRIPTION -->
     <legend class="legend">{{ title }}</legend>
     <p class="desc">{{ desc }}</p>
 
-    <!-- DEGREE IF LINEAR GRADIENT -->
+    <!-- WIDTH INPUT (%/px) -->
     <input-wrapper
-      v-if="gradient.type === 'linear-gradient'"
-      class="degree-range"
-      v-model="shape.degree"
-      :label="'Degree'"
-      :name="'gradient-degree'"
-      :what="shape.degree"
-      :min="0"
-      :max="360"/>
+      v-model="shape.size.x"
+      :label="'Width'"
+      :name="'shape-size-x'"
+      :what="shape.size.x"/>
 
-    <template v-if="gradient.type === 'radial-gradient'">
-      <!-- WIDTH INPUT (%/px) -->
-      <input-wrapper
-        v-model="shape.size.x"
-        :label="'Width'"
-        :name="'shape-size-x'"
-        :what="shape.size.x"/>
-
-      <!-- HEIGHT INPUT (%/px) -->
-      <input-wrapper
-        v-model="shape.size.y"
-        :label="'Height'"
-        :name="'shape-size-y'"
-        :what="shape.size.y"/>
-
-      <!-- X AXIS (%) -->
-      <input-wrapper
-        v-model="shape.coord.x"
-        :label="'X-axis'"
-        :name="'shape-x'"
-        :what="shape.coord.x"/>
-
-      <!-- Y AXIS (%) -->
-      <input-wrapper
-        v-model="shape.coord.y"
-        :label="'Y-axis'"
-        :name="'shape-y'"
-        :what="shape.coord.y"/>
-    </template>
-    <!-- SHAPE COLOR -->
+    <!-- HEIGHT INPUT (%/px) -->
     <input-wrapper
-      v-model="shape.color"
-      :label="'Color'"
-      :what="shape.color"
-      :color="true"
-      :name="'shape-color'"/>
+      v-model="shape.size.y"
+      :label="'Height'"
+      :name="'shape-size-y'"
+      :what="shape.size.y"/>
+
+    <!-- X AXIS (%) -->
+    <input-wrapper
+      v-model="shape.coord.x"
+      :label="'X-axis'"
+      :name="'shape-x'"
+      :what="shape.coord.x"/>
+
+    <!-- Y AXIS (%) -->
+    <input-wrapper
+      v-model="shape.coord.y"
+      :label="'Y-axis'"
+      :name="'shape-y'"
+      :what="shape.coord.y"/>
   </div>
 </template>
 
@@ -66,11 +46,11 @@ export default {
     InputWrapper
   },
   data: () => ({
-    title: 'Shape',
-    desc: 'Edit the shape of your radial gradient inside its box.'
+    title: 'Shape details',
+    desc: 'Edit the size and the placement of the shape that goes into the box.'
   }),
   computed: {
-    ...mapFields(['shape', 'gradient'])
+    ...mapFields(['shape'])
   }
 }
 </script>

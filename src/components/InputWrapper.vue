@@ -7,6 +7,7 @@
         :name="name"
         :unit="what.unit">
         <unit-input
+          :toggle="toggleUnit"
           v-model="what.unit"
           :unit="what.unit"
           :name="name + '-size-unit'"/>
@@ -18,7 +19,7 @@
         :max="max"/>
     </template>
     <text-input
-      v-else
+      v-if="what.color"
       v-model="what.color"
       :label="label"
       :name="name"
@@ -46,6 +47,11 @@ export default {
     })
   },
   props: {
+    toggleUnit: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
     label: {
       type: String,
       required: true

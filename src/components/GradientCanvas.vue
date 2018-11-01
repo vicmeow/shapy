@@ -61,7 +61,8 @@ export default {
       'box',
       'shape',
       'gradient',
-      'canvas'
+      'canvas',
+      'colors'
     ]),
     gradientShapes() {
       // make the gradient list into a css string
@@ -75,7 +76,6 @@ export default {
       const comment = this.comment
 
       // BOX INFO
-      const boxColor = this.box.color.color
       // box size
       const boxWidth = this.box.size.x.size + this.box.size.x.unit
       const boxHeight = this.box.size.y.size + this.box.size.y.unit
@@ -86,10 +86,12 @@ export default {
       // BOX COMBINED
       const boxSize = boxWidth + ' ' + boxHeight
       const boxCoord = boxX + ' ' + boxY
-      const box = boxSize + ' / ' + boxCoord
+      const box = boxCoord + ' / ' + boxSize
 
-      // shape into
-      const shapeColor = this.shape.color.color
+      // color stops
+      const stop1 = this.colors.stop1.color + ' ' + this.colors.stop1.size + '%'
+      const stop2 = this.colors.stop2.color + ' ' + this.colors.stop2.size + '%'
+
       // degree info
       const degree = this.shape.degree.size + this.shape.degree.unit
       // color stop
@@ -105,11 +107,11 @@ export default {
       const shape = shapeSize + ' at ' + shapeCoord
 
       if (type === 'radial-gradient') {
-        return `/* ${comment} */ ${type}(${shape}, ${shapeColor} 49.8%, ${boxColor} 50%) ${repeat} ${box}`
+        return `/* ${comment} */ ${type}(${shape}, ${stop1}, ${stop2}) ${repeat} ${box}`
       } else if (type === 'linear-gradient' && this.shape.degree.size > 0) {
-        return `/* ${comment} */ ${type}(${degree}, ${shapeColor} 49%, ${boxColor} 50%) ${repeat} ${box}`
+        return `/* ${comment} */ ${type}(${degree}, ${stop1}, ${stop2}) ${repeat} ${box}`
       } else if (type === 'linear-gradient') {
-        return `/* ${comment} */ ${type}(${shapeColor} 99.99%, ${boxColor} 100%) ${repeat} ${box}`
+        return `/* ${comment} */ ${type}(${stop1}, ${stop2}) ${repeat} ${box}`
       }
     }
   }
