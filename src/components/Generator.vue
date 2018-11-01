@@ -25,7 +25,7 @@ export default {
   .generator-wrapper
     display: grid
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))
-    grid-template-rows: 1fr minmax(300px, max-content)
-    min-height: 100vh
+    grid-template-rows: 1fr minmax(150px, 300px)
+    min-height: 100%
 
 </style>

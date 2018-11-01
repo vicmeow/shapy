@@ -28,4 +28,7 @@ export default {
     color: $black
     background: $black
     font-smooth: subpixel-antialiased
+
+  #app
+    min-height: 100vh
 </style>
