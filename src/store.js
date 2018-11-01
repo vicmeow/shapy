@@ -55,7 +55,17 @@ const state = {
     },
     degree: {
       unit: 'deg',
-      size: 0
+      size: 0,
+      stops: [
+        {
+          stop: 50,
+          color: '#00978D'
+        },
+        {
+          stop: 50,
+          color: 'transparent'
+        }
+      ]
     },
     size: {
       x: {

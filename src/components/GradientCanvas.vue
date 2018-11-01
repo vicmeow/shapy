@@ -76,43 +76,40 @@ export default {
 
       // BOX INFO
       const boxColor = this.box.color.color
-      // box width + unit
-      const boxWidth = this.box.size.x.size
-      const boxWidthUnit = this.box.size.x.unit
-      // box height + unit
-      const boxHeight = this.box.size.y.size
-      const boxHeightUnit = this.box.size.y.unit
-      // box coord x + unit
-      const boxX = this.box.coord.x.size
-      const boxXUnit = this.box.coord.x.unit
-      // box coord y + unit
-      const boxY = this.box.coord.y.size
-      const boxYUnit = this.box.coord.y.unit
+      // box size
+      const boxWidth = this.box.size.x.size + this.box.size.x.unit
+      const boxHeight = this.box.size.y.size + this.box.size.y.unit
+      // box coord
+      const boxX = this.box.coord.x.size + this.box.coord.x.unit
+      const boxY = this.box.coord.y.size + this.box.coord.y.unit
 
-      // SHAPE INFO
+      // BOX COMBINED
+      const boxSize = boxWidth + ' ' + boxHeight
+      const boxCoord = boxX + ' ' + boxY
+      const box = boxSize + ' / ' + boxCoord
+
+      // shape into
       const shapeColor = this.shape.color.color
       // degree info
-      const degreeSize = this.shape.degree.size
-      const degreeUnit = this.shape.degree.unit
-      // shape width + unit
-      const shapeWidth = this.shape.size.x.size
-      const shapeWidthUnit = this.shape.size.x.unit
-      // shape height + unit
-      const shapeHeight = this.shape.size.y.size
-      const shapeHeightUnit = this.shape.size.y.unit
-      // shape coord x + unit
-      const shapeX = this.shape.coord.x.size
-      const shapeXUnit = this.shape.coord.x.unit
-      // shape coord y + unit
-      const shapeY = this.shape.coord.y.size
-      const shapeYUnit = this.shape.coord.y.unit
+      const degree = this.shape.degree.size + this.shape.degree.unit
+      // color stop
+      const shapeWidth = this.shape.size.x.size + this.shape.size.x.unit
+      const shapeHeight = this.shape.size.y.size + this.shape.size.y.unit
+      // shape coord
+      const shapeX = this.shape.coord.x.size + this.shape.coord.x.unit
+      const shapeY = this.shape.coord.y.size + this.shape.coord.y.unit
+
+      // SHAPE COMBINED
+      const shapeSize = shapeWidth + ' ' + shapeHeight
+      const shapeCoord = shapeX + ' ' + shapeY
+      const shape = shapeSize + ' at ' + shapeCoord
 
       if (type === 'radial-gradient') {
-        return `/* ${comment} */ ${type}(${shapeWidth}${shapeWidthUnit} ${shapeHeight}${shapeHeightUnit} at ${shapeX}${shapeXUnit} ${shapeY}${shapeYUnit}, ${shapeColor} 49.8%, ${boxColor} 50%) ${repeat} ${boxX}${boxXUnit} ${boxY}${boxYUnit} / ${boxWidth}${boxWidthUnit} ${boxHeight}${boxHeightUnit}`
-      } else if (type === 'linear-gradient' && degreeSize > 0) {
-        return `/* ${comment} */ ${type}(${degreeSize}${degreeUnit}, ${shapeColor} 49%, ${boxColor} 50%) ${repeat} ${boxX}${boxXUnit} ${boxY}${boxYUnit} / ${boxWidth}${boxWidthUnit} ${boxHeight}${boxHeightUnit}`
+        return `/* ${comment} */ ${type}(${shape}, ${shapeColor} 49.8%, ${boxColor} 50%) ${repeat} ${box}`
+      } else if (type === 'linear-gradient' && this.shape.degree.size > 0) {
+        return `/* ${comment} */ ${type}(${degree}, ${shapeColor} 49%, ${boxColor} 50%) ${repeat} ${box}`
       } else if (type === 'linear-gradient') {
-        return `/* ${comment} */ ${type}(${shapeColor} 99.99%, ${boxColor} 100%) ${repeat} ${boxX}${boxXUnit} ${boxY}${boxYUnit} / ${boxWidth}${boxWidthUnit} ${boxHeight}${boxHeightUnit}`
+        return `/* ${comment} */ ${type}(${shapeColor} 99.99%, ${boxColor} 100%) ${repeat} ${box}`
       }
     }
   }
