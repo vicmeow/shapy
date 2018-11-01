@@ -121,6 +121,8 @@ export default {
 <style lang="sass">
 
   .gradient-wrapper
+    padding-top: 1em
+    padding-right: 1em
     grid-column: 2 / -1
 
   .canvas-wrapper

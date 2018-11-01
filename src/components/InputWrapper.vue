@@ -7,7 +7,7 @@
         :name="name"
         :unit="what.unit">
         <unit-input
-          :toggle="toggleUnit"
+          :toggle="toggle"
           v-model="what.unit"
           :unit="what.unit"
           :name="name + '-size-unit'"/>
@@ -47,7 +47,7 @@ export default {
     })
   },
   props: {
-    toggleUnit: {
+    toggle: {
       type: Boolean,
       required: false,
       default: true
@@ -88,8 +88,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass">
-  .color-wrapper
-    grid-column: 1 / -1
-</style>

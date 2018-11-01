@@ -27,6 +27,7 @@ export default {
     list-style-type: none
     color: white
     margin: 0
+    margin-top: 1em
 
     li
       display: inline-block

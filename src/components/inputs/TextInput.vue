@@ -1,5 +1,9 @@
 <template>
   <div :class="{'color-input-wrapper': color, 'text-wrapper': !color}">
+    <div
+      v-if="color"
+      class="color-preview"
+      :style="{background: color}"/>
     <input
       :value="colorValue"
       :class="{'color-input': color, 'text-input': !color}"
@@ -7,10 +11,6 @@
       type="text"
       :name="name"
       :id="name + '-id'">
-    <div
-      v-if="color"
-      class="color-preview"
-      :style="{background: color}"/>
   </div>
 </template>
 
@@ -56,22 +56,20 @@ export default {
     display: flex
     align-items: center
     width: 100%
-    justify-content: space-between
-    margin-bottom: .2em
+    justify-content: center
 
     .color-input
       flex: fill
       padding: 0
       min-width: 0
-      text-align: right
-      padding: 0 .2em
       border: 0
       margin: 0
+      margin-left: .5em
 
   .color-preview
     color: white
     min-height: 1em
     min-width: 1em
     border: 1px solid $black
-    border-radius: 1em
+    border-radius: 50%
 </style>

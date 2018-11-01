@@ -4,8 +4,8 @@
       class="form" 
       @submit.prevent>
       <fieldset-canvas/>
-      <fieldset-colors/>
       <fieldset-gradient/>
+      <fieldset-colors/>
       <fieldset-box/>
       <fieldset-shape v-if="gradient.type === 'radial-gradient'"/>
       <fieldset-comment/>
@@ -46,6 +46,7 @@ export default {
     flex-direction: column
     overflow-y: scroll
     max-height: 100vh
+    margin: 0 1em
 
   .fieldset
     display: grid
@@ -53,7 +54,7 @@ export default {
     grid-gap: .3em 1em
     border: 0
     padding: 1rem
-    margin-bottom: 1rem
+    margin: 1em 0
     background: $white
     border-radius: 5px
 
@@ -78,5 +79,8 @@ export default {
     padding: 0
     &:focus
       outline: 0
+
+  .input-wrapper
+    margin-top: .3em
 
 </style>
