@@ -27,13 +27,13 @@ const state = {
   },
   colors: {
     stop1: {
-      size: 100,
+      size: 70,
       color: '#00978D',
       unit: '%'
     },
     stop2: {
-      size: 0,
-      color: 'transparent',
+      size: 70,
+      color: '#3D4856',
       unit: '%'
     }
   },
