@@ -7,11 +7,12 @@
         class="canvas-outline"
         :style="{width: canvasCurrent.x, height: canvasCurrent.y}">
         <div
-          class="canvas-preview"
-          :style="{background: previewGradient}"/>
-        <div
           class="canvas-gradients"
           :style="{background: gradientStrings}"/>
+        <div
+          class="canvas-preview"
+          :style="{background: previewGradient}"/>
+        
       </div>
     </div>
   </div>
