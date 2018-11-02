@@ -12,37 +12,34 @@
       :hidden="hidden"/>
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
-      <div class="width-height-wrapper">
-        <!-- WIDTH INPUT (%/px) -->
-        <input-wrapper
-          v-model="box.size.x"
-          :label="'Width'"
-          :name="'box-size-x'"
-          :what="box.size.x"/>
 
-        <!-- HEIGHT INPUT (%/px) -->
-        <input-wrapper
-          v-model="box.size.y"
-          :label="'Height'"
-          :name="'box-size-y'"
-          :what="box.size.y"/>
-      </div>
+      <!-- WIDTH INPUT (%/px) -->
+      <input-wrapper
+        v-model="box.size.x"
+        :label="'Width'"
+        :name="'box-size-x'"
+        :what="box.size.x"/>
 
-      <div class="axis-wrapper">
-        <!-- X AXIS (%) -->
-        <input-wrapper
-          v-model="box.coord.x"
-          :label="'X-axis'"
-          :name="'box-x'"
-          :what="box.coord.x"/>
+      <!-- HEIGHT INPUT (%/px) -->
+      <input-wrapper
+        v-model="box.size.y"
+        :label="'Height'"
+        :name="'box-size-y'"
+        :what="box.size.y"/>
 
-        <!-- Y AXIS (%) -->
-        <input-wrapper
-          v-model="box.coord.y"
-          :label="'Y-axis'"
-          :name="'box-y'"
-          :what="box.coord.y"/>
-      </div>
+      <!-- X AXIS (%) -->
+      <input-wrapper
+        v-model="box.coord.x"
+        :label="'X-axis'"
+        :name="'box-x'"
+        :what="box.coord.x"/>
+
+      <!-- Y AXIS (%) -->
+      <input-wrapper
+        v-model="box.coord.y"
+        :label="'Y-axis'"
+        :name="'box-y'"
+        :what="box.coord.y"/>
 
       <!-- DEGREE IF LINEAR GRADIENT -->
       <input-wrapper
@@ -79,7 +76,8 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-  .fieldset-box
-    flex-direction: row
+<style lang="sass">
+  .degree-range
+    grid-column: 1 / -1
+    margin: 0 1em
 </style>
