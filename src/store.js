@@ -27,12 +27,12 @@ const state = {
   },
   colors: {
     stop1: {
-      size: 50,
+      size: 100,
       color: '#00978D',
       unit: '%'
     },
     stop2: {
-      size: 50,
+      size: 0,
       color: 'transparent',
       unit: '%'
     }
@@ -67,11 +67,11 @@ const state = {
     size: {
       x: {
         unit: '%',
-        size: 100
+        size: 50
       },
       y: {
         unit: '%',
-        size: 100
+        size: 50
       }
     },
     coord: {
@@ -125,6 +125,7 @@ const mutations = {
   deleteShapes(state) {
     state.gradientList = []
     state.gradientStrings = ''
+    state.previewGradient = ''
   },
   previewGradient(state, gradient) {
     state.previewGradient = gradient
