@@ -44,7 +44,7 @@ export default {
     GroupToggle
   },
   data: () => ({
-    hidden: true,
+    hidden: false,
     title: 'Canvas Size 🖼',
     desc: 'Edit the size of your canvas in percentages or pixels.'
   }),

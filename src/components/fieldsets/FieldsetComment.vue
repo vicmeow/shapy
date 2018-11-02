@@ -17,11 +17,10 @@
         <input
           v-model="comment"
           type="text"
-          max="50"
           id="input-comment">
         <label
           class="input-text-label"
-          for="input-comment">A description or name of your shape</label>
+          for="input-comment">A description or name of your shape.</label>
       </div>
     </template>
   </div>

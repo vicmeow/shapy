@@ -59,8 +59,9 @@ export default {
   },
   data: () => ({
     hidden: true,
-    title: 'Shape Details 📐',
-    desc: 'Edit the size and the placement of the shape that goes into the box.'
+    title: 'Shape in Box 📐',
+    desc:
+      'Edit the size and placement of the shape inside the box you edit above.'
   }),
   computed: {
     ...mapFields(['shape'])

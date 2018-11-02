@@ -17,16 +17,14 @@
         v-model="colors.stop1"
         :label="'Color 1'"
         :what="colors.stop1"
-        :color="true"
-        :max="100"
+        :color-input="true"
         :name="'color-stop'"
         :toggle-unit="false"/>
       <input-wrapper
         v-model="colors.stop2"
         :label="'Color 2'"
         :what="colors.stop2"
-        :color="true"
-        :max="100"
+        :color-input="true"
         :name="'color-stop'"
         :toggle-unit="false"/>
     </template>

@@ -58,7 +58,7 @@ export default {
     GroupToggle
   },
   data: () => ({
-    hidden: true,
+    hidden: false,
     title: 'Gradient Type 💈',
     desc:
       'Radial gradients create round shapes and linear gradients create rectangular shapes.'
