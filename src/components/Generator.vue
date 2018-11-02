@@ -2,20 +2,20 @@
   <div class="generator-wrapper">
     <gradient-form/>
     <gradient-canvas/>
-    <gradient-snippet/>
+    <gradient-list/>
   </div>
 </template>
 
 <script>
 import GradientForm from '@/components/GradientForm'
 import GradientCanvas from '@/components/GradientCanvas'
-import GradientSnippet from '@/components/GradientSnippet'
+import GradientList from '@/components/GradientList'
 export default {
   name: 'Generator',
   components: {
     GradientForm,
     GradientCanvas,
-    GradientSnippet
+    GradientList
   }
 }
 </script>
