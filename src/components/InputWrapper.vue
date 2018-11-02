@@ -20,12 +20,11 @@
         :max="max"/>
     </template>
     <text-input
-      v-if="what.color"
+      v-if="colorInput"
       v-model="what.color"
       :label="label"
       :name="name"
-      :color="what.color"
-      :color-value="what.color"/>
+      :color="what.color"/>
   </div>
 </template>
 
@@ -48,6 +47,11 @@ export default {
     })
   },
   props: {
+    colorInput: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     toggle: {
       type: Boolean,
       required: false,
@@ -60,11 +64,6 @@ export default {
     name: {
       type: String,
       required: true
-    },
-    color: {
-      type: Boolean,
-      required: false,
-      default: false
     },
     min: {
       type: Number,

@@ -1,12 +1,12 @@
 <template>
-  <div :class="{'color-input-wrapper': color, 'text-wrapper': !color}">
+  <div :class="{'color-input-wrapper': colorInput, 'text-wrapper': !colorInput}">
     <div
-      v-if="color"
+      v-if="colorInput"
       class="color-preview"
       :style="{background: color}"/>
     <input
-      :value="colorValue"
-      :class="{'color-input': color, 'text-input': !color}"
+      :value="color"
+      :class="{'color-input': colorInput, 'text-input': !colorInput}"
       @input="$emit('input', $event.target.value)"
       type="text"
       :name="name"
@@ -17,15 +17,15 @@
 <script>
 export default {
   props: {
-    colorValue: {
+    colorInput: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    color: {
       type: String,
       required: false,
       default: ''
-    },
-    color: {
-      type: Boolean | String,
-      required: false,
-      default: false
     },
     label: {
       type: String,
