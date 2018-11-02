@@ -70,7 +70,7 @@ export default {
   },
   data: () => ({
     hidden: true,
-    title: 'Box Details',
+    title: 'Box Details 📦',
     desc: 'The box your shape goes into.'
   }),
   computed: {

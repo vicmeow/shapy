@@ -59,7 +59,7 @@ export default {
   },
   data: () => ({
     hidden: true,
-    title: 'Shape Details',
+    title: 'Shape Details 📐',
     desc: 'Edit the size and the placement of the shape that goes into the box.'
   }),
   computed: {

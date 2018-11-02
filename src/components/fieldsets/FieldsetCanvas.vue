@@ -45,7 +45,7 @@ export default {
   },
   data: () => ({
     hidden: true,
-    title: 'Canvas Size',
+    title: 'Canvas Size 🖼',
     desc: 'Edit the size of your canvas in percentages or pixels.'
   }),
   computed: {

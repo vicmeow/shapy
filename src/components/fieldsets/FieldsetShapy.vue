@@ -21,7 +21,7 @@ export default {
   },
   data: () => ({
     hidden: false,
-    title: 'Welcome to Shapy!',
+    title: 'Welcome to Shapy 🤖',
     desc:
       'Shapy is a gradient shape editor made for you to explore the power of CSS gradients.'
   })

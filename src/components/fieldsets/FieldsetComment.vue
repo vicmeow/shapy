@@ -37,7 +37,7 @@ export default {
   },
   data: () => ({
     hidden: true,
-    title: 'Comment',
+    title: 'Comment ✏️',
     desc: 'Add a comment along with your shape for easier reference.'
   }),
   computed: {

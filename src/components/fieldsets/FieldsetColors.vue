@@ -45,7 +45,7 @@ export default {
   },
   data: () => ({
     hidden: true,
-    title: 'Color Stops',
+    title: 'Color Stops 🌈',
     desc: 'The colors for your gradient shape.'
   }),
   computed: {

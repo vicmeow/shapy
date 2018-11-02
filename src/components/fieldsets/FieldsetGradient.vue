@@ -59,7 +59,7 @@ export default {
   },
   data: () => ({
     hidden: true,
-    title: 'Gradient Type',
+    title: 'Gradient Type 💈',
     desc:
       'Radial gradients create round shapes and linear gradients create rectangular shapes.'
   }),
