@@ -110,7 +110,7 @@ const mutations = {
     state.gradientList.unshift(gradient)
     let newList = []
     state.gradientList.forEach(item => {
-      newList.unshift(item.string)
+      newList.push(item.string)
     })
     state.gradientStrings = newList.join(', ')
   },
