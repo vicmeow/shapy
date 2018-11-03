@@ -1,7 +1,6 @@
 <template>
   <div class="form-wrapper">
     <form
-      v-if="!hidden"
       class="form"
       @submit.prevent>
       <fieldset-shapy/>
