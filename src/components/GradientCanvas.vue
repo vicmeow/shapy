@@ -135,6 +135,7 @@ export default {
     background: white
     height: 100%
     width: 100%
+    min-height: 70vh
     border-radius: 5px
     padding: 16px
 
