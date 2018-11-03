@@ -129,6 +129,18 @@ const mutations = {
   },
   previewGradient(state, gradient) {
     state.previewGradient = gradient
+  },
+  removeShape(state, id) {
+    // Return array without the object with the ID match
+    const result = state.gradientList.filter(gradient => gradient.id !== id)
+    // New gradient list of objects
+    state.gradientList = result
+    let newList = []
+    // Join the strings of the new list together for the canvas
+    state.gradientList.forEach(item => {
+      newList.unshift(item.string)
+    })
+    state.gradientStrings = newList.join(', ')
   }
 }
 
