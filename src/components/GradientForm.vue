@@ -91,9 +91,6 @@ export default {
       max-height: 100%
       overflow: initial
 
-  .heading
-    font-size: 1.3em
-
   .fieldset
     display: flex
     flex-wrap: wrap
