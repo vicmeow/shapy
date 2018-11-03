@@ -1,9 +1,9 @@
 <template>
   <div class="fieldset fieldset-shapy">
     <!-- TITLE & DESCRIPTION -->
-    <legend class="legend title-legend">{{ title }}</legend>
-    <group-toggle 
-      @click.native="hidden = !hidden" 
+    <h1 class="legend title-legend">{{ title }}</h1 >
+    <group-toggle
+      @click.native="hidden = !hidden"
       :hidden="hidden"/>
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
@@ -15,7 +15,7 @@
 <script>
 import GroupToggle from '@/components/GroupToggle'
 export default {
-  name: 'Box',
+  name: 'Shapy',
   components: {
     GroupToggle
   },

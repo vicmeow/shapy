@@ -12,35 +12,28 @@
       :hidden="hidden"/>
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
-      <div 
-        class="type-wrapper" 
-        role="group">
-        <!-- GRADIENT TYPES -->
-        <radio-wrapper
-          :label="'linear-gradient'"
-          v-model="gradient.type"
-          :name="'gradient-type'"/>
-        <radio-wrapper
-          :label="'radial-gradient'"
-          v-model="gradient.type"
-          :name="'gradient-type'"/>
-      </div>
+
+      <!-- GRADIENT TYPES -->
+      <radio-wrapper
+        :label="'linear-gradient'"
+        v-model="gradient.type"
+        :name="'gradient-type'"/>
+      <radio-wrapper
+        :label="'radial-gradient'"
+        v-model="gradient.type"
+        :name="'gradient-type'"/>
 
       <!-- REPEAT VS NO-REPEAT GRADIENT -->
-      <div 
-        class="repeating-wrapper" 
-        role="group">
-        <radio-wrapper
-          class="repeat"
-          :label="'no-repeat'"
-          v-model="gradient.repeat"
-          :name="'repeating-gradient'"/>
-        <radio-wrapper
-          class="repeat"
-          :label="'repeat'"
-          v-model="gradient.repeat"
-          :name="'repeating-gradient'"/>
-      </div>
+      <radio-wrapper
+        class="repeat"
+        :label="'no-repeat'"
+        v-model="gradient.repeat"
+        :name="'repeating-gradient'"/>
+      <radio-wrapper
+        class="repeat"
+        :label="'repeat'"
+        v-model="gradient.repeat"
+        :name="'repeating-gradient'"/>
     </template>
   </div>
 </template>

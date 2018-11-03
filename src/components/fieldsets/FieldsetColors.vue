@@ -1,14 +1,14 @@
 <template>
-  <div 
-    role="group" 
-    class="fieldset fieldset-shape">
+  <div
+    role="group"
+    class="fieldset fieldset-colors">
 
     <!-- TITLE & DESCRIPTION -->
-    <legend 
-      class="legend" 
+    <legend
+      class="legend"
       @click="hidden = !hidden">{{ title }}</legend>
-    <group-toggle 
-      @click.native="hidden = !hidden" 
+    <group-toggle
+      @click.native="hidden = !hidden"
       :hidden="hidden"/>
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
@@ -51,3 +51,7 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  .fieldset-colors .input-wrapper
+</style>

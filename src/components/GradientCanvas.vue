@@ -122,7 +122,10 @@ export default {
     padding-top: 1em
     padding-right: 1em
     grid-column: 2 / -1
-    min-height: 100%
+    min-height: 70vh
+    @media screen and (max-width: 768px)
+      padding: 1em
+      padding-top: 0
 
   .canvas-wrapper
     display: flex

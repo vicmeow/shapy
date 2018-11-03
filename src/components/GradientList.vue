@@ -38,6 +38,9 @@ export default {
     margin: 0
     margin-top: 1em
     padding-right: 1em
+    @media screen and (max-width: 768px)
+      margin: 0
+      padding: 0 1em 1em
 
     li
       display: flex

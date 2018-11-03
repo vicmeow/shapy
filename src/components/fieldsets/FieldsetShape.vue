@@ -12,37 +12,34 @@
       :hidden="hidden"/>
     <template v-show="!hidden">
       <p class="desc">{{ desc }}</p>
-      <div class="width-height-wrapper">
-        <!-- WIDTH INPUT (%/px) -->
-        <input-wrapper
-          v-model="shape.size.x"
-          :label="'Width'"
-          :name="'shape-size-x'"
-          :what="shape.size.x"/>
 
-        <!-- HEIGHT INPUT (%/px) -->
-        <input-wrapper
-          v-model="shape.size.y"
-          :label="'Height'"
-          :name="'shape-size-y'"
-          :what="shape.size.y"/>
-      </div>
+      <!-- WIDTH INPUT (%/px) -->
+      <input-wrapper
+        v-model="shape.size.x"
+        :label="'Width'"
+        :name="'shape-size-x'"
+        :what="shape.size.x"/>
 
-      <div class="coord-wrapper">
-        <!-- X AXIS (%) -->
-        <input-wrapper
-          v-model="shape.coord.x"
-          :label="'X-axis'"
-          :name="'shape-x'"
-          :what="shape.coord.x"/>
+      <!-- HEIGHT INPUT (%/px) -->
+      <input-wrapper
+        v-model="shape.size.y"
+        :label="'Height'"
+        :name="'shape-size-y'"
+        :what="shape.size.y"/>
 
-        <!-- Y AXIS (%) -->
-        <input-wrapper
-          v-model="shape.coord.y"
-          :label="'Y-axis'"
-          :name="'shape-y'"
-          :what="shape.coord.y"/>
-      </div>
+      <!-- X AXIS (%) -->
+      <input-wrapper
+        v-model="shape.coord.x"
+        :label="'X-axis'"
+        :name="'shape-x'"
+        :what="shape.coord.x"/>
+
+      <!-- Y AXIS (%) -->
+      <input-wrapper
+        v-model="shape.coord.y"
+        :label="'Y-axis'"
+        :name="'shape-y'"
+        :what="shape.coord.y"/>
     </template>
   </div>
 </template>

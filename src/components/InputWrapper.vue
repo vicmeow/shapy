@@ -88,3 +88,38 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+
+  input
+    font-family: $font
+    font-size: 18px
+    color: $black
+    border: 0
+    padding: 0
+    &:focus
+      font-style: italic
+      outline: 0
+
+  .input-wrapper
+    margin-top: .3em
+    flex-basis: 50%
+
+  .input-wrapper:nth-child(odd)
+    padding-left: .75em
+
+  .input-wrapper:nth-child(even)
+    padding-right: .75em
+
+  @media screen and (max-width: 768px)
+    .input-wrapper
+      flex-basis: 100%
+      padding: 0
+
+    .input-wrapper:nth-child(even), .input-wrapper:nth-child(odd)
+      padding: 0
+
+    .size-wrapper
+      margin-top: .5em
+
+</style>

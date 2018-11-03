@@ -4,11 +4,11 @@
     class="fieldset fieldset-box">
 
     <!-- TITLE & DESCRIPTION -->
-    <legend 
-      class="legend" 
+    <legend
+      class="legend"
       @click="hidden = !hidden">{{ title }}</legend>
-    <group-toggle 
-      @click.native="hidden = !hidden" 
+    <group-toggle
+      @click.native="hidden = !hidden"
       :hidden="hidden"/>
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
@@ -44,7 +44,7 @@
       <!-- DEGREE IF LINEAR GRADIENT -->
       <input-wrapper
         v-if="gradient.type === 'linear-gradient'"
-        class="degree-range"
+        class="degree-wrapper"
         v-model="shape.degree"
         :label="'Degree'"
         :name="'gradient-degree'"
@@ -77,7 +77,6 @@ export default {
 </script>
 
 <style lang="sass">
-  .degree-range
-    grid-column: 1 / -1
-    margin: 0 1em
+  .degree-wrapper
+    flex-basis: 100%
 </style>

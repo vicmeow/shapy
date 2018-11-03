@@ -26,6 +26,10 @@ export default {
     display: grid
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))
     grid-template-rows: 1fr minmax(150px, 300px)
-    min-height: 100%
+    min-height: 100vh
+    @media screen and (max-width: 768px)
+      display: flex
+      flex-direction: column
+
 
 </style>
