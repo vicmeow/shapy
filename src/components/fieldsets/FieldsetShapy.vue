@@ -30,10 +30,6 @@ export default {
 
 <style lang="sass" scoped>
 
-  .fieldset-shapy
-    grid-template-columns: 2fr .5fr
-    z-index: 3
-
   .title-legend
     font-size: 1.5em
 </style>

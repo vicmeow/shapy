@@ -1,18 +1,14 @@
 <template>
   <div class="gradient-wrapper">
     <div
-      class="canvas-wrapper">
-      <div id="canvas-max"/>
+      class="canvas"
+      id="canvas-max">
       <div
-        class="canvas-outline"
-        :style="{width: canvasCurrent.x, height: canvasCurrent.y}">
+        class="preview-canvas"
+        :style="{width: canvasCurrent.x, height: canvasCurrent.y, background: previewGradient}">
         <div
-          class="canvas-gradients"
+          class="gradient-canvas"
           :style="{background: gradientStrings}"/>
-        <div
-          class="canvas-preview"
-          :style="{background: previewGradient}"/>
-        
       </div>
     </div>
   </div>
@@ -23,8 +19,8 @@ import { mapState } from 'vuex'
 export default {
   watch: {
     gradientString() {
-      // Watch the gradient string for updates to update the CSS string for the preview canvas
-      // Commit the changes to the store
+      // Watch the gradient string for updates to preview on canvas
+      // and commit changes to store
       this.$store.commit('previewGradient', this.gradientString)
     }
   },
@@ -119,49 +115,34 @@ export default {
 <style lang="sass">
 
   .gradient-wrapper
-    padding-top: 1em
-    padding-right: 1em
+    position: relative
+    margin-top: 1em
+    margin-right: 1em
     grid-column: 2 / -1
     min-height: 70vh
-    @media screen and (max-width: 768px)
-      padding: 1em
-      padding-top: 0
-
-  .canvas-wrapper
-    display: flex
-    justify-content: center
-    align-items: center
-    position: relative
     background: white
-    height: 100%
-    width: 100%
-    min-height: 70vh
-    border-radius: 5px
-    padding: 16px
+    border-radius: 3px
+    padding: 1em
+    display: flex
+    flex: 1 1 auto
 
-  #canvas-max
-    position: absolute
+  .canvas
+    display: flex
+    align-items: center
+    justify-content: center
     min-height: 100%
     min-width: 100%
 
-  .canvas-outline
-    position: relative
+  .preview-canvas
+    background: pink
     outline-color: $black
     outline-style: dashed
     outline-width: 1.5px
     outline-offset: 1.5px
-    max-width: 100%
-    max-height: 100%
 
-  .canvas-preview
-    position: absolute
+  .gradient-canvas
     height: 100%
     width: 100%
-    z-index: 2
 
-  .canvas-gradients
-    position: absolute
-    height: 100%
-    width: 100%
 
 </style>

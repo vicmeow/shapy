@@ -103,6 +103,7 @@ export default {
 
   .input-wrapper
     margin-top: .3em
+    margin-bottom: .5em
     flex-basis: 50%
 
   .input-wrapper:nth-child(odd)

@@ -52,11 +52,11 @@ export default {
     ...mapFields(['canvas']),
     ...mapState(['canvas']),
     maxX() {
-      if (this.canvas.x.unit === 'px') return this.canvas.x.max - 32
+      if (this.canvas.x.unit === 'px') return this.canvas.x.max
       else return 100
     },
     maxY() {
-      if (this.canvas.y.unit === 'px') return this.canvas.y.max - 32
+      if (this.canvas.y.unit === 'px') return this.canvas.y.max
       else return 100
     }
   }

@@ -1,15 +1,10 @@
 <template>
   <div class="form-wrapper">
-    <fieldset-shapy/>
-    <group-toggle
-      class="form-toggle"
-      :label="{show: 'Show fields', hide: 'Hide fields'}"
-      :hidden="hidden"
-      @click.native="hidden = !hidden"/>
     <form
       v-if="!hidden"
       class="form"
       @submit.prevent>
+      <fieldset-shapy/>
       <fieldset-canvas/>
       <fieldset-gradient/>
       <fieldset-colors/>
@@ -39,7 +34,6 @@ import FieldsetBox from '@/components/fieldsets/FieldsetBox'
 import FieldsetShape from '@/components/fieldsets/FieldsetShape'
 import FieldsetColors from '@/components/fieldsets/FieldsetColors'
 import FieldsetShapy from '@/components/fieldsets/FieldsetShapy'
-import GroupToggle from '@/components/GroupToggle'
 import { mapFields } from 'vuex-map-fields'
 import { mapState, mapMutations } from 'vuex'
 
@@ -52,12 +46,10 @@ export default {
     FieldsetBox,
     FieldsetShape,
     FieldsetColors,
-    FieldsetShapy,
-    GroupToggle
+    FieldsetShapy
   },
   data: () => ({
-    id: 0,
-    hidden: false
+    id: 0
   }),
   computed: {
     ...mapFields(['comment', 'gradient']),
@@ -92,6 +84,7 @@ export default {
       overflow: initial
 
   .fieldset
+    position: relative
     display: flex
     flex-wrap: wrap
     border: 0
