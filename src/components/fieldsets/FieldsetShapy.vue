@@ -23,7 +23,7 @@ export default {
     hidden: false,
     title: 'Welcome to Shapy 🤖',
     desc:
-      'Shapy is a gradient shape editor made for you to explore the power of CSS gradients.'
+      'Shapy is a gradient shape editor that helps you discover and explore the power of CSS gradients.'
   })
 }
 </script>
