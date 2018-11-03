@@ -11,6 +11,18 @@ export default {
   name: 'App',
   components: {
     Generator
+  },
+  metaInfo: {
+    title: 'Shapy',
+    htmlAttrs: {
+      lang: 'en'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Shapy is a CSS gradient shape generator.'
+      }
+    ]
   }
 }
 </script>
