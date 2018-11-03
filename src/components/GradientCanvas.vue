@@ -3,12 +3,12 @@
     <div
       class="canvas"
       id="canvas-max">
-      <div
-        class="preview-canvas"
-        :style="{width: canvasCurrent.x, height: canvasCurrent.y, background: previewGradient}">
+      <div 
+        class="gradient-canvas" 
+        :style="{width: canvasCurrent.x, height: canvasCurrent.y, background: gradientStrings}">
         <div
-          class="gradient-canvas"
-          :style="{background: gradientStrings}"/>
+          class="preview-gradient"
+          :style="{background: previewGradient}"/>
       </div>
     </div>
   </div>
@@ -133,14 +133,13 @@ export default {
     min-height: 100%
     min-width: 100%
 
-  .preview-canvas
-    background: pink
+  .gradient-canvas
     outline-color: $black
     outline-style: dashed
     outline-width: 1.5px
     outline-offset: 1.5px
 
-  .gradient-canvas
+  .preview-gradient
     height: 100%
     width: 100%
 
