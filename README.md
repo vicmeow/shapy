@@ -1,5 +1,13 @@
 # shapy
 
+Shapy is a gradient shape editor that helps you discover and explore the power of CSS gradients.
+
+## Demo  
+
+## [shapy.app](https://shapy.app/)
+
+![Project screenshot](./src/assets/shapyapp.png)
+
 ## Project setup
 ```
 yarn install
