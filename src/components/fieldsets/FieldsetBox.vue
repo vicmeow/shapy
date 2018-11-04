@@ -32,14 +32,18 @@
         v-model="box.coord.x"
         :label="'X-axis'"
         :name="'box-x'"
-        :what="box.coord.x"/>
+        :what="box.coord.x"
+        :min="-100"
+        :max="200"/>
 
       <!-- Y AXIS (%) -->
       <input-wrapper
         v-model="box.coord.y"
         :label="'Y-axis'"
         :name="'box-y'"
-        :what="box.coord.y"/>
+        :what="box.coord.y"
+        :min="-100"
+        :max="200"/>
 
       <!-- DEGREE IF LINEAR GRADIENT -->
       <input-wrapper
