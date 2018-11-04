@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Generator from './views/Generator'
+import Generator from './components/Generator'
 
 export default {
   name: 'App',
