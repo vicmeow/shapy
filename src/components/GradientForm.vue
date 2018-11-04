@@ -56,11 +56,13 @@ export default {
   },
   methods: {
     addShape() {
-      this.$store.commit('addShape', {
-        id: this.id,
-        string: this.previewGradient
-      })
-      this.id++
+      if (this.previewGradient) {
+        this.$store.commit('addShape', {
+          id: this.id,
+          string: this.previewGradient
+        })
+        this.id++
+      }
     },
     ...mapMutations(['undoShape', 'deleteShapes'])
   }
