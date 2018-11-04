@@ -32,14 +32,18 @@
         v-model="shape.coord.x"
         :label="'X-axis'"
         :name="'shape-x'"
-        :what="shape.coord.x"/>
+        :what="shape.coord.x"
+        :min="-100"
+        :max="200"/>
 
       <!-- Y AXIS (%) -->
       <input-wrapper
         v-model="shape.coord.y"
         :label="'Y-axis'"
         :name="'shape-y'"
-        :what="shape.coord.y"/>
+        :what="shape.coord.y"
+        :min="-100"
+        :max="200"/>
     </template>
   </div>
 </template>
