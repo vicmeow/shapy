@@ -3,10 +3,12 @@ import App from './App.vue'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
+import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Meta from 'vue-meta'
+import router from './router'
 
-library.add(faTrashAlt)
+library.add(faTrashAlt, faTwitter, faGithub)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -21,5 +23,6 @@ Vue.use(Meta, {
 
 new Vue({
   store,
+  router,
   render: h => h(App)
 }).$mount('#app')

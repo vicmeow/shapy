@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Generator from './components/Generator'
+import Generator from './views/Generator'
 
 export default {
   name: 'App',
@@ -14,13 +14,15 @@ export default {
   },
   metaInfo: {
     title: 'Shapy',
+    titleTemplate: '%s | Gradient Generator',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       {
         name: 'description',
-        content: 'Shapy is a CSS gradient shape generator.'
+        content:
+          'A CSS gradient shape generator made with Vue.js. Explore and discover the power of CSS gradients. Made by Victoria Bergquist.'
       }
     ]
   }
@@ -43,4 +45,14 @@ export default {
 
   #app
     min-height: 100vh
+
+  a, a:focus
+    text-decoration: none
+    color: $black
+
+  a:visited
+    border-bottom: 1px solid $green
+
+  a:hover
+    color: $green
 </style>

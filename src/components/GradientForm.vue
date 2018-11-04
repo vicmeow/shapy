@@ -77,7 +77,7 @@ export default {
     padding-right: 1em
     margin-left: 1em
     overflow-y: scroll
-    max-height: 100vh
+    min-height: 100vh
     @media screen and(max-width: 768px)
       max-height: 100%
       overflow: initial
