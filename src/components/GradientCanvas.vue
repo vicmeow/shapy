@@ -8,7 +8,7 @@
         :style="{width: canvasCurrent.x, height: canvasCurrent.y, background: gradientStrings}">
         <div
           class="preview-gradient"
-          :style="{background: previewGradient}"/>
+          :style="{background: previewGradient}" />
       </div>
     </div>
   </div>
@@ -118,6 +118,7 @@ export default {
     position: relative
     margin-top: 1em
     margin-right: 1em
+    margin-left: 1em
     grid-column: 2 / -1
     min-height: 70vh
     background: white
