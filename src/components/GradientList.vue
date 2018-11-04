@@ -46,15 +46,12 @@ export default {
     grid-column: 2 / -1
     grid-row: 2
     width: 100%
-    overflow-y: scroll
+    overflow-y: auto
     list-style-type: none
     color: white
-    margin: 0
-    margin-top: 1em
-    padding-right: 1em
-    @media screen and (max-width: 768px)
-      margin: 0
-      padding: 0 1em 1em
+    margin-top: 2em
+    padding-left: 1em
+    padding-right: 2em
 
     li
       display: flex
@@ -99,5 +96,6 @@ export default {
 
   code
     display: block
+    color: rgba(255, 255, 255, 0.8)
 
 </style>

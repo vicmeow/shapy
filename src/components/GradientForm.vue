@@ -78,11 +78,10 @@ export default {
     flex-direction: column
     padding-right: 1em
     margin-left: 1em
-    overflow-y: scroll
-    min-height: 100vh
-    @media screen and(max-width: 768px)
-      max-height: 100%
-      overflow: initial
+    height: 100vh
+    overflow-y: auto
+    @media screen and (max-width: 768px)
+      height: 100%
 
   .fieldset
     position: relative
@@ -161,7 +160,6 @@ export default {
     font-size: .9em
     background: $black
     color: $white
-    flex-basis: 100%
     margin: 0
     padding: 0
 
