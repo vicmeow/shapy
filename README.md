@@ -6,7 +6,7 @@ Shapy is a gradient shape editor that helps you discover and explore the power o
 
 ## [shapy.app](https://shapy.app/)
 
-![Project screenshot](./src/assets/shapyapp.png)
+![Project screenshot](./docs/assets/shapyapp.png)
 
 ## Project setup
 ```
