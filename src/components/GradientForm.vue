@@ -76,7 +76,6 @@ export default {
     flex-direction: column
     padding-right: 1em
     margin-left: 1em
-    overflow-y: scroll
     min-height: 100vh
     @media screen and(max-width: 768px)
       max-height: 100%

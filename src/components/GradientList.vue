@@ -46,7 +46,6 @@ export default {
     grid-column: 2 / -1
     grid-row: 2
     width: 100%
-    overflow-y: scroll
     list-style-type: none
     color: white
     margin: 0
