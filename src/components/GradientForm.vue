@@ -56,11 +56,13 @@ export default {
   },
   methods: {
     addShape() {
-      this.$store.commit('addShape', {
-        id: this.id,
-        string: this.previewGradient
-      })
-      this.id++
+      if (this.previewGradient) {
+        this.$store.commit('addShape', {
+          id: this.id,
+          string: this.previewGradient
+        })
+        this.id++
+      }
     },
     ...mapMutations(['undoShape', 'deleteShapes'])
   }
@@ -92,7 +94,7 @@ export default {
     border-radius: 5px
     margin: 1em 0
     box-shadow: 3px 3px 3px hsl(214, 29%, 25%)
-  
+
   .fieldset-canvas
     margin-top: 0
 
@@ -137,7 +139,7 @@ export default {
     cursor: pointer
     min-width: 100px
     margin: 1em .5em
-  
+
   .btn-add, .btn-undo
     box-shadow: 3px 3px 3px hsl(214, 29%, 20%)
     transition: all .1s ease-in-out
