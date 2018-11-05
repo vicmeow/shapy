@@ -57,6 +57,7 @@ export default {
     align-items: center
     width: 100%
     justify-content: center
+    margin-top: .5em
 
     .color-input
       flex: fill
