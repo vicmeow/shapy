@@ -7,7 +7,7 @@
       :value="label"
       :id="label+ '-id'"
       :checked="checked"
-      @input="$emit('input', $event.target.value)">
+      @change="$emit('input', $event.target.value)">
     <label
       :for="label + '-id'"
       class="label">{{ label }}</label>
