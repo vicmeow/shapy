@@ -1,22 +1,31 @@
 <template>
   <ul class="gradient-list">
     <li class="preview-string">
-      <code>{{ previewGradient }}</code>
+      <span class="string-label">Preview:</span>
+      <span v-highlightjs="previewGradient"><code class="css"/></span>
+      <span 
+        v-if="gradientList.length > 0" 
+        class="string-label">Added:</span>
     </li>
+    <li 
+      class="no-items" 
+      v-if="gradientList.length > 1">You haven't added any gradients yet...</li>
     <li
       class="gradient-item"
       v-for="gradient in gradientList"
       :key="gradient.id">
-      <span class="item-details">
-        <span class="delete">
-          <button
-            @click="removeShape(gradient.id)"
-            class="btn-delete-item">
-            <font-awesome-icon :icon="['far','trash-alt']"/>
-          </button>
-        </span>
-      </span>
-      <pre v-highlightjs><code class="css">{{ gradient.string }}</code></pre>
+      <div 
+        class="gradient-code" 
+        v-highlightjs="gradient.string">
+        <code class="css"/>
+      </div>
+      <div class="gradient-details">
+        <button
+          @click="removeShape(gradient.id)"
+          class="btn-delete-item">
+          ^Delete this gradient?
+        </button>
+      </div>
     </li>
   </ul>
 </template>
@@ -40,45 +49,67 @@ export default {
   .gradient-list
     grid-column: 2 / -1
     grid-row: 2
-    max-height: 250px
+    max-height: 100%
     overflow-y: scroll
-    padding: 1em
+    padding: 0 1em 1em
+    flex: 0 0 auto
+    justify-content: flex-start
+    list-style-type: none
 
     li
-      display: flex
       line-height: 1.3
-      margin-bottom: .5rem
 
-  .item-details
-    margin-bottom: 0
-    margin-right: 1em
+  .no-items
+    color: $white
+    font-style: italic
+    padding: .5em 0
+
+  .preview-string
+    position: sticky
+    top: 0
+    padding: .5em 0
+    background: $black
+    border-bottom: 1px solid $grey
+
+  .string-label
+    display: block
+    color: $white
     font-weight: 500
-    width: 1em
+    flex-direction: column
+    margin-top: .5em
 
   pre
     white-space: pre-wrap
+    tab-size: 2
+    padding: 0
+    margin: 0
+    line-height: 1
+
+  code
+    font-size: 1em
+    color: $white
+    padding: 0
+
+  .gradient-item:hover > .gradient-details
+    display: block
+
+  .gradient-details
+    display: none
 
   .btn-delete-item
+    color: $white
     cursor: pointer
-    font-weight: bold
-    color: $red
     padding: 0
     margin: 0
     min-width: 0
     background: 0
     border: 0
-    font-size: 1em
+    font-size: .8em
+    font-style: italic
+    margin-right: 1em
 
-  .preview-string
-    //font-size: 1.2em
-    flex-direction: column
-
-  .list-heading
-    display: block
-    font-size: 1.2rem
-
-  code
-    display: block
-    color: rgba(255, 255, 255, 0.8)
+  .delete-icon
+    font-size: .9em
+    color: $red
 
 </style>
