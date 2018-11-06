@@ -1,0 +1,25 @@
+/*
+ * Visual Studio 2015 dark style
+ * Author: Nicolas LLOBERA <nllobera@gmail.com>
+ */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #3D4856;
+  color: #DCDCDC;
+}
+
+.hljs-comment {
+  color: #BAFFA9;
+  font-style: italic;
+}
+
+.hljs-selector-tag {
+  color: #A0FFFF;
+}
+
+.hljs-selector-id {
+  color: #f3b6c9;
+}

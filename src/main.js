@@ -6,6 +6,7 @@ import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Meta from 'vue-meta'
+import VueHighlightJS from 'vue-highlightjs'
 
 library.add(faTrashAlt, faTwitter, faGithub)
 
@@ -19,6 +20,8 @@ Vue.use(Meta, {
   ssrAttribute: 'data-vue-meta-server-rendered', // the attribute name that lets vue-meta know that meta info has already been server-rendered
   tagIDKeyName: 'vmid' // the property name that vue-meta uses to determine whether to overwrite or append a tag
 })
+
+Vue.use(VueHighlightJS)
 
 new Vue({
   store,
