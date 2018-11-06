@@ -42,9 +42,10 @@ export default {
     color: $black
     background: $black
     font-smooth: subpixel-antialiased
+    min-height: 100vh
 
   #app
-    max-height: 100vh
+    min-height: 100vh
 
   a, a:focus
     text-decoration: none

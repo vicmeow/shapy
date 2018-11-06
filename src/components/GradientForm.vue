@@ -73,13 +73,14 @@ export default {
 
   .form-wrapper
     grid-column: 1
-    grid-row: 1 / -1
+    grid-row: span 2
     display: flex
     flex-direction: column
     padding-right: 1em
     margin-left: 1em
-    max-height: 100vh
     overflow-y: scroll
+    min-height: 100vh
+    max-height: 100vh
     @media screen and (max-width: 768px)
       height: 100%
   
