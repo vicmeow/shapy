@@ -24,9 +24,9 @@ export default {
 
   .generator-wrapper
     display: grid
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))
-    grid-template-rows: 1fr minmax(150px, 300px)
-    min-height: 100vh
+    grid-template-columns: minmax(300px, 450px) minmax(450px, 1fr)
+    grid-template-rows: minmax(500px, 1fr) 250px
+    max-height: 100vh
     @media screen and (max-width: 768px)
       display: flex
       flex-direction: column

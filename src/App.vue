@@ -44,7 +44,7 @@ export default {
     font-smooth: subpixel-antialiased
 
   #app
-    min-height: 100vh
+    max-height: 100vh
 
   a, a:focus
     text-decoration: none

@@ -9,21 +9,21 @@
       <p class="desc">{{ desc }}</p>
       <ul class="social-list">
         <li class="social-item">
-          <font-awesome-icon 
-            class="social-icon" 
-            :icon="['fab', 'twitter']"/>
-          Made by <a 
-            class="inline-link" 
-            href="https://github.com/vicbergquist/shapy" 
-            target="_blank" 
-            ref="noreferrer"> @vicbergquist</a>
+          <a href="https://github.com/vicbergquist/shapy">
+            <font-awesome-icon
+              class="social-icon"
+              :icon="['fab', 'github']"/>Contributions welcome!
+          </a>
         </li>
         <li class="social-item">
-          <a href="https://github.com/vicbergquist/shapy">
-            <font-awesome-icon 
-              class="social-icon" 
-              :icon="['fab', 'github']"/>Contribute!
-          </a>
+          <font-awesome-icon
+            class="social-icon"
+            :icon="['fab', 'twitter']"/>
+          Made by <a
+            class="inline-link"
+            href="https://github.com/vicbergquist/shapy"
+            target="_blank"
+            ref="noreferrer">@vicbergquist</a>
         </li>
       </ul>
     </template>
@@ -69,7 +69,7 @@ export default {
   .social-icon
     font-size: 1.1em
     margin-right: .5em
-  
+
   .inline-link
     margin: 0 .5em
 </style>

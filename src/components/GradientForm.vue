@@ -78,10 +78,13 @@ export default {
     flex-direction: column
     padding-right: 1em
     margin-left: 1em
-    height: 100vh
-    overflow-y: auto
+    max-height: 100vh
+    overflow-y: scroll
     @media screen and (max-width: 768px)
       height: 100%
+  
+  .form
+    min-height: 100vh
 
   .fieldset
     position: relative
@@ -147,6 +150,7 @@ export default {
       box-shadow: 1px 1px 1px hsl(214, 29%, 20%)
 
   .btn-add
+    color: $white
     background: $green
     flex-basis: min-content
 

@@ -3,8 +3,8 @@
     <div
       class="canvas"
       id="canvas-max">
-      <div 
-        class="gradient-canvas" 
+      <div
+        class="gradient-canvas"
         :style="{width: canvasCurrent.x, height: canvasCurrent.y, background: gradientStrings}">
         <div
           class="preview-gradient"
@@ -120,12 +120,11 @@ export default {
     margin-right: 1em
     margin-left: 1em
     grid-column: 2 / -1
-    min-height: 70vh
+    grid-row: 1
     background: white
     border-radius: 3px
     padding: 1em
     display: flex
-    flex: 1 1 auto
 
   .canvas
     display: flex
@@ -139,6 +138,8 @@ export default {
     outline-style: dashed
     outline-width: 1.5px
     outline-offset: 1.5px
+    max-height: 100%
+    max-width: 100%
 
   .preview-gradient
     height: 100%

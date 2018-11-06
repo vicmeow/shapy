@@ -1,18 +1,13 @@
 <template>
   <ul class="gradient-list">
     <li class="preview-string">
-      <h2 class="list-heading">Preview:</h2>
       <code>{{ previewGradient }}</code>
     </li>
-    <li><h2 class="list-heading">Added Shapes:</h2></li>
     <li
       class="gradient-item"
-      v-for="(gradient, index) in gradientList"
+      v-for="gradient in gradientList"
       :key="gradient.id">
       <span class="item-details">
-        <span class="number">
-          {{ index + 1 }}.
-        </span>
         <span class="delete">
           <button
             @click="removeShape(gradient.id)"
@@ -21,7 +16,7 @@
           </button>
         </span>
       </span>
-      <code>{{ gradient.string }}</code>
+      <pre v-highlightjs><code class="css">{{ gradient.string }}</code></pre>
     </li>
   </ul>
 </template>
@@ -45,35 +40,23 @@ export default {
   .gradient-list
     grid-column: 2 / -1
     grid-row: 2
-    width: 100%
-    overflow-y: auto
-    list-style-type: none
-    color: white
-    margin-top: 2em
-    padding-left: 1em
-    padding-right: 2em
+    max-height: 250px
+    overflow-y: scroll
+    padding: 1em
 
     li
       display: flex
       line-height: 1.3
       margin-bottom: .5rem
-  
-  .gradient-item
-    padding-left: 1em
 
   .item-details
+    margin-bottom: 0
     margin-right: 1em
     font-weight: 500
     width: 1em
 
-  .delete
-    display: none
-
-  li:hover > .item-details > .number
-    display: none
-
-  li:hover > .item-details .delete
-    display: block
+  pre
+    white-space: pre-wrap
 
   .btn-delete-item
     cursor: pointer
@@ -87,7 +70,7 @@ export default {
     font-size: 1em
 
   .preview-string
-    font-size: 1.2em
+    //font-size: 1.2em
     flex-direction: column
 
   .list-heading
