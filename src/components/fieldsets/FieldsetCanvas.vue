@@ -1,14 +1,14 @@
 <template>
-  <div 
-    role="group" 
+  <div
+    role="group"
     class="fieldset fieldset-canvas">
 
     <!-- TITLE & DESCRIPTION -->
-    <legend 
-      class="legend" 
+    <legend
+      class="legend"
       @click="hidden = !hidden">{{ title }}</legend>
-    <group-toggle 
-      @click.native="hidden = !hidden" 
+    <group-toggle
+      @click.native="hidden = !hidden"
       :hidden="hidden"/>
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
@@ -46,7 +46,7 @@ export default {
   data: () => ({
     hidden: false,
     title: 'Canvas Size 🖼',
-    desc: 'Edit the size of your canvas in percentages or pixels.'
+    desc: "Edit the size of your canvas. Choose 'px' by clicking on the unit."
   }),
   computed: {
     ...mapFields(['canvas']),
