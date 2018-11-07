@@ -42,7 +42,7 @@ export default {
     GroupToggle
   },
   data: () => ({
-    hidden: true,
+    hidden: false,
     title: 'Color Stops 🌈',
     desc: 'The colors for your gradient shape.'
   }),

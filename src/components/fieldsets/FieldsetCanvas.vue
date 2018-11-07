@@ -44,7 +44,7 @@ export default {
     GroupToggle
   },
   data: () => ({
-    hidden: false,
+    hidden: true,
     title: 'Canvas Size 🖼',
     desc: "Edit the size of your canvas. Choose 'px' by clicking on the unit."
   }),
