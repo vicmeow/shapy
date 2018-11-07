@@ -49,7 +49,7 @@ export default {
     grid-column: 2 / -1
     grid-row: 2
     max-height: 100%
-    overflow-y: scroll
+    overflow-y: auto
     padding: 0 1em 1em
     flex: 0 0 auto
     justify-content: flex-start
