@@ -22,7 +22,7 @@ export default {
       {
         name: 'description',
         content:
-          'A CSS gradient shape generator made with Vue.js. Explore and discover the power of CSS gradients. Made by Victoria Bergquist.'
+          'A gradient generator that lets you explore the power of CSS gradients. Create shapes and CSS images using background gradients only.'
       }
     ]
   }
