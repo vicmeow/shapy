@@ -3,19 +3,18 @@
     <li class="preview-string">
       <span class="string-label">Preview:</span>
       <span v-highlightjs="previewGradient"><code class="css"/></span>
-      <span 
-        v-if="gradientList.length > 0" 
+      <span
         class="string-label">Added:</span>
     </li>
-    <li 
-      class="no-items" 
-      v-if="gradientList.length > 1">You haven't added any gradients yet...</li>
+    <li
+      class="no-items"
+      v-if="gradientList.length < 1">You haven't added any gradients yet...</li>
     <li
       class="gradient-item"
       v-for="gradient in gradientList"
       :key="gradient.id">
-      <div 
-        class="gradient-code" 
+      <div
+        class="gradient-code"
         v-highlightjs="gradient.string">
         <code class="css"/>
       </div>
@@ -78,6 +77,9 @@ export default {
     flex-direction: column
     margin-top: .5em
 
+  .gradient-item
+    margin-top: .5em
+
   pre
     white-space: pre-wrap
     tab-size: 2
@@ -107,9 +109,5 @@ export default {
     font-size: .8em
     font-style: italic
     margin-right: 1em
-
-  .delete-icon
-    font-size: .9em
-    color: $red
 
 </style>
