@@ -12,12 +12,12 @@ const state = {
   canvas: {
     x: {
       unit: '%',
-      size: 50,
+      size: 100,
       max: false
     },
     y: {
       unit: '%',
-      size: 50,
+      size: 100,
       max: false
     }
   },
@@ -27,13 +27,13 @@ const state = {
   },
   colors: {
     stop1: {
-      size: 70,
+      size: 0,
       color: '#00978D',
       unit: '%'
     },
     stop2: {
-      size: 70,
-      color: '#3D4856',
+      size: 100,
+      color: '#f3b6c9',
       unit: '%'
     }
   },
@@ -41,11 +41,11 @@ const state = {
     size: {
       x: {
         unit: '%',
-        size: 50
+        size: 100
       },
       y: {
         unit: '%',
-        size: 50
+        size: 100
       }
     },
     coord: {
