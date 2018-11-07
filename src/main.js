@@ -2,13 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Meta from 'vue-meta'
 import VueHighlightJS from 'vue-highlightjs'
 
-library.add(faTrashAlt, faTwitter, faGithub)
+library.add(faTwitter, faGithub)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
