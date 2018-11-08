@@ -68,6 +68,8 @@ export default {
       const type = this.gradient.type
       const repeat = this.gradient.repeat
       const comment = this.comment
+      // degree info
+      const degree = this.gradient.degree.size + this.gradient.degree.unit
 
       // BOX INFO
       // box size
@@ -83,12 +85,17 @@ export default {
       const box = boxCoord + ' / ' + boxSize
 
       // color stops
-      const stop1 = this.colors.stop1.color + ' ' + this.colors.stop1.size + '%'
-      const stop2 = this.colors.stop2.color + ' ' + this.colors.stop2.size + '%'
+      //const stop1 = this.colors.stop1.color + ' ' + this.colors.stop1.size + '%'
+      //const stop2 = this.colors.stop2.color + ' ' + this.colors.stop2.size + '%'
+      const colors = this.colors.map(function(color) {
+        const colorStop = color.map(function(stop) {
+          const colorString = ` ${stop.color} ${stop.size}${stop.unit}`
+          return colorString
+        })
+        return colorStop.join(', ')
+      })
 
-      // degree info
-      const degree = this.shape.degree.size + this.shape.degree.unit
-      // color stop
+      // shape size
       const shapeWidth = this.shape.size.x.size + this.shape.size.x.unit
       const shapeHeight = this.shape.size.y.size + this.shape.size.y.unit
       // shape coord
@@ -101,11 +108,11 @@ export default {
       const shape = shapeSize + ' at ' + shapeCoord
 
       if (type === 'radial-gradient') {
-        return `/* ${comment} */ ${type}(${shape}, ${stop1}, ${stop2}) ${repeat} ${box}`
-      } else if (type === 'linear-gradient' && this.shape.degree.size > 0) {
-        return `/* ${comment} */ ${type}(${degree}, ${stop1}, ${stop2}) ${repeat} ${box}`
+        return `/* ${comment} */ ${type}(${shape}, ${colors}) ${repeat} ${box}`
+      } else if (type === 'linear-gradient' && this.gradient.degree.size > 0) {
+        return `/* ${comment} */ ${type}(${degree}, ${colors}) ${repeat} ${box}`
       } else if (type === 'linear-gradient') {
-        return `/* ${comment} */ ${type}(${stop1}, ${stop2}) ${repeat} ${box}`
+        return `/* ${comment} */ ${type}(${colors}) ${repeat} ${box}`
       }
     }
   }

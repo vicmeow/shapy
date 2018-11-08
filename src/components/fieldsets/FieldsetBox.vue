@@ -44,17 +44,6 @@
         :what="box.coord.y"
         :min="-100"
         :max="200"/>
-
-      <!-- DEGREE IF LINEAR GRADIENT -->
-      <input-wrapper
-        v-if="gradient.type === 'linear-gradient'"
-        class="degree-wrapper"
-        v-model="shape.degree"
-        :label="'Degree'"
-        :name="'gradient-degree'"
-        :what="shape.degree"
-        :min="0"
-        :max="360"/>
     </template>
   </div>
 </template>
@@ -75,7 +64,7 @@ export default {
     desc: 'The box your shape goes into.'
   }),
   computed: {
-    ...mapFields(['box', 'shape', 'gradient'])
+    ...mapFields(['box', 'shape'])
   }
 }
 </script>

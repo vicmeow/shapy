@@ -23,20 +23,26 @@ const state = {
   },
   gradient: {
     type: 'linear-gradient',
-    repeat: 'no-repeat'
-  },
-  colors: {
-    stop1: {
-      size: 0,
-      color: '#00978D',
-      unit: '%'
-    },
-    stop2: {
-      size: 100,
-      color: '#f3b6c9',
-      unit: '%'
+    repeat: 'no-repeat',
+    degree: {
+      unit: 'deg',
+      size: 0
     }
   },
+  colors: [
+    [
+      {
+        size: 0,
+        color: '#f3b6c9',
+        unit: '%'
+      },
+      {
+        size: 100,
+        color: '#00978D',
+        unit: '%'
+      }
+    ]
+  ],
   box: {
     size: {
       x: {
@@ -60,10 +66,6 @@ const state = {
     }
   },
   shape: {
-    degree: {
-      unit: 'deg',
-      size: 0
-    },
     size: {
       x: {
         unit: '%',
@@ -97,7 +99,10 @@ const getters = {
   gradientStrings() {
     return state.gradientStrings
   },
-  getField
+  getField,
+  colors() {
+    return state.colors
+  }
 }
 
 const mutations = {
@@ -141,6 +146,24 @@ const mutations = {
       newList.unshift(item.string)
     })
     state.gradientStrings = newList.join(', ')
+  },
+  addStop(state) {
+    const newStop = [
+      {
+        size: 0,
+        color: 'transparent',
+        unit: '%'
+      },
+      {
+        size: 100,
+        color: 'transparent',
+        unit: '%'
+      }
+    ]
+    state.colors.push(newStop)
+  },
+  removeStop(state, remove) {
+    if (state.colors.length > 1) state.colors.splice(remove, 1)
   }
 }
 

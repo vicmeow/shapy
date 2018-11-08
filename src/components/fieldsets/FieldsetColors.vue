@@ -13,45 +13,141 @@
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
       <!-- CUSTOM COLOR STOPS -->
+      <div class="color-stops">
+        <div
+          class="color-stop-wrapper"
+          role="group"
+          v-for="(stop, index) in colors"
+          :key="stop.index">
+          <color-wrapper
+            v-for="(pair, index) in stop"
+            :key="pair.index"
+            v-model="pair.index"
+            :label="index !== 0 ? 'Stop at' : 'Start at'"
+            :what="pair"
+            :name="'color-stop-' + index"/>
+          <div class="button-wrapper">
+            <button
+              class="icon-btn icon-add"
+              @click="addStop">
+              <font-awesome-icon
+                class="btn-icon"
+                :icon="['fas', 'plus-circle']"/>
+              <div class="hover">Add</div>
+            </button>
+            <button
+              class="icon-btn icon-remove"
+              @click="removeStop(index)">
+              <font-awesome-icon
+                class="btn-icon"
+                :icon="['fas', 'minus-circle']"/>
+              <div class="hover">Remove</div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- DEGREE IF LINEAR GRADIENT -->
       <input-wrapper
-        v-model="colors.stop1"
-        :label="'Color 1'"
-        :what="colors.stop1"
-        :color-input="true"
-        :name="'color-stop'"
-        :toggle-unit="false"/>
-      <input-wrapper
-        v-model="colors.stop2"
-        :label="'Color 2'"
-        :what="colors.stop2"
-        :color-input="true"
-        :name="'color-stop'"
-        :toggle-unit="false"/>
+        v-if="gradient.type === 'linear-gradient'"
+        class="degree-wrapper"
+        v-model="gradient.degree"
+        :label="'Degree'"
+        :name="'gradient-degree'"
+        :what="gradient.degree"
+        :min="0"
+        :max="360"/>
     </template>
   </div>
 </template>
 
 <script>
 import GroupToggle from '@/components/GroupToggle'
+import ColorWrapper from '@/components/ColorWrapper'
 import InputWrapper from '@/components/InputWrapper'
+import { mapMutations, mapState } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 export default {
-  name: 'Shape',
+  name: 'Colors',
   components: {
-    InputWrapper,
-    GroupToggle
+    ColorWrapper,
+    GroupToggle,
+    InputWrapper
   },
   data: () => ({
     hidden: false,
     title: 'Color Stops 🌈',
-    desc: 'The colors for your gradient shape.'
+    desc: 'Add or remove color stops on your gradient.'
   }),
   computed: {
-    ...mapFields(['colors'])
+    ...mapFields(['colors']),
+    ...mapState(['colors', 'gradient'])
+  },
+  methods: {
+    ...mapMutations(['addStop']),
+    removeStop(remove) {
+      this.$store.commit('removeStop', remove)
+    }
   }
 }
 </script>
 
 <style lang="sass">
-  .fieldset-colors .input-wrapper
+  .color-stop-wrapper
+    display: flex
+    flex-wrap: wrap
+    margin-bottom: .5rem
+
+  .button-wrapper
+    flex-basis: 100%
+    text-align: center
+    margin-top: .5rem
+
+  .icon-add
+    display: none
+
+  .color-stop-wrapper:last-child .button-wrapper .icon-add
+    display: inline-block
+
+  .icon-btn
+    position: relative
+    cursor: pointer
+    font-size: 1rem
+    text-transform: uppercase
+    font-weight: 500
+    background: 0
+    border: 0
+    padding: 0
+    margin: 0 .5rem
+
+    .hover
+      position: absolute
+      bottom: 0
+      right: 0
+      font-size: .85rem
+      font-weight: 500
+      margin-bottom: 2px
+      opacity: 0
+      margin-top: .5rem
+      transition: all .3s linear
+
+  .icon-btn:hover .hover
+    opacity: 1
+    transform: translateX(0px)
+
+  .icon-add .hover
+    left: -65px
+    transform: translateX(5px)
+
+  .icon-remove .hover
+    right: -65px
+    transform: translateX(-5px)
+
+  .btn-icon
+    font-size: 1.1em
+
+  .icon-remove
+    color: $black
+
+  .icon-add
+    color: $green
 </style>
