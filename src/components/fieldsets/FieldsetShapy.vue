@@ -21,7 +21,7 @@
             :icon="['fab', 'twitter']"/>
           Made by <a
             class="inline-link"
-            href="https://github.com/vicbergquist/shapy"
+            href="https://twitter.com/vicbergquist/"
             target="_blank"
             ref="noreferrer">@vicbergquist</a>
         </li>
