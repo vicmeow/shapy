@@ -1,5 +1,6 @@
 <template>
   <div class="size-wrapper">
+    <slot name="color"/>
     <label
       :for="name + '-id'"
       class="label">{{ label }}:</label>
@@ -13,7 +14,7 @@
         :id="name + '-id'"
         :min="min"
         :max="max">
-      <slot/>
+      <slot name="unit"/>
     </div>
   </div>
 </template>
@@ -56,7 +57,6 @@ export default {
     display: flex
     align-items: center
     width: 100%
-    justify-content: space-between
     margin-bottom: .2em
 
     .size-input
@@ -72,4 +72,5 @@ export default {
   .size-edit
     display: flex
     justify-content: flex-end
+    margin-left: auto
 </style>

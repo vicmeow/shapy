@@ -39,6 +39,9 @@ export default {
     // Add an event listener for calculating canvas max size (px)
     window.addEventListener('resize', this.updateMax)
   },
+  destroyed() {
+    window.removeEventListener('resize', this.updateMax)
+  },
   mounted() {
     // update the max canvas size based on canvas wrapper
     this.updateMax()
@@ -62,50 +65,65 @@ export default {
       'canvas',
       'colors'
     ]),
-    gradientString() {
-      /* TODO: Move string creation to the store */
-      // GRADIENT INFO
-      const type = this.gradient.type
-      const repeat = this.gradient.repeat
-      const comment = this.comment
-      // degree info
-      const degree = this.gradient.degree.size + this.gradient.degree.unit
-
-      // BOX INFO
-      // box size
+    boxCombined() {
       const boxWidth = this.box.size.x.size + this.box.size.x.unit
       const boxHeight = this.box.size.y.size + this.box.size.y.unit
-      // box coord
       const boxX = this.box.coord.x.size + this.box.coord.x.unit
       const boxY = this.box.coord.y.size + this.box.coord.y.unit
-
-      // BOX COMBINED
       const boxSize = boxWidth + ' ' + boxHeight
       const boxCoord = boxX + ' ' + boxY
-      const box = boxCoord + ' / ' + boxSize
 
-      // color stops
-      //const stop1 = this.colors.stop1.color + ' ' + this.colors.stop1.size + '%'
-      //const stop2 = this.colors.stop2.color + ' ' + this.colors.stop2.size + '%'
-      const colors = this.colors.map(function(color) {
-        const colorStop = color.map(function(stop) {
-          const colorString = ` ${stop.color} ${stop.size}${stop.unit}`
-          return colorString
+      return boxCoord + ' / ' + boxSize
+    },
+    shapeCombined() {
+      const shapeWidth = this.shape.size.x.size + this.shape.size.x.unit
+      const shapeHeight = this.shape.size.y.size + this.shape.size.y.unit
+      const shapeX = this.shape.coord.x.size + this.shape.coord.x.unit
+      const shapeY = this.shape.coord.y.size + this.shape.coord.y.unit
+      const shapeSize = shapeWidth + ' ' + shapeHeight
+      const shapeCoord = shapeX + ' ' + shapeY
+
+      return shapeSize + ' at ' + shapeCoord
+    },
+    colorStops() {
+      const colors = this.colors.map(color => {
+        const colorStop = color.map(stop => {
+          const size = stop.size + stop.unit
+          const c = stop.color
+          switch (stop.type) {
+            case 'rgba': {
+              const rgba = c.rgba
+              return `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a}) ${size}`
+            }
+            case 'hex': {
+              return `${c.hex} ${size}`
+            }
+            default: {
+              return `rgba(${c.rgba.r},${c.rgba.g},${c.rgba.b}, ${
+                c.rgba.a
+              }) ${size}`
+            }
+          }
         })
         return colorStop.join(', ')
       })
-
-      // shape size
-      const shapeWidth = this.shape.size.x.size + this.shape.size.x.unit
-      const shapeHeight = this.shape.size.y.size + this.shape.size.y.unit
-      // shape coord
-      const shapeX = this.shape.coord.x.size + this.shape.coord.x.unit
-      const shapeY = this.shape.coord.y.size + this.shape.coord.y.unit
-
-      // SHAPE COMBINED
-      const shapeSize = shapeWidth + ' ' + shapeHeight
-      const shapeCoord = shapeX + ' ' + shapeY
-      const shape = shapeSize + ' at ' + shapeCoord
+      return colors
+    },
+    gradientString() {
+      // TYPE
+      const type = this.gradient.type
+      // REPEATING
+      const repeat = this.gradient.repeat
+      // COLORS
+      const colors = this.colorStops
+      // COMMENT
+      const comment = this.comment
+      // DEGREE
+      const degree = this.gradient.degree.size + this.gradient.degree.unit
+      // BOX
+      const box = this.boxCombined
+      // SHAPE
+      const shape = this.shapeCombined
 
       if (type === 'radial-gradient') {
         return `/* ${comment} */ ${type}(${shape}, ${colors}) ${repeat} ${box}`

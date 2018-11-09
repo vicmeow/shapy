@@ -9,6 +9,7 @@
         :min="min"
         :max="max">
         <unit-input
+          slot="unit"
           v-model="what.unit"
           :unit="what.unit"
           :name="name + '-size-unit'"/>
