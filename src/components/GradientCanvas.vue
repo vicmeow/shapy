@@ -86,28 +86,37 @@ export default {
       return shapeSize + ' at ' + shapeCoord
     },
     colorStops() {
-      const colors = this.colors.map(color => {
-        const colorStop = color.map(stop => {
-          const size = stop.size + stop.unit
-          const c = stop.color
-          switch (stop.type) {
-            case 'rgba': {
-              const rgba = c.rgba
-              return `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a}) ${size}`
-            }
-            case 'hex': {
-              return `${c.hex} ${size}`
-            }
-            default: {
-              return `rgba(${c.rgba.r},${c.rgba.g},${c.rgba.b}, ${
-                c.rgba.a
-              }) ${size}`
-            }
-          }
-        })
-        return colorStop.join(', ')
+      const colorStops = this.colors.map(color => {
+        let startColor
+        let stopColor
+
+        const start = color.start
+        const stop = color.stop
+        const startSize = start.size + start.unit
+        const stopSize = stop.size + stop.unit
+
+        // START VALUES
+        if (start.color.type === 'rgba') {
+          const rgba = start.color.rgba
+          startColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
+            rgba.a
+          }) ${startSize}`
+        } else {
+          startColor = `${start.color.hex} ${startSize}`
+        }
+
+        // STOP VALUES
+        if (stop.color.type === 'rgba') {
+          const rgba = stop.color.rgba
+          stopColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
+            rgba.a
+          }) ${stopSize}`
+        } else {
+          stopColor = `${stop.color.hex} ${stopSize}`
+        }
+        return `${startColor}, ${stopColor}`
       })
-      return colors
+      return colorStops.join(', ')
     },
     gradientString() {
       // TYPE

@@ -30,8 +30,9 @@ const state = {
     }
   },
   colors: [
-    [
-      {
+    {
+      id: 1,
+      start: {
         size: 0,
         type: 'hex',
         color: {
@@ -41,7 +42,7 @@ const state = {
         },
         unit: '%'
       },
-      {
+      stop: {
         size: 100,
         type: 'hex',
         color: {
@@ -51,7 +52,7 @@ const state = {
         },
         unit: '%'
       }
-    ]
+    }
   ],
   box: {
     size: {
@@ -157,33 +158,12 @@ const mutations = {
     })
     state.gradientStrings = newList.join(', ')
   },
-  addStop(state) {
-    const newStop = [
-      {
-        size: 0,
-        type: 'hex',
-        color: {
-          hex: '#00978d',
-          rgba: { a: 1, b: 141, g: 151, r: 0 },
-          a: 1
-        },
-        unit: '%'
-      },
-      {
-        size: 100,
-        type: 'hex',
-        color: {
-          hex: '#f3b6c9',
-          rgba: { a: 1, b: 141, g: 151, r: 0 },
-          a: 1
-        },
-        unit: '%'
-      }
-    ]
-    state.colors.push(newStop)
+  addStop(state, { index, newStop }) {
+    state.colors.splice(index, 0, newStop)
   },
-  removeStop(state, remove) {
-    if (state.colors.length > 1) state.colors.splice(remove, 1)
+  removeStop(state, id) {
+    const result = state.colors.filter(pair => pair.id !== id)
+    state.colors = result
   }
 }
 

@@ -112,6 +112,8 @@ export default {
   .color-wrapper
     margin-top: .3em
     flex-basis: 50%
+    display: inline-block
+    width: 50%
 
   .color-wrapper:nth-child(even)
     padding-left: .75em
@@ -134,7 +136,7 @@ export default {
     border-radius: 50%
 
   .appear-enter-active, .appear-leave-active
-    transition: all .5s
+    transition: all .3s
 
   .appear-enter, .appear-leave-to
     opacity: 0
@@ -157,10 +159,11 @@ export default {
       height: auto
 
     .vc-chrome-fields .vc-input__label
-      font-size: .9em
+      font-size: .8em
       font-family: $font
       color: $black
-  
+      letter-spacing: 1px
+
   .color-wrapper:first-child #chrome-picker
     left: 0
 

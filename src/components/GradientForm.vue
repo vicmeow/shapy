@@ -47,13 +47,13 @@ export default {
     FieldsetColors,
     FieldsetShapy
   },
-  data: () => ({
-    id: 0
-  }),
   computed: {
     ...mapFields(['comment', 'gradient']),
     ...mapState(['previewGradient', 'gradientList'])
   },
+  data: () => ({
+    id: 0
+  }),
   methods: {
     addShape() {
       if (this.previewGradient) {
@@ -61,8 +61,8 @@ export default {
           id: this.id,
           string: this.previewGradient
         })
-        this.id++
       }
+      this.id++
     },
     ...mapMutations(['undoShape', 'deleteShapes'])
   }
