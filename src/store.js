@@ -33,12 +33,22 @@ const state = {
     [
       {
         size: 0,
-        color: '#f3b6c9',
+        type: 'hex',
+        color: {
+          hex: '#00978d',
+          rgba: { a: 1, b: 141, g: 151, r: 0 },
+          a: 1
+        },
         unit: '%'
       },
       {
         size: 100,
-        color: '#00978D',
+        type: 'hex',
+        color: {
+          hex: '#f3b6c9',
+          rgba: { a: 1, b: 201, g: 182, r: 243 },
+          a: 1
+        },
         unit: '%'
       }
     ]
@@ -151,12 +161,22 @@ const mutations = {
     const newStop = [
       {
         size: 0,
-        color: 'transparent',
+        type: 'hex',
+        color: {
+          hex: '#00978d',
+          rgba: { a: 1, b: 141, g: 151, r: 0 },
+          a: 1
+        },
         unit: '%'
       },
       {
         size: 100,
-        color: 'transparent',
+        type: 'hex',
+        color: {
+          hex: '#f3b6c9',
+          rgba: { a: 1, b: 141, g: 151, r: 0 },
+          a: 1
+        },
         unit: '%'
       }
     ]

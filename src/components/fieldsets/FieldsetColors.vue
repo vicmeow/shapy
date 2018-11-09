@@ -20,12 +20,15 @@
           v-for="(stop, index) in colors"
           :key="stop.index">
           <color-wrapper
-            v-for="(pair, index) in stop"
-            :key="pair.index"
-            v-model="pair.index"
-            :label="index !== 0 ? 'Stop at' : 'Start at'"
-            :what="pair"
-            :name="'color-stop-' + index"/>
+            v-model="stop[0]"
+            :label="'Start at'"
+            :what="stop[0]"
+            :name="'color-stop-start'"/>
+          <color-wrapper
+            v-model="stop[1]"
+            :label="'Stop at'"
+            :what="stop[1]"
+            :name="'color-stop-stop'"/>
           <div class="button-wrapper">
             <button
               class="icon-btn icon-add"
@@ -76,7 +79,8 @@ export default {
   data: () => ({
     hidden: false,
     title: 'Color Stops 🌈',
-    desc: 'Add or remove color stops on your gradient.'
+    desc:
+      'The colors of your gradient. You can add multiple color stops or remove them.'
   }),
   computed: {
     ...mapFields(['colors']),
@@ -92,6 +96,7 @@ export default {
 </script>
 
 <style lang="sass">
+
   .color-stop-wrapper
     display: flex
     flex-wrap: wrap
@@ -100,7 +105,6 @@ export default {
   .button-wrapper
     flex-basis: 100%
     text-align: center
-    margin-top: .5rem
 
   .icon-add
     display: none
