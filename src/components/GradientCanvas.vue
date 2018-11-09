@@ -132,6 +132,8 @@ export default {
     border-radius: 3px
     padding: 1em
     display: flex
+    @media screen and (max-width: 768px)
+      min-height: 60vw
 
   .canvas
     display: flex
