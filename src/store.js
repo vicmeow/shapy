@@ -45,7 +45,7 @@ const state = {
         size: 100,
         type: 'hex',
         color: {
-          hex: '#194d33',
+          hex: '#f3b6c9',
           rgba: { a: 1, b: 201, g: 182, r: 243 },
           a: 1
         },
@@ -173,7 +173,7 @@ const mutations = {
         size: 100,
         type: 'hex',
         color: {
-          hex: '#00978d',
+          hex: '#f3b6c9',
           rgba: { a: 1, b: 141, g: 151, r: 0 },
           a: 1
         },
