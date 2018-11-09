@@ -131,6 +131,7 @@ export default {
     border-radius: 3px
     margin-right: .5em
     cursor: pointer
+    border-radius: 50%
 
   .appear-enter-active, .appear-leave-active
     transition: all .5s
