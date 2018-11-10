@@ -1,5 +1,7 @@
 <template>
-  <div class="color-wrapper">
+  <div 
+    class="color-wrapper" 
+    ref="colorwrapper">
     <size-input
       :label="label"
       v-model.number="what.size"
@@ -7,7 +9,7 @@
       :unit="what.unit">
       <div
         slot="color"
-        @click="picker = !picker"
+        @click="togglePicker()"
         class="color-preview"
         :style="{background: activeColor}"/>
       <unit-input
@@ -54,6 +56,28 @@ export default {
       } else {
         this.a = false
         this.what.type = 'hex'
+      }
+    },
+    togglePicker() {
+      if (this.picker) {
+        this.hidePicker()
+      } else {
+        this.showPicker()
+      }
+    },
+    hidePicker() {
+      document.removeEventListener('click', this.documentClick)
+      this.picker = false
+    },
+    showPicker() {
+      document.addEventListener('click', this.documentClick)
+      this.picker = true
+    },
+    documentClick(e) {
+      const element = this.$refs.colorwrapper
+      const target = e.target
+      if (element !== target && !element.contains(target)) {
+        this.hidePicker()
       }
     }
   },
