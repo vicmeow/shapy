@@ -157,8 +157,10 @@ export default {
 
   .btn-delete
     font-weight: normal
+    font-style: italic
     flex-basis: 100%
     font-size: .9em
+    opacity: .7
     background: $black
     color: $white
     margin: 0

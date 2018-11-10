@@ -192,13 +192,6 @@ export default {
     left: 0
 
   @media screen and (max-width: 768px)
-    .color-wrapper
-      flex-basis: 100%
-      padding: 0
-
-    .color-wrapper:nth-child(even), .color-wrapper:nth-child(odd)
-      padding: 0
-
     .size-wrapper
       margin-top: .5em
 

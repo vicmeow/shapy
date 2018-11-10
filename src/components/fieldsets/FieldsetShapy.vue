@@ -16,14 +16,14 @@
           </a>
         </li>
         <li class="social-item">
-          <font-awesome-icon
-            class="social-icon"
-            :icon="['fab', 'twitter']"/>
-          Made by <a
+          <a
             class="inline-link"
             href="https://twitter.com/vicbergquist/"
             target="_blank"
-            ref="noreferrer">@vicbergquist</a>
+            ref="noreferrer">
+            <font-awesome-icon
+              class="social-icon"
+              :icon="['fab', 'twitter']"/>@vicbergquist</a>
         </li>
       </ul>
     </template>
@@ -56,10 +56,15 @@ export default {
     font-size: 1.5em
 
   .social-list
+    display: flex
     list-style-type: none
-    margin-top: .5em
+    //margin-top: .5em
+    align-items: center
+    width: 100%
+    //justify-content: space-between
 
   .social-item
+    font-size: .93em
     font-weight: 500
     display: flex
     align-items: center
@@ -67,9 +72,7 @@ export default {
     margin-top: .5em
 
   .social-icon
-    font-size: 1.1em
-    margin-right: .5em
+    font-size: 1em
+    margin-right: .3em
 
-  .inline-link
-    margin: 0 .5em
 </style>
