@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   watch: {
     gradientString() {
@@ -65,59 +65,7 @@ export default {
       'canvas',
       'colors'
     ]),
-    boxCombined() {
-      const boxWidth = this.box.size.x.size + this.box.size.x.unit
-      const boxHeight = this.box.size.y.size + this.box.size.y.unit
-      const boxX = this.box.coord.x.size + this.box.coord.x.unit
-      const boxY = this.box.coord.y.size + this.box.coord.y.unit
-      const boxSize = boxWidth + ' ' + boxHeight
-      const boxCoord = boxX + ' ' + boxY
-
-      return boxCoord + ' / ' + boxSize
-    },
-    shapeCombined() {
-      const shapeWidth = this.shape.size.x.size + this.shape.size.x.unit
-      const shapeHeight = this.shape.size.y.size + this.shape.size.y.unit
-      const shapeX = this.shape.coord.x.size + this.shape.coord.x.unit
-      const shapeY = this.shape.coord.y.size + this.shape.coord.y.unit
-      const shapeSize = shapeWidth + ' ' + shapeHeight
-      const shapeCoord = shapeX + ' ' + shapeY
-
-      return shapeSize + ' at ' + shapeCoord
-    },
-    colorStops() {
-      const colorStops = this.colors.map(color => {
-        let startColor
-        let stopColor
-
-        const start = color.start
-        const stop = color.stop
-        const startSize = start.size + start.unit
-        const stopSize = stop.size + stop.unit
-
-        // START VALUES
-        if (start.color.type === 'rgba') {
-          const rgba = start.color.rgba
-          startColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
-            rgba.a
-          }) ${startSize}`
-        } else {
-          startColor = `${start.color.hex} ${startSize}`
-        }
-
-        // STOP VALUES
-        if (stop.color.type === 'rgba') {
-          const rgba = stop.color.rgba
-          stopColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
-            rgba.a
-          }) ${stopSize}`
-        } else {
-          stopColor = `${stop.color.hex} ${stopSize}`
-        }
-        return `${startColor}, ${stopColor}`
-      })
-      return colorStops.join(', ')
-    },
+    ...mapGetters(['colorStops', 'boxCombined', 'shapeCombined']),
     gradientString() {
       // TYPE
       const type = this.gradient.type

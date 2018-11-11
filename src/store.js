@@ -111,8 +111,49 @@ const getters = {
     return state.gradientStrings
   },
   getField,
-  colors() {
-    return state.colors
+  boxCombined() {
+    const boxWidth = state.box.size.x.size + state.box.size.x.unit
+    const boxHeight = state.box.size.y.size + state.box.size.y.unit
+    const boxX = state.box.coord.x.size + state.box.coord.x.unit
+    const boxY = state.box.coord.y.size + state.box.coord.y.unit
+    const boxSize = boxWidth + ' ' + boxHeight
+    const boxCoord = boxX + ' ' + boxY
+    return `${boxCoord} / ${boxSize}`
+  },
+  shapeCombined() {
+    const shapeWidth = state.shape.size.x.size + state.shape.size.x.unit
+    const shapeHeight = state.shape.size.y.size + state.shape.size.y.unit
+    const shapeX = state.shape.coord.x.size + state.shape.coord.x.unit
+    const shapeY = state.shape.coord.y.size + state.shape.coord.y.unit
+    const shapeSize = shapeWidth + ' ' + shapeHeight
+    const shapeCoord = shapeX + ' ' + shapeY
+    return `${shapeSize} at ${shapeCoord}`
+  },
+  colorStops() {
+    const stops = state.colors.map(color => {
+      let startColor
+      let stopColor
+      const startSize = color.start.size + color.start.unit
+      const stopSize = color.stop.size + color.stop.unit
+      // START VALUES
+      if (color.start.color.type === 'rgba') {
+        const rgba = color.start.color.rgba
+        startColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
+          rgba.a
+        }) ${startSize}`
+      } else {
+        startColor = `${color.start.color.hex} ${startSize}`
+      }
+      // STOP VALUES
+      if (color.stop.color.type === 'rgba') {
+        const rgba = color.stop.color.rgba
+        stopColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a}) ${stopSize}`
+      } else {
+        stopColor = `${color.stop.color.hex} ${stopSize}`
+      }
+      return `${startColor}, ${stopColor}`
+    })
+    return stops.join(', ')
   }
 }
 
