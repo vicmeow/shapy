@@ -1,8 +1,14 @@
-# shapy
+# Shapy
 
-Shapy is a gradient shape editor that helps you discover and explore the power of CSS gradients.
+Shapy is a CSS gradient editor that helps you explore the power of CSS gradients. Create custom shapes or images using gradients only.
 
-## Demo  
+Contributions welcome!  
+Check out the [guidelines](./CONTRIBUTING.md) for more info.
+
+Have an idea for Shapy? [Submit a Feature Request](https://github.com/vicbergquist/shapy/issues/new?template=feature_request.md)!  
+Found a bug? [Submit a Bug Report](https://github.com/vicbergquist/shapy/issues/new?template=bug_report.md)!
+
+## Demo
 
 ## [shapy.app](https://shapy.app/)
 
@@ -21,11 +27,6 @@ yarn serve
 ### Compiles and minifies for production
 ```
 yarn build
-```
-
-### Run your tests
-```
-yarn test
 ```
 
 ### Lints and fixes files
