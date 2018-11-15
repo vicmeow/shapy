@@ -5,18 +5,12 @@ const state = {
     x: {
       unit: '%',
       size: 100,
-      max: false,
-      asString: function() {
-        return `${this.size}${this.unit}`
-      }
+      max: false
     },
     y: {
       unit: '%',
       size: 100,
-      max: false,
-      asString: function() {
-        return `${this.size}${this.unit}`
-      }
+      max: false
     }
   }
 }
