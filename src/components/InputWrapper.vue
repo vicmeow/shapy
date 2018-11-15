@@ -28,7 +28,7 @@
 import RangeInput from '@/components/inputs/RangeInput'
 import SizeInput from '@/components/inputs/SizeInput'
 import UnitInput from '@/components/inputs/UnitInput'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   components: {
     UnitInput,
@@ -36,8 +36,8 @@ export default {
     RangeInput
   },
   computed: {
-    ...mapState({
-      canvas: 'canvas'
+    ...mapGetters({
+      canvas: 'canvas/canvas'
     })
   },
   props: {
@@ -82,8 +82,8 @@ export default {
     border: 0
     padding: 0
     &:focus
-      font-style: italic
       outline: 0
+      border-bottom: 1px solid $green
 
   .input-wrapper
     margin-top: .3em

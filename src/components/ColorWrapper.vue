@@ -126,16 +126,6 @@ export default {
 
 <style lang="sass">
 
-  input
-    font-family: $font
-    font-size: 18px
-    color: $black
-    border: 0
-    padding: 0
-    &:focus
-      font-style: italic
-      outline: 0
-
   .color-wrapper
     margin-top: .3em
     flex-basis: 50%

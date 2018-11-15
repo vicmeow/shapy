@@ -20,7 +20,7 @@
       </div>
       <div class="gradient-details">
         <button
-          @click="removeShape(gradient.id)"
+          @click="deleteGradient(gradient.id)"
           class="btn-delete-item">
           ^Delete this gradient?
         </button>
@@ -36,8 +36,8 @@ export default {
     ...mapGetters(['gradientList', 'previewGradient'])
   },
   methods: {
-    removeShape(id) {
-      this.$store.dispatch('removeShape', id)
+    deleteGradient(id) {
+      this.$store.dispatch('deleteGradient', id)
     }
   }
 }

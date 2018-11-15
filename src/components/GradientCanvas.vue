@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   watch: {
     gradientString() {
       // Watch the gradient string for updates to preview on canvas
-      // and commit changes to store
-      this.$store.commit('previewGradient', this.gradientString)
+      // and dispatch changes to store
+      this.$store.dispatch('previewGradient', this.gradientString)
     }
   },
   methods: {
@@ -29,8 +29,8 @@ export default {
       // Update the max canvas size (px) based on the browser size
       const width = document.getElementById('canvas-max').offsetWidth
       const height = document.getElementById('canvas-max').offsetHeight
-      // Commit the new max values to the stire
-      this.$store.commit('updateMax', { x: width, y: height })
+      // Dispatch the new max values to the stire
+      this.$store.dispatch('canvas/updateMax', { x: width, y: height })
     }
   },
   created() {
@@ -53,18 +53,18 @@ export default {
       const height = this.canvas.y.size + this.canvas.y.unit
       return { x: width, y: height }
     },
-    // Things we need from the store
-    ...mapState([
-      'previewGradient',
-      'gradientList',
-      'gradientStrings',
-      'comment',
-      'box',
-      'shape',
-      'gradient',
-      'canvas'
-    ]),
-    ...mapGetters(['boxCombined', 'shapeCombined', 'colors']),
+    ...mapGetters({
+      previewGradient: 'previewGradient',
+      gradientList: 'gradientList',
+      gradientStrings: 'gradientStrings',
+      boxCombined: 'box/boxCombined',
+      shapeCombined: 'shape/shapeCombined',
+      colors: 'colors/colors',
+      canvas: 'canvas/canvas',
+      general: 'general/general',
+      box: 'box/box',
+      shape: 'shape/shape'
+    }),
     colorStops() {
       const stops = this.colors.map(color => {
         let startColor
@@ -96,15 +96,15 @@ export default {
     },
     gradientString() {
       // TYPE
-      const type = this.gradient.type
+      const type = this.general.type
       // REPEATING
-      const repeat = this.gradient.repeat
+      const repeat = this.general.repeat
       // COLORS
       const colors = this.colorStops
       // COMMENT
-      const comment = this.comment
+      const comment = this.general.comment
       // DEGREE
-      const degree = this.gradient.degree.size + this.gradient.degree.unit
+      const degree = this.general.degree.size + this.general.degree.unit
       // BOX
       const box = this.boxCombined
       // SHAPE
@@ -112,7 +112,7 @@ export default {
 
       if (type === 'radial-gradient') {
         return `/* ${comment} */ ${type}(${shape}, ${colors}) ${repeat} ${box}`
-      } else if (type === 'linear-gradient' && this.gradient.degree.size > 0) {
+      } else if (type === 'linear-gradient' && this.general.degree.size > 0) {
         return `/* ${comment} */ ${type}(${degree}, ${colors}) ${repeat} ${box}`
       } else if (type === 'linear-gradient') {
         return `/* ${comment} */ ${type}(${colors}) ${repeat} ${box}`

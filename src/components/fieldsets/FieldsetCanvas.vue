@@ -35,8 +35,12 @@
 <script>
 import InputWrapper from '@/components/InputWrapper'
 import GroupToggle from '@/components/GroupToggle'
-import { mapState } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
+import { mapGetters } from 'vuex'
+import { createHelpers } from 'vuex-map-fields'
+const { mapFields } = createHelpers({
+  getterType: 'canvas/getField',
+  mutationType: 'canvas/updateField'
+})
 export default {
   name: 'Canvas',
   components: {
@@ -50,7 +54,7 @@ export default {
   }),
   computed: {
     ...mapFields(['canvas']),
-    ...mapState(['canvas']),
+    ...mapGetters(['canvas/canvas']),
     maxX() {
       if (this.canvas.x.unit === 'px') return this.canvas.x.max
       else return 100

@@ -5,21 +5,20 @@
       @submit.prevent>
       <fieldset-shapy/>
       <fieldset-canvas/>
-      <fieldset-gradient/>
+      <fieldset-general/>
       <fieldset-colors/>
       <fieldset-box/>
-      <fieldset-shape v-if="gradient.type === 'radial-gradient'"/>
-      <fieldset-comment/>
+      <fieldset-shape v-if="general.type === 'radial-gradient'"/>
       <div class="buttons">
         <button
-          @click="undoShape"
+          @click="undoGradient"
           class="btn btn-undo">Undo</button>
         <button
-          @click="addShape"
+          @click="addGradient"
           class="btn btn-add">Add</button>
         <button
-          @click="deleteShapes"
-          class="btn btn-delete">Delete all shapes</button>
+          @click="deleteAllGradients"
+          class="btn btn-delete">Delete all Gradients</button>
       </div>
     </form>
   </div>
@@ -27,44 +26,42 @@
 
 <script>
 import FieldsetCanvas from '@/components/fieldsets/FieldsetCanvas'
-import FieldsetComment from '@/components/fieldsets/FieldsetComment'
-import FieldsetGradient from '@/components/fieldsets/FieldsetGradient'
+import FieldsetGeneral from '@/components/fieldsets/FieldsetGeneral'
 import FieldsetBox from '@/components/fieldsets/FieldsetBox'
 import FieldsetShape from '@/components/fieldsets/FieldsetShape'
 import FieldsetColors from '@/components/fieldsets/FieldsetColors'
 import FieldsetShapy from '@/components/fieldsets/FieldsetShapy'
 import { mapFields } from 'vuex-map-fields'
-import { mapState, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Form',
   components: {
     FieldsetCanvas,
-    FieldsetComment,
-    FieldsetGradient,
+    FieldsetGeneral,
     FieldsetBox,
     FieldsetShape,
     FieldsetColors,
     FieldsetShapy
   },
   computed: {
-    ...mapFields(['comment', 'gradient']),
-    ...mapState(['previewGradient', 'gradientList'])
+    ...mapFields(['general']),
+    ...mapGetters(['previewGradient', 'gradientList'])
   },
   data: () => ({
     id: 0
   }),
   methods: {
-    addShape() {
+    addGradient() {
       if (this.previewGradient) {
-        this.$store.commit('addShape', {
+        this.$store.dispatch('addGradient', {
           id: this.id,
           string: this.previewGradient
         })
       }
       this.id++
     },
-    ...mapMutations(['undoShape', 'deleteShapes'])
+    ...mapActions(['undoGradient', 'deleteAllGradients'])
   }
 }
 </script>

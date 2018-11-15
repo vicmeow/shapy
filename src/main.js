@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import store from './store'
+import store from './store/store'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'

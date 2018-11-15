@@ -15,18 +15,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   model: {
     prop: 'value',
     event: 'input'
   },
   computed: {
-    ...mapState(['gradient']),
+    ...mapGetters({
+      general: 'general/general'
+    }),
     checked() {
       if (
-        this.label === this.gradient.type ||
-        this.label === this.gradient.repeat
+        this.label === this.general.type ||
+        this.label === this.general.repeat
       )
         return true
       else false

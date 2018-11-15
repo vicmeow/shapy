@@ -51,7 +51,11 @@
 <script>
 import GroupToggle from '@/components/GroupToggle'
 import InputWrapper from '@/components/InputWrapper'
-import { mapFields } from 'vuex-map-fields'
+import { createHelpers } from 'vuex-map-fields'
+const { mapFields } = createHelpers({
+  getterType: 'shape/getField',
+  mutationType: 'shape/updateField'
+})
 export default {
   name: 'Shape',
   components: {

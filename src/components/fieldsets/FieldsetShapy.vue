@@ -58,10 +58,9 @@ export default {
   .social-list
     display: flex
     list-style-type: none
-    //margin-top: .5em
     align-items: center
     width: 100%
-    //justify-content: space-between
+    flex-wrap: wrap
 
   .social-item
     font-size: .93em

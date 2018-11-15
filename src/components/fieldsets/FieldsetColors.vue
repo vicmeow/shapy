@@ -66,12 +66,12 @@
       </transition-group>
       <!-- DEGREE IF LINEAR GRADIENT -->
       <input-wrapper
-        v-if="gradient.type === 'linear-gradient'"
+        v-if="general.type === 'linear-gradient'"
         class="degree-wrapper"
-        v-model="gradient.degree"
+        v-model="general.degree"
         :label="'Degree'"
         :name="'gradient-degree'"
-        :what="gradient.degree"
+        :what="general.degree"
         :min="0"
         :max="360"/>
     </template>
@@ -83,7 +83,11 @@ import GroupToggle from '@/components/GroupToggle'
 import ColorWrapper from '@/components/ColorWrapper'
 import InputWrapper from '@/components/InputWrapper'
 import { mapGetters } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
+import { createHelpers } from 'vuex-map-fields'
+const { mapFields } = createHelpers({
+  getterType: 'colors/getField',
+  mutationType: 'colors/updateField'
+})
 export default {
   name: 'Colors',
   components: {
@@ -101,11 +105,14 @@ export default {
   }),
   computed: {
     ...mapFields(['colors']),
-    ...mapGetters(['colors', 'gradient'])
+    ...mapGetters({
+      general: 'general/general',
+      colors: 'colors/colors'
+    })
   },
   methods: {
     updateType(id, where, type) {
-      this.$store.dispatch('updateType', { id, where, type })
+      this.$store.dispatch('colors/updateType', { id, where, type })
     },
     addStop(index) {
       const newStop = {
@@ -131,11 +138,12 @@ export default {
           unit: '%'
         }
       }
-      this.$store.dispatch('addStop', { index, newStop })
+      this.$store.dispatch('colors/addStop', { index, newStop })
       this.id++
     },
     removeStop(stop) {
-      if (this.colors.length > 1) this.$store.dispatch('removeStop', stop)
+      if (this.colors.length > 1)
+        this.$store.dispatch('colors/removeStop', stop)
       else this.removeError = true
       setTimeout(() => {
         this.removeError = false
