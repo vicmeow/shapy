@@ -27,7 +27,7 @@
         id="chrome-picker"
         v-if="picker"
         v-model="what.color"
-        @input="setType"/>
+        @input="updateType"/>
     </transition>
   </div>
 </template>
@@ -49,13 +49,11 @@ export default {
     a: false
   }),
   methods: {
-    setType(e) {
-      if (e.a < 1) {
-        this.a = true
-        this.what.type = 'rgba'
+    updateType(event) {
+      if (event.a === 1) {
+        this.$emit('updateType', 'hex')
       } else {
-        this.a = false
-        this.what.type = 'hex'
+        this.$emit('updateType', 'rgb')
       }
     },
     togglePicker() {
@@ -93,6 +91,11 @@ export default {
     }
   },
   props: {
+    id: {
+      type: Number,
+      required: true,
+      default: 0
+    },
     label: {
       type: String,
       required: true

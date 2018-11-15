@@ -24,17 +24,21 @@
           v-for="(stop, index) in colors"
           :key="stop.id">
           <color-wrapper
+            :id="stop.id"
             v-model="stop.start"
             :key="stop.start.index"
             :label="'Start at'"
             :what="stop.start"
-            :name="'color-stop-start'"/>
+            :name="'color-stop-start'"
+            @updateType="updateType(stop.id, 'start', ...arguments)"/>
           <color-wrapper
+            :id="stop.id"
             v-model="stop.stop"
             :key="stop.stop.index"
             :label="'Stop at'"
             :what="stop.stop"
-            :name="'color-stop-stop'"/>
+            :name="'color-stop-stop'"
+            @updateType="updateType(stop.id, 'stop', ...arguments)"/>
           <div
             class="button-wrapper"
             :key="'buttons'">
@@ -78,7 +82,7 @@
 import GroupToggle from '@/components/GroupToggle'
 import ColorWrapper from '@/components/ColorWrapper'
 import InputWrapper from '@/components/InputWrapper'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 export default {
   name: 'Colors',
@@ -97,9 +101,12 @@ export default {
   }),
   computed: {
     ...mapFields(['colors']),
-    ...mapState(['colors', 'gradient'])
+    ...mapGetters(['colors', 'gradient'])
   },
   methods: {
+    updateType(id, where, type) {
+      this.$store.dispatch('updateType', { id, where, type })
+    },
     addStop(index) {
       const newStop = {
         id: this.id,
@@ -124,11 +131,11 @@ export default {
           unit: '%'
         }
       }
-      this.$store.commit('addStop', { index, newStop })
+      this.$store.dispatch('addStop', { index, newStop })
       this.id++
     },
-    removeStop(remove) {
-      if (this.colors.length > 1) this.$store.commit('removeStop', remove)
+    removeStop(stop) {
+      if (this.colors.length > 1) this.$store.dispatch('removeStop', stop)
       else this.removeError = true
       setTimeout(() => {
         this.removeError = false

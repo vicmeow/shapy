@@ -30,14 +30,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapState(['gradientList', 'previewGradient'])
+    ...mapGetters(['gradientList', 'previewGradient'])
   },
   methods: {
     removeShape(id) {
-      this.$store.commit('removeShape', id)
+      this.$store.dispatch('removeShape', id)
     }
   }
 }

@@ -35,7 +35,7 @@ export default {
   },
   created() {
     // Show a shape on initial load
-    this.$store.commit('previewGradient', this.gradientString)
+    this.$store.dispatch('previewGradient', this.gradientString)
     // Add an event listener for calculating canvas max size (px)
     window.addEventListener('resize', this.updateMax)
   },
@@ -62,10 +62,38 @@ export default {
       'box',
       'shape',
       'gradient',
-      'canvas',
-      'colors'
+      'canvas'
     ]),
-    ...mapGetters(['colorStops', 'boxCombined', 'shapeCombined']),
+    ...mapGetters(['boxCombined', 'shapeCombined', 'colors']),
+    colorStops() {
+      const stops = this.colors.map(color => {
+        let startColor
+        let stopColor
+        const startSize = color.start.size + color.start.unit
+        const stopSize = color.stop.size + color.stop.unit
+        // START VALUES
+
+        if (color.start.type === 'rgb') {
+          const rgba = color.start.color.rgba
+          startColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
+            rgba.a
+          }) ${startSize}`
+        } else {
+          startColor = `${color.start.color.hex} ${startSize}`
+        }
+        // STOP VALUES
+        if (color.stop.type === 'rgb') {
+          const rgba = color.stop.color.rgba
+          stopColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
+            rgba.a
+          }) ${stopSize}`
+        } else {
+          stopColor = `${color.stop.color.hex} ${stopSize}`
+        }
+        return `${startColor}, ${stopColor}`
+      })
+      return stops.join(', ')
+    },
     gradientString() {
       // TYPE
       const type = this.gradient.type

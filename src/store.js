@@ -110,6 +110,12 @@ const getters = {
   gradientStrings() {
     return state.gradientStrings
   },
+  gradient() {
+    return state.gradient
+  },
+  colors() {
+    return state.colors
+  },
   getField,
   boxCombined() {
     const boxWidth = state.box.size.x.size + state.box.size.x.unit
@@ -128,32 +134,6 @@ const getters = {
     const shapeSize = shapeWidth + ' ' + shapeHeight
     const shapeCoord = shapeX + ' ' + shapeY
     return `${shapeSize} at ${shapeCoord}`
-  },
-  colorStops() {
-    const stops = state.colors.map(color => {
-      let startColor
-      let stopColor
-      const startSize = color.start.size + color.start.unit
-      const stopSize = color.stop.size + color.stop.unit
-      // START VALUES
-      if (color.start.color.type === 'rgba') {
-        const rgba = color.start.color.rgba
-        startColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
-          rgba.a
-        }) ${startSize}`
-      } else {
-        startColor = `${color.start.color.hex} ${startSize}`
-      }
-      // STOP VALUES
-      if (color.stop.color.type === 'rgba') {
-        const rgba = color.stop.color.rgba
-        stopColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a}) ${stopSize}`
-      } else {
-        stopColor = `${color.stop.color.hex} ${stopSize}`
-      }
-      return `${startColor}, ${stopColor}`
-    })
-    return stops.join(', ')
   }
 }
 
@@ -205,11 +185,41 @@ const mutations = {
   removeStop(state, id) {
     const result = state.colors.filter(pair => pair.id !== id)
     state.colors = result
+  },
+  updateType(state, { id, where, type }) {
+    const colorMatch = state.colors.filter(colorStop => colorStop.id === id)
+    if (where === 'start') {
+      colorMatch[0].start.type = type
+    } else {
+      colorMatch[0].stop.type = type
+    }
+  }
+}
+
+const actions = {
+  addStop({ commit }, { index, newStop }) {
+    commit('addStop', { index, newStop })
+  },
+  removeShape({ commit }, id) {
+    commit('removeShape', id)
+  },
+  removeStop({ commit }, id) {
+    commit('removeStop', id)
+  },
+  changeType({ commit }, { type, id }) {
+    commit('changeType', type, id)
+  },
+  previewGradient({ commit }, gradient) {
+    commit('previewGradient', gradient)
+  },
+  updateType({ commit }, { id, where, type }) {
+    commit('updateType', { id, where, type })
   }
 }
 
 export default new Vuex.Store({
   state,
   getters,
-  mutations
+  mutations,
+  actions
 })
