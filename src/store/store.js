@@ -70,6 +70,12 @@ const mutations = {
 }
 
 const actions = {
+  addGradient({ commit }, gradient) {
+    commit('addGradient', gradient)
+  },
+  undoGradient({ commit }) {
+    commit('undoGradient')
+  },
   deleteGradient({ commit }, id) {
     commit('deleteGradient', id)
   },
