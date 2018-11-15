@@ -47,6 +47,7 @@ export default {
 
   input[type=range]:focus
     outline: none
+    border: 0
 
   input[type=range]::-webkit-slider-runnable-track
     width: 100%
@@ -78,6 +79,8 @@ export default {
     box-shadow: 0
     background: $black
     border: 0
+    &:focus
+      background: $green
 
   input[type=range]::-moz-range-track:focus
     background: $green
