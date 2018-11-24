@@ -28,9 +28,6 @@ const state = {
 const getters = {
   getField,
   box() {
-    return state.box
-  },
-  boxCombined() {
     const boxWidth = state.box.size.x.size + state.box.size.x.unit
     const boxHeight = state.box.size.y.size + state.box.size.y.unit
     const boxX = state.box.coord.x.size + state.box.coord.x.unit
@@ -45,12 +42,9 @@ const mutations = {
   updateField
 }
 
-const actions = {}
-
 export default {
   namespaced: true,
   state,
   getters,
-  mutations,
-  actions
+  mutations
 }

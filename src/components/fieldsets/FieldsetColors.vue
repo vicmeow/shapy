@@ -106,8 +106,7 @@ export default {
   computed: {
     ...mapFields(['colors']),
     ...mapGetters({
-      general: 'general/general',
-      colors: 'colors/colors'
+      general: 'general/general'
     })
   },
   methods: {

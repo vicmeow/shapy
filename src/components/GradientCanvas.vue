@@ -57,65 +57,31 @@ export default {
       previewGradient: 'previewGradient',
       gradientList: 'gradientList',
       gradientStrings: 'gradientStrings',
-      boxCombined: 'box/boxCombined',
-      shapeCombined: 'shape/shapeCombined',
-      colors: 'colors/colors',
+      colorStops: 'colors/colorStops',
       canvas: 'canvas/canvas',
       general: 'general/general',
       box: 'box/box',
       shape: 'shape/shape'
     }),
-    colorStops() {
-      const stops = this.colors.map(color => {
-        let startColor
-        let stopColor
-        const startSize = color.start.size + color.start.unit
-        const stopSize = color.stop.size + color.stop.unit
-        // START VALUES
-
-        if (color.start.type === 'rgb') {
-          const rgba = color.start.color.rgba
-          startColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
-            rgba.a
-          }) ${startSize}`
-        } else {
-          startColor = `${color.start.color.hex} ${startSize}`
-        }
-        // STOP VALUES
-        if (color.stop.type === 'rgb') {
-          const rgba = color.stop.color.rgba
-          stopColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
-            rgba.a
-          }) ${stopSize}`
-        } else {
-          stopColor = `${color.stop.color.hex} ${stopSize}`
-        }
-        return `${startColor}, ${stopColor}`
-      })
-      return stops.join(', ')
-    },
     gradientString() {
-      // TYPE
-      const type = this.general.type
-      // REPEATING
-      const repeat = this.general.repeat
-      // COLORS
-      const colors = this.colorStops
-      // COMMENT
-      const comment = this.general.comment
       // DEGREE
       const degree = this.general.degree.size + this.general.degree.unit
-      // BOX
-      const box = this.boxCombined
-      // SHAPE
-      const shape = this.shapeCombined
 
-      if (type === 'radial-gradient') {
-        return `/* ${comment} */ ${type}(${shape}, ${colors}) ${repeat} ${box}`
-      } else if (type === 'linear-gradient' && this.general.degree.size > 0) {
-        return `/* ${comment} */ ${type}(${degree}, ${colors}) ${repeat} ${box}`
-      } else if (type === 'linear-gradient') {
-        return `/* ${comment} */ ${type}(${colors}) ${repeat} ${box}`
+      if (this.general.type === 'radial-gradient') {
+        return `/* ${this.general.comment} */ ${this.general.type}(${
+          this.shape
+        }, ${this.colorStops}) ${this.general.repeat} ${this.box}`
+      } else if (
+        this.general.type === 'linear-gradient' &&
+        this.general.degree.size > 0
+      ) {
+        return `/* ${this.general.comment} */ ${this.general.type}(${degree}, ${
+          this.colorStops
+        }) ${this.general.repeat} ${this.box}`
+      } else if (this.general.type === 'linear-gradient') {
+        return `/* ${this.general.comment} */ ${this.general.type}(${
+          this.colorStops
+        }) ${this.general.repeat} ${this.box}`
       }
     }
   }

@@ -30,8 +30,32 @@ const state = {
 
 const getters = {
   getField,
-  colors() {
-    return state.colors
+  colorStops() {
+    const stops = state.colors.map(color => {
+      let startColor
+      let stopColor
+      const startSize = color.start.size + color.start.unit
+      const stopSize = color.stop.size + color.stop.unit
+      // START VALUES
+
+      if (color.start.type === 'rgb') {
+        const rgba = color.start.color.rgba
+        startColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
+          rgba.a
+        }) ${startSize}`
+      } else {
+        startColor = `${color.start.color.hex} ${startSize}`
+      }
+      // STOP VALUES
+      if (color.stop.type === 'rgb') {
+        const rgba = color.stop.color.rgba
+        stopColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a}) ${stopSize}`
+      } else {
+        stopColor = `${color.stop.color.hex} ${stopSize}`
+      }
+      return `${startColor}, ${stopColor}`
+    })
+    return stops.join(', ')
   }
 }
 
