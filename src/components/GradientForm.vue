@@ -12,13 +12,13 @@
       <div class="buttons">
         <button
           @click="undoGradient"
-          class="btn btn-undo">Undo</button>
+          class="btn btn-shadow btn-undo">Undo</button>
         <button
           @click="addGradient"
-          class="btn btn-add">Add</button>
+          class="btn btn-shadow btn-add">Add</button>
         <button
           @click="deleteAllGradients"
-          class="btn btn-delete">Delete all Gradients</button>
+          class="btn btn-delete">Delete everything</button>
       </div>
     </form>
   </div>
@@ -136,7 +136,7 @@ export default {
     min-width: 100px
     margin: 1em .5em
 
-  .btn-add, .btn-undo
+  .btn-shadow
     box-shadow: 3px 3px 3px hsl(214, 29%, 20%)
     transition: all .1s ease-in-out
     &:active
@@ -154,7 +154,6 @@ export default {
 
   .btn-delete
     font-weight: normal
-    font-style: italic
     flex-basis: 100%
     font-size: .9em
     opacity: .7

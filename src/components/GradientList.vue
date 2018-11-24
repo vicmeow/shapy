@@ -22,9 +22,29 @@
         <button
           @click="deleteGradient(gradient.id)"
           class="btn-delete-item">
-          ^Delete this gradient?
+          Delete
         </button>
       </div>
+    </li>
+    <li
+      class="copy"
+      v-if="gradientList.length > 0">
+      <button
+        :key="'copy'"
+        class="btn btn-copy btn-shadow"
+        v-clipboard:copy="gradientStrings"
+        v-clipboard:success="copyCode">
+        <transition
+          name="fade"
+          mode="out-in">
+          <div
+            v-if="!copied"
+            :key="'copy'">Copy CSS</div>
+          <div
+            v-if="copied"
+            :key="'copied'">Copied!</div>
+        </transition>
+      </button>
     </li>
   </ul>
 </template>
@@ -32,12 +52,21 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  data: () => ({
+    copied: false
+  }),
   computed: {
-    ...mapGetters(['gradientList', 'previewGradient'])
+    ...mapGetters(['gradientList', 'previewGradient', 'gradientStrings'])
   },
   methods: {
     deleteGradient(id) {
       this.$store.dispatch('deleteGradient', id)
+    },
+    copyCode() {
+      this.copied = true
+      setTimeout(() => {
+        this.copied = false
+      }, 1500)
     }
   }
 }
@@ -92,12 +121,6 @@ export default {
     color: $white
     padding: 0
 
-  .gradient-item:hover > .gradient-details
-    display: block
-
-  .gradient-details
-    display: none
-
   .btn-delete-item
     color: $white
     cursor: pointer
@@ -107,7 +130,28 @@ export default {
     background: 0
     border: 0
     font-size: .8em
-    font-style: italic
+    opacity: .7
     margin-right: 1em
+
+  .copy
+    position: absolute
+    bottom: 0
+    right: 1rem
+
+  .btn-copy
+    background: $green
+    color: $white
+    min-width: 130px
+
+  .fade-enter-active, .fade-leave-active
+    transition: all .1s linear
+
+  .fade-enter
+    opacity: 0
+    transform: translateY(-10px)
+
+  .fade-leave-to
+    opacity: 0
+    transform: translateY(10px)
 
 </style>
