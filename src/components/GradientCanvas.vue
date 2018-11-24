@@ -19,8 +19,6 @@ import { mapGetters } from 'vuex'
 export default {
   watch: {
     gradientString() {
-      // Watch the gradient string for updates to preview on canvas
-      // and dispatch changes to store
       this.$store.dispatch('previewGradient', this.gradientString)
     }
   },
@@ -48,6 +46,7 @@ export default {
   },
   computed: {
     canvasCurrent() {
+      // TODO: move to store
       // Add size and unit together for canvas size on load
       const width = this.canvas.x.size + this.canvas.x.unit
       const height = this.canvas.y.size + this.canvas.y.unit
@@ -64,25 +63,21 @@ export default {
       shape: 'shape/shape'
     }),
     gradientString() {
-      // DEGREE
       const degree = this.general.degree.size + this.general.degree.unit
+      let comment =
+        this.general.comment === '' ? '' : `/* ${this.general.comment} */`
 
-      if (this.general.type === 'radial-gradient') {
-        return `/* ${this.general.comment} */ ${this.general.type}(${
-          this.shape
-        }, ${this.colorStops}) ${this.general.repeat} ${this.box}`
-      } else if (
-        this.general.type === 'linear-gradient' &&
-        this.general.degree.size > 0
-      ) {
-        return `/* ${this.general.comment} */ ${this.general.type}(${degree}, ${
-          this.colorStops
-        }) ${this.general.repeat} ${this.box}`
-      } else if (this.general.type === 'linear-gradient') {
-        return `/* ${this.general.comment} */ ${this.general.type}(${
-          this.colorStops
-        }) ${this.general.repeat} ${this.box}`
-      }
+      return this.general.type === 'linear-gradient'
+        ? this.general.degree.size > 0
+          ? `${comment}${this.general.type}(${degree}, ${this.colorStops}) ${
+              this.general.repeat
+            } ${this.box}`
+          : `${comment} ${this.general.type}(${this.colorStops}) ${
+              this.general.repeat
+            } ${this.box}`
+        : `${comment} ${this.general.type}(${this.shape}, ${this.colorStops}) ${
+            this.general.repeat
+          } ${this.box}`
     }
   }
 }
@@ -122,6 +117,5 @@ export default {
   .preview-gradient
     height: 100%
     width: 100%
-
 
 </style>
