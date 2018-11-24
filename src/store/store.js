@@ -63,7 +63,7 @@ const mutations = {
     let newList = []
     // Join the strings of the new list together for the canvas
     state.gradientList.forEach(item => {
-      newList.unshift(item.string)
+      newList.push(item.string)
     })
     state.gradientStrings = newList.join(', ')
   }
