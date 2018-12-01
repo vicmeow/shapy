@@ -90,6 +90,7 @@ export default {
     border-radius: 5px
     margin: 1em 0
     box-shadow: 3px 3px 3px hsl(214, 29%, 25%)
+    justify-content: space-between
 
   .fieldset-canvas
     margin-top: 0
@@ -161,5 +162,9 @@ export default {
     color: $white
     margin: 0
     padding: 0
+
+  input:-moz-focusring, button:-moz-focusring
+    outline: 2px dashed $focus
+    outline-offset: 2px
 
 </style>

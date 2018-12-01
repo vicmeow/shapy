@@ -1,8 +1,8 @@
 <template>
-  <div class="group-toggle">
+  <button class="btn group-toggle">
     <span v-if="hidden">{{ label.show }}</span>
     <span v-else>{{ label.hide }}</span>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -30,6 +30,10 @@ export default {
 <style lang="sass" scoped>
 
   .group-toggle
+    background: 0
+    margin: 0
+    padding: 0
+    min-width: 20px
     font-size: .8em
     align-content: center
     display: flex

@@ -83,7 +83,6 @@ export default {
     padding: 0
     &:focus
       outline: 0
-      border-bottom: 1px solid $green
 
   .input-wrapper
     margin-top: .3em
