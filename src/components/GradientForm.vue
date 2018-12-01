@@ -163,8 +163,4 @@ export default {
     margin: 0
     padding: 0
 
-  input:-moz-focusring, button:-moz-focusring
-    outline: 2px dashed $focus
-    outline-offset: 2px
-
 </style>
