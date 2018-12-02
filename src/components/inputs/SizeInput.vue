@@ -8,7 +8,7 @@
       <input
         @input="$emit('input', $event.target.value)"
         class="size-input"
-        :value="value"
+        :value="percentCheck(value)"
         type="text"
         :name="name"
         :id="name + '-id'"
@@ -47,6 +47,15 @@ export default {
       type: Number,
       required: false,
       default: 100
+    }
+  },
+  methods: {
+    percentCheck(value) {
+      if (this.unit === '%' && value > 100) {
+        return 100
+      } else {
+        return value
+      }
     }
   }
 }
