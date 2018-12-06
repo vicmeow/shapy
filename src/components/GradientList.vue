@@ -66,19 +66,27 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { createHelpers } from 'vuex-map-fields'
+const { mapFields } = createHelpers({
+  getterType: 'canvas/getField'
+})
+
 export default {
   data: () => ({
     copied: false
   }),
   computed: {
+    ...mapFields(['canvas']),
     ...mapGetters(['gradientList', 'previewGradient', 'gradientStrings']),
     getFormData() {
       return JSON.stringify({
         title: 'Shapy Gradient 🤖',
         html: '<div class="gradient"></div>',
-        css: `.gradient {
-  height: 500px;
-  width: 500px;
+        css: `
+body, html {width: 100%; height: 100%}
+.gradient {
+  height: ${this.canvas.x.size}${this.canvas.x.unit};
+  width: ${this.canvas.y.size}${this.canvas.y.unit};
   background: ${this.gradientStrings};
 }`
       })
