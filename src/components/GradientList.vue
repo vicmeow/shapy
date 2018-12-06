@@ -74,7 +74,7 @@ export default {
     ...mapGetters(['gradientList', 'previewGradient', 'gradientStrings']),
     getFormData() {
       return JSON.stringify({
-        title: 'New Pen!',
+        title: 'Shapy Gradient 🤖',
         html: '<div class="gradient"></div>',
         css: `.gradient {
   height: 500px;
