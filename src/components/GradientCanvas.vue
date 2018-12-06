@@ -77,6 +77,7 @@ export default {
                 this.general.repeat
               } ${this.box}`
         }
+
         if (type === 'conic-gradient') {
           return `${comment} ${this.general.type}(${this.colorStops})${
             this.box
