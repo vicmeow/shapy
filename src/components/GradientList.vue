@@ -2,9 +2,8 @@
   <ul class="gradient-list">
     <li class="preview-string">
       <span class="string-label">Preview:</span>
-      <span v-highlightjs="previewGradient"><code class="css"/></span>
-      <span
-        class="string-label">Added:</span>
+      <span v-highlightjs="previewGradient"><code class="css" /></span>
+      <span class="string-label">Added:</span>
     </li>
     <li
       class="no-items"
@@ -16,7 +15,7 @@
       <div
         class="gradient-code"
         v-highlightjs="gradient.string">
-        <code class="css"/>
+        <code class="css" />
       </div>
       <div class="gradient-details">
         <button
@@ -45,18 +44,53 @@
             :key="'copied'">Copied!</div>
         </transition>
       </button>
+      <form
+        class="export-form"
+        action="https://codepen.io/pen/define"
+        method="POST"
+        target="_blank">
+        <input
+          type="hidden"
+          name="data"
+          :value="getFormData">
+        <button
+          type="submit"
+          class="btn btn-export btn-shadow">
+          Export to CodePen
+        </button>
+      </form>
+
     </li>
   </ul>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { createHelpers } from 'vuex-map-fields'
+const { mapFields } = createHelpers({
+  getterType: 'canvas/getField'
+})
+
 export default {
   data: () => ({
     copied: false
   }),
   computed: {
-    ...mapGetters(['gradientList', 'previewGradient', 'gradientStrings'])
+    ...mapFields(['canvas']),
+    ...mapGetters(['gradientList', 'previewGradient', 'gradientStrings']),
+    getFormData() {
+      return JSON.stringify({
+        title: 'Shapy Gradient 🤖',
+        html: '<div class="gradient"></div>',
+        css: `
+body, html {width: 100%; height: 100%}
+.gradient {
+  height: ${this.canvas.x.size}${this.canvas.x.unit};
+  width: ${this.canvas.y.size}${this.canvas.y.unit};
+  background: ${this.gradientStrings};
+}`
+      })
+    }
   },
   methods: {
     deleteGradient(id) {
@@ -86,6 +120,9 @@ export default {
 
     li
       line-height: 1.3
+
+  .export-form
+    display: inline
 
   .no-items
     color: $white
@@ -133,10 +170,15 @@ export default {
     opacity: .7
     margin-right: 1em
 
-  .copy
+  .copy, .export
     position: absolute
     bottom: 0
     right: 1rem
+
+  .btn-export
+    background: $red
+    min-width: 130px
+
 
   .btn-copy
     background: $green
