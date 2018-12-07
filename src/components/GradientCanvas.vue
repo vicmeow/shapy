@@ -78,10 +78,10 @@ export default {
               } ${this.box}`
         }
 
-        if (type === 'conic-gradient') {
+        if (type.includes('conic-gradient')) {
           return `${comment} ${this.general.type}(${this.colorStops})${
             this.box
-          }`
+          } ${this.general.repeat}`
         }
 
         return `${comment} ${this.general.type}(${this.shape}, ${

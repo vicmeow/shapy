@@ -26,6 +26,10 @@
         :label="'conic-gradient'"
         v-model="general.type"
         :name="'gradient-type'"/>
+      <radio-wrapper
+        :label="'repeating-conic-gradient'"
+        v-model="general.type"
+        :name="'gradient-type'"/>
 
       <!-- REPEAT VS NO-REPEAT GRADIENT -->
       <radio-wrapper
