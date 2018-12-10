@@ -75,6 +75,9 @@ const mutations = {
     } else {
       colorMatch[0].stop.type = type
     }
+  },
+  updateColors(state, colors) {
+    state.colors = colors
   }
 }
 

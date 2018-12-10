@@ -39,7 +39,10 @@ const getters = {
 }
 
 const mutations = {
-  updateField
+  updateField,
+  updateShape(state, shape) {
+    state.shape = shape
+  }
 }
 
 export default {

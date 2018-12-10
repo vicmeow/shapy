@@ -3,15 +3,14 @@
     <li class="preview-string">
       <span class="string-label">Preview:</span>
       <span v-highlightjs="previewGradient"><code class="css" /></span>
-      <span class="string-label">Added:</span>
     </li>
     <li
       class="no-items"
       v-if="gradientList.length < 1">You haven't added any gradients yet...</li>
     <li
       class="gradient-item"
-      v-for="gradient in gradientList"
-      :key="gradient.id">
+      v-for="(gradient, index) in gradientList"
+      :key="index">
       <div
         class="gradient-code"
         v-highlightjs="gradient.string">
@@ -19,9 +18,20 @@
       </div>
       <div class="gradient-details">
         <button
-          @click="deleteGradient(gradient.id)"
+          @click="editGradient(index, gradient.id)"
           class="btn-delete-item">
-          Delete
+          Edit <font-awesome-icon
+            aria-hidden="true"
+            class="list-icon"
+            :icon="['fas', 'pencil-alt']"/>
+        </button>
+        <button
+          @click="deleteSingle(index, gradient.id)"
+          class="btn-delete-item">
+          Delete <font-awesome-icon
+            aria-hidden="true"
+            class="list-icon"
+            :icon="['fas', 'trash-alt']"/>
         </button>
       </div>
     </li>
@@ -65,7 +75,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
   getterType: 'canvas/getField'
@@ -77,24 +87,36 @@ export default {
   }),
   computed: {
     ...mapFields(['canvas']),
-    ...mapGetters(['gradientList', 'previewGradient', 'gradientStrings']),
+    ...mapState([
+      'gradientList',
+      'previewGradient',
+      'gradientStrings',
+      'actions'
+    ]),
     getFormData() {
       return JSON.stringify({
         title: 'Shapy Gradient 🤖',
         html: '<div class="gradient"></div>',
         css: `
-body, html {width: 100%; height: 100%}
-.gradient {
-  height: ${this.canvas.x.size}${this.canvas.x.unit};
-  width: ${this.canvas.y.size}${this.canvas.y.unit};
-  background: ${this.gradientStrings};
-}`
+              body, html {
+                width: 100%;
+                height: 100%;
+              }
+
+              .gradient {
+                height: ${this.canvas.x.size}${this.canvas.x.unit};
+                width: ${this.canvas.y.size}${this.canvas.y.unit};
+                background: ${this.gradientStrings};
+              }`
       })
     }
   },
   methods: {
-    deleteGradient(id) {
-      this.$store.dispatch('deleteGradient', id)
+    deleteSingle(index, id) {
+      this.$store.dispatch('deleteSingle', { index, id })
+    },
+    editGradient(index, id) {
+      this.$store.dispatch('editGradient', { index, id })
     },
     copyCode() {
       this.copied = true
@@ -134,11 +156,12 @@ body, html {width: 100%; height: 100%}
     top: 0
     padding: .5em 0
     background: $black
-    border-bottom: 1px solid $grey
+    border-bottom: 1px solid $white
 
   .string-label
     display: block
     color: $white
+    font-size: .9em
     font-weight: 500
     flex-direction: column
     margin-top: .5em
@@ -157,8 +180,13 @@ body, html {width: 100%; height: 100%}
     font-size: 1em
     color: $white
     padding: 0
+  
+  .gradient-details
+    display: flex
 
   .btn-delete-item
+    display: flex
+    align-items: center
     color: $white
     cursor: pointer
     padding: 0
@@ -167,8 +195,14 @@ body, html {width: 100%; height: 100%}
     background: 0
     border: 0
     font-size: .8em
-    opacity: .7
+    font-weight: 600
     margin-right: 1em
+    &:hover
+      color: $red
+
+  .list-icon
+    font-size: .8em
+    margin-left: .5em
 
   .copy, .export
     position: absolute
@@ -178,7 +212,6 @@ body, html {width: 100%; height: 100%}
   .btn-export
     background: $red
     min-width: 130px
-
 
   .btn-copy
     background: $green

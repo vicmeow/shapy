@@ -39,12 +39,18 @@ const getters = {
 }
 
 const mutations = {
-  updateField
+  updateField,
+  updateBox(state, box) {
+    state.box = box
+  }
 }
+
+const actions = {}
 
 export default {
   namespaced: true,
   state,
   getters,
-  mutations
+  mutations,
+  actions
 }

@@ -11,6 +11,7 @@
         <li class="social-item">
           <a href="https://github.com/vicbergquist/shapy">
             <font-awesome-icon
+              aria-hidden="true"
               class="social-icon"
               :icon="['fab', 'github']"/>Contributions welcome!
           </a>
@@ -22,6 +23,7 @@
             target="_blank"
             ref="noreferrer">
             <font-awesome-icon
+              aria-hidden="true"
               class="social-icon"
               :icon="['fab', 'twitter']"/>@vicbergquist</a>
         </li>

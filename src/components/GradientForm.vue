@@ -11,13 +11,13 @@
       <fieldset-shape v-if="general.type === 'radial-gradient'" />
       <div class="buttons">
         <button
-          @click="undoGradient"
+          @click="undoAction"
           class="btn btn-shadow btn-undo">Undo</button>
         <button
           @click="addGradient"
           class="btn btn-shadow btn-add">Add</button>
         <button
-          @click="deleteAllGradients"
+          @click="deleteAll"
           class="btn btn-delete">Delete everything</button>
       </div>
     </form>
@@ -32,7 +32,7 @@ import FieldsetShape from '@/components/fieldsets/FieldsetShape'
 import FieldsetColors from '@/components/fieldsets/FieldsetColors'
 import FieldsetShapy from '@/components/fieldsets/FieldsetShapy'
 import { mapFields } from 'vuex-map-fields'
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Form',
@@ -45,23 +45,25 @@ export default {
     FieldsetShapy
   },
   computed: {
-    ...mapFields(['general']),
-    ...mapGetters(['previewGradient', 'gradientList'])
+    ...mapState(['actions', 'previewGradient', 'gradientList']),
+    ...mapFields(['general'])
   },
-  data: () => ({
-    id: 0
-  }),
   methods: {
     addGradient() {
-      if (this.previewGradient) {
-        this.$store.dispatch('addGradient', {
-          id: this.id,
-          string: this.previewGradient
-        })
+      if (this.actions.length === 0) {
+        this.$store.dispatch('addGradient', this.previewGradient)
+      } else {
+        const type = this.actions[this.actions.length - 1].type
+        if (this.previewGradient) {
+          if (type === 'editGradient') {
+            this.$store.dispatch('returnGradient')
+          } else {
+            this.$store.dispatch('addGradient', this.previewGradient)
+          }
+        }
       }
-      this.id++
     },
-    ...mapActions(['undoGradient', 'deleteAllGradients'])
+    ...mapActions(['undoAction', 'deleteAll'])
   }
 }
 </script>

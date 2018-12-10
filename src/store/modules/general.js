@@ -20,7 +20,10 @@ const getters = {
 }
 
 const mutations = {
-  updateField
+  updateField,
+  updateGeneral(state, general) {
+    state.general = general
+  }
 }
 
 export default {

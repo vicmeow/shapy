@@ -46,6 +46,7 @@
               class="icon-btn icon-add"
               @click="addStop(index + 1)">
               <font-awesome-icon
+                aria-hidden="true"
                 class="btn-icon"
                 :icon="['fas', 'plus-circle']"/>
               <div class="hover">Add</div>
@@ -54,6 +55,7 @@
               class="icon-btn icon-remove"
               @click="removeStop(stop.id)">
               <font-awesome-icon
+                aria-hidden="true"
                 class="btn-icon"
                 :icon="['fas', 'minus-circle']"/>
               <div class="hover">Remove</div>
