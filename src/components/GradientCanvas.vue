@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
   watch: {
     gradientString() {
@@ -24,73 +24,36 @@ export default {
   },
   methods: {
     updateMax() {
-      // Update the max canvas size (px) based on the browser size
       const width = document.getElementById('canvas-max').offsetWidth
       const height = document.getElementById('canvas-max').offsetHeight
-      // Dispatch the new max values to the stire
       this.$store.dispatch('canvas/updateMax', { x: width, y: height })
     }
   },
   created() {
-    // Show a shape on initial load
     this.$store.dispatch('previewGradient', this.gradientString)
-    // Add an event listener for calculating canvas max size (px)
     window.addEventListener('resize', this.updateMax)
   },
   destroyed() {
     window.removeEventListener('resize', this.updateMax)
   },
   mounted() {
-    // update the max canvas size based on canvas wrapper
     this.updateMax()
   },
   computed: {
     canvasCurrent() {
-      // TODO: move to store
-      // Add size and unit together for canvas size on load
       const width = this.canvas.x.size + this.canvas.x.unit
       const height = this.canvas.y.size + this.canvas.y.unit
       return { x: width, y: height }
     },
+    ...mapState(['gradientStrings', 'previewGradient']),
     ...mapGetters({
-      previewGradient: 'previewGradient',
-      gradientList: 'gradientList',
-      gradientStrings: 'gradientStrings',
       colorStops: 'colors/colorStops',
       canvas: 'canvas/canvas',
       general: 'general/general',
       box: 'box/box',
-      shape: 'shape/shape'
-    }),
-    gradientString() {
-      const degree = this.general.degree.size + this.general.degree.unit
-      let comment =
-        this.general.comment === '' ? '' : `/* ${this.general.comment} */`
-
-      const returnValue = type => {
-        if (type === 'linear-gradient') {
-          return this.general.degree.size > 0
-            ? `${comment}${this.general.type}(${degree}, ${this.colorStops}) ${
-                this.general.repeat
-              } ${this.box}`
-            : `${comment} ${this.general.type}(${this.colorStops}) ${
-                this.general.repeat
-              } ${this.box}`
-        }
-
-        if (type.includes('conic-gradient')) {
-          return `${comment} ${this.general.type}(${this.colorStops})${
-            this.box
-          } ${this.general.repeat}`
-        }
-
-        return `${comment} ${this.general.type}(${this.shape}, ${
-          this.colorStops
-        }) ${this.general.repeat} ${this.box}`
-      }
-
-      return returnValue(this.general.type)
-    }
+      shape: 'shape/shape',
+      gradientString: 'createString'
+    })
   }
 }
 </script>
