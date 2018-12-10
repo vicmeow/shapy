@@ -4,11 +4,11 @@
     class="fieldset fieldset-gradient">
 
     <!-- TITLE & DESCRIPTION -->
-    <legend 
-      class="legend" 
+    <legend
+      class="legend"
       @click="hidden = !hidden">{{ title }}</legend>
-    <group-toggle 
-      @click.native="hidden = !hidden" 
+    <group-toggle
+      @click.native="hidden = !hidden"
       :hidden="hidden"/>
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
@@ -20,6 +20,14 @@
         :name="'gradient-type'"/>
       <radio-wrapper
         :label="'radial-gradient'"
+        v-model="general.type"
+        :name="'gradient-type'"/>
+      <radio-wrapper
+        :label="'conic-gradient'"
+        v-model="general.type"
+        :name="'gradient-type'"/>
+      <radio-wrapper
+        :label="'repeating-conic-gradient'"
         v-model="general.type"
         :name="'gradient-type'"/>
 

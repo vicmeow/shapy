@@ -9,6 +9,10 @@ import Meta from 'vue-meta'
 import VueHighlightJS from 'vue-highlightjs'
 import VueClipboard from 'vue-clipboard2'
 
+// Conic gradients
+import 'prefixfree'
+import 'conic-gradient'
+
 library.add(faTwitter, faGithub, faPlusCircle, faMinusCircle)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

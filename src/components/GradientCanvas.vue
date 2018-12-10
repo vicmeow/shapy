@@ -8,7 +8,7 @@
         :style="{width: canvasCurrent.x, height: canvasCurrent.y, background: gradientStrings}">
         <div
           class="preview-gradient"
-          :style="{background: previewGradient}" />
+          :style="{background: previewGradient}"/>
       </div>
     </div>
   </div>
@@ -67,17 +67,29 @@ export default {
       let comment =
         this.general.comment === '' ? '' : `/* ${this.general.comment} */`
 
-      return this.general.type === 'linear-gradient'
-        ? this.general.degree.size > 0
-          ? `${comment}${this.general.type}(${degree}, ${this.colorStops}) ${
-              this.general.repeat
-            } ${this.box}`
-          : `${comment} ${this.general.type}(${this.colorStops}) ${
-              this.general.repeat
-            } ${this.box}`
-        : `${comment} ${this.general.type}(${this.shape}, ${this.colorStops}) ${
-            this.general.repeat
-          } ${this.box}`
+      const returnValue = type => {
+        if (type === 'linear-gradient') {
+          return this.general.degree.size > 0
+            ? `${comment}${this.general.type}(${degree}, ${this.colorStops}) ${
+                this.general.repeat
+              } ${this.box}`
+            : `${comment} ${this.general.type}(${this.colorStops}) ${
+                this.general.repeat
+              } ${this.box}`
+        }
+
+        if (type.includes('conic-gradient')) {
+          return `${comment} ${this.general.type}(${this.colorStops})${
+            this.box
+          } ${this.general.repeat}`
+        }
+
+        return `${comment} ${this.general.type}(${this.shape}, ${
+          this.colorStops
+        }) ${this.general.repeat} ${this.box}`
+      }
+
+      return returnValue(this.general.type)
     }
   }
 }

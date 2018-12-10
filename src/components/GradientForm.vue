@@ -3,12 +3,12 @@
     <form
       class="form"
       @submit.prevent>
-      <fieldset-shapy/>
-      <fieldset-canvas/>
-      <fieldset-general/>
-      <fieldset-colors/>
-      <fieldset-box/>
-      <fieldset-shape v-if="general.type === 'radial-gradient'"/>
+      <fieldset-shapy />
+      <fieldset-canvas />
+      <fieldset-general />
+      <fieldset-colors />
+      <fieldset-box />
+      <fieldset-shape v-if="general.type === 'radial-gradient'" />
       <div class="buttons">
         <button
           @click="undoGradient"
