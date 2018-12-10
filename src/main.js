@@ -2,7 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store/store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+  faPlusCircle,
+  faMinusCircle,
+  faTrashAlt,
+  faPencilAlt
+} from '@fortawesome/free-solid-svg-icons'
 import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Meta from 'vue-meta'
@@ -13,7 +18,14 @@ import VueClipboard from 'vue-clipboard2'
 import 'prefixfree'
 import 'conic-gradient'
 
-library.add(faTwitter, faGithub, faPlusCircle, faMinusCircle)
+library.add(
+  faTwitter,
+  faGithub,
+  faPlusCircle,
+  faMinusCircle,
+  faTrashAlt,
+  faPencilAlt
+)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
