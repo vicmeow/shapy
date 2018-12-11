@@ -68,7 +68,7 @@
       </transition-group>
       <!-- DEGREE IF LINEAR GRADIENT -->
       <input-wrapper
-        v-if="general.type === 'linear-gradient'"
+        v-if="general.type === 'linear'"
         class="degree-wrapper"
         v-model="general.degree"
         :label="'Degree'"

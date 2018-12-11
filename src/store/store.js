@@ -26,26 +26,29 @@ const getters = {
     let comment =
       state.general.general.comment === ''
         ? ''
-        : `/* ${state.general.general.comment} */`
+        : `/* ${state.general.general.comment} */ `
+    let repeating = !state.general.general.repeating ? '' : 'repeating-'
 
     const returnValue = type => {
-      if (type === 'linear-gradient') {
+      if (type === 'linear') {
         return state.general.general.degree.size > 0
-          ? `${comment} ${state.general.general.type}(${degree}, ${
-              rootGetters['colors/colorStops']
-            }) ${state.general.general.repeat} ${rootGetters['box/box']}`
-          : `${comment} ${state.general.general.type}(${
+          ? `${comment}${repeating}${
+              state.general.general.type
+            }-gradient(${degree}, ${rootGetters['colors/colorStops']}) ${
+              state.general.general.repeat
+            } ${rootGetters['box/box']}`
+          : `${comment}${repeating}${state.general.general.type}-gradient(${
               rootGetters['colors/colorStops']
             }) ${state.general.general.repeat} ${rootGetters['box/box']}`
       }
 
-      if (type.includes('conic-gradient')) {
-        return `${comment} ${state.general.general.type}(${
+      if (type.includes('conic')) {
+        return `${comment}${repeating}${state.general.general.type}-gradient(${
           rootGetters['colors/colorStops']
         }) ${rootGetters['box/box']} ${state.general.general.repeat}`
       }
 
-      return `${comment} ${state.general.general.type}(${
+      return `${comment}${repeating}${state.general.general.type}-gradient(${
         rootGetters['shape/shape']
       }, ${rootGetters['colors/colorStops']}) ${state.general.general.repeat} ${
         rootGetters['box/box']
@@ -87,6 +90,7 @@ const mutations = {
       newList.push(gradient.string)
     })
     state.gradientStrings = newList.join(', ')
+    state.actions.push({ type: 'returnGradient', data: editedGradient })
   },
   editGradient(state, gradient) {
     state.actions.push({ type: 'editGradient', data: gradient })
@@ -103,6 +107,12 @@ const mutations = {
     })
     state.gradientStrings = newList.join(', ')
   },
+  deleteAll(state) {
+    state.actions.push({ type: 'deleteAll', data: state.gradientList })
+    state.gradientList = []
+    state.gradientStrings = ''
+    state.previewGradient = ''
+  },
   undoAdded(state) {
     state.actions.push({ type: 'undoAdded', data: state.gradientList[0] })
     state.gradientList.shift()
@@ -111,12 +121,6 @@ const mutations = {
       newList.unshift(item.string)
     })
     state.gradientStrings = newList.join(', ')
-  },
-  deleteAll(state) {
-    state.actions.push({ type: 'deleteAll', data: state.gradientList })
-    state.gradientList = []
-    state.gradientStrings = ''
-    state.previewGradient = ''
   },
   undoDeleteAll(state, gradient) {
     state.gradientList = gradient
@@ -151,24 +155,25 @@ const actions = {
     const type = lastAction.type
     const gradient = lastAction.data
 
-    if (type === 'addGradient') {
-      commit('undoAdded')
+    if (state.actions.length > 0) {
+      if (type === 'addGradient') {
+        commit('undoAdded')
+      }
+      if (type === 'deleteAll') {
+        const last = gradient[gradient.length - 1]
+        commit('undoDeleteAll', gradient)
+        commit('general/updateGeneral', last.general, { root: true })
+        commit('box/updateBox', last.box, { root: true })
+        commit('shape/updateShape', last.shape, { root: true })
+        commit('colors/updateColors', last.colors, { root: true })
+      }
+      if (type === 'deleteSingle') {
+        commit('undoDeleteSingle', gradient)
+      }
+      if (type === 'editGradient') {
+        commit('undoEditGradient', gradient)
+      }
     }
-    if (type === 'deleteAll') {
-      const last = gradient[gradient.length - 1]
-      commit('undoDeleteAll', gradient)
-      commit('general/updateGeneral', last.general, { root: true })
-      commit('box/updateBox', last.box, { root: true })
-      commit('shape/updateShape', last.shape, { root: true })
-      commit('colors/updateColors', last.colors, { root: true })
-    }
-    if (type === 'deleteSingle') {
-      commit('undoDeleteSingle', gradient)
-    }
-    if (type === 'editGradient') {
-      commit('undoEditGradient', gradient)
-    }
-    state.actions.pop()
   },
   deleteSingle({ commit }, { index, id }) {
     commit('deleteSingle', { index, id })

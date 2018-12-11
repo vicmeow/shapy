@@ -3,7 +3,8 @@ import { getField, updateField } from 'vuex-map-fields'
 const state = {
   general: {
     comment: '',
-    type: 'linear-gradient',
+    type: 'linear',
+    repeating: false,
     repeat: 'no-repeat',
     degree: {
       unit: 'deg',
