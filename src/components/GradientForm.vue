@@ -8,14 +8,51 @@
       <fieldset-general />
       <fieldset-colors />
       <fieldset-box />
-      <fieldset-shape v-if="general.type === 'radial-gradient'" />
+      <fieldset-shape v-if="general.type === 'radial'"/>
       <div class="buttons">
-        <button
+        <!-- <button
           @click="undoAction"
-          class="btn btn-shadow btn-undo">Undo</button>
+          class="btn btn-shadow btn-undo">Undo</button> -->
         <button
           @click="addGradient"
-          class="btn btn-shadow btn-add">Add</button>
+          class="btn btn-shadow btn-add">Add Gradient</button>
+        <button
+          :key="'copy'"
+          class="btn btn-copy btn-shadow"
+          v-clipboard:copy="gradientStrings"
+          v-clipboard:success="copyCode">
+          <transition
+            name="copy"
+            mode="out-in">
+            <div
+              v-if="!copied"
+              :key="'copy'">Copy CSS <font-awesome-icon
+                aria-hidden="true"
+                class="social-icon"
+                :icon="['fas', 'copy']"/></div>
+            <div
+              v-if="copied"
+              :key="'copied'">Copied!</div>
+          </transition>
+        </button>
+        <form
+          class="export-form"
+          action="https://codepen.io/pen/define"
+          method="POST"
+          target="_blank">
+          <input
+            type="hidden"
+            name="data"
+            :value="getFormData">
+          <button
+            type="submit"
+            class="btn btn-codepen btn-shadow">
+            CodePen <font-awesome-icon
+              aria-hidden="true"
+              class="social-icon"
+              :icon="['fab', 'codepen']"/>
+          </button>
+        </form>
         <button
           @click="deleteAll"
           class="btn btn-delete">Delete everything</button>
@@ -31,8 +68,7 @@ import FieldsetBox from '@/components/fieldsets/FieldsetBox'
 import FieldsetShape from '@/components/fieldsets/FieldsetShape'
 import FieldsetColors from '@/components/fieldsets/FieldsetColors'
 import FieldsetShapy from '@/components/fieldsets/FieldsetShapy'
-import { mapFields } from 'vuex-map-fields'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Form',
@@ -44,11 +80,45 @@ export default {
     FieldsetColors,
     FieldsetShapy
   },
+  data: () => ({
+    copied: false
+  }),
   computed: {
-    ...mapState(['actions', 'previewGradient', 'gradientList']),
-    ...mapFields(['general'])
+    ...mapState({
+      gradientStrings: 'gradientStrings',
+      actions: 'actions',
+      previewGradient: 'previewGradient',
+      gradientList: 'gradientList'
+    }),
+    ...mapGetters({
+      general: 'general/general',
+      canvas: 'canvas/canvas'
+    }),
+    getFormData() {
+      return JSON.stringify({
+        title: 'Shapy Gradient 🤖',
+        html: '<div class="gradient"></div>',
+        css: `
+  body, html {
+    width: 100%;
+    height: 100%;
+  }
+
+  .gradient {
+    height: ${this.canvas.x.size}${this.canvas.x.unit};
+    width: ${this.canvas.y.size}${this.canvas.y.unit};
+    background: ${this.gradientStrings};
+  }`
+      })
+    }
   },
   methods: {
+    copyCode() {
+      this.copied = true
+      setTimeout(() => {
+        this.copied = false
+      }, 1500)
+    },
     addGradient() {
       if (this.actions.length === 0) {
         this.$store.dispatch('addGradient', this.previewGradient)
@@ -132,12 +202,12 @@ export default {
     color: $black
     font-size: 1em
     border: 0
-    padding: .5em 1em
+    padding: .5em 0
     border-radius: 3px
     font-weight: 700
     cursor: pointer
-    min-width: 100px
-    margin: 1em .5em
+    min-width: 160px
+    margin: .5em 0
 
   .btn-shadow
     box-shadow: 3px 3px 3px hsl(214, 29%, 20%)
@@ -150,10 +220,15 @@ export default {
     color: $white
     background: $green
     flex-basis: min-content
+    flex-basis: 100%
+    margin-top: 0
 
   .btn-undo
     background: $red
     flex-basis: min-content
+
+  .btn-copy, .btn-codepen
+    margin: .5em
 
   .btn-delete
     font-weight: normal
@@ -164,5 +239,16 @@ export default {
     color: $white
     margin: 0
     padding: 0
+
+  .copy-enter-active, .copy-leave-active
+    transition: all .1s linear
+
+  .copy-enter
+    opacity: 0
+    transform: translateY(-10px)
+
+  .copy-leave-to
+    opacity: 0
+    transform: translateY(10px)
 
 </style>

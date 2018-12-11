@@ -35,81 +35,15 @@
         </button>
       </div>
     </li>
-    <li
-      class="copy"
-      v-if="gradientList.length > 0">
-      <button
-        :key="'copy'"
-        class="btn btn-copy btn-shadow"
-        v-clipboard:copy="gradientStrings"
-        v-clipboard:success="copyCode">
-        <transition
-          name="fade"
-          mode="out-in">
-          <div
-            v-if="!copied"
-            :key="'copy'">Copy CSS</div>
-          <div
-            v-if="copied"
-            :key="'copied'">Copied!</div>
-        </transition>
-      </button>
-      <form
-        class="export-form"
-        action="https://codepen.io/pen/define"
-        method="POST"
-        target="_blank">
-        <input
-          type="hidden"
-          name="data"
-          :value="getFormData">
-        <button
-          type="submit"
-          class="btn btn-export btn-shadow">
-          Export to CodePen
-        </button>
-      </form>
-
-    </li>
   </ul>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { createHelpers } from 'vuex-map-fields'
-const { mapFields } = createHelpers({
-  getterType: 'canvas/getField'
-})
 
 export default {
-  data: () => ({
-    copied: false
-  }),
   computed: {
-    ...mapFields(['canvas']),
-    ...mapState([
-      'gradientList',
-      'previewGradient',
-      'gradientStrings',
-      'actions'
-    ]),
-    getFormData() {
-      return JSON.stringify({
-        title: 'Shapy Gradient 🤖',
-        html: '<div class="gradient"></div>',
-        css: `
-              body, html {
-                width: 100%;
-                height: 100%;
-              }
-
-              .gradient {
-                height: ${this.canvas.x.size}${this.canvas.x.unit};
-                width: ${this.canvas.y.size}${this.canvas.y.unit};
-                background: ${this.gradientStrings};
-              }`
-      })
-    }
+    ...mapState(['gradientList', 'previewGradient'])
   },
   methods: {
     deleteSingle(index, id) {
@@ -117,12 +51,6 @@ export default {
     },
     editGradient(index, id) {
       this.$store.dispatch('editGradient', { index, id })
-    },
-    copyCode() {
-      this.copied = true
-      setTimeout(() => {
-        this.copied = false
-      }, 1500)
     }
   }
 }
@@ -142,6 +70,9 @@ export default {
 
     li
       line-height: 1.3
+
+  .gradient-details
+    margin-bottom: .5em
 
   .export-form
     display: inline
@@ -180,7 +111,7 @@ export default {
     font-size: 1em
     color: $white
     padding: 0
-  
+
   .gradient-details
     display: flex
 
@@ -203,30 +134,5 @@ export default {
   .list-icon
     font-size: .8em
     margin-left: .5em
-
-  .copy, .export
-    position: absolute
-    bottom: 0
-    right: 1rem
-
-  .btn-export
-    background: $red
-    min-width: 130px
-
-  .btn-copy
-    background: $green
-    color: $white
-    min-width: 130px
-
-  .fade-enter-active, .fade-leave-active
-    transition: all .1s linear
-
-  .fade-enter
-    opacity: 0
-    transform: translateY(-10px)
-
-  .fade-leave-to
-    opacity: 0
-    transform: translateY(10px)
 
 </style>

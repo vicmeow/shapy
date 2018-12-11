@@ -6,9 +6,14 @@ import {
   faPlusCircle,
   faMinusCircle,
   faTrashAlt,
-  faPencilAlt
+  faPencilAlt,
+  faCopy
 } from '@fortawesome/free-solid-svg-icons'
-import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
+import {
+  faTwitter,
+  faGithub,
+  faCodepen
+} from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Meta from 'vue-meta'
 import VueHighlightJS from 'vue-highlightjs'
@@ -24,7 +29,9 @@ library.add(
   faPlusCircle,
   faMinusCircle,
   faTrashAlt,
-  faPencilAlt
+  faPencilAlt,
+  faCodepen,
+  faCopy
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
