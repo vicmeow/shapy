@@ -1,33 +1,36 @@
 <template>
-  <div 
-    class="color-wrapper" 
-    ref="colorwrapper">
+  <div ref="colorwrapper" class="color-wrapper">
     <size-input
       :label="label"
       v-model.number="what.size"
       :name="name"
-      :unit="what.unit">
+      :unit="what.unit"
+    >
       <div
         slot="color"
-        @click="togglePicker()"
+        :style="{ background: activeColor }"
         class="color-preview"
-        :style="{background: activeColor}"/>
+        @click="togglePicker()"
+      />
       <unit-input
         slot="unit"
         v-model="what.unit"
         :unit="what.unit"
-        :name="name + '-size-unit'"/>
+        :name="name + '-size-unit'"
+      />
     </size-input>
     <range-input
       v-model.number="what.size"
       :name="name + '-range'"
-      :value="what.size"/>
+      :value="what.size"
+    />
     <transition name="appear">
       <chrome-picker
-        id="chrome-picker"
         v-if="picker"
+        id="chrome-picker"
         v-model="what.color"
-        @input="updateType"/>
+        @input="updateType"
+      />
     </transition>
   </div>
 </template>
@@ -43,52 +46,6 @@ export default {
     RangeInput,
     UnitInput,
     ChromePicker: Chrome
-  },
-  data: () => ({
-    picker: false,
-    a: false
-  }),
-  methods: {
-    updateType(event) {
-      if (event.a === 1) {
-        this.$emit('updateType', 'hex')
-      } else {
-        this.$emit('updateType', 'rgb')
-      }
-    },
-    togglePicker() {
-      if (this.picker) {
-        this.hidePicker()
-      } else {
-        this.showPicker()
-      }
-    },
-    hidePicker() {
-      document.removeEventListener('click', this.documentClick)
-      this.picker = false
-    },
-    showPicker() {
-      document.addEventListener('click', this.documentClick)
-      this.picker = true
-    },
-    documentClick(e) {
-      const element = this.$refs.colorwrapper
-      const target = e.target
-      if (element !== target && !element.contains(target)) {
-        this.hidePicker()
-      }
-    }
-  },
-  computed: {
-    activeColor() {
-      const c = this.what.color
-      if (this.a) {
-        const rgba = c.rgba
-        return `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a})`
-      } else {
-        return c.hex
-      }
-    }
   },
   props: {
     id: {
@@ -120,72 +77,117 @@ export default {
         }
       }
     }
+  },
+  data: () => ({
+    picker: false,
+    a: false
+  }),
+  computed: {
+    activeColor() {
+      const c = this.what.color
+      if (this.a) {
+        const rgba = c.rgba
+        return `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a})`
+      } else {
+        return c.hex
+      }
+    }
+  },
+  methods: {
+    updateType(event) {
+      if (event.a === 1) {
+        this.$emit('updateType', 'hex')
+      } else {
+        this.$emit('updateType', 'rgb')
+      }
+    },
+    togglePicker() {
+      if (this.picker) {
+        this.hidePicker()
+      } else {
+        this.showPicker()
+      }
+    },
+    hidePicker() {
+      document.removeEventListener('click', this.documentClick)
+      this.picker = false
+    },
+    showPicker() {
+      document.addEventListener('click', this.documentClick)
+      this.picker = true
+    },
+    documentClick(e) {
+      const element = this.$refs.colorwrapper
+      const target = e.target
+      if (element !== target && !element.contains(target)) {
+        this.hidePicker()
+      }
+    }
   }
 }
 </script>
 
 <style lang="sass">
 
-  .color-wrapper
-    margin-top: .3em
-    flex-basis: 50%
-    display: inline-block
-    width: 50%
+.color-wrapper
+  margin-top: .3em
+  flex-basis: 50%
+  display: inline-block
+  width: 50%
 
-  .color-wrapper:nth-child(even)
-    padding-left: .75em
+.color-wrapper:nth-child(even)
+  padding-left: .75em
 
-  .color-wrapper:nth-child(odd)
-    padding-right: .75em
+.color-wrapper:nth-child(odd)
+  padding-right: .75em
 
-  .input-wrapper.degree-wrapper
-    padding-right: 0
-    padding-left: 0
+.input-wrapper.degree-wrapper
+  padding-right: 0
+  padding-left: 0
 
-  .color-preview
-    color: white
-    height: 1em
-    width: 1em
-    border: 1px solid $black
-    border-radius: 3px
-    margin-right: .5em
-    cursor: pointer
-    border-radius: 50%
+.color-preview
+  color: white
+  height: 1em
+  width: 1em
+  border: 1px solid $black
+  border-radius: 3px
+  margin-right: .5em
+  cursor: pointer
+  border-radius: 50%
 
-  .appear-enter-active, .appear-leave-active
-    transition: all .3s
+.appear-enter-active, .appear-leave-active
+  transition: all .3s
 
-  .appear-enter, .appear-leave-to
-    opacity: 0
-    transform: translateY(-20px)
+.appear-enter, .appear-leave-to
+  opacity: 0
+  transform: translateY(-20px)
 
-  #chrome-picker
-    position: absolute
-    z-index: 10
-    border-radius: 5px
-    right: 0
+#chrome-picker
+  position: absolute
+  z-index: 10
+  border-radius: 5px
+  right: 0
+  font-family: $font
+
+  div:not(:first-child)
+    border-radius: 0 0 5px 5px
+
+  .vc-chrome-fields .vc-input__input
+    font-size: .95rem
+    color: $black
+    padding: .3em 0
+    height: auto
+
+  .vc-chrome-fields .vc-input__label
+    font-size: .8em
     font-family: $font
+    color: $black
+    letter-spacing: 1px
 
-    div:not(:first-child)
-      border-radius: 0 0 5px 5px
+.color-wrapper:first-child #chrome-picker
+  left: 0
 
-    .vc-chrome-fields .vc-input__input
-      font-size: .95rem
-      color: $black
-      padding: .3em 0
-      height: auto
-
-    .vc-chrome-fields .vc-input__label
-      font-size: .8em
-      font-family: $font
-      color: $black
-      letter-spacing: 1px
-
-  .color-wrapper:first-child #chrome-picker
-    left: 0
-
-  @media screen and (max-width: 768px)
-    .size-wrapper
-      margin-top: .5em
-
+@media screen and (max-width: 768px)
+  .size-wrapper
+    margin-top: .5em
 </style>

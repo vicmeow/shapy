@@ -1,7 +1,5 @@
 <template>
-  <span 
-    class="unit-switch"
-    @click="switchUnit">{{ unit }}</span>
+  <span class="unit-switch" @click="switchUnit">{{ unit }}</span>
 </template>
 
 <script>
@@ -27,7 +25,6 @@ export default {
 
 <style lang="sass" scoped>
 
-  .unit-switch
-    cursor: pointer
-
+.unit-switch
+  cursor: pointer
 </style>

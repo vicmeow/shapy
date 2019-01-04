@@ -7,19 +7,22 @@
         :name="name"
         :unit="what.unit"
         :min="min"
-        :max="max">
+        :max="max"
+      >
         <unit-input
           slot="unit"
           v-model="what.unit"
           :unit="what.unit"
-          :name="name + '-size-unit'"/>
+          :name="name + '-size-unit'"
+        />
       </size-input>
       <range-input
         v-model.number="what.size"
         :name="name + '-range'"
         :value="what.size"
         :min="min"
-        :max="max"/>
+        :max="max"
+      />
     </template>
   </div>
 </template>
@@ -34,11 +37,6 @@ export default {
     UnitInput,
     SizeInput,
     RangeInput
-  },
-  computed: {
-    ...mapGetters({
-      canvas: 'canvas/canvas'
-    })
   },
   props: {
     label: {
@@ -69,41 +67,45 @@ export default {
         }
       }
     }
+  },
+  computed: {
+    ...mapGetters({
+      canvas: 'canvas/canvas'
+    })
   }
 }
 </script>
 
 <style lang="sass">
 
-  input
-    font-family: $font
-    font-size: 18px
-    color: $black
-    border: 0
-    padding: 0
-    &:focus
-      outline: 0
+input
+  font-family: $font
+  font-size: 18px
+  color: $black
+  border: 0
+  padding: 0
+  &:focus
+    outline: 0
 
+.input-wrapper
+  margin-top: .3em
+  margin-bottom: .5em
+  flex-basis: 50%
+
+.input-wrapper:nth-child(odd)
+  padding-left: .75em
+
+.input-wrapper:nth-child(even)
+  padding-right: .75em
+
+@media screen and (max-width: 768px)
   .input-wrapper
-    margin-top: .3em
-    margin-bottom: .5em
-    flex-basis: 50%
+    flex-basis: 100%
+    padding: 0
 
-  .input-wrapper:nth-child(odd)
-    padding-left: .75em
+  .input-wrapper:nth-child(even), .input-wrapper:nth-child(odd)
+    padding: 0
 
-  .input-wrapper:nth-child(even)
-    padding-right: .75em
-
-  @media screen and (max-width: 768px)
-    .input-wrapper
-      flex-basis: 100%
-      padding: 0
-
-    .input-wrapper:nth-child(even), .input-wrapper:nth-child(odd)
-      padding: 0
-
-    .size-wrapper
-      margin-top: .5em
-
+  .size-wrapper
+    margin-top: .5em
 </style>

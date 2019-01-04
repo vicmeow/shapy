@@ -29,26 +29,25 @@ export default {
 
 <style lang="sass" scoped>
 
-  .group-toggle
-    background: 0
-    margin: 0
-    padding: 0
-    min-width: 20px
-    font-size: .8em
-    align-content: center
-    display: flex
-    align-items: center
-    justify-content: flex-end
-    opacity: .9
-    cursor: pointer
+.group-toggle
+  background: 0
+  margin: 0
+  padding: 0
+  min-width: 20px
+  font-size: .8em
+  align-content: center
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  opacity: .9
+  cursor: pointer
 
-  .form-toggle
-    display: none
-    color: white
-    margin: 0
-    margin-right: auto
-    margin-bottom: .5em
-    @media screen and (max-width: 768px)
-      display: block
-
+.form-toggle
+  display: none
+  color: white
+  margin: 0
+  margin-right: auto
+  margin-bottom: .5em
+  @media screen and (max-width: 768px)
+    display: block
 </style>

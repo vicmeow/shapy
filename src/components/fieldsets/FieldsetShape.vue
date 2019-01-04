@@ -1,15 +1,8 @@
 <template>
-  <div
-    role="group"
-    class="fieldset fieldset-shape">
-
+  <div role="group" class="fieldset fieldset-shape">
     <!-- TITLE & DESCRIPTION -->
-    <legend 
-      class="legend" 
-      @click="hidden = !hidden">{{ title }}</legend>
-    <group-toggle 
-      @click.native="hidden = !hidden" 
-      :hidden="hidden"/>
+    <legend class="legend" @click="hidden = !hidden">{{ title }}</legend>
+    <group-toggle :hidden="hidden" @click.native="hidden = !hidden" />
     <template v-show="!hidden">
       <p class="desc">{{ desc }}</p>
 
@@ -18,14 +11,16 @@
         v-model="shape.size.x"
         :label="'Width'"
         :name="'shape-size-x'"
-        :what="shape.size.x"/>
+        :what="shape.size.x"
+      />
 
       <!-- HEIGHT INPUT (%/px) -->
       <input-wrapper
         v-model="shape.size.y"
         :label="'Height'"
         :name="'shape-size-y'"
-        :what="shape.size.y"/>
+        :what="shape.size.y"
+      />
 
       <!-- X AXIS (%) -->
       <input-wrapper
@@ -34,7 +29,8 @@
         :name="'shape-x'"
         :what="shape.coord.x"
         :min="-100"
-        :max="200"/>
+        :max="200"
+      />
 
       <!-- Y AXIS (%) -->
       <input-wrapper
@@ -43,7 +39,8 @@
         :name="'shape-y'"
         :what="shape.coord.y"
         :min="-100"
-        :max="200"/>
+        :max="200"
+      />
     </template>
   </div>
 </template>

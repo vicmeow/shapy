@@ -1,15 +1,8 @@
 <template>
-  <div
-    role="group"
-    class="fieldset fieldset-canvas">
-
+  <div role="group" class="fieldset fieldset-canvas">
     <!-- TITLE & DESCRIPTION -->
-    <legend
-      class="legend"
-      @click="hidden = !hidden">{{ title }}</legend>
-    <group-toggle
-      @click.native="hidden = !hidden"
-      :hidden="hidden"/>
+    <legend class="legend" @click="hidden = !hidden">{{ title }}</legend>
+    <group-toggle :hidden="hidden" @click.native="hidden = !hidden" />
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
 
@@ -19,7 +12,8 @@
         :label="'Width'"
         :name="'canvas-width'"
         :what="canvas.x"
-        :max="maxX"/>
+        :max="maxX"
+      />
 
       <!-- HEIGHT INPUT -->
       <input-wrapper
@@ -27,7 +21,8 @@
         :label="'Height'"
         :name="'canvas-height'"
         :what="canvas.y"
-        :max="maxY"/>
+        :max="maxY"
+      />
     </template>
   </div>
 </template>
@@ -69,22 +64,22 @@ export default {
 
 <style lang="sass" scoped>
 
-  .canvas-size
-    max-width: 50%
-    display: flex
-    flex-direction: column-reverse
+.canvas-size
+  max-width: 50%
+  display: flex
+  flex-direction: column-reverse
 
-  label
-    text-align: center
-    margin-top: .2rem
+label
+  text-align: center
+  margin-top: .2rem
 
-  input
-    border-radius: 2rem
-    display: block
-    font-size: 1.2rem
-    max-width: 150px
-    text-align: center
-    border: 1px solid $black
-    &:focus
-      border: 1px solid $green
+input
+  border-radius: 2rem
+  display: block
+  font-size: 1.2rem
+  max-width: 150px
+  text-align: center
+  border: 1px solid $black
+  &:focus
+    border: 1px solid $green
 </style>
