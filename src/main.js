@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Meta from 'vue-meta'
 import VueHighlightJS from 'vue-highlightjs'
 import VueClipboard from 'vue-clipboard2'
+import VueAnalytics from 'vue-analytics'
 
 // Conic gradients
 import 'prefixfree'
@@ -46,6 +47,11 @@ Vue.use(Meta, {
 })
 Vue.use(VueHighlightJS)
 Vue.use(VueClipboard)
+
+Vue.use(VueAnalytics, {
+  id: 'UA-131727670-1',
+  set: [{ field: 'anonymizeIp', value: true }]
+})
 
 new Vue({
   store,

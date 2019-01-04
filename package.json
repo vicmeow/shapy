@@ -16,6 +16,7 @@
     "conic-gradient": "^1.0.0",
     "prefixfree": "^1.0.0",
     "vue": "^2.5.17",
+    "vue-analytics": "^5.16.1",
     "vue-clipboard2": "^0.2.1",
     "vue-color": "^2.7.0",
     "vue-meta": "^1.5.5",
