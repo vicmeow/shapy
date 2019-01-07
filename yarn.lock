@@ -7038,10 +7038,6 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-analytics@^5.16.1:
-  version "5.16.1"
-  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.16.1.tgz#2fa909a245e1cee9993a69f0b72caf1dd6126c10"
-
 vue-clipboard2@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/vue-clipboard2/-/vue-clipboard2-0.2.1.tgz#9f06690af1c98aef344be1fc4beb00cdc5307ee1"
