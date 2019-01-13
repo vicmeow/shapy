@@ -4,14 +4,14 @@
     <label :for="name + '-id'" class="label">{{ label }}:</label>
     <div class="size-edit">
       <input
-        :value="value"
+        :value="checkValue"
         :name="name"
         :id="name + '-id'"
         :min="min"
         :max="max"
         class="size-input"
-        type="text"
-        @input="$emit('input', $event.target.value)"
+        type="number"
+        @input="emitValue"
       />
       <slot name="unit" />
     </div>
@@ -47,6 +47,22 @@ export default {
       required: false,
       default: 100
     }
+  },
+  computed: {
+    checkValue() {
+      return this.unit === '%' && this.value > 100
+        ? 100
+        : this.unit === 'px' && this.value > this.max
+        ? this.max
+        : this.value
+    }
+  },
+  methods: {
+    emitValue(event) {
+      event.target.value >= this.max
+        ? this.$emit('input', this.max)
+        : this.$emit('input', event.target.value)
+    }
   }
 }
 </script>
@@ -62,7 +78,7 @@ export default {
     display: flex
     padding: 0
     min-width: 0
-    max-width: 2.9em
+    flex: 1
     text-align: right
     padding: 0 .2em
     border: 0
@@ -72,4 +88,5 @@ export default {
   display: flex
   justify-content: flex-end
   margin-left: auto
+  flex: 1
 </style>
