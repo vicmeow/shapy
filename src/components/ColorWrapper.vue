@@ -154,6 +154,7 @@ export default {
   margin-right: .5em
   cursor: pointer
   border-radius: 50%
+  flex-shrink: 0
 
 .appear-enter-active, .appear-leave-active
   transition: all .3s

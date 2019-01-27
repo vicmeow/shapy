@@ -78,6 +78,7 @@ export default {
     display: flex
     padding: 0
     min-width: 0
+    width: 99%
     flex: 1
     text-align: right
     padding: 0 .2em
@@ -88,5 +89,5 @@ export default {
   display: flex
   justify-content: flex-end
   margin-left: auto
-  flex: 1
+  flex-basis: 1
 </style>
