@@ -3,9 +3,10 @@
     <div id="canvas-max" class="canvas">
       <div
         :style="{
-          width: canvasCurrent.x,
-          height: canvasCurrent.y,
-          background: gradientStrings
+          width: canvas.width,
+          height: canvas.height,
+          'background-color': backgroundColor,
+          'background-image': gradientStrings
         }"
         class="gradient-canvas"
       >
@@ -22,15 +23,11 @@
 import { mapGetters, mapState } from 'vuex'
 export default {
   computed: {
-    canvasCurrent() {
-      const width = this.canvas.x.size + this.canvas.x.unit
-      const height = this.canvas.y.size + this.canvas.y.unit
-      return { x: width, y: height }
-    },
     ...mapState(['gradientStrings', 'previewGradient']),
     ...mapGetters({
       colorStops: 'colors/colorStops',
-      canvas: 'canvas/canvas',
+      canvas: 'canvas/size',
+      backgroundColor: 'canvas/backgroundColor',
       general: 'general/general',
       box: 'box/box',
       shape: 'shape/shape',
@@ -56,7 +53,7 @@ export default {
     updateMax() {
       const width = document.getElementById('canvas-max').offsetWidth
       const height = document.getElementById('canvas-max').offsetHeight
-      this.$store.dispatch('canvas/updateMax', { x: width, y: height })
+      this.$store.dispatch('canvas/updateMax', { width, height })
     }
   }
 }

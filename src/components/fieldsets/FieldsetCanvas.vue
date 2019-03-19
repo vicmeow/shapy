@@ -5,36 +5,26 @@
     <group-toggle :hidden="hidden" @click.native="hidden = !hidden" />
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
-
-      <!-- WIDTH INPUT -->
       <input-wrapper
-        v-model="canvas.x"
+        :name="'Canvas width'"
         :label="'Width'"
-        :name="'canvas-width'"
-        :what="canvas.x"
-        :max="canvas.x.unit === 'px' ? canvas.x.max : 100"
+        :field="width"
+        v-model="width"
       />
-
-      <!-- HEIGHT INPUT -->
       <input-wrapper
-        v-model="canvas.y"
+        :name="'Canvas height'"
         :label="'Height'"
-        :name="'canvas-height'"
-        :what="canvas.y"
-        :max="canvas.y.unit === 'px' ? canvas.y.max : 100"
+        :field="height"
+        v-model="height"
       />
     </template>
   </div>
 </template>
 
 <script>
-import InputWrapper from '@/components/InputWrapper'
+import InputWrapper from '@/components/inputs/InputWrapper'
 import GroupToggle from '@/components/GroupToggle'
-import { createHelpers } from 'vuex-map-fields'
-const { mapFields } = createHelpers({
-  getterType: 'canvas/getField',
-  mutationType: 'canvas/updateField'
-})
+import { mapFields } from 'vuex-map-fields'
 export default {
   name: 'Canvas',
   components: {
@@ -42,12 +32,12 @@ export default {
     GroupToggle
   },
   data: () => ({
-    hidden: true,
+    hidden: false,
     title: 'Canvas Size 🖼',
     desc: "Edit the size of your canvas. Choose 'px' by clicking on the unit."
   }),
   computed: {
-    ...mapFields(['canvas'])
+    ...mapFields('canvas', ['width', 'height'])
   }
 }
 </script>
