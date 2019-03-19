@@ -18,26 +18,24 @@
           class="color-stop-wrapper"
           role="group"
         >
-          <color-wrapper
-            :id="stop.id"
-            v-model="stop.start"
-            :key="stop.start.index"
+          <input-wrapper
+            :name="`Color stop no. ${index + 1}, start position`"
+            :field="stop.start"
             :label="'Start'"
-            :what="stop.start"
-            :name="'color-stop-start'"
-            @updateType="updateType(stop.id, 'start', ...arguments)"
+            v-model="stop.start"
           />
-          <color-wrapper
-            :id="stop.id"
-            v-model="stop.stop"
-            :key="stop.stop.index"
+          <input-wrapper
+            :name="`Color stop no. ${index + 1}, stop position`"
+            :field="stop.stop"
             :label="'Stop'"
-            :what="stop.stop"
-            :name="'color-stop-stop'"
-            @updateType="updateType(stop.id, 'stop', ...arguments)"
+            v-model="stop.stop"
           />
           <div :key="'buttons'" class="button-wrapper">
-            <button class="icon-btn icon-add" @click="addStop(index + 1)">
+            <button
+              :aria-label="`Add a new stop after stop no. ${index + 1}`"
+              class="icon-btn icon-add"
+              @click="addStop(index + 1)"
+            >
               <font-awesome-icon
                 :icon="['fas', 'plus-circle']"
                 aria-hidden="true"
@@ -45,7 +43,11 @@
               />
               <div class="hover">Add</div>
             </button>
-            <button class="icon-btn icon-remove" @click="removeStop(stop.id)">
+            <button
+              :aria-label="`Remove color stop no. ${index + 1}`"
+              class="icon-btn icon-remove"
+              @click="removeStop(stop.id)"
+            >
               <font-awesome-icon
                 :icon="['fas', 'minus-circle']"
                 aria-hidden="true"
@@ -60,7 +62,7 @@
         </div>
       </transition-group>
       <!-- DEGREE IF LINEAR GRADIENT -->
-      <input-wrapper
+      <!-- <input-wrapper
         v-if="general.type === 'linear'"
         v-model="general.degree"
         :label="'Degree'"
@@ -69,15 +71,14 @@
         :min="0"
         :max="360"
         class="degree-wrapper"
-      />
+      />-->
     </template>
   </div>
 </template>
 
 <script>
 import GroupToggle from '@/components/GroupToggle'
-import ColorWrapper from '@/components/ColorWrapper'
-import InputWrapper from '@/components/InputWrapper'
+import InputWrapper from '@/components/inputs/InputWrapper'
 import { mapGetters } from 'vuex'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
@@ -87,7 +88,6 @@ const { mapFields } = createHelpers({
 export default {
   name: 'Colors',
   components: {
-    ColorWrapper,
     GroupToggle,
     InputWrapper
   },
@@ -106,9 +106,6 @@ export default {
     })
   },
   methods: {
-    updateType(id, where, type) {
-      this.$store.dispatch('colors/updateType', { id, where, type })
-    },
     addStop(index) {
       const newStop = {
         id: this.id,

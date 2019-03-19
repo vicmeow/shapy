@@ -5,24 +5,28 @@ const state = {
     {
       id: 1,
       start: {
-        size: 0,
+        pct: 0,
+        px: 0,
+        max: null,
         type: 'hex',
         color: {
           hex: '#00978d',
           rgba: { a: 1, b: 141, g: 151, r: 0 },
           a: 1
         },
-        unit: '%'
+        defaultUnit: true
       },
       stop: {
-        size: 100,
+        pct: 100,
+        px: null,
+        max: 100,
         type: 'hex',
         color: {
           hex: '#f3b6c9',
           rgba: { a: 1, b: 201, g: 182, r: 243 },
           a: 1
         },
-        unit: '%'
+        defaultUnit: true
       }
     }
   ]
@@ -34,11 +38,15 @@ const getters = {
     const stops = state.colors.map(color => {
       let startColor
       let stopColor
-      const startSize = color.start.size + color.start.unit
-      const stopSize = color.stop.size + color.stop.unit
-      // START VALUES
+      const startSize = color.start.defaultUnit
+        ? `${color.start.pct}%`
+        : `${color.start.px}px`
+      const stopSize = color.stop.defaultUnit
+        ? `${color.stop.pct}%`
+        : `${color.stop.px}px`
 
-      if (color.start.type === 'rgb') {
+      // START VALUES
+      if (color.start.color.a !== 1) {
         const rgba = color.start.color.rgba
         startColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${
           rgba.a
@@ -47,7 +55,7 @@ const getters = {
         startColor = `${color.start.color.hex} ${startSize}`
       }
       // STOP VALUES
-      if (color.stop.type === 'rgb') {
+      if (color.stop.color.a !== 1) {
         const rgba = color.stop.color.rgba
         stopColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a}) ${stopSize}`
       } else {
