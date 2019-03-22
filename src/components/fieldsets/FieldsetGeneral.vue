@@ -19,7 +19,6 @@
 
       <input-wrapper label="Repeating gradient" name="repeating">
         <toggle-input
-          slot="toggle"
           :default-value="isRepeating"
           :values="['normal', 'repeating']"
           @change="isRepeating = $event"
