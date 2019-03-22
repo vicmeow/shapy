@@ -6,6 +6,7 @@
         v-if="field"
         v-model.number="input"
         :max="field.defaultUnit ? 100 : field.max"
+        :min="min"
         @input="emitValue"
         @change="toggleUnit"
       />
@@ -40,6 +41,11 @@ export default {
       type: Object,
       required: false,
       default: () => {}
+    },
+    min: {
+      type: Number,
+      required: false,
+      default: 0
     }
   },
   data() {
@@ -47,6 +53,17 @@ export default {
       input: 0,
       colorInput: null,
       gradientType: null
+    }
+  },
+  computed: {
+    synced() {
+      // Sync the % and px values to match each other
+      const value = parseInt(this.input)
+      if (this.field) {
+        return this.field.defaultUnit
+          ? Math.round((value * this.field.max) / 100)
+          : Math.round((value / this.field.max) * 100)
+      }
     }
   },
   watch: {
@@ -66,34 +83,46 @@ export default {
   methods: {
     toggleUnit(value) {
       this.field.defaultUnit = value
+      this.field.defaultUnit
+        ? (this.input = this.field.pct)
+        : (this.input = this.field.px)
       this.checkMax()
     },
     checkMax() {
       if (this.field.defaultUnit) {
         if (this.input > 100) {
           this.input = 100
-          this.$emit('input', { ...this.field, pct: 100 })
+          this.$emit('input', { ...this.field, pct: 100, px: this.synced })
         } else {
           const input = this.input
-          this.$emit('input', { ...this.field, pct: input })
+          this.$emit('input', { ...this.field, pct: input, px: this.synced })
         }
       } else {
         if (this.input > this.field.max) {
           const max = this.field.max
           this.input = max
-          this.$emit('input', { ...this.field, px: max })
+          this.$emit('input', { ...this.field, px: max, pct: this.synced })
         } else {
           const input = this.input
-          this.$emit('input', { ...this.field, px: input })
+          this.$emit('input', { ...this.field, px: input, pct: this.synced })
         }
       }
     },
     emitValue(value) {
       const newValue = parseInt(value)
+
       if (this.field) {
         this.field.defaultUnit
-          ? this.$emit('input', { ...this.field, pct: newValue })
-          : this.$emit('input', { ...this.field, px: newValue })
+          ? this.$emit('input', {
+              ...this.field,
+              pct: newValue,
+              px: this.synced
+            })
+          : this.$emit('input', {
+              ...this.field,
+              px: newValue,
+              pct: this.synced
+            })
       }
     }
   }
