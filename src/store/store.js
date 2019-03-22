@@ -21,41 +21,41 @@ const state = {
 const getters = {
   getField,
   createString(state, rootGetters) {
-    const degree =
-      state.general.general.degree.size + state.general.general.degree.unit
-    let comment =
-      state.general.general.comment === ''
-        ? ''
-        : `/* ${state.general.general.comment} */ `
-    let repeating = !state.general.general.repeating ? '' : 'repeating-'
+    const degree = `${state.general.angle.active}deg`
+    const comment =
+      state.general.comment === '' ? '' : `/* ${state.general.comment} */ `
+    const repeating = state.general.isRepeating ? '' : 'repeating-'
+    const repeat = state.general.backgroundRepeat.active
 
     const returnValue = type => {
       if (type === 'linear') {
-        return state.general.general.degree.size > 0
+        return state.general.angle.active > 0
           ? `${comment}${repeating}${
-              state.general.general.type
-            }-gradient(${degree}, ${rootGetters['colors/colorStops']}) ${
-              state.general.general.repeat
-            } ${rootGetters['box/box']}`
-          : `${comment}${repeating}${state.general.general.type}-gradient(${
+              state.general.gradient.active
+            }-gradient(${degree}, ${
               rootGetters['colors/colorStops']
-            }) ${state.general.general.repeat} ${rootGetters['box/box']}`
+            }) ${repeat} ${rootGetters['box/box']}`
+          : `${comment}${repeating}${state.general.gradient.active}-gradient(${
+              rootGetters['colors/colorStops']
+            }) ${repeat} ${rootGetters['box/box']}`
       }
 
       if (type.includes('conic')) {
-        return `${comment}${repeating}${state.general.general.type}-gradient(${
-          rootGetters['colors/colorStops']
-        }) ${rootGetters['box/box']} ${state.general.general.repeat}`
+        return `${comment}${repeating}${
+          state.general.gradient.active
+        }-gradient(${rootGetters['colors/colorStops']}) ${
+          rootGetters['box/box']
+        } ${repeat}`
       }
 
-      return `${comment}${repeating}${state.general.general.type}-gradient(${
+      return `${comment}${repeating}${state.general.gradient.active}-gradient(${
         rootGetters['shape/shape']
-      }, ${rootGetters['colors/colorStops']}) ${state.general.general.repeat} ${
+      }, ${rootGetters['colors/colorStops']}) ${repeat} ${
         rootGetters['box/box']
       }`
     }
 
-    return returnValue(state.general.general.type)
+    return returnValue(state.general.gradient.active)
   }
 }
 

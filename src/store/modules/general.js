@@ -1,23 +1,24 @@
 import { getField, updateField } from 'vuex-map-fields'
 
 const state = {
-  general: {
-    comment: '',
-    type: 'linear',
-    repeating: false,
-    repeat: 'no-repeat',
-    degree: {
-      unit: 'deg',
-      size: 0
-    }
+  gradient: {
+    active: 'linear',
+    types: ['linear', 'radial', 'conic']
+  },
+  isRepeating: true,
+  backgroundRepeat: {
+    active: 'no-repeat',
+    types: ['no-repeat', 'repeat', 'space', 'round', 'repeat-x', 'repeat-y']
+  },
+  comment: '',
+  angle: {
+    active: 0,
+    types: [0, 45, 90, 180, 270]
   }
 }
 
 const getters = {
-  getField,
-  general() {
-    return state.general
-  }
+  getField
 }
 
 const mutations = {
