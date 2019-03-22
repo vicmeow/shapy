@@ -5,7 +5,6 @@
     <group-toggle :hidden="hidden" @click.native="hidden = !hidden" />
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
-      <p>{{ width }}</p>
       <input-wrapper
         :field="width"
         v-model="width"
@@ -25,7 +24,11 @@
 <script>
 import InputWrapper from '@/components/inputs/InputWrapper'
 import GroupToggle from '@/components/GroupToggle'
-import { mapFields } from 'vuex-map-fields'
+import { createHelpers } from 'vuex-map-fields'
+const { mapFields } = createHelpers({
+  getterType: 'canvas/getField',
+  mutationType: 'canvas/updateField'
+})
 export default {
   name: 'Canvas',
   components: {
@@ -38,7 +41,19 @@ export default {
     desc: "Edit the size of your canvas. Choose 'px' by clicking on the unit."
   }),
   computed: {
-    ...mapFields('canvas', ['width', 'height'])
+    ...mapFields(['width', 'height'])
+  },
+  watch: {
+    width() {
+      // When the canvas width changes, the max size for box should update
+      const width = this.width.px
+      this.$store.dispatch('box/updateMax', { type: 'width', value: width })
+    },
+    height() {
+      // When the canvas height changes, the max size for box should update
+      const height = this.height.px
+      this.$store.dispatch('box/updateMax', { type: 'height', value: height })
+    }
   }
 }
 </script>

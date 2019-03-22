@@ -1,21 +1,20 @@
 <template>
   <div class="form-wrapper">
     <form class="form" @submit.prevent>
-      <fieldset-shapy />
       <fieldset-canvas />
       <fieldset-general />
       <fieldset-colors />
       <fieldset-box />
-      <fieldset-shape v-if="general.type === 'radial'" />
+      <fieldset-shape v-if="gradient.active === 'radial'" />
       <div class="buttons">
         <!-- <button
           @click="undoAction"
-          class="btn btn-shadow btn-undo">Undo</button> -->
+        class="btn btn-shadow btn-undo">Undo</button>-->
         <button class="btn btn-shadow btn-add" @click="addGradient">
           Add Gradient
         </button>
         <button
-          v-clipboard:copy="gradientStrings"
+          v-clipboard:copy="strings"
           v-clipboard:success="copyCode"
           :key="'copy'"
           class="btn btn-copy btn-shadow"
@@ -38,7 +37,7 @@
           method="POST"
           target="_blank"
         >
-          <input :value="getFormData" type="hidden" name="data" />
+          <!-- <input :value="getFormData" type="hidden" name="data"> -->
           <button type="submit" class="btn btn-codepen btn-shadow">
             CodePen
             <font-awesome-icon
@@ -63,7 +62,7 @@ import FieldsetBox from '@/components/fieldsets/FieldsetBox'
 import FieldsetShape from '@/components/fieldsets/FieldsetShape'
 import FieldsetColors from '@/components/fieldsets/FieldsetColors'
 import FieldsetShapy from '@/components/fieldsets/FieldsetShapy'
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Form',
@@ -80,32 +79,31 @@ export default {
   }),
   computed: {
     ...mapState({
-      gradientStrings: 'gradientStrings',
+      strings: 'gradientStrings',
       actions: 'actions',
-      previewGradient: 'previewGradient',
-      gradientList: 'gradientList'
+      preview: 'previewGradient',
+      gradient: state => state.general.gradient
     }),
-    ...mapGetters({
-      general: 'general/general',
-      canvas: 'canvas/canvas'
-    }),
-    getFormData() {
-      return JSON.stringify({
-        title: 'Shapy Gradient 🤖',
-        html: '<div class="gradient"></div>',
-        css: `
-  body, html {
-    width: 100%;
-    height: 100%;
-  }
-
-  .gradient {
-    height: ${this.canvas.x.size}${this.canvas.x.unit};
-    width: ${this.canvas.y.size}${this.canvas.y.unit};
-    background: ${this.gradientStrings};
-  }`
-      })
+    canvas() {
+      return this.$store.getters['canvas/size']
     }
+    //   getFormData() {
+    //     return JSON.stringify({
+    //       title: 'Shapy Gradient 🤖',
+    //       html: '<div class="gradient"></div>',
+    //       css: `
+    // body, html {
+    //   width: 100%;
+    //   height: 100%;
+    // }
+
+    // .gradient {
+    //   height: ${this.canvas.x.size}${this.canvas.x.unit};
+    //   width: ${this.canvas.y.size}${this.canvas.y.unit};
+    //   background: ${this.strings};
+    // }`
+    //     })
+    //   }
   },
   methods: {
     copyCode() {
@@ -116,14 +114,14 @@ export default {
     },
     addGradient() {
       if (this.actions.length === 0) {
-        this.$store.dispatch('addGradient', this.previewGradient)
+        this.$store.dispatch('addGradient', this.preview)
       } else {
         const type = this.actions[this.actions.length - 1].type
-        if (this.previewGradient) {
+        if (this.preview) {
           if (type === 'editGradient') {
             this.$store.dispatch('returnGradient')
           } else {
-            this.$store.dispatch('addGradient', this.previewGradient)
+            this.$store.dispatch('addGradient', this.preview)
           }
         }
       }

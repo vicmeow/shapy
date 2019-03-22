@@ -7,41 +7,25 @@
       <p class="desc">{{ desc }}</p>
 
       <!-- WIDTH INPUT (%/px) -->
-      <input-wrapper
-        v-model="shape.size.x"
-        :label="'Width'"
-        :name="'shape-size-x'"
-        :what="shape.size.x"
-        :max="shape.size.x.unit === '%' ? 100 : boxPx.x"
-      />
+      <input-wrapper v-model="width" :field="width" label="Radial width" />
 
       <!-- HEIGHT INPUT (%/px) -->
-      <input-wrapper
-        v-model="shape.size.y"
-        :label="'Height'"
-        :name="'shape-size-y'"
-        :what="shape.size.y"
-        :max="shape.size.y.unit === '%' ? 100 : boxPx.y"
-      />
+      <input-wrapper v-model="height" :field="height" label="Radial height" />
 
-      <!-- X AXIS (%) -->
+      <!-- X AXIS (%/px) -->
       <input-wrapper
-        v-model="shape.coord.x"
-        :label="'X-axis'"
-        :name="'shape-x'"
-        :what="shape.coord.x"
-        :min="shape.coord.x.unit === '%' ? 0 : axis.min.x"
-        :max="shape.coord.x.unit === '%' ? 100 : boxPx.x + shapePx.x"
+        v-model="x"
+        :field="x"
+        :min="x.defaultUnit ? 0 : -width.px"
+        label="Radial on x axis"
       />
 
       <!-- Y AXIS (%) -->
       <input-wrapper
-        v-model="shape.coord.y"
-        :label="'Y-axis'"
-        :name="'shape-y'"
-        :what="shape.coord.y"
-        :min="shape.coord.y.unit === '%' ? 0 : axis.min.y"
-        :max="shape.coord.y.unit === '%' ? 100 : boxPx.y + shapePx.y"
+        v-model="y"
+        :field="y"
+        :min="y.defaultUnit ? 0 : -height.px"
+        label="Radial on y axis"
       />
     </template>
   </div>
@@ -49,7 +33,7 @@
 
 <script>
 import GroupToggle from '@/components/GroupToggle'
-import InputWrapper from '@/components/InputWrapper'
+import InputWrapper from '@/components/inputs/InputWrapper'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
   getterType: 'shape/getField',
@@ -68,7 +52,7 @@ export default {
       'Edit the size and placement of the shape inside the box you edit above.'
   }),
   computed: {
-    ...mapFields(['shape']),
+    ...mapFields(['width', 'height', 'x', 'y']),
     boxMax() {
       // Max box size based on canvas (PX)
       const CANVAS = this.$store.state.canvas.canvas

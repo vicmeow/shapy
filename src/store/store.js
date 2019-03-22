@@ -1,3 +1,4 @@
+// TODO: Add actions into its own module?
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -143,10 +144,10 @@ const actions = {
     let savedGradient = {
       string: gradient,
       id: state.id,
-      general: JSON.parse(JSON.stringify(state.general.general)),
-      box: JSON.parse(JSON.stringify(state.box.box)),
-      shape: JSON.parse(JSON.stringify(state.shape.shape)),
-      colors: JSON.parse(JSON.stringify(state.colors.colors))
+      general: JSON.parse(JSON.stringify(state.general)),
+      box: JSON.parse(JSON.stringify(state.box)),
+      shape: JSON.parse(JSON.stringify(state.shape)),
+      colors: JSON.parse(JSON.stringify(state.colors))
     }
     commit('addGradient', savedGradient)
   },

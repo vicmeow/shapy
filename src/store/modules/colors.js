@@ -1,3 +1,5 @@
+// TODO: Add action for updating max PX value for color stop, based on box size
+
 import { getField, updateField } from 'vuex-map-fields'
 
 const state = {
@@ -7,7 +9,7 @@ const state = {
       start: {
         pct: 0,
         px: 0,
-        max: null,
+        max: 100,
         type: 'hex',
         color: {
           hex: '#00978d',
@@ -18,7 +20,7 @@ const state = {
       },
       stop: {
         pct: 100,
-        px: null,
+        px: 100,
         max: 100,
         type: 'hex',
         color: {

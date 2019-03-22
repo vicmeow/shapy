@@ -21,15 +21,27 @@
           <input-wrapper
             :name="`Color stop no. ${index + 1}, start position`"
             :field="stop.start"
-            :label="'Start'"
             v-model="stop.start"
-          />
+            label="Start"
+          >
+            <color-picker
+              slot="color"
+              :color="stop.start.color"
+              v-model="stop.start.color"
+            />
+          </input-wrapper>
           <input-wrapper
             :name="`Color stop no. ${index + 1}, stop position`"
             :field="stop.stop"
-            :label="'Stop'"
             v-model="stop.stop"
-          />
+            label="Stop"
+          >
+            <color-picker
+              slot="color"
+              :color="stop.stop.color"
+              v-model="stop.stop.color"
+            />
+          </input-wrapper>
           <div :key="'buttons'" class="button-wrapper">
             <button
               :aria-label="`Add a new stop after stop no. ${index + 1}`"
@@ -79,6 +91,7 @@
 <script>
 import GroupToggle from '@/components/GroupToggle'
 import InputWrapper from '@/components/inputs/InputWrapper'
+import ColorPicker from '@/components/inputs/ColorPicker'
 import { mapGetters } from 'vuex'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
@@ -89,7 +102,8 @@ export default {
   name: 'Colors',
   components: {
     GroupToggle,
-    InputWrapper
+    InputWrapper,
+    ColorPicker
   },
   data: () => ({
     hidden: false,
@@ -110,24 +124,26 @@ export default {
       const newStop = {
         id: this.id,
         start: {
-          size: 0,
+          pct: 0,
+          px: 0,
           type: 'hex',
           color: {
             hex: '#00978d',
             rgba: { a: 1, b: 141, g: 151, r: 0 },
             a: 1
           },
-          unit: '%'
+          defaultUnit: true
         },
         stop: {
-          size: 100,
+          pct: 100,
+          px: 100,
           type: 'hex',
           color: {
             hex: '#f3b6c9',
             rgba: { a: 1, b: 201, g: 182, r: 243 },
             a: 1
           },
-          unit: '%'
+          defaultUnit: true
         }
       }
       this.$store.dispatch('colors/addStop', { index, newStop })
