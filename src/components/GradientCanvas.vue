@@ -18,7 +18,6 @@
 <script>
 import { mapGetters, mapState } from 'vuex'
 export default {
-  // ['gradientStrings', 'previewGradient', 'canvas/width']
   computed: {
     ...mapState({
       gradient: 'gradientStrings',
@@ -37,16 +36,20 @@ export default {
   },
   created() {
     this.$store.dispatch('previewGradient', this.gradientString)
+    // Add event listener for calculating max canvas size
     window.addEventListener('resize', this.updateMax)
   },
   destroyed() {
+    // Remove event listener for calculating max canvas size
     window.removeEventListener('resize', this.updateMax)
   },
   mounted() {
+    // Update the max values (canvas => box => shape)
     this.updateMax()
   },
   methods: {
     updateMax() {
+      // Get the size of the div that is our canvas in max
       const width = document.getElementById('canvas-max').offsetWidth
       const height = document.getElementById('canvas-max').offsetHeight
       this.$store.dispatch('canvas/updateMax', { width, height })
