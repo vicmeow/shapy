@@ -6,82 +6,72 @@
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
 
-      <!-- GRADIENT TYPES -->
-      <div class="fieldset fieldset-inline" role="group">
-        <div class="checkbox-wrapper">
-          <input
-            id="repeating-gradient"
-            :value="'repeating'"
-            v-model="general.repeating"
-            class="radio"
-            type="checkbox"
-          />
-          <label for="repeating-gradient" class="label">repeating</label>
-        </div>
-        <radio-wrapper
-          :label="'linear'"
-          v-model="general.type"
-          :name="'gradient-type'"
+      <input-wrapper label="gradient type" name="gradient type">
+        <radio-input
+          v-for="radio in gradient.types"
+          :active="gradient.active"
+          v-model="gradient.active"
+          :radio="radio"
+          :key="radio.index"
+          group="gradient-type"
         />
-        <radio-wrapper
-          :label="'radial'"
-          v-model="general.type"
-          :name="'gradient-type'"
-        />
-        <radio-wrapper
-          :label="'conic'"
-          :description="'*'"
-          v-model="general.type"
-          :name="'gradient-type'"
-        />
-      </div>
+      </input-wrapper>
 
-      <!-- REPEAT VS NO-REPEAT GRADIENT -->
-      <radio-wrapper
-        :label="'no-repeat'"
-        v-model="general.repeat"
-        :name="'repeating-gradient'"
-        class="repeat"
-      />
-      <radio-wrapper
-        :label="'repeat'"
-        v-model="general.repeat"
-        :name="'repeating-gradient'"
-        class="repeat"
-      />
-      <!-- COMMENT -->
-      <div class="input-wrapper comment-wrapper">
-        <label class="input-text-label comment-label" for="input-comment"
-          >Comment:</label
-        >
-        <input
-          id="input-comment"
-          v-model="general.comment"
-          class="comment-input"
-          type="text"
-          placeholder="Name of your shape/gradient etc."
+      <input-wrapper label="Repeating gradient" name="repeating">
+        <toggle-input
+          slot="toggle"
+          :default-value="isRepeating"
+          :values="['normal', 'repeating']"
+          @change="isRepeating = $event"
+        ></toggle-input>
+      </input-wrapper>
+
+      <input-wrapper label="background repeat" name="background repeat">
+        <radio-input
+          v-for="radio in backgroundRepeat.types"
+          :active="backgroundRepeat.active"
+          v-model="backgroundRepeat.active"
+          :radio="radio"
+          :key="radio.index"
+          group="background-repeat"
         />
-      </div>
-      <div class="note">*native support only in Chrome 69+</div>
+      </input-wrapper>
+      <input-wrapper
+        v-if="gradient.active === 'linear'"
+        label="Gradient angle"
+        name="gradient angle"
+      >
+        <radio-input
+          v-for="radio in angle.types"
+          :active="angle.active"
+          v-model="angle.active"
+          :radio="radio"
+          :key="radio.index"
+          group="angle"
+        />
+      </input-wrapper>
     </template>
   </div>
 </template>
 
 <script>
 import GroupToggle from '@/components/GroupToggle'
-import InputWrapper from '@/components/InputWrapper'
-import RadioWrapper from '@/components/RadioWrapper'
+import InputWrapper from '@/components/inputs/InputWrapper'
+import RadioInput from '@/components/inputs/RadioInput'
+import ToggleInput from '@/components/inputs/ToggleInput'
+// import { mapState } from 'vuex'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
   getterType: 'general/getField',
   mutationType: 'general/updateField'
 })
 export default {
-  name: 'Gradient',
+  name: 'General',
   components: {
-    RadioWrapper,
     InputWrapper,
-    GroupToggle
+    GroupToggle,
+    RadioInput,
+    ToggleInput
   },
   data: () => ({
     hidden: false,
@@ -90,7 +80,13 @@ export default {
       'Radial gradients create round shapes and linear gradients create rectangular shapes.'
   }),
   computed: {
-    ...mapFields(['general'])
+    ...mapFields([
+      'gradient',
+      'backgroundRepeat',
+      'isRepeating',
+      'angle',
+      'comment'
+    ])
   }
 }
 </script>

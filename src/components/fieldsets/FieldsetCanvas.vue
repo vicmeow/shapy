@@ -5,17 +5,18 @@
     <group-toggle :hidden="hidden" @click.native="hidden = !hidden" />
     <template v-if="!hidden">
       <p class="desc">{{ desc }}</p>
+      <p>{{ width }}</p>
       <input-wrapper
-        :name="'Canvas width'"
-        :label="'Width'"
         :field="width"
         v-model="width"
+        name="Canvas width"
+        label="Width"
       />
       <input-wrapper
-        :name="'Canvas height'"
-        :label="'Height'"
         :field="height"
         v-model="height"
+        name="Canvas height"
+        label="height"
       />
     </template>
   </div>
