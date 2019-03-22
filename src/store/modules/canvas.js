@@ -50,19 +50,26 @@ const getters = {
 
 const mutations = {
   updateField,
-  updateMax(state, max) {
-    // Set max when window updates
-    state.width.max = max.width
-    state.height.max = max.height
+  updateWidth(state, max) {
     // Set max if pixel values are null
-    if (!state.width.px) state.width.px = max.width
-    if (!state.height.px) state.height.px = max.height
+    if (!state.width.px) state.width.px = max
+    // Update max when window width changes
+    state.width.max = max
+  },
+  updateHeight(state, max) {
+    // Set max if pixel values are null
+    if (!state.height.px) state.height.px = max
+    // Update max when window height changes
+    state.height.max = max
   }
 }
 
 const actions = {
   updateMax({ commit }, max) {
-    commit('updateMax', max)
+    // Update max width
+    commit('updateWidth', max.width)
+    // Update max height
+    commit('updateHeight', max.height)
   }
 }
 
