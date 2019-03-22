@@ -7,17 +7,17 @@
       class="color-preview"
       @click="togglePicker()"
     />
-    <transition name="appear">
-      <chrome-picker
-        v-if="picker"
-        id="chrome-picker"
-        ref="picker"
-        v-model="colorInput"
-        tabindex="0"
-        @input="updateColor"
-        @change="updateColor"
-      />
-    </transition>
+    <!-- <transition name="appear"> -->
+    <chrome-picker
+      v-if="picker"
+      id="chrome-picker"
+      ref="picker"
+      v-model="colorInput"
+      tabindex="0"
+      @input="updateColor"
+      @change="updateColor"
+    />
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -86,35 +86,22 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.color-picker
-  margin-top: .3em
-  flex-basis: 50%
-  display: inline-block
-  width: 50%
-
-.color-picker:nth-child(even)
-  padding-left: .75em
-
-.color-picker:nth-child(odd)
-  padding-right: .75em
 
 .color-preview
   color: white
-  height: 1em
-  width: 1em
+  height: 1rem
+  width: 1rem
   border: 1px solid $black
   border-radius: 3px
   margin-right: .5em
   cursor: pointer
-  border-radius: 50%
   flex-shrink: 0
 
 .appear-enter-active, .appear-leave-active
-  transition: all .3s
+  transition: opacity .3s linear
 
 .appear-enter, .appear-leave-to
   opacity: 0
-  transform: translateY(-20px)
 
 #chrome-picker
   position: absolute
