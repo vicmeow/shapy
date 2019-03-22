@@ -5,15 +5,11 @@
         :style="{
           width: canvas.width,
           height: canvas.height,
-          'background-color': backgroundColor,
-          'background-image': gradientStrings
+          background: gradient
         }"
         class="gradient-canvas"
       >
-        <div
-          :style="{ background: previewGradient }"
-          class="preview-gradient"
-        />
+        <div :style="{ background: preview }" class="preview-gradient" />
       </div>
     </div>
   </div>
@@ -22,16 +18,16 @@
 <script>
 import { mapGetters, mapState } from 'vuex'
 export default {
+  // ['gradientStrings', 'previewGradient', 'canvas/width']
   computed: {
-    ...mapState(['gradientStrings', 'previewGradient']),
+    ...mapState({
+      gradient: 'gradientStrings',
+      preview: 'previewGradient'
+    }),
     ...mapGetters({
       colorStops: 'colors/colorStops',
-      canvas: 'canvas/size',
-      backgroundColor: 'canvas/backgroundColor',
-      general: 'general/general',
-      box: 'box/box',
-      shape: 'shape/shape',
-      gradientString: 'createString'
+      gradientString: 'createString',
+      canvas: 'canvas/size'
     })
   },
   watch: {
