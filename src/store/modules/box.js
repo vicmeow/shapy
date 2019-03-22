@@ -1,40 +1,45 @@
 import { getField, updateField } from 'vuex-map-fields'
 
 const state = {
-  box: {
-    size: {
-      x: {
-        unit: '%',
-        size: 100
-      },
-      y: {
-        unit: '%',
-        size: 100
-      }
-    },
-    coord: {
-      x: {
-        unit: '%',
-        size: 50
-      },
-      y: {
-        unit: '%',
-        size: 50
-      }
-    }
+  width: {
+    pct: 17,
+    px: null,
+    defaultUnit: true
+  },
+  height: {
+    pct: 17,
+    px: null,
+    defaultUnit: true
+  },
+  x: {
+    pct: 0,
+    px: null,
+    defaultUnit: true
+  },
+  y: {
+    pct: 0,
+    px: null,
+    defaultUnit: true
   }
 }
 
 const getters = {
   getField,
   box() {
-    const boxWidth = state.box.size.x.size + state.box.size.x.unit
-    const boxHeight = state.box.size.y.size + state.box.size.y.unit
-    const boxX = state.box.coord.x.size + state.box.coord.x.unit
-    const boxY = state.box.coord.y.size + state.box.coord.y.unit
-    const boxSize = boxWidth + ' ' + boxHeight
-    const boxCoord = boxX + ' ' + boxY
-    return `${boxCoord} / ${boxSize}`
+    // Which width unit to return based on defaultUnit
+    const width = state.width.defaultUnit
+      ? `${state.width.pct}%`
+      : `${state.width.px}px`
+    // Which height unit to return based on defaultUnit
+    const height = state.height.defaultUnit
+      ? `${state.height.pct}%`
+      : `${state.height.px}px`
+    // Which X coordinate unit to return based on defaultUnit
+    const x = state.x.defaultUnit ? `${state.x.pct}%` : `${state.x.px}px`
+    // Which Y coordinate unit to return based on defaultUnit
+    const y = state.y.defaultUnit ? `${state.y.pct}%` : `${state.y.px}px`
+    // Finished string for the gradient's coordinates and size
+    return `${x} ${y} / ${width} ${height}`
   }
 }
 
