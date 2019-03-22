@@ -2,20 +2,22 @@
   <div class="number-input">
     <input
       :value="value"
+      :min="min"
       :max="max"
       class="number"
       type="number"
-      @input="$emit('input', $event.target.value)"
+      @input="$emit('input', parseInt($event.target.value))"
     />
     <toggle-input @change="$emit('change', $event)" />
     <input
       :name="`input`"
       :class="`range-input`"
       :value="value"
+      :min="min"
       :max="max"
       class="range"
       type="range"
-      @input="$emit('input', $event.target.value)"
+      @input="$emit('input', parseInt($event.target.value))"
     />
   </div>
 </template>
@@ -39,6 +41,11 @@ export default {
     max: {
       type: Number,
       required: true
+    },
+    min: {
+      type: Number,
+      required: false,
+      default: 0
     }
   }
 }
