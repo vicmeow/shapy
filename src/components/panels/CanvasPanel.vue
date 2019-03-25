@@ -1,29 +1,29 @@
 <template>
-  <div role="group" class="fieldset fieldset-canvas">
-    <!-- TITLE & DESCRIPTION -->
-    <legend class="legend" @click="hidden = !hidden">{{ title }}</legend>
-    <group-toggle :hidden="hidden" @click.native="hidden = !hidden" />
-    <template v-if="!hidden">
-      <p class="desc">{{ desc }}</p>
-      <input-wrapper
-        :field="width"
-        v-model="width"
-        name="Canvas width"
-        label="Width"
-      />
-      <input-wrapper
-        :field="height"
-        v-model="height"
-        name="Canvas height"
-        label="height"
-      />
-    </template>
+  <div class="panel" role="group">
+    <slot />
+    <!-- CANVAS WIDTH & HEIGHT -->
+    <input-wrapper
+      :field="width"
+      v-model="width"
+      label="Width"
+      name="canvas-width"
+    />
+    <input-wrapper
+      :field="height"
+      v-model="height"
+      label="height"
+      name="canvas-height"
+    />
+    <!-- TODO: Add custom canvas background color input -->
+    <button @click="$emit('updatePanel', 'control')">
+      <div class="icon"></div>
+      <div class="label">Close</div>
+    </button>
   </div>
 </template>
 
 <script>
 import InputWrapper from '@/components/inputs/InputWrapper'
-import GroupToggle from '@/components/GroupToggle'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
   getterType: 'canvas/getField',
@@ -32,13 +32,10 @@ const { mapFields } = createHelpers({
 export default {
   name: 'Canvas',
   components: {
-    InputWrapper,
-    GroupToggle
+    InputWrapper
   },
   data: () => ({
-    hidden: false,
-    title: 'Canvas Size 🖼',
-    desc: "Edit the size of your canvas. Choose 'px' by clicking on the unit."
+    desc: 'Edit the size of your canvas.'
   }),
   computed: {
     ...mapFields(['width', 'height'])

@@ -1,17 +1,18 @@
 <template>
   <div class="input-wrapper">
     <label :for="`${label}-input`" class="label">{{ label }}</label>
+    <slot name="color" />
     <slot>
       <number-input
         v-if="field"
         v-model.number="input"
         :max="field.defaultUnit ? 100 : field.max"
         :min="min"
+        :name="name"
         @input="emitValue"
         @change="toggleUnit"
       />
     </slot>
-    <slot name="color" />
   </div>
 </template>
 
@@ -34,8 +35,7 @@ export default {
     },
     name: {
       type: String,
-      required: false,
-      default: 'Name'
+      required: true
     },
     field: {
       type: Object,
@@ -134,13 +134,11 @@ export default {
 .input-wrapper
   display: flex
   flex-wrap: wrap
-  margin-bottom: 1em
+  border: 1px solid red
+  margin-right: 1em
 
-  > .label
-    flex-basis: 100%
-    &::first-letter
-      text-transform: capitalize
-
-  .range
-    flex-basis: 100%
+.label
+  flex-basis: 100%
+  &::first-letter
+    text-transform: capitalize
 </style>

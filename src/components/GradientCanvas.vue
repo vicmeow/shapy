@@ -1,5 +1,5 @@
 <template>
-  <div class="gradient-wrapper">
+  <div class="canvas-wrapper">
     <div id="canvas-max" class="canvas">
       <div
         :style="{
@@ -60,19 +60,12 @@ export default {
 
 <style lang="sass">
 
-.gradient-wrapper
+.canvas-wrapper
   position: relative
-  margin-top: 1em
-  margin-right: 1em
-  margin-left: 1em
-  grid-column: 2 / -1
-  grid-row: 1
   background: white
   border-radius: 3px
-  padding: 1em
+  //padding: 1em
   display: flex
-  @media screen and (max-width: 768px)
-    min-height: 60vw
 
 .canvas
   display: flex

@@ -38,7 +38,7 @@ body
   font-family: $font
   font-size: 18px
   color: $black
-  background: $black
+  background: #fff
   font-smooth: subpixel-antialiased
   min-height: 100vh
 

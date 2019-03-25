@@ -1,95 +1,84 @@
 <template>
-  <div role="group" class="fieldset fieldset-colors">
-    <!-- TITLE & DESCRIPTION -->
-    <legend class="legend" @click="hidden = !hidden">{{ title }}</legend>
-    <group-toggle :hidden="hidden" @click.native="hidden = !hidden" />
-    <template v-if="!hidden">
-      <p class="desc">{{ desc }}</p>
-      <!-- CUSTOM COLOR STOPS -->
-      <transition-group
-        name="list-item"
-        tag="div"
-        mode="in-out"
-        class="color-stops"
+  <div role="group" class="panel">
+    <slot />
+    <!-- COLOR STOPS -->
+    <transition-group
+      name="list-item"
+      tag="div"
+      mode="in-out"
+      class="color-stops"
+    >
+      <div
+        v-for="(stop, index) in colors"
+        :key="stop.id"
+        class="color-stop-wrapper"
+        role="group"
       >
-        <div
-          v-for="(stop, index) in colors"
-          :key="stop.id"
-          class="color-stop-wrapper"
-          role="group"
+        <input-wrapper
+          :name="`Color stop no. ${index + 1}, start position`"
+          :field="stop.start"
+          v-model="stop.start"
+          label="Start"
         >
-          <input-wrapper
-            :name="`Color stop no. ${index + 1}, start position`"
-            :field="stop.start"
-            v-model="stop.start"
-            label="Start"
+          <color-picker
+            slot="color"
+            :color="stop.start.color"
+            v-model="stop.start.color"
+          />
+        </input-wrapper>
+        <input-wrapper
+          :name="`Color stop no. ${index + 1}, stop position`"
+          :field="stop.stop"
+          v-model="stop.stop"
+          label="Stop"
+        >
+          <color-picker
+            slot="color"
+            :color="stop.stop.color"
+            v-model="stop.stop.color"
+          />
+        </input-wrapper>
+        <button @click="addStop(index + 1)">Add</button>
+        <button @click="removeStop(stop.id)">Remove</button>
+        <!-- <div :key="'buttons'" class="button-wrapper">
+          <button
+            :aria-label="`Add a new stop after stop no. ${index + 1}`"
+            class="icon-btn icon-add"
+            @click="addStop(index + 1)"
           >
-            <color-picker
-              slot="color"
-              :color="stop.start.color"
-              v-model="stop.start.color"
+            <font-awesome-icon
+              :icon="['fas', 'plus-circle']"
+              aria-hidden="true"
+              class="btn-icon"
             />
-          </input-wrapper>
-          <input-wrapper
-            :name="`Color stop no. ${index + 1}, stop position`"
-            :field="stop.stop"
-            v-model="stop.stop"
-            label="Stop"
+            <div class="hover">Add</div>
+          </button>
+          <button
+            :aria-label="`Remove color stop no. ${index + 1}`"
+            class="icon-btn icon-remove"
+            @click="removeStop(stop.id)"
           >
-            <color-picker
-              slot="color"
-              :color="stop.stop.color"
-              v-model="stop.stop.color"
+            <font-awesome-icon
+              :icon="['fas', 'minus-circle']"
+              aria-hidden="true"
+              class="btn-icon"
             />
-          </input-wrapper>
-          <div :key="'buttons'" class="button-wrapper">
-            <button
-              :aria-label="`Add a new stop after stop no. ${index + 1}`"
-              class="icon-btn icon-add"
-              @click="addStop(index + 1)"
-            >
-              <font-awesome-icon
-                :icon="['fas', 'plus-circle']"
-                aria-hidden="true"
-                class="btn-icon"
-              />
-              <div class="hover">Add</div>
-            </button>
-            <button
-              :aria-label="`Remove color stop no. ${index + 1}`"
-              class="icon-btn icon-remove"
-              @click="removeStop(stop.id)"
-            >
-              <font-awesome-icon
-                :icon="['fas', 'minus-circle']"
-                aria-hidden="true"
-                class="btn-icon"
-              />
-              <div class="hover">Remove</div>
-            </button>
-            <div v-if="removeError && colors.length === 1" class="remove-error">
-              You need at least one color stop.
-            </div>
+            <div class="hover">Remove</div>
+          </button>
+          <div v-if="removeError && colors.length === 1" class="remove-error">
+            You need at least one color stop.
           </div>
-        </div>
-      </transition-group>
-      <!-- DEGREE IF LINEAR GRADIENT -->
-      <!-- <input-wrapper
-        v-if="general.type === 'linear'"
-        v-model="general.degree"
-        :label="'Degree'"
-        :name="'gradient-degree'"
-        :what="general.degree"
-        :min="0"
-        :max="360"
-        class="degree-wrapper"
-      />-->
-    </template>
+        </div> -->
+      </div>
+    </transition-group>
+    <button class="control" @click="$emit('updatePanel', 'control')">
+      <div class="icon"></div>
+      <div class="label">Close</div>
+    </button>
   </div>
 </template>
 
 <script>
-import GroupToggle from '@/components/GroupToggle'
 import InputWrapper from '@/components/inputs/InputWrapper'
 import ColorPicker from '@/components/inputs/ColorPicker'
 import { mapGetters } from 'vuex'
@@ -101,13 +90,12 @@ const { mapFields } = createHelpers({
 export default {
   name: 'Colors',
   components: {
-    GroupToggle,
     InputWrapper,
     ColorPicker
   },
   data: () => ({
     hidden: false,
-    title: 'Color Stops 🌈',
+    title: 'Colors',
     desc:
       'The colors of your gradient. You can add multiple color stops or remove them.',
     id: 2,
@@ -164,14 +152,16 @@ export default {
 <style lang="sass">
 
 .color-stops
-  position: relative
-  min-width: 100%
+  display: flex
+  overflow: scroll
 
 .color-stop-wrapper
-  background: $white
-  display: inline-block
-  transition: all .3s linear
-  width: 100%
+  display: flex
+  flex-direction: column
+  flex-shrink: 0
+  //max-width: 200px
+  //transition: all .3s linear
+  //width: 100%
 
 .button-wrapper
   flex-basis: 100%

@@ -1,23 +1,28 @@
 <template>
-  <div class="number-input">
-    <input
-      :value="value"
-      :min="min"
-      :max="max"
-      class="number"
-      type="number"
-      @input="$emit('input', parseInt($event.target.value))"
-    />
-    <toggle-input @change="$emit('change', $event)" />
-    <input
-      :name="`input`"
-      :class="`range-input`"
-      :value="value"
-      :min="min"
-      :max="max"
-      class="range"
-      type="range"
-      @input="$emit('input', parseInt($event.target.value))"
+  <div class="number-wrapper">
+    <div class="range-input">
+      <input
+        :name="`input`"
+        :value="value"
+        :min="min"
+        :max="max"
+        type="range"
+        @input="$emit('input', parseInt($event.target.value))"
+      />
+    </div>
+    <div class="number-input">
+      <input
+        :value="value"
+        :min="min"
+        :max="max"
+        type="number"
+        @input="$emit('input', parseInt($event.target.value))"
+      />
+    </div>
+    <toggle-input
+      :name="name"
+      class="toggle-input"
+      @change="$emit('change', $event)"
     />
   </div>
 </template>
@@ -29,6 +34,10 @@ export default {
     ToggleInput
   },
   props: {
+    name: {
+      type: String,
+      required: true
+    },
     toggle: {
       type: Array,
       required: false,
@@ -50,3 +59,20 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+
+input
+  font-size: 1rem
+
+input[type="range"],
+input[type="number"]
+  width: 100%
+
+.range-input
+  width: 100%
+
+.number-input, .toggle-wrapper
+  display: inline-block
+  width: 50%
+</style>

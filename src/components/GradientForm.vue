@@ -1,11 +1,11 @@
 <template>
   <div class="form-wrapper">
     <form class="form" @submit.prevent>
-      <fieldset-canvas />
+      <!-- <fieldset-canvas />
       <fieldset-general />
       <fieldset-colors />
       <fieldset-box />
-      <fieldset-shape v-if="gradient.active === 'radial'" />
+      <fieldset-shape v-if="gradient.active === 'radial'" /> -->
       <div class="buttons">
         <!-- <button
           @click="undoAction"
@@ -56,23 +56,23 @@
 </template>
 
 <script>
-import FieldsetCanvas from '@/components/fieldsets/FieldsetCanvas'
-import FieldsetGeneral from '@/components/fieldsets/FieldsetGeneral'
-import FieldsetBox from '@/components/fieldsets/FieldsetBox'
-import FieldsetShape from '@/components/fieldsets/FieldsetShape'
-import FieldsetColors from '@/components/fieldsets/FieldsetColors'
-import FieldsetShapy from '@/components/fieldsets/FieldsetShapy'
+// import FieldsetCanvas from '@/components/fieldsets/FieldsetCanvas'
+// import FieldsetGeneral from '@/components/fieldsets/FieldsetGeneral'
+// import FieldsetBox from '@/components/fieldsets/FieldsetBox'
+// import FieldsetShape from '@/components/fieldsets/FieldsetShape'
+// import FieldsetColors from '@/components/fieldsets/FieldsetColors'
+// import FieldsetShapy from '@/components/fieldsets/FieldsetShapy'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Form',
   components: {
-    FieldsetCanvas,
-    FieldsetGeneral,
-    FieldsetBox,
-    FieldsetShape,
-    FieldsetColors,
-    FieldsetShapy
+    // FieldsetCanvas,
+    // FieldsetGeneral,
+    // FieldsetBox,
+    // FieldsetShape,
+    // FieldsetColors,
+    // FieldsetShapy
   },
   data: () => ({
     copied: false
