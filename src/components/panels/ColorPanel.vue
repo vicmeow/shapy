@@ -9,83 +9,49 @@
       class="color-stops"
     >
       <div
-        v-for="(stop, index) in colors"
-        :key="stop.id"
+        v-for="(color, index) in stops"
+        :key="color.id"
         class="color-stop-wrapper"
         role="group"
       >
         <input-wrapper
           :name="`Color stop no. ${index + 1}, start position`"
-          :field="stop.start"
-          v-model="stop.start"
+          :field="color.start"
+          v-model="color.start"
           label="Start"
         >
           <color-picker
             slot="color"
-            :color="stop.start.color"
-            v-model="stop.start.color"
+            :color="color.start.color"
+            v-model="color.start.color"
           />
         </input-wrapper>
         <input-wrapper
           :name="`Color stop no. ${index + 1}, stop position`"
-          :field="stop.stop"
-          v-model="stop.stop"
+          :field="color.stop"
+          v-model="color.stop"
           label="Stop"
         >
           <color-picker
             slot="color"
-            :color="stop.stop.color"
-            v-model="stop.stop.color"
+            :color="color.stop.color"
+            v-model="color.stop.color"
           />
         </input-wrapper>
         <button @click="addStop(index + 1)">Add</button>
-        <button @click="removeStop(stop.id)">Remove</button>
-        <!-- <div :key="'buttons'" class="button-wrapper">
-          <button
-            :aria-label="`Add a new stop after stop no. ${index + 1}`"
-            class="icon-btn icon-add"
-            @click="addStop(index + 1)"
-          >
-            <font-awesome-icon
-              :icon="['fas', 'plus-circle']"
-              aria-hidden="true"
-              class="btn-icon"
-            />
-            <div class="hover">Add</div>
-          </button>
-          <button
-            :aria-label="`Remove color stop no. ${index + 1}`"
-            class="icon-btn icon-remove"
-            @click="removeStop(stop.id)"
-          >
-            <font-awesome-icon
-              :icon="['fas', 'minus-circle']"
-              aria-hidden="true"
-              class="btn-icon"
-            />
-            <div class="hover">Remove</div>
-          </button>
-          <div v-if="removeError && colors.length === 1" class="remove-error">
-            You need at least one color stop.
-          </div>
-        </div> -->
+        <button @click="removeStop(color.id)">Remove</button>
       </div>
     </transition-group>
-    <button class="control" @click="$emit('updatePanel', 'control')">
-      <div class="icon"></div>
-      <div class="label">Close</div>
-    </button>
   </div>
 </template>
 
 <script>
 import InputWrapper from '@/components/inputs/InputWrapper'
 import ColorPicker from '@/components/inputs/ColorPicker'
-import { mapGetters } from 'vuex'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
-  getterType: 'colors/getField',
-  mutationType: 'colors/updateField'
+  getterType: 'color/getField',
+  mutationType: 'color/updateField'
 })
 export default {
   name: 'Colors',
@@ -102,12 +68,10 @@ export default {
     removeError: false
   }),
   computed: {
-    ...mapFields(['colors']),
-    ...mapGetters({
-      general: 'general/general'
-    })
+    ...mapFields(['stops'])
   },
   methods: {
+    // TODO: add to color.js
     addStop(index) {
       const newStop = {
         id: this.id,
@@ -134,12 +98,11 @@ export default {
           defaultUnit: true
         }
       }
-      this.$store.dispatch('colors/addStop', { index, newStop })
+      this.$store.dispatch('color/addStop', { index, newStop })
       this.id++
     },
     removeStop(stop) {
-      if (this.colors.length > 1)
-        this.$store.dispatch('colors/removeStop', stop)
+      if (this.stops.length > 1) this.$store.dispatch('color/removeStop', stop)
       else this.removeError = true
       setTimeout(() => {
         this.removeError = false
@@ -151,91 +114,92 @@ export default {
 
 <style lang="sass">
 
-.color-stops
-  display: flex
-  overflow: scroll
+// .color-stops
+//   display: flex
+//   overflow: scroll
 
-.color-stop-wrapper
-  display: flex
-  flex-direction: column
-  flex-shrink: 0
-  //max-width: 200px
-  //transition: all .3s linear
-  //width: 100%
+// .color-stop-wrapper
+//   display: flex
+//   flex-direction: column
+//   flex-shrink: 0
+//   width: 100%
+//   //max-width: 200px
+//   //transition: all .3s linear
+//   //width: 100%
 
-.button-wrapper
-  flex-basis: 100%
-  text-align: center
+// .button-wrapper
+//   flex-basis: 100%
+//   text-align: center
 
-.icon-btn
-  position: relative
-  cursor: pointer
-  font-size: 1rem
-  text-transform: uppercase
-  font-weight: 500
-  background: 0
-  border: 0
-  padding: 0
-  margin: 0 .5rem
-  transition: all .3s
+// .icon-btn
+//   position: relative
+//   cursor: pointer
+//   font-size: 1rem
+//   text-transform: uppercase
+//   font-weight: 500
+//   background: 0
+//   border: 0
+//   padding: 0
+//   margin: 0 .5rem
+//   transition: all .3s
 
-  .hover
-    position: absolute
-    bottom: 0
-    right: 0
-    font-size: .85rem
-    font-weight: 500
-    margin-bottom: 2px
-    opacity: 0
-    margin-top: .5rem
-    transition: all .3s linear
+//   .hover
+//     position: absolute
+//     bottom: 0
+//     right: 0
+//     font-size: .85rem
+//     font-weight: 500
+//     margin-bottom: 2px
+//     opacity: 0
+//     margin-top: .5rem
+//     transition: all .3s linear
 
-.icon-btn:hover .hover
-  opacity: 1
-  transform: translateX(0px)
+// .icon-btn:hover .hover
+//   opacity: 1
+//   transform: translateX(0px)
 
-.icon-add .hover
-  left: -65px
-  transform: translateX(5px)
+// .icon-add .hover
+//   left: -65px
+//   transform: translateX(5px)
 
-.icon-remove .hover
-  right: -65px
-  transform: translateX(-5px)
+// .icon-remove .hover
+//   right: -65px
+//   transform: translateX(-5px)
 
-.btn-icon
-  font-size: 1.1em
+// .btn-icon
+//   font-size: 1.1em
 
-.icon-remove
-  color: $black
+// .icon-remove
+//   color: $black
 
-.icon-add
-  color: $green
+// .icon-add
+//   color: $green
 
-.list-item-enter,
-.list-item-leave-to
-  opacity: 0
+// .list-item-enter,
+// .list-item-leave-to
+//   opacity: 0
 
-.list-item-leave-active
-  opacity: 0
-  position: absolute
-  bottom: -40px
-  right: 0
+// .list-item-leave-active
+//   opacity: 0
+//   position: absolute
+//   bottom: -40px
+//   right: 0
 
-.list-item-enter-to, .list-item-leave
-  opacity: 1
+// .list-item-enter-to, .list-item-leave
+//   opacity: 1
 
-.remove-error
-  font-size: .8em
-  animation: error .3s ease-in-out 1
-  margin-top: .5em
+// .remove-error
+//   font-size: .8em
+//   animation: error .3s ease-in-out 1
+//   margin-top: .5em
 
-@keyframes error
-  0%,100%
-    transform: translateX(0px)
-  25%
-    transform: translateX(10px)
-  50%
-    transform: translateX(-10px)
-  75%
-    transform: translateX(5px)
+// @keyframes error
+//   0%,100%
+//     transform: translateX(0px)
+//   25%
+//     transform: translateX(10px)
+//   50%
+//     transform: translateX(-10px)
+//   75%
+//     transform: translateX(5px)
 </style>

@@ -129,13 +129,28 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 
 .input-wrapper
+  //display: flex
+  //flex-wrap: wrap
+  flex-basis: 100%
+  flex-grow: 1
+  border-bottom: 1px solid rgba(0,0,0,.2)
+  margin: 1em 0
+  padding-bottom: 1em
+
+.color-stop-wrapper
   display: flex
-  flex-wrap: wrap
-  border: 1px solid red
-  margin-right: 1em
+  .input-wrapper
+    border: 0
+    margin: 0
+    padding: 0
+
+label
+  font-family: 'Rubik', sans-serif
+  color: $black
+  font-size: 1em
 
 .label
   flex-basis: 100%

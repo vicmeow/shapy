@@ -36,61 +36,91 @@
     </input-wrapper>
     <template v-if="gradient.active === 'radial'">
       <input-wrapper
-        v-model="radialWidth"
-        :field="radialWidth"
+        v-model="shapeWidth"
+        :field="shapeWidth"
         label="Radial width"
       />
       <input-wrapper
-        v-model="radialHeight"
-        :field="radialHeight"
+        v-model="shapeHeight"
+        :field="shapeHeight"
         label="Radial height"
       />
       <input-wrapper
-        v-model="radialX"
-        :field="radialX"
-        :min="radialX.defaultUnit ? 0 : -radialWidth.px"
+        v-model="shapeX"
+        :field="shapeX"
+        :min="shapeX.defaultUnit ? 0 : -shapeWidth.px"
         label="Radial on x axis"
       />
       <input-wrapper
-        v-model="radialY"
-        :field="radialY"
-        :min="radialY.defaultUnit ? 0 : -radialHeight.px"
+        v-model="shapeY"
+        :field="shapeY"
+        :min="shapeY.defaultUnit ? 0 : -shapeHeight.px"
         label="Radial on y axis"
       />
     </template>
+    <div
+      v-for="(color, index) in stops"
+      :key="color.id"
+      class="color-stop-wrapper"
+      role="group"
+    >
+      <input-wrapper
+        :name="`Color stop no. ${index + 1}, start position`"
+        :field="color.start"
+        v-model="color.start"
+        label="Start"
+      >
+        <color-picker
+          slot="color"
+          :color="color.start.color"
+          v-model="color.start.color"
+        />
+      </input-wrapper>
+      <input-wrapper
+        :name="`Color stop no. ${index + 1}, stop position`"
+        :field="color.stop"
+        v-model="color.stop"
+        label="Stop"
+      >
+        <color-picker
+          slot="color"
+          :color="color.stop.color"
+          v-model="color.stop.color"
+        />
+      </input-wrapper>
+      <button @click="addStop(index + 1)">Add</button>
+      <button @click="removeStop(color.id)">Remove</button>
+    </div>
   </div>
 </template>
 
 <script>
 import InputWrapper from '@/components/inputs/InputWrapper'
 import RadioInput from '@/components/inputs/RadioInput'
+import ColorPicker from '@/components/inputs/ColorPicker'
 import ToggleInput from '@/components/inputs/ToggleInput'
 import { mapFields } from 'vuex-map-fields'
-// const { mapFields } = createHelpers({
-//   getterType: 'general/getField',
-//   mutationType: 'general/updateField'
-// })
 export default {
   name: 'Type',
   components: {
     InputWrapper,
     RadioInput,
-    ToggleInput
+    ToggleInput,
+    ColorPicker
   },
   data: () => ({
     desc: 'Edit the type of your gradient.'
   }),
   computed: {
-    //...mapFields(['gradient', 'angle', 'isRepeating']),
-    //...mapFields(['gradient', 'angle', 'isRepeating'])
     ...mapFields({
-      gradient: 'general.gradient',
-      angle: 'general.angle',
-      isRepeating: 'general.isRepeating',
-      radialWidth: 'shape.width',
-      radialHeight: 'shape.height',
-      radialX: 'shape.x',
-      radialY: 'shape.y'
+      gradient: 'type',
+      angle: 'angle',
+      isRepeating: 'repeating',
+      shapeWidth: 'shape.width',
+      shapeHeight: 'shape.height',
+      shapeX: 'shape.x',
+      shapeY: 'shape.y',
+      stops: 'color.stops'
     })
   }
 }

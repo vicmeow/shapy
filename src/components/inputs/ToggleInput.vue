@@ -37,7 +37,7 @@ export default {
       }
     },
     defaultValue: {
-      type: Boolean,
+      type: [Boolean, Object],
       required: false,
       default: true
     }

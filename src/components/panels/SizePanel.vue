@@ -21,8 +21,8 @@
 import InputWrapper from '@/components/inputs/InputWrapper'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
-  getterType: 'box/getField',
-  mutationType: 'box/updateField'
+  getterType: 'gradient/getField',
+  mutationType: 'gradient/updateField'
 })
 export default {
   name: 'Size',
@@ -36,16 +36,16 @@ export default {
     ...mapFields(['width', 'height'])
   },
   watch: {
-    width() {
+    /* width() {
       // When the box width changes, the max size for the radial shape should update
       const width = this.width.px
-      this.$store.dispatch('shape/updateMax', { type: 'width', value: width })
+      this.$store.dispatch('shape/updateWidth', width)
     },
     height() {
       // When the box height changes, the max size for the radial shape should update
       const height = this.height.px
-      this.$store.dispatch('shape/updateMax', { type: 'height', value: height })
-    }
+      this.$store.dispatch('shape/updateHeight', height)
+    } */
   }
 }
 </script>

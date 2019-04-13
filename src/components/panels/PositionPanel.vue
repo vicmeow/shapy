@@ -25,8 +25,8 @@
 import InputWrapper from '@/components/inputs/InputWrapper'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
-  getterType: 'box/getField',
-  mutationType: 'box/updateField'
+  getterType: 'gradient/getField',
+  mutationType: 'gradient/updateField'
 })
 export default {
   name: 'Position',

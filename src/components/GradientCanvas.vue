@@ -19,12 +19,24 @@
 import { mapGetters, mapState } from 'vuex'
 export default {
   computed: {
+    box() {
+      return this.$store.state.gradient
+    },
+    shape() {
+      return this.$store.state.shape
+    },
+    width() {
+      return this.$store.state.canvas.width.max
+    },
+    height() {
+      return this.$store.state.canvas.height.max
+    },
     ...mapState({
       gradient: 'gradientStrings',
       preview: 'previewGradient'
     }),
     ...mapGetters({
-      colorStops: 'colors/colorStops',
+      color: 'color/colorStops',
       gradientString: 'createString',
       canvas: 'canvas/size'
     })
@@ -32,6 +44,16 @@ export default {
   watch: {
     gradientString() {
       this.$store.dispatch('previewGradient', this.gradientString)
+    },
+    width() {
+      // When the canvas width changes, the max for gradient width should update
+      const width = this.width
+      this.$store.dispatch('gradient/updateWidth', width)
+    },
+    height() {
+      // When the canvas height changes, the max for gradient height should update
+      const height = this.height
+      this.$store.dispatch('gradient/updateHeight', height)
     }
   },
   created() {
@@ -52,6 +74,7 @@ export default {
       // Get the size of the div that is our canvas in max
       const width = document.getElementById('canvas-max').offsetWidth
       const height = document.getElementById('canvas-max').offsetHeight
+      // Update canvas maxes
       this.$store.dispatch('canvas/updateMax', { width, height })
     }
   }

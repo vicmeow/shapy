@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      controls: ['canvas', 'type', 'size', 'position', 'color', 'repeat']
+      controls: ['canvas', 'gradient', 'repeat', 'size', 'position']
     }
   }
 }
@@ -26,14 +26,18 @@ export default {
 <style lang="sass">
 
 .controls
-  grid-column: 1 / -1
-  grid-row: 4
-  display: flex
+  //grid-column: 1 / -1
+  //grid-row: 4
+  //display: flex
   justify-content: space-between
   padding: 0 1em
 
 .panel
   width: 100%
   display: flex
-  align-items: center
+  //flex-wrap: wrap
+  box-shadow: 0 0 10px rgba(0,0,0,.2)
+  padding: 0 1em
+  margin: 1em 0
+  //align-items: center
 </style>

@@ -15,10 +15,6 @@
       name="canvas-height"
     />
     <!-- TODO: Add custom canvas background color input -->
-    <button @click="$emit('updatePanel', 'control')">
-      <div class="icon"></div>
-      <div class="label">Close</div>
-    </button>
   </div>
 </template>
 
@@ -42,14 +38,14 @@ export default {
   },
   watch: {
     width() {
-      // When the canvas width changes, the max size for box should update
+      // When the canvas width changes, the max size for the gradient should update
       const width = this.width.px
-      this.$store.dispatch('box/updateMax', { type: 'width', value: width })
+      this.$store.dispatch('gradient/updateWidth', width)
     },
     height() {
-      // When the canvas height changes, the max size for box should update
+      // When the canvas height changes, the max size for the gradient should update
       const height = this.height.px
-      this.$store.dispatch('box/updateMax', { type: 'height', value: height })
+      this.$store.dispatch('gradient/updateHeight', height)
     }
   }
 }
