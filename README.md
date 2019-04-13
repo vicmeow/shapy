@@ -14,22 +14,21 @@ Found a bug? [Submit a Bug Report](https://github.com/vicbergquist/shapy/issues/
 
 ![Project screenshot](./docs/assets/shapyapp.png)
 
-## Project setup
-```
-yarn install
+## Build Setup
+
+``` bash
+# install dependencies
+$ yarn install
+
+# serve with hot reload at localhost:3000
+$ yarn run dev
+
+# build for production and launch server
+$ yarn run build
+$ yarn start
+
+# generate static project
+$ yarn run generate
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
+For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
