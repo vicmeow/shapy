@@ -3,7 +3,7 @@
 import { getField, updateField } from 'vuex-map-fields'
 
 const state = {
-  colors: [
+  stops: [
     {
       id: 1,
       start: {
@@ -37,7 +37,7 @@ const state = {
 const getters = {
   getField,
   colorStops() {
-    const stops = state.colors.map(color => {
+    const stops = state.stops.map(color => {
       let startColor
       let stopColor
       const startSize = color.start.defaultUnit
@@ -72,22 +72,22 @@ const getters = {
 const mutations = {
   updateField,
   addStop(state, { index, newStop }) {
-    state.colors.splice(index, 0, newStop)
+    state.stops.splice(index, 0, newStop)
   },
   removeStop(state, id) {
-    const result = state.colors.filter(pair => pair.id !== id)
-    state.colors = result
+    const result = state.stops.filter(pair => pair.id !== id)
+    state.stops = result
   },
   updateType(state, { id, where, type }) {
-    const colorMatch = state.colors.filter(colorStop => colorStop.id === id)
+    const colorMatch = state.stops.filter(colorStop => colorStop.id === id)
     if (where === 'start') {
       colorMatch[0].start.type = type
     } else {
       colorMatch[0].stop.type = type
     }
   },
-  updateColors(state, colors) {
-    state.colors = colors
+  updateColors(state, stops) {
+    state.stops = stops
   }
 }
 

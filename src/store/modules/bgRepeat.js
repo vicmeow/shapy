@@ -1,7 +1,8 @@
 import { getField, updateField } from 'vuex-map-fields'
 
 const state = {
-  comment: ''
+  active: 'no-repeat',
+  types: ['no-repeat', 'repeat', 'space', 'round', 'repeat-x', 'repeat-y']
 }
 
 const getters = {

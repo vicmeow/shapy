@@ -3,10 +3,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import canvas from './modules/canvas'
-import general from './modules/general'
-import colors from './modules/colors'
-import box from './modules/box'
+import color from './modules/color'
+import gradient from './modules/gradient'
 import shape from './modules/shape'
+import type from './modules/type'
+import repeating from './modules/repeating'
+import general from './modules/general'
+import bgRepeat from './modules/bgRepeat'
+import angle from './modules/angle'
 import { getField, updateField } from 'vuex-map-fields'
 
 Vue.use(Vuex)
@@ -22,41 +26,37 @@ const state = {
 const getters = {
   getField,
   createString(state, rootGetters) {
-    const degree = `${state.general.angle.active}deg`
+    const degree = `${state.angle.active}deg`
     const comment =
       state.general.comment === '' ? '' : `/* ${state.general.comment} */ `
-    const repeating = state.general.isRepeating ? '' : 'repeating-'
-    const repeat = state.general.backgroundRepeat.active
+    const repeating = state.repeating ? '' : 'repeating-'
+    const repeat = state.bgRepeat.active
 
     const returnValue = type => {
       if (type === 'linear') {
-        return state.general.angle.active > 0
-          ? `${comment}${repeating}${
-              state.general.gradient.active
-            }-gradient(${degree}, ${
-              rootGetters['colors/colorStops']
-            }) ${repeat} ${rootGetters['box/box']}`
-          : `${comment}${repeating}${state.general.gradient.active}-gradient(${
-              rootGetters['colors/colorStops']
-            }) ${repeat} ${rootGetters['box/box']}`
+        return state.angle.active > 0
+          ? `${comment}${repeating}${state.type.active}-gradient(${degree}, ${
+              rootGetters['color/colorStops']
+            }) ${repeat} ${rootGetters['gradient/gradient']}`
+          : `${comment}${repeating}${state.type.active}-gradient(${
+              rootGetters['color/colorStops']
+            }) ${repeat} ${rootGetters['gradient/gradient']}`
       }
 
       if (type.includes('conic')) {
-        return `${comment}${repeating}${
-          state.general.gradient.active
-        }-gradient(${rootGetters['colors/colorStops']}) ${
-          rootGetters['box/box']
-        } ${repeat}`
+        return `${comment}${repeating}${state.type.active}-gradient(${
+          rootGetters['color/colorStops']
+        }) ${rootGetters['gradient/gradient']} ${repeat}`
       }
 
-      return `${comment}${repeating}${state.general.gradient.active}-gradient(${
+      return `${comment}${repeating}${state.type.active}-gradient(${
         rootGetters['shape/shape']
-      }, ${rootGetters['colors/colorStops']}) ${repeat} ${
-        rootGetters['box/box']
+      }, ${rootGetters['color/colorStops']}) ${repeat} ${
+        rootGetters['gradient/gradient']
       }`
     }
 
-    return returnValue(state.general.gradient.active)
+    return returnValue(state.type.active)
   }
 }
 
@@ -80,10 +80,10 @@ const mutations = {
     let editedGradient = {
       string: state.previewGradient,
       id: state.id,
-      general: JSON.parse(JSON.stringify(state.general.general)),
-      box: JSON.parse(JSON.stringify(state.box.box)),
+      general: JSON.parse(JSON.stringify(state.general)),
+      gradient: JSON.parse(JSON.stringify(state.gradient.gradient)),
       shape: JSON.parse(JSON.stringify(state.shape.shape)),
-      colors: JSON.parse(JSON.stringify(state.colors.colors))
+      color: JSON.parse(JSON.stringify(state.color.colorStops))
     }
     state.gradientList.splice(index, 1, editedGradient)
     let newList = []
@@ -145,9 +145,9 @@ const actions = {
       string: gradient,
       id: state.id,
       general: JSON.parse(JSON.stringify(state.general)),
-      box: JSON.parse(JSON.stringify(state.box)),
+      gradient: JSON.parse(JSON.stringify(state.gradient)),
       shape: JSON.parse(JSON.stringify(state.shape)),
-      colors: JSON.parse(JSON.stringify(state.colors))
+      color: JSON.parse(JSON.stringify(state.color))
     }
     commit('addGradient', savedGradient)
   },
@@ -164,9 +164,9 @@ const actions = {
         const last = gradient[gradient.length - 1]
         commit('undoDeleteAll', gradient)
         commit('general/updateGeneral', last.general, { root: true })
-        commit('box/updateBox', last.box, { root: true })
+        commit('gradient/updateGradient', last.gradient, { root: true })
         commit('shape/updateShape', last.shape, { root: true })
-        commit('colors/updateColors', last.colors, { root: true })
+        commit('color/updateColors', last.colorStops, { root: true })
       }
       if (type === 'deleteSingle') {
         commit('undoDeleteSingle', gradient)
@@ -188,9 +188,9 @@ const actions = {
     commit('editGradient', gradient)
     commit('previewGradient', gradient.string)
     commit('general/updateGeneral', gradient.general, { root: true })
-    commit('box/updateBox', gradient.box, { root: true })
+    commit('gradient/updateGradient', gradient.gradient, { root: true })
     commit('shape/updateShape', gradient.shape, { root: true })
-    commit('colors/updateColors', gradient.colors, { root: true })
+    commit('color/updateColors', gradient.colorStops, { root: true })
   },
   returnGradient({ commit }) {
     commit('returnGradient')
@@ -207,9 +207,13 @@ export default new Vuex.Store({
   actions,
   modules: {
     canvas,
+    type,
+    angle,
+    repeating,
     general,
-    box,
+    bgRepeat,
+    gradient,
     shape,
-    colors
+    color
   }
 })

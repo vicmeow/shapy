@@ -1,7 +1,8 @@
 import { getField, updateField } from 'vuex-map-fields'
 
 const state = {
-  comment: ''
+  active: 'linear',
+  types: ['linear', 'radial', 'conic']
 }
 
 const getters = {

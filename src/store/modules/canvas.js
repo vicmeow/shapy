@@ -65,6 +65,7 @@ const mutations = {
 }
 
 const actions = {
+  // TODO: Split into updateWidth and updateHeight actions?
   updateMax({ commit }, max) {
     // Update max width
     commit('updateWidth', max.width)

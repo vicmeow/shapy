@@ -29,7 +29,7 @@ const state = {
 
 const getters = {
   getField,
-  box() {
+  gradient() {
     // Which width unit to return based on defaultUnit
     const width = state.width.defaultUnit
       ? `${state.width.pct}%`
@@ -49,43 +49,50 @@ const getters = {
 
 const mutations = {
   updateField,
-  updateBox(state, box) {
-    state.box = box
+  updateGradient(state, gradient) {
+    // TODO: fix this
+    state.gradient = gradient
   },
-  updateWidth(state, max) {
-    // If px values for box size are null, set them to the max
-    if (!state.width.px) state.width.px = max
+  updateWidth(state, value) {
+    // If px values for gradient size are null, set them to the max
+    if (!state.width.px) state.width.px = value
 
     // If px values for the axis are null, set them to the max
-    if (!state.x.px) state.x.px = max
+    if (!state.x.px) state.x.px = value
 
-    // Box max values should be the the canvas px max
-    state.width.max = max
+    // gradient max values should be the the canvas px max
+    state.width.max = value
 
     // If px values exist for the axis, set them as the payload
-    state.x.max = max
+    state.x.max = value
   },
-  updateHeight(state, max) {
-    // If px values for box size are null, set them to the max
-    if (!state.height.px) state.height.px = max
+  updateHeight(state, value) {
+    // If px values for gradient size are null, set them to the max
+    if (!state.height.px) state.height.px = value
 
     // If px values for the axis are null, set them to the max
-    if (!state.y.px) state.y.px = max
+    if (!state.y.px) state.y.px = value
 
-    // Box max values should be the the canvas px max
-    state.height.max = max
+    // gradient max values should be the the canvas px max
+    state.height.max = value
 
     // If px values exist for the axis, set them as the payload
-    state.y.max = max
+    state.y.max = value
   }
 }
 
 const actions = {
-  updateMax({ commit }, max) {
-    // Update max width if the width is changing
-    if (max.type === 'width') commit('updateWidth', max.value)
-    // Update max height if the height is changing
-    if (max.type === 'height') commit('updateHeight', max.value)
+  updateWidth({ commit }, value) {
+    commit('updateWidth', value)
+    // Update shape max
+    // dispatch(
+    //   'shape/updateWidth',
+    //   value,
+    //   { root: true }
+    // )
+  },
+  updateHeight({ commit }, value) {
+    commit('updateHeight', value)
   }
 }
 
