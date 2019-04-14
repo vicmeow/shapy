@@ -93,19 +93,14 @@ export const mutations = {
     const down = index + 1
     state.stops.splice(down, 0, stop)
   },
-  CREATE_STOP(state, { point, color }) {
-    const newStop = {
-      id: Math.random()
-        .toString(36)
-        .substr(2, 9),
-      pct: point,
-      defaultUnit: true,
-      color: color
-    }
-    state.stops.push(newStop)
+  CREATE_STOP(state, stop) {
+    state.stops.push(stop)
   },
   UPDATE_STOP(state, { point, id }) {
     state.stops.find(stop => stop.id === id).pct = point
+  },
+  SET_ACTIVE(state, stop) {
+    state.activeStop = stop
   }
 }
 
@@ -126,10 +121,22 @@ export const actions = {
   moveDown({ commit }, index) {
     commit('MOVE_DOWN', index)
   },
-  createStop({ commit }, { point, color }) {
-    commit('CREATE_STOP', { point, color })
+  createStop({ commit, dispatch }, { point, color }) {
+    const stop = {
+      id: Math.random()
+        .toString(36)
+        .substr(2, 9),
+      pct: point,
+      defaultUnit: true,
+      color: color
+    }
+    commit('CREATE_STOP', stop)
+    dispatch('setActive', stop)
   },
   updateStop({ commit }, { point, id }) {
     commit('UPDATE_STOP', { point, id })
+  },
+  setActive({ commit }, stop) {
+    commit('SET_ACTIVE', stop)
   }
 }

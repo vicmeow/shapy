@@ -5,9 +5,14 @@
       :stops="stops"
       :active-gradient="activeGradient"
       @createStop="createStop($event)"
+      @setActive="setActive"
     />
     <!-- List of the gradient stop points that handles moving and deleting points -->
-    <stop-list :stops="stops" :active-stop="activeStop" />
+    <stop-list
+      :stops="stops"
+      :active-stop="activeStop"
+      @setActive="setActive"
+    />
     <!-- Color picker deciding the color of a stop point -->
     <no-ssr>
       <color-picker id="color-picker" v-model="activeStop.color" />
@@ -46,14 +51,12 @@ export default {
     this.activeStop = this.stops[0]
   },
   methods: {
+    setActive(stop) {
+      this.$store.dispatch('colors/setActive', stop)
+    },
     createStop(point) {
-      // eslint-disable-next-line
-      // console.log(value)
       const color = this.activeStop.color
       this.$store.dispatch('colors/createStop', { point, color })
-    },
-    setActive(stop) {
-      this.activeStop = stop
     },
     updateValue(color) {
       this.$emit('input', {

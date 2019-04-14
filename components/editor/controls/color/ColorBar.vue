@@ -12,11 +12,12 @@
       <div class="drag-area">
         <!-- Stop points for the gradient -->
         <stop-point
-          v-for="(stop, index) in stops"
-          :key="index"
+          v-for="stop in stops"
+          :key="stop.id"
           :value="stop.pct"
           :color="stop.color.hex"
           :width="width"
+          @mousedown.native="$emit('setActive', stop)"
           @dragStart="dragStart($event, stop.id)"
         />
       </div>
