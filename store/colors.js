@@ -61,22 +61,6 @@ export const getters = {
 
 export const mutations = {
   updateField,
-  ADD_STOP(state) {
-    // Add with push, copy last stop in stops
-    const newStop = {
-      id: JSON.parse(JSON.stringify(state.stops[state.stops.length - 1].id)),
-      value: JSON.parse(
-        JSON.stringify(state.stops[state.stops.length - 1].value)
-      ),
-      color: JSON.parse(
-        JSON.stringify(state.stops[state.stops.length - 1].color)
-      ),
-      defaultUnit: JSON.parse(
-        JSON.stringify(state.stops[state.stops.length - 1].defaultUnit)
-      )
-    }
-    state.stops.push(newStop)
-  },
   REMOVE_STOP(state, id) {
     // Remove stop by ID
     state.stops = state.stops.filter(stop => stop.id !== id)
@@ -105,9 +89,6 @@ export const mutations = {
 }
 
 export const actions = {
-  addStop({ commit }) {
-    commit('ADD_STOP')
-  },
   removeStop({ commit, state }, id) {
     if (state.stops.length > 2) {
       commit('REMOVE_STOP', id)
