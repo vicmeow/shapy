@@ -77,9 +77,9 @@ export const mutations = {
     }
     state.stops.push(newStop)
   },
-  REMOVE_STOP(state, index) {
-    // Remove stop if more than two stops
-    state.stops.splice(index, 1)
+  REMOVE_STOP(state, id) {
+    // Remove stop by ID
+    state.stops = state.stops.filter(stop => stop.id !== id)
   },
   MOVE_UP(state, index) {
     // Move stop up
@@ -108,9 +108,9 @@ export const actions = {
   addStop({ commit }) {
     commit('ADD_STOP')
   },
-  removeStop({ commit, state }, index) {
+  removeStop({ commit, state }, id) {
     if (state.stops.length > 2) {
-      commit('REMOVE_STOP', index)
+      commit('REMOVE_STOP', id)
     }
   },
   moveUp({ commit }, index) {

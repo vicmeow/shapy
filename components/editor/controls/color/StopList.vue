@@ -16,9 +16,7 @@
         </span>
       </div>
       <div class="stop-actions">
-        <button @click="moveUp(index)">^</button>
-        <button @click="moveDown(index)">></button>
-        <button @click="removeStop(index)">x</button>
+        <button @click="removeStop(stop.id)">x</button>
       </div>
     </li>
   </ul>
