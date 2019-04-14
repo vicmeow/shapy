@@ -41,10 +41,10 @@ export const getters = {
   },
   colors(state) {
     const colors = state.stops
+      .sort((a, b) => a.pct - b.pct)
       .map(stop => {
         return `${stop.color.hex} ${stop.pct}%`
       })
-      .sort((a, b) => a.pct - b.pct)
     return colors.join(', ')
   },
   activeGradient(state) {
@@ -93,18 +93,19 @@ export const mutations = {
     const down = index + 1
     state.stops.splice(down, 0, stop)
   },
-  CREATE_STOP(state, stop) {
-    const id = state.stop.length + 1
+  CREATE_STOP(state, { point, color }) {
     const newStop = {
-      id: id,
-      pct: stop.pct,
-      defaultUnit: false,
-      color: stop.color
+      id: Math.random()
+        .toString(36)
+        .substr(2, 9),
+      pct: point,
+      defaultUnit: true,
+      color: color
     }
     state.stops.push(newStop)
   },
-  UPDATE_STOP(state, { value, id }) {
-    state.stops.find(stop => stop.id === id).pct = value
+  UPDATE_STOP(state, { point, id }) {
+    state.stops.find(stop => stop.id === id).pct = point
   }
 }
 
@@ -125,10 +126,10 @@ export const actions = {
   moveDown({ commit }, index) {
     commit('MOVE_DOWN', index)
   },
-  createStop({ commit }, position) {
-    commit('CREATE_STOP', position)
+  createStop({ commit }, { point, color }) {
+    commit('CREATE_STOP', { point, color })
   },
-  updateStop({ commit }, { value, id }) {
-    commit('UPDATE_STOP', { value, id })
+  updateStop({ commit }, { point, id }) {
+    commit('UPDATE_STOP', { point, id })
   }
 }

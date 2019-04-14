@@ -1,15 +1,18 @@
 <template>
   <div class="color-bar-wrapper">
-    <div class="color-bar">
-      <!-- Add event listener to color-bar -->
+    <!-- Color bar contain the bar with the gradient & drag area -->
+    <div class="color-bar" @mousedown="createStop">
+      <!-- Color bar showing the gradient -->
       <div
         ref="colorBar"
         class="color-gradient"
         :style="{ 'background-image': activeGradient }"
       ></div>
-      <div ref="dragArea" class="drag-area">
+      <!-- The drag area for stop points -->
+      <div class="drag-area">
+        <!-- Stop points for the gradient -->
         <stop-point
-          v-for="(stop, index) in sortedStops"
+          v-for="(stop, index) in stops"
           :key="index"
           :value="stop.pct"
           :color="stop.color.hex"
@@ -28,10 +31,12 @@ export default {
     StopPoint
   },
   props: {
+    // Gradient to show on the color bar
     activeGradient: {
       type: String,
       required: true
     },
+    // Stops for the color bar
     stops: {
       type: Array,
       required: true,
@@ -40,14 +45,9 @@ export default {
   },
   data() {
     return {
-      dragActive: false,
-      dragId: null,
-      width: null
-    }
-  },
-  computed: {
-    sortedStops() {
-      return this.stops.slice(0).sort((a, b) => a.pct - b.pct)
+      dragActive: false, // Whether dragging is active
+      dragId: null, // ID of point being dragged
+      width: null // Width to pass down to point to calculate px for CSS transform
     }
   },
   mounted() {
@@ -55,16 +55,53 @@ export default {
     this.width = this.$refs.colorBar.getBoundingClientRect().width
   },
   methods: {
+    // Calculate the point value
+    calculatePoint(x) {
+      // Get color bar info
+      const colorBar = this.$refs.colorBar.getBoundingClientRect()
+      // Get the position of where to add the new stop
+      const px = x - colorBar.left
+      // Calculate the % of the new stop point
+      const pct = Math.round((px / colorBar.width) * 100)
+      return pct
+    },
+    // Create a color stop point on the color bar
+    createStop(e) {
+      if (e.target.className === 'drag-area') {
+        // Point of the click
+        const point = this.calculatePoint(e.clientX)
+        // Emit value to ColorControl
+        this.$emit('createStop', point)
+      }
+    },
+    // Start drag of a color stop point
     dragStart(e, id) {
       // Dragging is active
       this.dragActive = true
       // Set index of the point being dragged
       this.dragId = id
       // Add event listener for drag
-      window.addEventListener('mousemove', this.drag)
+      window.addEventListener('mousemove', this.drag, false)
       // Event listener for ending drag
-      window.addEventListener('mouseup', this.dragEnd)
+      window.addEventListener('mouseup', this.dragEnd, false)
     },
+    // Calculate position of point as it's being dragged
+    drag(e) {
+      // Drag only if dragging is active
+      if (this.dragActive) {
+        e.preventDefault()
+        // Calculate the % of the drag point
+        const point = this.calculatePoint(e.clientX)
+        // Get index of the drag point
+        const id = this.dragId
+        // Only update stop point position if value is between 0 and 100
+        if (point >= 0 && point <= 100) {
+          // Update position of stop point being dragged
+          this.$store.dispatch('colors/updateStop', { point, id })
+        }
+      }
+    },
+    // Handle the end of the drag
     dragEnd(e) {
       // Set dragging to false
       this.dragActive = false
@@ -73,25 +110,6 @@ export default {
       // Remove event listeners
       window.removeEventListener('mousemove', this.dragEnd)
       window.removeEventListener('mouseup', this.dragEnd)
-    },
-    drag(e) {
-      // Drag only if dragging is active
-      if (this.dragActive) {
-        e.preventDefault()
-        // Get color bar info
-        const colorBar = this.$refs.colorBar.getBoundingClientRect()
-        // Get the position of the stop point being dragged
-        const px = e.clientX - colorBar.left
-        // Calculate the % of the drag point
-        const value = Math.round((px / colorBar.width) * 100)
-        // Get index of the drag point
-        const id = this.dragId
-        // Only update stop point position if value is between 0 and 100
-        if (value >= 0 && value <= 100) {
-          // Update position of stop point being dragged
-          this.$store.dispatch('colors/updateStop', { value, id })
-        }
-      }
     }
   }
 }

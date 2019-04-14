@@ -1,7 +1,14 @@
 <template>
   <div class="control color-control">
-    <color-bar :stops="stops" :active-gradient="activeGradient" />
+    <!-- Color bar displaying the gradient and handling stop points -->
+    <color-bar
+      :stops="stops"
+      :active-gradient="activeGradient"
+      @createStop="createStop($event)"
+    />
+    <!-- List of the gradient stop points that handles moving and deleting points -->
     <stop-list :stops="stops" :active-stop="activeStop" />
+    <!-- Color picker deciding the color of a stop point -->
     <no-ssr>
       <color-picker id="color-picker" v-model="activeStop.color" />
     </no-ssr>
@@ -39,6 +46,12 @@ export default {
     this.activeStop = this.stops[0]
   },
   methods: {
+    createStop(point) {
+      // eslint-disable-next-line
+      // console.log(value)
+      const color = this.activeStop.color
+      this.$store.dispatch('colors/createStop', { point, color })
+    },
     setActive(stop) {
       this.activeStop = stop
     },
