@@ -6,16 +6,20 @@
       class="stop-item"
       :class="{ active: stop.id === activeStop.id }"
     >
-      <div class="stop-info" @mousedown="$emit('setActive', stop)">
+      <div
+        class="stop-info"
+        :class="`stop-${stop.id}`"
+        @mousedown="$emit('setActive', stop)"
+      >
         <div class="stop-preview" :style="{ background: stop.color.hex }"></div>
-        <span class="stop-string">
+        <div class="stop-string">
           {{ stop.color.hex }}
-        </span>
-        <span class="stop-value">
-          {{ stop.pct }}
-        </span>
+        </div>
+        <div class="stop-value">{{ stop.pct }}%</div>
       </div>
       <div class="stop-actions">
+        <button @click="moveUp(stop.id)">^</button>
+        <button @click="moveDown(stop.id)">></button>
         <button @click="removeStop(stop.id)">x</button>
       </div>
     </li>

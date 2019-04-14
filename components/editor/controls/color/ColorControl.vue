@@ -42,9 +42,10 @@ export default {
     }
   },
   computed: {
-    ...mapFields(['stops', 'activeStop']),
+    ...mapFields(['activeStop']),
     ...mapGetters({
-      activeGradient: 'colors/activeGradient'
+      activeGradient: 'colors/activeGradient',
+      stops: 'colors/stops'
     })
   },
   mounted() {

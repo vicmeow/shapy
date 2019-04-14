@@ -65,17 +65,41 @@ export const mutations = {
     // Remove stop by ID
     state.stops = state.stops.filter(stop => stop.id !== id)
   },
-  MOVE_UP(state, index) {
-    // Move stop up
-    const stop = state.stops.splice(index, 1)[0]
-    const up = index - 1
-    state.stops.splice(up, 0, stop)
+  MOVE_UP(state, id) {
+    // I honestly don't understand how this is working, but it is...
+    // Index of stop being moved
+    const clickedIndex = state.stops.findIndex(stop => stop.id === id)
+    // Stop object being moved
+    const clickedStop = state.stops.find(stop => stop.id === id)
+    // Index of stop above the stop being moved
+    const aboveIndex = clickedIndex === 0 ? 0 : clickedIndex - 1
+    // Stop object above stop being moved
+    const aboveStop = state.stops[aboveIndex]
+
+    const abovePct = JSON.parse(JSON.stringify(aboveStop.pct))
+    const clickedPct = JSON.parse(JSON.stringify(clickedStop.pct))
+
+    // Make sure all values but pct changes
+    state.stops[aboveIndex].pct = clickedPct
+    state.stops[clickedIndex].pct = abovePct
   },
-  MOVE_DOWN(state, index) {
-    // Move stop down
-    const stop = state.stops.splice(index, 1)[0]
-    const down = index + 1
-    state.stops.splice(down, 0, stop)
+  MOVE_DOWN(state, id) {
+    // I honestly don't understand how this is working, but it is...
+    // Index of stop being moved
+    const clickedIndex = state.stops.findIndex(stop => stop.id === id)
+    // Stop object being moved
+    const clickedStop = state.stops.find(stop => stop.id === id)
+    // Index of stop above the stop being moved
+    const belowIndex = clickedIndex + 1
+    // Stop object above stop being moved
+    const belowStop = state.stops[belowIndex]
+
+    const belowPct = JSON.parse(JSON.stringify(belowStop.pct))
+    const clickedPct = JSON.parse(JSON.stringify(clickedStop.pct))
+
+    // Make sure all values but pct changes
+    state.stops[belowIndex].pct = clickedPct
+    state.stops[clickedIndex].pct = belowPct
   },
   CREATE_STOP(state, stop) {
     state.stops.push(stop)
@@ -94,13 +118,11 @@ export const actions = {
       commit('REMOVE_STOP', id)
     }
   },
-  moveUp({ commit }, index) {
-    if (index > 0) {
-      commit('MOVE_UP', index)
-    }
+  moveUp({ commit, state }, id) {
+    commit('MOVE_UP', id)
   },
-  moveDown({ commit }, index) {
-    commit('MOVE_DOWN', index)
+  moveDown({ commit }, id) {
+    commit('MOVE_DOWN', id)
   },
   createStop({ commit, dispatch }, { point, color }) {
     const stop = {
