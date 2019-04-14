@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import ColorControl from '@/components/editor/controls/ColorControl'
+import ColorControl from '@/components/editor/controls/color/ColorControl'
 export default {
   components: {
     ColorControl

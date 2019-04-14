@@ -8,7 +8,6 @@ export const state = () => ({
     {
       id: 0, // ID of gradient
       pct: 0, // Gradient stop
-      px: null,
       defaultUnit: true, // %/px
       color: {
         // Color from color picker
@@ -22,7 +21,6 @@ export const state = () => ({
     {
       id: 1,
       pct: 100,
-      px: null,
       defaultUnit: true,
       color: {
         hex: '#333',
@@ -40,9 +38,10 @@ export const getters = {
   stops(state) {
     // Stops for line showing stops
     return state.stops.map(stop => {
-      return stop.defaultUnit ? `${stop.value}%` : `${stop.value}px`
+      return { value: stop.pct, color: stop.color.hex }
     })
   },
+  // TODO: Add sorted stops based on pct
   colors(state) {
     const colors = state.stops.map(stop => {
       return `${stop.color.hex} ${stop.pct}%`
@@ -98,18 +97,14 @@ export const mutations = {
     const id = state.stop.length + 1
     const newStop = {
       id: id,
-      px: stop.px,
       pct: stop.pct,
       defaultUnit: false,
       color: stop.color
     }
     state.stops.push(newStop)
   },
-  UPDATE_STOP(state, stop) {
-    state.stops[stop.index].pct = stop.pct
-    state.stops[stop.index].px = stop.px
-    // eslint-disable-next-line
-    // console.log('update with: ', newPos)
+  UPDATE_STOP(state, { value, index }) {
+    state.stops[index].pct = value
   }
 }
 
@@ -133,7 +128,7 @@ export const actions = {
   createStop({ commit }, position) {
     commit('CREATE_STOP', position)
   },
-  updateStop({ commit }, stop) {
-    commit('UPDATE_STOP', stop)
+  updateStop({ commit }, { value, index }) {
+    commit('UPDATE_STOP', { value, index })
   }
 }
