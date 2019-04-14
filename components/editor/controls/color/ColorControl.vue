@@ -1,9 +1,9 @@
 <template>
   <div class="control color-control">
-    <color-bar :active-gradient="activeGradient" />
-    <stop-list :stops="stops" :active="active" />
+    <color-bar :stops="stops" :active-gradient="activeGradient" />
+    <stop-list :stops="stops" :active-stop="activeStop" />
     <no-ssr>
-      <color-picker id="color-picker" v-model="active.color" />
+      <color-picker id="color-picker" v-model="activeStop.color" />
     </no-ssr>
   </div>
 </template>
@@ -30,21 +30,21 @@ export default {
     }
   },
   computed: {
-    ...mapFields(['stops', 'active']),
+    ...mapFields(['stops', 'activeStop']),
     ...mapGetters({
       activeGradient: 'colors/activeGradient'
     })
   },
   mounted() {
-    this.active = this.stops[0]
+    this.activeStop = this.stops[0]
   },
   methods: {
     setActive(stop) {
-      this.active = stop
+      this.activeStop = stop
     },
     updateValue(color) {
       this.$emit('input', {
-        ...this.active,
+        ...this.activeStop,
         color: color
       })
     }

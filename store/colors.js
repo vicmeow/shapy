@@ -3,10 +3,10 @@
 import { getField, updateField } from 'vuex-map-fields'
 
 export const state = () => ({
-  active: {},
+  activeStop: {},
   stops: [
     {
-      id: 0, // ID of gradient
+      id: 'ap6y8f70k', // ID of gradient
       pct: 0, // Gradient stop
       defaultUnit: true, // %/px
       color: {
@@ -19,7 +19,7 @@ export const state = () => ({
       }
     },
     {
-      id: 1,
+      id: 'h1qlz9p91',
       pct: 100,
       defaultUnit: true,
       color: {
@@ -36,21 +36,21 @@ export const state = () => ({
 export const getters = {
   getField,
   stops(state) {
-    // Stops for line showing stops
-    return state.stops.map(stop => {
-      return { value: stop.pct, color: stop.color.hex }
-    })
+    // Color stops sorted
+    return state.stops.slice(0).sort((a, b) => a.pct - b.pct)
   },
-  // TODO: Add sorted stops based on pct
   colors(state) {
-    const colors = state.stops.map(stop => {
-      return `${stop.color.hex} ${stop.pct}%`
-    })
+    const colors = state.stops
+      .map(stop => {
+        return `${stop.color.hex} ${stop.pct}%`
+      })
+      .sort((a, b) => a.pct - b.pct)
     return colors.join(', ')
   },
   activeGradient(state) {
     // Current gradient shown in the color bar
-    const stops = state.stops.map(stop => {
+    const sortedStops = state.stops.slice(0).sort((a, b) => a.pct - b.pct)
+    const stops = sortedStops.map(stop => {
       return stop.defaultUnit
         ? `${stop.color.hex} ${stop.pct}%`
         : `${stop.color.hex} ${stop.px}px`
@@ -103,8 +103,8 @@ export const mutations = {
     }
     state.stops.push(newStop)
   },
-  UPDATE_STOP(state, { value, index }) {
-    state.stops[index].pct = value
+  UPDATE_STOP(state, { value, id }) {
+    state.stops.find(stop => stop.id === id).pct = value
   }
 }
 
@@ -128,7 +128,7 @@ export const actions = {
   createStop({ commit }, position) {
     commit('CREATE_STOP', position)
   },
-  updateStop({ commit }, { value, index }) {
-    commit('UPDATE_STOP', { value, index })
+  updateStop({ commit }, { value, id }) {
+    commit('UPDATE_STOP', { value, id })
   }
 }

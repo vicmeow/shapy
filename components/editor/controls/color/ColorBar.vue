@@ -5,16 +5,16 @@
       <div
         ref="colorBar"
         class="color-gradient"
-        :style="{ background: activeGradient }"
+        :style="{ 'background-image': activeGradient }"
       ></div>
       <div ref="dragArea" class="drag-area">
         <stop-point
-          v-for="(stop, index) in stops"
+          v-for="(stop, index) in sortedStops"
           :key="index"
-          :value="stop.value"
-          :color="stop.color"
+          :value="stop.pct"
+          :color="stop.color.hex"
           :width="width"
-          @dragStart="dragStart($event, index)"
+          @dragStart="dragStart($event, stop.id)"
         />
       </div>
     </div>
@@ -23,7 +23,6 @@
 
 <script>
 import StopPoint from '@/components/editor/controls/color/StopPoint.vue'
-import { mapGetters } from 'vuex'
 export default {
   components: {
     StopPoint
@@ -32,30 +31,35 @@ export default {
     activeGradient: {
       type: String,
       required: true
+    },
+    stops: {
+      type: Array,
+      required: true,
+      default: () => []
     }
   },
   data() {
     return {
       dragActive: false,
-      dragIndex: null,
+      dragId: null,
       width: null
     }
   },
   computed: {
-    ...mapGetters({
-      stops: 'colors/stops'
-    })
+    sortedStops() {
+      return this.stops.slice(0).sort((a, b) => a.pct - b.pct)
+    }
   },
   mounted() {
     // Set the width of the color bar where the drag happens
     this.width = this.$refs.colorBar.getBoundingClientRect().width
   },
   methods: {
-    dragStart(e, index) {
+    dragStart(e, id) {
       // Dragging is active
       this.dragActive = true
       // Set index of the point being dragged
-      this.dragIndex = index
+      this.dragId = id
       // Add event listener for drag
       window.addEventListener('mousemove', this.drag)
       // Event listener for ending drag
@@ -65,7 +69,7 @@ export default {
       // Set dragging to false
       this.dragActive = false
       // Reset index
-      this.dragIndex = null
+      this.dragId = null
       // Remove event listeners
       window.removeEventListener('mousemove', this.dragEnd)
       window.removeEventListener('mouseup', this.dragEnd)
@@ -81,11 +85,11 @@ export default {
         // Calculate the % of the drag point
         const value = Math.round((px / colorBar.width) * 100)
         // Get index of the drag point
-        const index = this.dragIndex
+        const id = this.dragId
         // Only update stop point position if value is between 0 and 100
         if (value >= 0 && value <= 100) {
           // Update position of stop point being dragged
-          this.$store.dispatch('colors/updateStop', { value, index })
+          this.$store.dispatch('colors/updateStop', { value, id })
         }
       }
     }

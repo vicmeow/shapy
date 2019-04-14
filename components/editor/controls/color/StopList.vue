@@ -1,10 +1,10 @@
 <template>
   <ul class="stop-list">
     <li
-      v-for="(stop, index) in stops"
+      v-for="(stop, index) in sortedStops"
       :key="index"
       class="stop-item"
-      :class="{ active: stop.id === active.id }"
+      :class="{ active: stop.id === activeStop.id }"
     >
       <div class="stop-info" @mousedown="setActive(stop)">
         <div class="stop-preview" :style="{ background: stop.color.hex }"></div>
@@ -33,10 +33,15 @@ export default {
       required: true,
       default: () => []
     },
-    active: {
+    activeStop: {
       type: Object,
       required: true,
       default: () => {}
+    }
+  },
+  computed: {
+    sortedStops() {
+      return this.stops.slice(0).sort((a, b) => a.pct - b.pct)
     }
   },
   methods: {
