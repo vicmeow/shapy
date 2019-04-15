@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .color-bar-wrapper
   position: relative
   width: 100%

@@ -12,11 +12,14 @@ export const state = () => ({
       defaultUnit: true, // %/px
       color: {
         // Color from color picker
-        hex: '#194d33',
-        hsl: { h: 150, s: 0.5, l: 0.2, a: 1 },
-        hsv: { h: 150, s: 0.66, v: 0.3, a: 1 },
-        rgba: { r: 25, g: 77, b: 51, a: 1 },
-        a: 1
+        a: 1,
+        hex: '#812525',
+        hex8: '#812525FF',
+        hsl: { a: 1, h: 0, l: 0.3248028, s: 0.5517107611141283 },
+        hsv: { a: 1, h: 0, s: 0.7111, v: 0.504 },
+        oldHue: 0,
+        rgba: { a: 1, b: 37, g: 37, r: 129 },
+        source: 'hsva'
       }
     },
     {
@@ -24,11 +27,15 @@ export const state = () => ({
       pct: 100,
       defaultUnit: true,
       color: {
-        hex: '#333',
-        hsl: { h: 150, s: 0.5, l: 0.2, a: 1 },
-        hsv: { h: 150, s: 0.66, v: 0.3, a: 1 },
-        rgba: { r: 25, g: 77, b: 51, a: 1 },
-        a: 1
+        // Color from color picker
+        a: 1,
+        hex: '#812525',
+        hex8: '#812525FF',
+        hsl: { a: 1, h: 0, l: 0.3248028, s: 0.5517107611141283 },
+        hsv: { a: 1, h: 0, s: 0.7111, v: 0.504 },
+        oldHue: 0,
+        rgba: { a: 1, b: 37, g: 37, r: 129 },
+        source: 'hsva'
       }
     }
   ]
@@ -63,6 +70,9 @@ export const getters = {
 
 export const mutations = {
   updateField,
+  UPDATE_COLOR(state, color) {
+    state.activeStop.color = color
+  },
   REMOVE_STOP(state, id) {
     // Remove stop by ID
     state.stops = state.stops.filter(stop => stop.id !== id)
@@ -143,5 +153,8 @@ export const actions = {
   },
   setActive({ commit }, stop) {
     commit('SET_ACTIVE', stop)
+  },
+  updateColor({ commit }, color) {
+    commit('UPDATE_COLOR')
   }
 }
