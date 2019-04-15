@@ -1,4 +1,5 @@
 // TODO: Add action for updating max PX value for color stop, based on box size
+// TODO: Refactor
 
 import { getField, updateField } from 'vuex-map-fields'
 
@@ -35,11 +36,12 @@ export const state = () => ({
 
 export const getters = {
   getField,
-  stops(state) {
-    // Color stops sorted
+  // Color stops sorted according to position
+  sortedStops(state) {
     return state.stops.slice(0).sort((a, b) => a.pct - b.pct)
   },
-  colors(state) {
+  // All color stops for the gradient
+  colorString(state) {
     const colors = state.stops
       .sort((a, b) => a.pct - b.pct)
       .map(stop => {

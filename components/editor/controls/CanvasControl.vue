@@ -22,8 +22,8 @@
 import InputWrapper from '@/components/inputs/InputWrapper'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
-  getterType: 'canvas/getField',
-  mutationType: 'canvas/updateField'
+  getterType: 'gradientCanvas/getField',
+  mutationType: 'gradientCanvas/updateField'
 })
 export default {
   name: 'Canvas',
@@ -40,12 +40,12 @@ export default {
     width() {
       // When the canvas width changes, the max size for the gradient should update
       const width = this.width.px
-      this.$store.dispatch('gradient/updateWidth', width)
+      this.$store.dispatch('backgroundSize/updateWidth', width)
     },
     height() {
       // When the canvas height changes, the max size for the gradient should update
       const height = this.height.px
-      this.$store.dispatch('gradient/updateHeight', height)
+      this.$store.dispatch('backgroundSize/updateHeight', height)
     }
   }
 }

@@ -27,32 +27,22 @@ export default {
       preview: 'preview'
     }),
     ...mapGetters({
-      canvas: 'canvas/size',
-      string: 'string'
+      canvas: 'gradientCanvas/size',
+      background: 'background'
     }),
     max() {
-      const width = `${this.$store.state.canvas.width.max}px`
-      const height = `${this.$store.state.canvas.height.max}px`
+      const width = `${this.$store.state.gradientCanvas.width.max}px`
+      const height = `${this.$store.state.gradientCanvas.height.max}px`
       return { width, height }
     }
   },
   watch: {
-    string() {
-      this.$store.dispatch('generatePreview', this.string)
-    },
-    width() {
-      // When the canvas width changes, the max for gradient width should update
-      const width = this.width
-      this.$store.dispatch('gradient/updateWidth', width)
-    },
-    height() {
-      // When the canvas height changes, the max for gradient height should update
-      const height = this.height
-      this.$store.dispatch('gradient/updateHeight', height)
+    background() {
+      this.$store.dispatch('generatePreview', this.background)
     }
   },
   created() {
-    this.$store.dispatch('generatePreview', this.string)
+    this.$store.dispatch('generatePreview', this.background)
     // Add event listener for calculating max canvas size
     // eslint-disable-next-line
     window.addEventListener('resize', this.updateMax)
@@ -71,7 +61,7 @@ export default {
       const width = document.getElementById('canvas-max').offsetWidth
       const height = document.getElementById('canvas-max').offsetHeight
       // Update canvas maxes
-      this.$store.dispatch('canvas/updateMax', { width, height })
+      this.$store.dispatch('gradientCanvas/updateMax', { width, height })
     }
   }
 }

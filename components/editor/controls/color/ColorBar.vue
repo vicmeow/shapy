@@ -98,7 +98,7 @@ export default {
         // Only update stop point position if value is between 0 and 100
         if (point >= 0 && point <= 100) {
           // Update position of stop point being dragged
-          this.$store.dispatch('colors/updateStop', { point, id })
+          this.$store.dispatch('colorStops/updateStop', { point, id })
         }
       }
     },

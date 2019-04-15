@@ -62,8 +62,8 @@ export default {
   },
   computed: {
     max() {
-      const width = `${this.$store.state.canvas.width.max}px`
-      const height = `${this.$store.state.canvas.height.max}px`
+      const width = `${this.$store.state.gradientCanvas.width.max}px`
+      const height = `${this.$store.state.gradientCanvas.height.max}px`
       return { width, height }
     }
   }

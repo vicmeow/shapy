@@ -1,5 +1,12 @@
 import { getField, updateField } from 'vuex-map-fields'
 
+/* 
+
+All information about the canvas
+where are gradient is placed
+
+*/
+
 export const state = () => ({
   width: {
     // in percentage
@@ -12,13 +19,9 @@ export const state = () => ({
     defaultUnit: true
   },
   height: {
-    // in percentage
     pct: 100,
-    // in pixels
     px: null,
-    // max possible in px
     max: null,
-    // default unit is always percentage
     defaultUnit: true
   },
   backgroundColor: {
@@ -66,10 +69,12 @@ export const mutations = {
 
 export const actions = {
   // TODO: Split into updateWidth and updateHeight actions?
-  updateMax({ commit }, max) {
+  updateMax({ commit, dispatch }, max) {
     // Update max width
     commit('UPDATE_WIDTH', max.width)
+    dispatch('backgroundSize/updateWidth', max.width, { root: true })
     // Update max height
     commit('UPDATE_HEIGHT', max.height)
+    dispatch('backgroundSize/updateHeight', max.height, { root: true })
   }
 }

@@ -27,8 +27,8 @@ import { Chrome } from 'vue-color'
 import ColorBar from '@/components/editor/controls/color/ColorBar'
 import StopList from '@/components/editor/controls/color/StopList'
 const { mapFields } = createHelpers({
-  getterType: 'colors/getField',
-  mutationType: 'colors/updateField'
+  getterType: 'colorStops/getField',
+  mutationType: 'colorStops/updateField'
 })
 export default {
   components: {
@@ -44,8 +44,8 @@ export default {
   computed: {
     ...mapFields(['activeStop']),
     ...mapGetters({
-      activeGradient: 'colors/activeGradient',
-      stops: 'colors/stops'
+      activeGradient: 'colorStops/activeGradient',
+      stops: 'colorStops/sortedStops'
     })
   },
   mounted() {
@@ -53,11 +53,11 @@ export default {
   },
   methods: {
     setActive(stop) {
-      this.$store.dispatch('colors/setActive', stop)
+      this.$store.dispatch('colorStops/setActive', stop)
     },
     createStop(point) {
       const color = this.activeStop.color
-      this.$store.dispatch('colors/createStop', { point, color })
+      this.$store.dispatch('colorStops/createStop', { point, color })
     },
     updateValue(color) {
       this.$emit('input', {
