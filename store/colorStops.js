@@ -71,44 +71,17 @@ export const mutations = {
     state.activeStop.color = color
   },
   REMOVE_STOP(state, id) {
-    // Remove stop by ID
+    // Return all stops except the one with an ID match
     state.stops = state.stops.filter(stop => stop.id !== id)
   },
-  MOVE_UP(state, id) {
-    // I honestly don't understand how this is working, but it is...
-    // Index of stop being moved
-    const clickedIndex = state.stops.findIndex(stop => stop.id === id)
-    // Stop object being moved
-    const clickedStop = state.stops.find(stop => stop.id === id)
-    // Index of stop above the stop being moved
-    const aboveIndex = clickedIndex === 0 ? 0 : clickedIndex - 1
-    // Stop object above stop being moved
-    const aboveStop = state.stops[aboveIndex]
-
-    const abovePct = JSON.parse(JSON.stringify(aboveStop.pct))
-    const clickedPct = JSON.parse(JSON.stringify(clickedStop.pct))
-
+  MOVE_UP(state, { clicked, above }) {
     // Make sure all values but pct changes
-    state.stops[aboveIndex].pct = clickedPct
-    state.stops[clickedIndex].pct = abovePct
+    state.stops[above.index].pct = clicked.pct
+    state.stops[clicked.index].pct = above.pct
   },
-  MOVE_DOWN(state, id) {
-    // I honestly don't understand how this is working, but it is...
-    // Index of stop being moved
-    const clickedIndex = state.stops.findIndex(stop => stop.id === id)
-    // Stop object being moved
-    const clickedStop = state.stops.find(stop => stop.id === id)
-    // Index of stop above the stop being moved
-    const belowIndex = clickedIndex + 1
-    // Stop object above stop being moved
-    const belowStop = state.stops[belowIndex]
-
-    const belowPct = JSON.parse(JSON.stringify(belowStop.pct))
-    const clickedPct = JSON.parse(JSON.stringify(clickedStop.pct))
-
-    // Make sure all values but pct changes
-    state.stops[belowIndex].pct = clickedPct
-    state.stops[clickedIndex].pct = belowPct
+  MOVE_DOWN(state, { clicked, below }) {
+    state.stops[below.index].pct = clicked.pct
+    state.stops[clicked.index].pct = below.pct
   },
   CREATE_STOP(state, stop) {
     state.stops.push(stop)
@@ -128,10 +101,53 @@ export const actions = {
     }
   },
   moveUp({ commit, state }, id) {
-    commit('MOVE_UP', id)
+    // Index of stop being moved
+    const clickedIndex = state.stops.findIndex(stop => stop.id === id)
+    // Stop object being moved
+    const clickedStop = state.stops.find(stop => stop.id === id)
+    // Index of stop above the stop being moved
+    const aboveIndex = clickedIndex === 0 ? 0 : clickedIndex - 1
+    // Stop object above stop being moved
+    const aboveStop = state.stops[aboveIndex]
+
+    // Info from clicked stop
+    const clicked = {
+      index: clickedIndex,
+      pct: JSON.parse(JSON.stringify(clickedStop.pct))
+    }
+    // Info from stop above the clicked stop
+    const above = {
+      index: aboveIndex,
+      pct: JSON.parse(JSON.stringify(aboveStop.pct))
+    }
+    if (clickedIndex !== 0) {
+      commit('MOVE_UP', { clicked, above })
+    }
   },
-  moveDown({ commit }, id) {
-    commit('MOVE_DOWN', id)
+  moveDown({ commit, state }, id) {
+    // Index of stop being moved
+    const clickedIndex = state.stops.findIndex(stop => stop.id === id)
+    // Stop object being moved
+    const clickedStop = state.stops.find(stop => stop.id === id)
+    // Index of stop below the stop being moved
+    const belowIndex = clickedIndex + 1
+    // Stop object below stop being moved
+    const belowStop = state.stops[belowIndex]
+
+    if (belowIndex < state.stops.length) {
+      // Info from clicked stop
+      const clicked = {
+        index: clickedIndex,
+        pct: JSON.parse(JSON.stringify(clickedStop.pct))
+      }
+      // Info from stop below the clicked stop
+      const below = {
+        index: belowIndex,
+        pct: JSON.parse(JSON.stringify(belowStop.pct))
+      }
+
+      commit('MOVE_DOWN', { clicked, below })
+    }
   },
   createStop({ commit, dispatch }, { point, color }) {
     const stop = {
