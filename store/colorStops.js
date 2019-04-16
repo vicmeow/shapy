@@ -10,6 +10,7 @@ export const state = () => ({
       id: 'ap6y8f70k', // ID of gradient
       pct: 0, // Gradient stop
       defaultUnit: true, // %/px
+      active: 'rgba',
       color: {
         // Color from color picker
         a: 1,
@@ -26,6 +27,7 @@ export const state = () => ({
       id: 'h1qlz9p91',
       pct: 100,
       defaultUnit: true,
+      active: 'hex',
       color: {
         // Color from color picker
         a: 1,
@@ -52,19 +54,14 @@ export const getters = {
     const colors = state.stops
       .sort((a, b) => a.pct - b.pct)
       .map(stop => {
-        return `${stop.color.hex} ${stop.pct}%`
+        const rgba = `rgba(${stop.color.rgba.r},${stop.color.rgba.g},${
+          stop.color.rgba.b
+        },${stop.color.rgba.a})`
+        const hex = stop.color.hex
+        const color = stop.active === 'hex' ? hex : rgba
+        return `${color} ${stop.pct}%`
       })
     return colors.join(', ')
-  },
-  activeGradient(state) {
-    // Current gradient shown in the color bar
-    const sortedStops = state.stops.slice(0).sort((a, b) => a.pct - b.pct)
-    const stops = sortedStops.map(stop => {
-      return stop.defaultUnit
-        ? `${stop.color.hex} ${stop.pct}%`
-        : `${stop.color.hex} ${stop.px}px`
-    })
-    return `linear-gradient(to right, ${stops.join(', ')})`
   }
 }
 

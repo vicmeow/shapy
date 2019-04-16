@@ -6,7 +6,7 @@
       <div
         ref="colorBar"
         class="color-gradient"
-        :style="{ 'background-image': activeGradient }"
+        :style="{ 'background-image': backgroundImage }"
       ></div>
       <!-- The drag area for stop points -->
       <div class="drag-area">
@@ -32,11 +32,6 @@ export default {
     StopPoint
   },
   props: {
-    // Gradient to show on the color bar
-    activeGradient: {
-      type: String,
-      required: true
-    },
     // Stops for the color bar
     stops: {
       type: Array,
@@ -49,6 +44,13 @@ export default {
       dragActive: false, // Whether dragging is active
       dragId: null, // ID of point being dragged
       width: null // Width to pass down to point to calculate px for CSS transform
+    }
+  },
+  computed: {
+    backgroundImage() {
+      return `linear-gradient(to right, ${
+        this.$store.getters['colorStops/colorString']
+      })`
     }
   },
   mounted() {

@@ -3,7 +3,6 @@
     <!-- Color bar displaying the gradient and handling stop points -->
     <color-bar
       :stops="stops"
-      :active-gradient="activeGradient"
       @createStop="createStop($event)"
       @setActive="setActive"
     />
@@ -44,7 +43,6 @@ export default {
   computed: {
     ...mapFields(['activeStop']),
     ...mapGetters({
-      activeGradient: 'colorStops/activeGradient',
       stops: 'colorStops/sortedStops'
     })
   },
