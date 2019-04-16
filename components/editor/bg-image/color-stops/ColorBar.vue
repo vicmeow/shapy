@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import StopPoint from '@/components/editor/controls/color/StopPoint.vue'
+import StopPoint from '@/components/editor/bg-image/color-stops/StopPoint.vue'
 export default {
   components: {
     StopPoint

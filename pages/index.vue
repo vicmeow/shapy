@@ -1,6 +1,6 @@
 <template>
   <div class="page-editor">
-    <Controls />
+    <editor-controls />
     <no-ssr>
       <Canvas />
     </no-ssr>
@@ -9,11 +9,11 @@
 
 <script>
 import Canvas from '@/components/editor/Canvas'
-import Controls from '@/components/editor/Controls'
+import EditorControls from '@/components/editor/EditorControls'
 export default {
   components: {
     Canvas,
-    Controls
+    EditorControls
   }
 }
 </script>

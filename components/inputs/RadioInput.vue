@@ -1,12 +1,12 @@
 <template>
-  <span
+  <div
     :class="{ 'conic-support': !conicSupport && radio === 'conic' }"
     class="radio-input"
   >
     <input
       :id="`radio-${radio}`"
       :disabled="!conicSupport && radio === 'conic'"
-      :class="`radio-${radio} radio-single`"
+      :class="`radio-${radio} radio-input`"
       :checked="active === radio"
       :value="radio"
       :name="`${group}-radio-input`"
@@ -15,10 +15,10 @@
     />
     <label
       :for="`${group}-${radio}`"
-      :class="`label radio-single-label radio-${group}-label`"
+      :class="`label radio-label radio-${group}-label`"
       >{{ radio === 'conic' ? 'conic*' : radio }}
     </label>
-  </span>
+  </div>
 </template>
 
 <script>
@@ -41,7 +41,7 @@ export default {
     conicSupport() {
       return CSS.supports(
         'background-image',
-        'conic-gradient(#d44 72deg, #fc3 0 234deg, #ac0 0)'
+        'conic-gradient(#fff 72deg, #fff 0 234deg, #fff 0)'
       )
     }
   }
@@ -50,9 +50,12 @@ export default {
 
 <style lang="sass" scoped>
 
-.radio-single-label
-  margin-left: .5em
-  margin-right: 1.5em
+.radio-input
+  text-align: center
+  margin: 0 1rem
+
+.radio-input, .radio-label
+  display: block
 
 .radio-angle-label::after
   content: '\00b0'

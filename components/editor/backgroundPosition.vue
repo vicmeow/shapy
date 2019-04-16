@@ -1,33 +1,28 @@
 <template>
-  <div role="group" class="panel">
+  <div class="bg-position">
     <slot />
-
     <!-- GRADIENT POSITION -->
     <input-wrapper
       v-model="x"
       :label="'x'"
-      :name="'box-size-y'"
+      :name="'bg-position-x'"
       :field="x"
-      :min="x.defaultUnit ? 0 : -width.px"
+      :min="x.defaultUnit ? 0 : -width"
     />
 
     <input-wrapper
       v-model="y"
       :label="'y'"
-      :name="'box-size-y'"
+      :name="'bg-position-y'"
       :field="y"
-      :min="y.defaultUnit ? 0 : -height.px"
+      :min="y.defaultUnit ? 0 : -height"
     />
   </div>
 </template>
 
 <script>
 import InputWrapper from '@/components/inputs/InputWrapper'
-import { createHelpers } from 'vuex-map-fields'
-const { mapFields } = createHelpers({
-  getterType: 'gradient/getField',
-  mutationType: 'gradient/updateField'
-})
+import { mapFields } from 'vuex-map-fields'
 export default {
   name: 'Position',
   components: {
@@ -37,7 +32,16 @@ export default {
     desc: 'The position of your gradient on the canvas.'
   }),
   computed: {
-    ...mapFields(['x', 'y'])
+    ...mapFields({
+      x: 'backgroundPosition.x',
+      y: 'backgroundPosition.y'
+    }),
+    width() {
+      return this.$store.state.backgroundSize.width.px
+    },
+    height() {
+      return this.$store.state.backgroundSize.height.px
+    }
   }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div class="number-wrapper">
+    <!-- Number input as a range slider -->
     <div class="range-input">
       <input
         :name="`input`"
@@ -10,6 +11,7 @@
         @input="$emit('input', parseInt($event.target.value))"
       />
     </div>
+    <!-- Number input as a simple number input -->
     <div class="number-input">
       <input
         :value="value"
@@ -19,10 +21,11 @@
         @input="$emit('input', parseInt($event.target.value))"
       />
     </div>
+    <!--Toggle for number unit, % or px -->
     <toggle-input
       :name="name"
       class="toggle-input"
-      @change="$emit('toggle', $event)"
+      @input="$emit('input', $event)"
     />
   </div>
 </template>
@@ -55,6 +58,11 @@ export default {
       type: Number,
       required: false,
       default: 0
+    },
+    defaultValue: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
   methods: {

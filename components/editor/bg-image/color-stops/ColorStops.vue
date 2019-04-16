@@ -1,5 +1,5 @@
 <template>
-  <div class="control color-control">
+  <div class="color-stops">
     <!-- Color bar displaying the gradient and handling stop points -->
     <color-bar
       :stops="stops"
@@ -23,8 +23,8 @@
 import { mapGetters } from 'vuex'
 import { createHelpers } from 'vuex-map-fields'
 import { Chrome } from 'vue-color'
-import ColorBar from '@/components/editor/controls/color/ColorBar'
-import StopList from '@/components/editor/controls/color/StopList'
+import ColorBar from '@/components/editor/bg-image/color-stops/ColorBar'
+import StopList from '@/components/editor/bg-image/color-stops/StopList'
 const { mapFields } = createHelpers({
   getterType: 'colorStops/getField',
   mutationType: 'colorStops/updateField'
@@ -68,11 +68,8 @@ export default {
 
 <style lang="sass">
 
-.color-control
-  grid-column: 1 / -1
-  outline: 1px solid red
-  gap: 1rem
-  padding-top: 1rem
+.color-stops
+  flex-grow: 1
   display: flex
   flex-wrap: wrap
 

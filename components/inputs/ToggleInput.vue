@@ -2,18 +2,17 @@
   <div class="toggle-wrapper">
     <input
       :id="`${name}-toggle-switch`"
-      v-model="toggle"
       :name="name"
       :checked="defaultValue"
       class="toggle-input"
       type="checkbox"
-      @change="$emit('change', toggle)"
+      @change="$emit('input', $event.target.checked)"
     />
-    <label :for="`${name}-toggle-switch`" class="label toggle-label">
+    <!-- <label :for="`${name}-toggle-switch`" class="label toggle-label">
       <div class="circle">
         <span v-text="defaultValue ? values[0] : values[1]" />
       </div>
-    </label>
+    </label> -->
   </div>
 </template>
 
@@ -32,14 +31,9 @@ export default {
       }
     },
     defaultValue: {
-      type: [Boolean, Object],
+      type: Boolean,
       required: false,
       default: true
-    }
-  },
-  data() {
-    return {
-      toggle: true
     }
   }
 }

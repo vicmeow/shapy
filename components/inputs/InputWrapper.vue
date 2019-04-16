@@ -1,14 +1,16 @@
 <template>
   <div class="input-wrapper">
-    <label :for="`${label}-input`" class="label">{{ label }}</label>
-    <slot name="color" />
+    <slot name="label" />
+    <!-- Slot for only a toggle input -->
     <slot>
+      <!-- Default content when no slot -->
       <number-input
         v-if="field"
         v-model.number="input"
         :max="field.defaultUnit ? 100 : field.max"
         :min="min"
         :name="name"
+        :default-value="field.defaultUnit"
         @input="emitValue"
         @toggle="handleToggle"
       />
@@ -17,14 +19,10 @@
 </template>
 
 <script>
-// import ColorPicker from '@/components/inputs/ColorPicker'
 import NumberInput from '@/components/inputs/NumberInput'
-// import ToggleInput from '@/components/inputs/ToggleInput'
 export default {
   name: 'InputWrapper',
   components: {
-    // ColorPicker,
-    // ToggleInput,
     NumberInput
   },
   props: {
@@ -99,7 +97,15 @@ export default {
       }
     },
     emitValue(value) {
-      if (this.field) {
+      if (typeof value === 'boolean') {
+        this.toggle = value
+        value ? (this.input = this.field.pct) : (this.input = this.field.px)
+        this.$emit('input', {
+          ...this.field,
+          defaultUnit: value
+        })
+      }
+      if (this.field && typeof value !== 'boolean') {
         this.field.defaultUnit
           ? this.$emit('input', {
               ...this.field,
@@ -121,13 +127,6 @@ export default {
 
 .input-wrapper
   display: flex
-
-.color-stop-wrapper
-  display: flex
-  .input-wrapper
-    border: 0
-    margin: 0
-    padding: 0
 
 label
   font-family: 'Rubik', sans-serif

@@ -11,7 +11,11 @@
           background: gradients
         }"
       >
-        <div :style="{ background: preview }" class="preview" />
+        <div
+          ref="gradientPreview"
+          :style="{ background: preview }"
+          class="preview"
+        />
       </div>
     </div>
   </div>
@@ -46,6 +50,7 @@ export default {
     // Add event listener for calculating max canvas size
     // eslint-disable-next-line
     window.addEventListener('resize', this.updateMax)
+    // this.$refs.gradientPreview('')
   },
   destroyed() {
     // Remove event listener for calculating max canvas size
@@ -56,6 +61,7 @@ export default {
     this.updateMax()
   },
   methods: {
+    updateSize() {},
     updateMax() {
       // Get the size of the div that is our canvas in max
       const width = document.getElementById('canvas-max').offsetWidth
