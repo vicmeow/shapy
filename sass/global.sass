@@ -1,6 +1,6 @@
 body, html
   font-family: $font
-  font-size: 18px
+  font-size: 16px
   color: $black
   margin: 0
 
@@ -10,9 +10,13 @@ body, html
   box-sizing: border-box
 
 button
-  // font-size: 1rem
+  font-size: .8rem
+  border: 0
+  background: 0
   color: $black
   font-family: $font
+  padding: 0
+  margin: 0
 
 a
   color: $black
@@ -29,17 +33,7 @@ h1, h2, h3, h4
   font-weight: 600
 
 .wrapper
-  outline: 1px solid red
-  min-height: 100vh
-  max-height: 100vh
   display: grid
   grid-template-columns: 1fr
   grid-template-rows: max-content 1fr max-content
   grid-template-areas: 'nav' 'page' 'footer'
-
-.page
-  display: grid
-  grid-template-columns: minmax(350px, .7fr) 1fr
-  gap: 1rem
-  @media screen and (max-width: 768px)
-    grid-template-columns: 1fr
