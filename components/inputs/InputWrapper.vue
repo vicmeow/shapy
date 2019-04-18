@@ -33,7 +33,8 @@ export default {
     },
     name: {
       type: String,
-      required: true
+      required: false,
+      default: 'Name'
     },
     field: {
       type: Object,
