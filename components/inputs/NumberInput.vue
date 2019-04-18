@@ -1,16 +1,5 @@
 <template>
   <div class="number-wrapper">
-    <!-- Number input as a range slider -->
-    <div class="range-input">
-      <input
-        :name="`input`"
-        :value="value"
-        :min="min"
-        :max="max"
-        type="range"
-        @input="$emit('input', parseInt($event.target.value))"
-      />
-    </div>
     <!-- Number input as a simple number input -->
     <div class="number-input">
       <input
@@ -27,6 +16,17 @@
       class="toggle-input"
       @input="$emit('input', $event)"
     />
+    <!-- Number input as a range slider -->
+    <div class="range-input">
+      <input
+        :name="`input`"
+        :value="value"
+        :min="min"
+        :max="max"
+        type="range"
+        @input="$emit('input', parseInt($event.target.value))"
+      />
+    </div>
   </div>
 </template>
 
