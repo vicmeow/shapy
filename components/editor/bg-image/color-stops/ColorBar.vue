@@ -119,17 +119,18 @@ export default {
 </script>
 
 <style lang="sass">
+
 .color-bar-wrapper
   position: relative
   width: 100%
-  padding: 1rem
+  padding: 1rem 0
   padding-bottom: 2.5rem
 
 .color-bar
   width: 100%
-  height: 2.5rem
+  height: 2rem
   box-shadow: 0 0 10px rgba(0,0,0,.3)
-  padding: 3px
+  padding: 2px
   border-radius: 4px
 
 .color-gradient
@@ -141,8 +142,8 @@ export default {
   position: absolute
   display: flex
   top: .5rem
-  left: 10px
-  right: 10px
-  height: 3.5rem
+  left: 0
+  right: 0
+  height: 3rem
   cursor: copy
 </style>

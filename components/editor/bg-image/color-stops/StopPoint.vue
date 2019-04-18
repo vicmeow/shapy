@@ -2,7 +2,7 @@
   <div
     class="stop-point"
     :style="{
-      transform: `translateX(${px}px)`
+      transform: `translateX(${px - 10}px)`
     }"
     @mousedown="$emit('dragStart', $event)"
   >
@@ -51,7 +51,7 @@ export default {
   top: 10%
   right: 25%
   height: 80%
-  width: 50%
+  width: 10px
   border: 2px solid $white
   box-shadow: 0 0 5px rgba(0,0,0,.3)
   border-radius: 2rem

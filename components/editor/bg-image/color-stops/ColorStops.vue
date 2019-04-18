@@ -21,14 +21,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { createHelpers } from 'vuex-map-fields'
+import { mapFields } from 'vuex-map-fields'
 import { Chrome } from 'vue-color'
 import ColorBar from '@/components/editor/bg-image/color-stops/ColorBar'
 import StopList from '@/components/editor/bg-image/color-stops/StopList'
-const { mapFields } = createHelpers({
-  getterType: 'colorStops/getField',
-  mutationType: 'colorStops/updateField'
-})
 export default {
   components: {
     ColorPicker: Chrome,
@@ -41,7 +37,9 @@ export default {
     }
   },
   computed: {
-    ...mapFields(['activeStop']),
+    ...mapFields({
+      activeStop: 'colorStops.activeStop'
+    }),
     ...mapGetters({
       stops: 'colorStops/sortedStops'
     })
