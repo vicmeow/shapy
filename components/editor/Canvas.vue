@@ -58,7 +58,9 @@ export default {
   },
   mounted() {
     // Update the max values (canvas => box => shape)
-    this.updateMax()
+    setTimeout(() => {
+      this.updateMax()
+    }, 1)
   },
   methods: {
     updateSize() {},
@@ -77,11 +79,11 @@ export default {
 
 .canvas-wrapper
   position: relative
-  background: white
+  height: 100%
+  width: 100%
   border-radius: 3px
   display: flex
   padding: 1rem 0
-  min-height: 300px
 
 .canvas
   display: flex
