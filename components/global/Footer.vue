@@ -17,9 +17,11 @@
 <style lang="sass">
 .footer
   background: $black
-  position: sticky
+  position: fixed
   bottom: 0
-  padding: .5rem 1rem
+  z-index: 900
+  width: 100%
+  padding: .2rem 1rem
 
 .footer-link
   margin-right: 1rem

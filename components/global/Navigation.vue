@@ -34,9 +34,13 @@ export default {
 
 <style lang="sass" scoped>
 .navigation
+  position: sticky
+  top: 0
   display: flex
   padding: .5rem 1rem
   background: $black
+  height: 2.5rem
+  z-index: 1000
 
 .nav-link
   color: $white

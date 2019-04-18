@@ -1,5 +1,5 @@
 <template>
-  <div class="controls">
+  <div class="editor-controls">
     <no-ssr>
       <background-image />
       <background-repeat />
@@ -32,6 +32,28 @@ export default {
 </script>
 
 <style lang="sass">
-.heading
-  flex-basis: 100%
+.editor-controls
+  max-width: 600px
+  display: grid
+  grid-template-areas: 'bgImage bgImage' 'bgRepeat bgRepeat' 'bgSize bgPosition'
+  gap: 1rem
+  align-content: flex-start
+  padding: 1rem
+  @media screen and (max-width: 768px)
+    grid-template-areas: 'bgImage' 'bgRepeat' 'bgRepeat' 'bgSize' 'bgPosition'
+
+.bg-image
+  grid-area: bgImage
+
+.bg-repeat
+  grid-area: bgRepeat
+
+.bg-size
+  grid-area: bgSize
+
+.bg-position
+  grid-area: bgPosition
+
+.overflow
+  height: 1000px
 </style>
