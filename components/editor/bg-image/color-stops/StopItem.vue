@@ -37,12 +37,15 @@ export default {
   display: flex
   margin-bottom: .5rem
   padding: .5rem
-  box-shadow: 0 0 10px rgba(0,0,0,0.1)
+  //box-shadow: 0 0 10px rgba(0,0,0,0.1)
   transition: all .3s linear
+  border: 1px solid rgba(0,0,0,.1)
+  border-radius: 10px
 
   &.active
-    transform: scale(1.05)
-    box-shadow: 0 0 10px rgba(0,0,0,0.2)
+    border: 1px solid rgba(0,0,0,.2)
+    // transform: translateX(5px)
+    //box-shadow: 0 0 10px rgba(0,0,0,0.2)
 
 .stop-info
   flex-grow: 1
@@ -50,8 +53,12 @@ export default {
 
 .stop-item-color
   height: 100%
-  width: 3rem
+  width: 1.5rem
+  height: 1.5rem
+  border-radius: 50%
   margin-right: 1rem
+  border: 1px solid rgba(0,0,0,.1)
+  // box-shadow: 0 0 1px rgba(0,0,0,0.2)
 
 .stop-value
   margin-left: auto

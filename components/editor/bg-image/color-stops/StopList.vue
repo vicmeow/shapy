@@ -1,18 +1,28 @@
 <template>
   <div class="stop-list-wrapper">
-    <h3 class="list-title">Color stops</h3>
     <ul class="stop-list">
       <stop-item
         v-for="stop in stops"
         :key="stop.id"
         :stop="stop"
         :class="{ active: stop.id === activeStop.id }"
-        @click="$emit('setActive', stop)"
+        @click.native="$emit('setActive', stop)"
       >
         <div class="stop-actions">
-          <button @click="moveUp(stop.id)">^</button>
-          <button @click="moveDown(stop.id)">></button>
-          <button @click="removeStop(stop.id)">x</button>
+          <div class="move-buttons">
+            <button class="btn btn-action btn-move" @click="moveUp(stop.id)">
+              p
+            </button>
+            <button class="btn btn-action btn-move" @click="moveDown(stop.id)">
+              d
+            </button>
+          </div>
+          <button
+            class="btn btn-action btn-remove"
+            @click="removeStop(stop.id)"
+          >
+            x
+          </button>
         </div>
       </stop-item>
     </ul>
@@ -51,21 +61,33 @@ export default {
 <style lang="sass">
 .stop-list-wrapper
   position: relative
-  max-height: 300px
+  max-height: 225px
   overflow-y: auto
   padding: 0 1rem
   flex-grow: 1
-
-.list-title
-  position: sticky
-  top: 0
-  margin: 0
-  padding-bottom: .5rem
-  background: $white
-  font-size: 1.2rem
 
 .stop-list
   list-style-type: none
   padding: 0
   margin: 0
+
+.stop-actions
+  display: flex
+
+.move-buttons
+  display: flex
+  flex-direction: column
+
+.btn-action
+  padding: 0 .2rem
+
+.btn-move:hover
+  color: green
+  cursor: pointer
+
+.btn-remove
+  color: red
+  &:hover
+    cursor: pointer
+    outline: 1px solid red
 </style>
