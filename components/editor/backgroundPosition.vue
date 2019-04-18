@@ -1,6 +1,6 @@
 <template>
   <div class="bg-position">
-    <slot />
+    <h3 class="heading">Background-position</h3>
     <!-- GRADIENT POSITION -->
     <input-wrapper
       v-model="x"

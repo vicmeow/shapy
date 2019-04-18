@@ -1,6 +1,6 @@
 <template>
   <div class="bg-image">
-    <h2 class="heading">Background-image</h2>
+    <h3 class="heading">Background-image</h3>
     <div class="general-settings">
       <input-wrapper class="gradient-repeating">
         <label>Repeating</label>
@@ -49,7 +49,7 @@ export default {
 
 <style lang="sass" scoped>
 .bg-image
-  outline: 1px solid red
+  // outline: 1px solid red
 
 .general-settings
   display: flex

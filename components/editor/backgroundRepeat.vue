@@ -1,5 +1,6 @@
 <template>
   <div class="bg-repeat">
+    <h3 class="heading">Background-repeat</h3>
     <input-wrapper label="background repeat" name="background repeat">
       <radio-input
         v-for="radio in backgroundRepeat.types"

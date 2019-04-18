@@ -1,7 +1,6 @@
 <template>
   <div class="bg-size">
-    <slot />
-
+    <h3 class="heading">Background-size</h3>
     <!-- BACKGROUND SIZE -->
     <input-wrapper
       v-model="width"
