@@ -10,16 +10,16 @@ export const state = () => ({
       id: 'ap6y8f70k', // ID of gradient
       pct: 0, // Gradient stop
       defaultUnit: true, // %/px
-      active: 'rgba',
+      active: 'hex',
       color: {
         // Color from color picker
         a: 1,
-        hex: '#812525',
-        hex8: '#812525FF',
-        hsl: { a: 1, h: 0, l: 0.3248028, s: 0.5517107611141283 },
-        hsv: { a: 1, h: 0, s: 0.7111, v: 0.504 },
+        hex: '#080808',
+        hex8: '#080808FF',
+        hsl: { a: 1, h: 0, l: 0.031556, s: 0.020408163265306138 },
+        hsv: { a: 1, h: 0, s: 0.04000000000000003, v: 0.0322 },
         oldHue: 0,
-        rgba: { a: 1, b: 37, g: 37, r: 129 },
+        rgba: { a: 1, b: 8, g: 8, r: 8 },
         source: 'hsva'
       }
     },
