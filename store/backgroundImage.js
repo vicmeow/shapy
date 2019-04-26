@@ -21,7 +21,21 @@ export const state = () => ({
 })
 
 export const getters = {
-  getField
+  getField,
+  comment(state) {
+    return state.comment === '' ? false : state.comment
+  },
+  repeating(state) {
+    return state.repeating ? 'repeating-' : false
+  },
+  type(state) {
+    return `${state.type.active}-gradient`
+  },
+  angle(state) {
+    return state.type.active === 'linear' && state.angle.active > 0
+      ? `${state.angle.active}deg`
+      : false
+  }
 }
 
 export const mutations = {
