@@ -2,10 +2,6 @@ import { getField, updateField } from 'vuex-map-fields'
 export const strict = false
 
 export const state = () => ({
-  gradientList: [],
-  preview: '',
-  gradientStrings: '',
-  id: 1,
   actions: []
 })
 
