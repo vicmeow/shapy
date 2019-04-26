@@ -6,6 +6,8 @@
       <background-size />
       <background-position />
     </no-ssr>
+    <button @click="$emit('showList')">Show list</button>
+    <button @click="addGradient">Add to canvas</button>
   </div>
 </template>
 
@@ -26,6 +28,11 @@ export default {
       const width = `${this.$store.state.gradientCanvas.width.max}px`
       const height = `${this.$store.state.gradientCanvas.height.max}px`
       return { width, height }
+    }
+  },
+  methods: {
+    addGradient() {
+      this.$store.dispatch('gradients/addGradient')
     }
   }
 }
