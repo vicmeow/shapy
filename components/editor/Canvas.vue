@@ -80,7 +80,8 @@ export default {
   width: 100%
   border-radius: 3px
   display: flex
-  padding: 1rem 0
+  padding: 1rem
+  background: $white
 
 .canvas
   display: flex
