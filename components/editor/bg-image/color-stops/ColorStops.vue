@@ -73,4 +73,6 @@ export default {
 
 #color-picker
   box-shadow: none
+  width: 100%
+  max-width: 180px
 </style>
