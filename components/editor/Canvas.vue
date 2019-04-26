@@ -8,12 +8,12 @@
           'max-width': max.width,
           height: canvas.height,
           'max-height': max.height,
-          background: gradients
+          background: gradientString
         }"
       >
         <div
           ref="gradientPreview"
-          :style="{ background: preview }"
+          :style="{ background: gradientPreview }"
           class="preview"
         />
       </div>
@@ -22,17 +22,14 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapState({
-      gradients: 'gradientStrings',
-      preview: 'preview'
-    }),
     ...mapGetters({
       canvas: 'gradientCanvas/size',
-      background: 'background'
+      gradientPreview: 'background',
+      gradientString: 'gradients/string'
     }),
     max() {
       const width = `${this.$store.state.gradientCanvas.width.max}px`
