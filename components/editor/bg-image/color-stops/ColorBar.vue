@@ -15,7 +15,7 @@
           v-for="stop in stops"
           :key="stop.id"
           :value="stop.pct"
-          :color="stop.color.hex"
+          :stop="stop"
           :width="width"
           @mousedown.native="$emit('setActive', stop)"
           @dragStart="dragStart($event, stop.id)"

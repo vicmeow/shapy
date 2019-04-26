@@ -1,10 +1,11 @@
 <template>
-  <div class="stop-item">
-    <div class="stop-info" :class="`stop-${stop.id}`">
+  <div class="stop-item" :class="`stop-${stop.id}`">
+    <div class="stop-info">
       <div
         class="stop-item-color"
         :style="{ 'background-color': backgroundColor }"
       ></div>
+      <div>{{ backgroundColor }}</div>
       <div class="stop-value">{{ stop.pct }}%</div>
     </div>
     <slot />
@@ -26,7 +27,7 @@ export default {
         this.stop.color.rgba.b
       },${this.stop.color.rgba.a})`
       const hex = this.stop.color.hex
-      return this.stop.active === 'hex' ? hex : rgba
+      return this.stop.color.a < 1 ? rgba : hex
     }
   }
 }

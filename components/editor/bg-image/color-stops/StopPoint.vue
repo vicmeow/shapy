@@ -1,12 +1,16 @@
 <template>
   <div
     class="stop-point"
+    :class="`stop-point-${stop.id}`"
     :style="{
       transform: `translateX(${px - 10}px)`
     }"
     @mousedown="$emit('dragStart', $event)"
   >
-    <div class="stop-color" :style="{ 'background-color': color }"></div>
+    <div
+      class="stop-color"
+      :style="{ 'background-color': backgroundColor }"
+    ></div>
     <label class="point-label">{{ value }}%</label>
   </div>
 </template>
@@ -18,8 +22,8 @@ export default {
       type: Number,
       required: true
     },
-    color: {
-      type: String,
+    stop: {
+      type: Object,
       required: true,
       default: () => {}
     },
@@ -32,6 +36,13 @@ export default {
   computed: {
     px() {
       return (this.width / 100) * this.value
+    },
+    backgroundColor() {
+      const rgba = `rgba(${this.stop.color.rgba.r},${this.stop.color.rgba.g},${
+        this.stop.color.rgba.b
+      },${this.stop.color.rgba.a})`
+      const hex = this.stop.color.hex
+      return this.stop.color.a < 1 ? rgba : hex
     }
   }
 }
