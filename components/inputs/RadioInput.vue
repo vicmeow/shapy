@@ -51,11 +51,8 @@ export default {
 <style lang="sass" scoped>
 
 .radio-input
+  display: flex
   text-align: center
-  margin: 0 1rem
-
-.radio-input, .radio-label
-  display: block
 
 .radio-angle-label::after
   content: '\00b0'
