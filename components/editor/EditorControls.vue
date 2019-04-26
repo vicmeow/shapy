@@ -6,7 +6,6 @@
       <background-size />
       <background-position />
     </no-ssr>
-    <button @click="$emit('showList')">Show list</button>
     <button @click="addGradient">Add to canvas</button>
   </div>
 </template>
@@ -40,14 +39,19 @@ export default {
 
 <style lang="sass">
 .editor-controls
-  max-width: 600px
+  width: 100%
   display: grid
   grid-template-areas: 'bgImage bgImage' 'bgRepeat bgRepeat' 'bgSize bgPosition'
   gap: 1rem
   align-content: flex-start
-  padding: 1rem
+  padding: .5rem
   @media screen and (max-width: 768px)
     grid-template-areas: 'bgImage' 'bgRepeat' 'bgRepeat' 'bgSize' 'bgPosition'
+
+.control
+  background: $white
+  padding: 1rem
+  border-radius: $borderRadius
 
 .bg-image
   grid-area: bgImage
