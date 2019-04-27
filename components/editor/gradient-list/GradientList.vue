@@ -1,8 +1,5 @@
 <template>
   <div class="gradient-list">
-    <button @click="$emit('showList')">
-      <span>Close</span>
-    </button>
     <button @click="shorthand = !shorthand">
       <span v-if="shorthand">X</span>
       <span v-if="!shorthand">Shorthand</span>
