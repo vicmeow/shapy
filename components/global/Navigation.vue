@@ -39,7 +39,7 @@ export default {
   display: flex
   padding: .5rem 1rem
   background: $black
-  height: 2.5rem
+  height: $navHeight
   z-index: 1000
 
 .nav-link
