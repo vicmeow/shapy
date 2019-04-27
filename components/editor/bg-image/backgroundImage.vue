@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-image">
+  <div class="control image-control">
     <h2 class="heading">Background-image</h2>
     <h3>Type</h3>
     <div class="gradient-type">
@@ -81,8 +81,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.bg-image
-  // outline: 1px solid red
 
 .gradient-type
   display: flex

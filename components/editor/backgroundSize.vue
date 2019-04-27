@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-size">
+  <div class="control size-control">
     <h3 class="heading">Background-size</h3>
     <!-- BACKGROUND SIZE -->
     <input-wrapper

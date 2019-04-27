@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-repeat">
+  <div class="control repeat-control">
     <h3 class="heading">Background-repeat</h3>
     <input-wrapper label="background repeat" name="background repeat">
       <radio-input

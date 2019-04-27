@@ -6,7 +6,9 @@
       <background-size />
       <background-position />
     </no-ssr>
-    <button @click="addGradient">Add to canvas</button>
+    <button class="btn btn-action btn-add" @click="addGradient">
+      Add to canvas
+    </button>
   </div>
 </template>
 
@@ -41,29 +43,29 @@ export default {
 .editor-controls
   width: 100%
   display: grid
-  grid-template-areas: 'bgImage bgImage' 'bgRepeat bgRepeat' 'bgSize bgPosition'
+  grid-template-areas: 'image image' 'repeat repeat' 'size position'
   gap: 1rem
   align-content: flex-start
   padding: .5rem
   @media screen and (max-width: 768px)
-    grid-template-areas: 'bgImage' 'bgRepeat' 'bgRepeat' 'bgSize' 'bgPosition'
+    grid-template-areas: 'image' 'repeat' 'size' 'position'
 
 .control
   background: $white
   padding: 1rem
   border-radius: $borderRadius
 
-.bg-image
-  grid-area: bgImage
+.image-control
+  grid-area: image
 
-.bg-repeat
-  grid-area: bgRepeat
+.repeat-control
+  grid-area: repeat
 
-.bg-size
-  grid-area: bgSize
+.size-control
+  grid-area: size
 
-.bg-position
-  grid-area: bgPosition
+.position-control
+  grid-area: position
 
 .overflow
   height: 1000px

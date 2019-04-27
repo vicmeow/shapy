@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-position">
+  <div class="control position-control">
     <h3 class="heading">Background-position</h3>
     <!-- GRADIENT POSITION -->
     <input-wrapper
