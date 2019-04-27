@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import BackgroundImage from '@/components/editor/bg-image/BackgroundImage'
-import BackgroundRepeat from '@/components/editor/BackgroundRepeat'
-import BackgroundSize from '@/components/editor/BackgroundSize'
-import BackgroundPosition from '@/components/editor/BackgroundPosition'
+import BackgroundImage from '@/components/editor/controls/BackgroundImage'
+import BackgroundRepeat from '@/components/editor/controls/BackgroundRepeat'
+import BackgroundSize from '@/components/editor/controls/BackgroundSize'
+import BackgroundPosition from '@/components/editor/controls/BackgroundPosition'
 export default {
   components: {
     BackgroundImage,
@@ -54,6 +54,7 @@ export default {
   background: $white
   padding: 1rem
   border-radius: $borderRadius
+  min-width: 0
 
 .image-control
   grid-area: image

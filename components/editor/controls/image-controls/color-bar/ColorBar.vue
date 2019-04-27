@@ -11,7 +11,7 @@
       <!-- The drag area for stop points -->
       <div class="drag-area">
         <!-- Stop points for the gradient -->
-        <stop-point
+        <color-point
           v-for="stop in stops"
           :key="stop.id"
           :value="stop.pct"
@@ -26,10 +26,10 @@
 </template>
 
 <script>
-import StopPoint from '@/components/editor/bg-image/color-stops/StopPoint.vue'
+import ColorPoint from './ColorPoint.vue'
 export default {
   components: {
-    StopPoint
+    ColorPoint
   },
   props: {
     // Stops for the color bar
@@ -124,19 +124,20 @@ export default {
   position: relative
   width: 100%
   padding: 1rem 0
-  padding-bottom: 2.5rem
+  padding-bottom: 2rem
+  grid-column: 1 / -1
 
 .color-bar
   width: 100%
   height: 2rem
-  box-shadow: 0 0 10px rgba(0,0,0,.3)
+  box-shadow: $boxShadow
   padding: 2px
   border-radius: 4px
 
 .color-gradient
   height: 100%
   width: 100%
-  border-radius: 2px
+  border-radius: $borderRadius
 
 .drag-area
   position: absolute
@@ -146,4 +147,55 @@ export default {
   right: 0
   height: 3rem
   cursor: copy
+
+#color-picker
+  box-shadow: none
+  width: 100%
+  max-width: 100%
+  font-family: $monospace
+  // display: grid
+  // grid-template-columns: 1fr 1fr
+
+  .vc-chrome-body
+    padding: 0
+    padding-top: .5rem
+
+  .vc-chrome-fields-wrap
+    margin-bottom: 1rem
+
+  .vc-editable-input
+    box-sizing: content-box
+
+  .vc-input__input
+    color: $black
+    box-shadow: none
+    font-size: 1rem
+
+  .vc-input__label
+    font-size: .8rem
+    color: $darkgrey
+    letter-spacing: .2rem
+    margin-top: .5rem
+    font-family: $font
+
+  .vc-chrome-field
+    padding: 0
+
+  .vc-chrome-fields
+    flex: unset
+
+  .vc-chrome-toggle-icon-highlight
+    display: none
+
+  .vc-chrome-color-wrap
+    display: none
+
+  .vc-chrome-saturation-wrap
+    // padding: 0
+    border-radius: $borderRadius
+
+  // .vc-chrome-color-wrap .vc-chrome-active-color,
+  // .vc-chrome-color-wrap .vc-checkerboard
+  //   height: 1.5rem
+  //   width: 1.5rem
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="control size-control">
-    <h3 class="heading">Background-size</h3>
+    <h3 class="heading">Size</h3>
     <!-- BACKGROUND SIZE -->
     <input-wrapper
       v-model="width"

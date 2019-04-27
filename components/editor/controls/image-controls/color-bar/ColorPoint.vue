@@ -69,5 +69,5 @@ export default {
 
 .point-label
   position: absolute
-  bottom: -1.5rem
+  bottom: -1rem
 </style>

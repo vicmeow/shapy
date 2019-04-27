@@ -1,6 +1,6 @@
 <template>
   <div class="control position-control">
-    <h3 class="heading">Background-position</h3>
+    <h3 class="heading">Position</h3>
     <!-- GRADIENT POSITION -->
     <input-wrapper
       v-model="x"
