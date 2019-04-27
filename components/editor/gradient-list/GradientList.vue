@@ -13,6 +13,7 @@
     <div v-if="!layers.length">
       You haven't added any gradients to the canvas yet.
   </div>
+  </div>
 </template>
 
 <script>
