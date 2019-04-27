@@ -13,6 +13,8 @@
       :key="item.id"
       :item="item"
     />
+    <div v-if="!layers.length">
+      You haven't added any gradients to the canvas yet.
   </div>
 </template>
 
