@@ -1,5 +1,4 @@
 // TODO: Add action for updating max PX value for color stop, based on box size
-// TODO: Refactor
 
 import { getField, updateField } from 'vuex-map-fields'
 
@@ -58,10 +57,10 @@ export const getters = {
           stop.color.rgba.b
         },${stop.color.rgba.a})`
         const hex = stop.color.hex
-        const color = stop.active === 'hex' ? hex : rgba
+        const color = stop.color.a < 1 ? rgba : hex
         return `${color} ${stop.pct}%`
       })
-    return colors.join(', ')
+    return colors
   }
 }
 
