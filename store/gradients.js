@@ -41,12 +41,7 @@ export const actions = {
         position: rootState.backgroundPosition,
         size: rootState.backgroundSize,
         repeat: rootState.backgroundRepeat,
-        image: {
-          type: rootState.backgroundImage.type.active,
-          repeating: rootState.backgroundImage.repeating,
-          angle: rootState.backgroundImage.angle.active,
-          comment: rootState.backgroundImage.comment
-        },
+        image: rootState.backgroundImage,
         colorStops: rootGetters['colorStops/sortedStops']
       },
       processed: {

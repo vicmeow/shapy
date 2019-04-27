@@ -28,9 +28,11 @@ export default {
   computed: {
     ...mapGetters({
       canvas: 'gradientCanvas/size',
-      gradientPreview: 'background',
       gradientString: 'gradients/string'
     }),
+    gradientPreview() {
+      return this.$store.getters.background.join('')
+    },
     max() {
       const width = `${this.$store.state.gradientCanvas.width.max}px`
       const height = `${this.$store.state.gradientCanvas.height.max}px`
@@ -60,7 +62,6 @@ export default {
     }, 1)
   },
   methods: {
-    updateSize() {},
     updateMax() {
       // Get the size of the div that is our canvas in max
       const width = document.getElementById('canvas-max').offsetWidth

@@ -11,10 +11,10 @@ export const getters = {
   backgroundImage(state, rootGetters) {
     const shape =
       rootGetters['backgroundImage/type'] === 'radial-gradient'
-        ? `${rootGetters['radialShape/radialString']},`
+        ? `${rootGetters['radialShape/radialString']}, `
         : false
     const angle = rootGetters['backgroundImage/angle']
-      ? `${rootGetters['backgroundImage/angle']},`
+      ? `${rootGetters['backgroundImage/angle']}, `
       : false
     return [
       rootGetters['backgroundImage/comment'],
@@ -23,20 +23,20 @@ export const getters = {
       '(',
       angle,
       shape,
-      rootGetters['colorStops/colorString'],
-      ')'
+      rootGetters['colorStops/colorString'].join(', '),
+      ') '
     ].filter(Boolean)
   },
   // CSS background-position property
   backgroundPosition(state) {
     // Which X coordinate unit to return based on defaultUnit
     const x = state.backgroundPosition.x.defaultUnit
-      ? `${state.backgroundPosition.x.pct}%`
-      : `${state.backgroundPosition.x.px}px`
+      ? `${state.backgroundPosition.x.pct}% `
+      : `${state.backgroundPosition.x.px}px `
     // Which Y coordinate unit to return based on defaultUnit
     const y = state.backgroundPosition.y.defaultUnit
-      ? `${state.backgroundPosition.y.pct}%`
-      : `${state.backgroundPosition.y.px}px`
+      ? `${state.backgroundPosition.y.pct}% `
+      : `${state.backgroundPosition.y.px}px `
     // Finished string for the gradient's coordinates and size
     return [x, y]
   },
@@ -44,12 +44,12 @@ export const getters = {
   backgroundSize(state) {
     // Which width unit to return based on defaultUnit
     const width = state.backgroundSize.width.defaultUnit
-      ? `${state.backgroundSize.width.pct}%`
-      : `${state.backgroundSize.width.px}px`
+      ? `${state.backgroundSize.width.pct}% `
+      : `${state.backgroundSize.width.px}px `
     // Which height unit to return based on defaultUnit
     const height = state.backgroundSize.height.defaultUnit
-      ? `${state.backgroundSize.height.pct}%`
-      : `${state.backgroundSize.height.px}px`
+      ? `${state.backgroundSize.height.pct}% `
+      : `${state.backgroundSize.height.px}px `
     // Finished string for the gradient's size
     return [width, height]
   },
@@ -60,29 +60,24 @@ export const getters = {
   // CSS background shorthand property
   background(state, getters) {
     const shorthand = type => {
-      // Shorthand for LINEAR gradients
-      if (type === 'linear') {
-        return `${getters.backgroundImage.join('')} ${
-          getters.backgroundRepeat
-        } ${getters.backgroundPosition.join(
-          ' '
-        )} / ${getters.backgroundSize.join(' ')}`
-      }
       // Shorthand for CONICAL gradients
       if (type === 'conical') {
-        return `${getters.backgroundImage.join(
-          ''
-        )} ${getters.backgroundPosition.join(
-          ' '
-        )} / ${getters.backgroundSize.join(' ')} ${getters.backgroundRepeat}`
+        return [
+          getters.backgroundImage,
+          getters.backgroundPosition,
+          ' / ',
+          getters.backgroundSize,
+          getters.backgroundRepeat
+        ].flat(3)
       }
-      // Shorthand for RADIAL gradients
-      // TODO: add radial shape logic
-      return `${getters.backgroundImage.join('')} ${
-        getters.backgroundRepeat
-      } ${getters.backgroundPosition.join(' ')} / ${getters.backgroundSize.join(
-        ' '
-      )}`
+      // Shorthand for LINEAR & RADIAL gradients
+      return [
+        getters.backgroundImage,
+        `${getters.backgroundRepeat} `,
+        getters.backgroundPosition,
+        ' / ',
+        getters.backgroundSize
+      ].flat(3)
     }
     return shorthand(state.backgroundImage.type.active)
   }
