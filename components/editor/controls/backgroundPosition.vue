@@ -4,13 +4,13 @@
     <!-- GRADIENT POSITION -->
     <number-input
       v-model="x"
-      name="position-x"
+      name="x-axis"
       :field="x"
       :min="x.defaultUnit ? 0 : -width"
     />
     <number-input
       v-model="y"
-      name="position-y"
+      name="y-axis"
       :field="y"
       :min="y.defaultUnit ? 0 : -height"
     />
