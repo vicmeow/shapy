@@ -17,7 +17,8 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Muli:400,600'
+        href:
+          'https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Lato:400,700'
       }
     ]
   },
