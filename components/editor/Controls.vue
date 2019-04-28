@@ -44,11 +44,13 @@ export default {
   width: 100%
   display: grid
   grid-template-areas: 'image image' 'repeat repeat' 'size position'
+  grid-template-columns: 1fr 1fr
   gap: 1rem
   align-content: flex-start
   padding: .5rem
   @media screen and (max-width: 768px)
     grid-template-areas: 'image' 'repeat' 'size' 'position'
+    grid-template-columns: 1fr
 
 .control
   background: $white
