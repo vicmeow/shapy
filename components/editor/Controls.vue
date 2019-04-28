@@ -57,6 +57,7 @@ export default {
   padding: 1rem
   border-radius: $borderRadius
   min-width: 0
+  box-shadow: 3px 3px 3px #282f38
 
 .image-control
   grid-area: image
