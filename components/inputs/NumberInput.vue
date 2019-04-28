@@ -1,29 +1,42 @@
 <template>
   <div class="number-wrapper">
+    <label
+      id="`${name}-label`"
+      :class="`label number-label ${name}-label`"
+      :for="`${name}-label`"
+    >
+      {{ name }}
+    </label>
     <!-- Number input as a simple number input -->
-    <div class="number-input">
+    <div class="number-input-wrapper">
       <input
+        class="number-input"
         :id="`${name}-input-number`"
         v-model.number="input"
+        aria-labelledby=""
         :min="field.defaultUnit ? 0 : min / 2"
         :max="field.defaultUnit ? 100 : field.max"
         type="number"
         @input="handleInput($event.target.value)"
       />
-    </div>
-    <!--Toggle for number unit, % or px -->
-    <toggle-input :name="name" class="toggle-input" @input="handleToggle" />
-    <!-- Number input as a range slider -->
-    <div class="range-input">
-      <input
-        :id="`${name}-input-range`"
-        v-model.number="input"
-        :min="min"
-        :max="field.defaultUnit ? 100 : field.max"
-        type="range"
-        @input="handleInput($event.target.value)"
+      <!--Toggle for number unit, % or px -->
+      <toggle-input
+        :name="field.defaultUnit ? '%' : 'px'"
+        class="toggle-input"
+        @input="handleToggle"
       />
     </div>
+    <!-- Number input as a range slider -->
+    <input
+      class="range-input"
+      :id="`${name}-input-range`"
+      v-model.number="input"
+      :aria-labelledby="`${name}-label`"
+      :min="min"
+      :max="field.defaultUnit ? 100 : field.max"
+      type="range"
+      @input="handleInput($event.target.value)"
+    />
   </div>
 </template>
 
@@ -109,20 +122,27 @@ export default {
 
 <style lang="sass">
 
-input
-  font-size: 1rem
-
-input[type="range"],
-input[type="number"]
-  width: 100%
-
 .number-wrapper
   display: flex
   flex-wrap: wrap
 
-.range-input
-  flex-basis: 100%
+.number-label
+  text-transform: capitalize
+  margin-right: 1rem
 
-.number-input, .toggle-wrapper
-  flex-basis: 50%
+.number-input-wrapper
+  display: flex
+  min-width: 0
+  flex-grow: 1
+  justify-content: flex-end
+
+.number-input
+  max-width: 80px
+  text-align: right
+
+.toggle-wrapper
+  flex-shrink: 0
+
+.range-input
+  width: 100%
 </style>
