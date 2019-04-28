@@ -1,20 +1,20 @@
 <template>
   <div class="control image-control">
     <h2 class="heading">Gradient</h2>
-    <!-- Type of gradient (linear, radial, conical) -->
+    <!-- Type of gradient (linear, radial, conical) and angle -->
     <gradient-type />
-    <!-- Color picker -->
-    <no-ssr>
-      <color-picker id="color-picker" v-model="activeStop.color" />
-    </no-ssr>
     <!-- Color bar displaying the gradient and handling stop points -->
     <color-bar
       :stops="stops"
       @createStop="createStop($event)"
       @setActive="setActive"
     />
+    <!-- Color picker -->
+    <no-ssr>
+      <color-picker id="color-picker" v-model="activeStop.color" />
+    </no-ssr>
     <!-- List of the gradient stop points that handles moving and deleting points -->
-    <stop-list
+    <color-list
       :stops="stops"
       :active-stop="activeStop"
       @setActive="setActive"
@@ -28,13 +28,13 @@ import { mapGetters } from 'vuex'
 import { Chrome } from 'vue-color'
 import ColorBar from './image-controls/color-bar/ColorBar'
 import GradientType from './image-controls/GradientType'
-import StopList from './image-controls/color-list/StopList'
+import ColorList from './image-controls/color-list/ColorList'
 export default {
   components: {
     ColorPicker: Chrome,
     GradientType,
     ColorBar,
-    StopList
+    ColorList
   },
   data() {
     return {
@@ -79,35 +79,46 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 
 .heading
   grid-column: 1/-1
 
 .image-control
+  background: pink
   display: grid
-  grid-template-columns: 1fr .8fr
+  grid-template-columns: .5fr 1fr
+  gap: 0 1rem
 
-.angle-control
-  height: 1.5rem
-  width: 1.5rem
-  border-radius: 50%
-  border: 2px solid $black
-  display: flex
-  align-items: center
-  justify-content: center
+#color-picker
+  box-shadow: none
+  width: 100%
+  max-width: 100%
+  font-family: $monospace
 
-.angle-point-wrapper
-  position: relative
-  height: 100%
-  width: 5px
-  pointer-events: none
+  .vc-chrome-saturation-wrap
+    height: 100%
+    max-height: 100px
 
-.angle-point
-  position: absolute
-  top: 2.5px
-  height: 5px
-  width: 5px
-  border-radius: 50%
-  background: black
+  .vc-chrome-body
+    padding: 0
+    padding: .5rem 0 1rem
+
+    .vc-chrome-color-wrap
+      display: none
+
+  .vc-chrome-fields-wrap
+    padding-top: .5rem
+
+  .vc-input__input
+    font-size: .9rem
+    color: $black
+    box-shadow: none
+    border-bottom: 1px solid $mediumgrey
+    border-radius: 0
+
+  .vc-input__label
+    font-family: $font
+    font-size: .8rem
+    color: $darkgrey
 </style>

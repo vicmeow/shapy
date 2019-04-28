@@ -16,7 +16,9 @@ export const state = () => ({
   repeating: false,
   angle: {
     active: 0,
-    types: [0, 45, 90, 180, 270]
+    defaultUnit: false,
+    max: 360,
+    types: [0, 90, 180, 270]
   }
 })
 
@@ -32,9 +34,23 @@ export const getters = {
     return `${state.type.active}-gradient`
   },
   angle(state) {
-    return state.type.active === 'linear' && state.angle.active > 0
-      ? `${state.angle.active}deg`
-      : false
+    if (state.type.active === 'linear') {
+      switch (state.angle.active) {
+        case 0:
+          return 'to top'
+        case 90:
+          return 'to right'
+        case 180:
+          return 'to bottom'
+        case 270:
+          return 'to left'
+        default:
+          return typeof state.angle.active === 'number'
+            ? `${state.angle.active}deg`
+            : state.angle.active
+      }
+    }
+    return false
   }
 }
 

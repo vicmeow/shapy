@@ -1,8 +1,9 @@
 <template>
-  <div class="stop-item" :class="`stop-${stop.id}`">
+  <div class="color-item" :class="`stop-${stop.id}`">
+    <slot />
     <div class="stop-info">
       <div
-        class="stop-item-color"
+        class="color-item-color"
         :style="{ 'background-color': backgroundColor }"
       ></div>
       <div class="stop-color">{{ backgroundColor }}</div>
@@ -54,15 +55,14 @@ export default {
 </script>
 
 <style lang="sass">
-.stop-item
+.color-item
   display: flex
   transition: transform .3s linear
   padding: .2rem .5rem
-  margin-right: .5rem
+  margin-right: 1rem
   margin-bottom: .5rem
-  font-family: $monospace
+  margin-left: .2rem
   align-items: center
-  box-shadow: $boxShadow
   border-radius: $borderRadius
 
   &.active
@@ -77,7 +77,7 @@ export default {
   display: flex
   align-items: center
 
-.stop-item-color
+.color-item-color
   height: 100%
   width: 1rem
   height: 1rem
@@ -108,6 +108,7 @@ export default {
   padding: 0
   color: $black
   font-size: .5rem
+  box-shadow: none
 
 .btn-move:hover
   cursor: pointer
@@ -117,6 +118,7 @@ export default {
   background: $white
   padding: 0
   padding-left: .5rem
+  box-shadow: none
   &:hover
     cursor: pointer
 </style>

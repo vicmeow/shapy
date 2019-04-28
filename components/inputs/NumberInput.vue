@@ -10,9 +10,9 @@
     <!-- Number input as a simple number input -->
     <div class="number-input-wrapper">
       <input
-        class="number-input"
         :id="`${name}-input-number`"
         v-model.number="input"
+        class="number-input"
         aria-labelledby=""
         :min="field.defaultUnit ? 0 : min / 2"
         :max="field.defaultUnit ? 100 : field.max"
@@ -21,6 +21,7 @@
       />
       <!--Toggle for number unit, % or px -->
       <toggle-input
+        v-if="field.defaultUnit"
         :name="field.defaultUnit ? '%' : 'px'"
         class="toggle-input"
         @input="handleToggle"
@@ -28,9 +29,9 @@
     </div>
     <!-- Number input as a range slider -->
     <input
-      class="range-input"
       :id="`${name}-input-range`"
       v-model.number="input"
+      class="range-input"
       :aria-labelledby="`${name}-label`"
       :min="min"
       :max="field.defaultUnit ? 100 : field.max"
@@ -74,27 +75,44 @@ export default {
       return this.field.defaultUnit
         ? Math.round((this.input * this.field.max) / 100)
         : Math.round((this.input / this.field.max) * 100)
+    },
+    active() {
+      if (this.field.active) return this.field.active
+      return false
     }
   },
   watch: {
     input() {
       // Make sure the input value isn't over its max value
       this.checkMax()
+    },
+    active() {
+      if (this.field.active) {
+        this.input = this.field.active
+      }
     }
   },
   mounted() {
-    // Set the input as the default value from the store
-    // based on default unit
-    this.input = this.field.defaultUnit ? this.field.pct : this.field.px
+    if (this.field.pct || this.field.px) {
+      // Set the input as the default value from the store
+      // based on default unit
+      this.input = this.field.defaultUnit ? this.field.pct : this.field.px
+    } else {
+      this.input = this.field.active
+    }
   },
   methods: {
     handleToggle() {
       this.toggle = !this.toggle
-      this.toggle ? (this.input = this.field.pct) : (this.input = this.field.px)
-      this.$emit('input', {
-        ...this.field,
-        defaultUnit: this.toggle
-      })
+      if (this.field.pct || this.field.px) {
+        this.toggle
+          ? (this.input = this.field.pct)
+          : (this.input = this.field.px)
+        this.$emit('input', {
+          ...this.field,
+          defaultUnit: this.toggle
+        })
+      }
     },
     checkMax() {
       if (this.field.defaultUnit && this.input > 100) {
@@ -104,17 +122,24 @@ export default {
       }
     },
     handleInput(value) {
-      this.field.defaultUnit
-        ? this.$emit('input', {
-            ...this.field,
-            pct: this.input,
-            px: this.synced
-          })
-        : this.$emit('input', {
-            ...this.field,
-            pct: this.synced,
-            px: this.input
-          })
+      if (this.field.pct || this.field.px) {
+        this.field.defaultUnit
+          ? this.$emit('input', {
+              ...this.field,
+              pct: this.input,
+              px: this.synced
+            })
+          : this.$emit('input', {
+              ...this.field,
+              pct: this.synced,
+              px: this.input
+            })
+      } else {
+        this.$emit('input', {
+          ...this.field,
+          active: this.input
+        })
+      }
     }
   }
 }

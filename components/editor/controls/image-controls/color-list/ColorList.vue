@@ -1,23 +1,24 @@
 <template>
-  <div class="stop-list-wrapper">
-    <ul class="stop-list">
-      <stop-item
-        v-for="stop in stops"
+  <div class="color-list-wrapper">
+    <ul class="color-list">
+      <color-item
+        v-for="(stop, index) in stops"
         :key="stop.id"
         :stop="stop"
         :class="{ active: stop.id === activeStop.id }"
         @click.native="$emit('setActive', stop)"
       >
-      </stop-item>
+        <span>{{ index + 1 }}</span>
+      </color-item>
     </ul>
   </div>
 </template>
 
 <script>
-import StopItem from './StopItem'
+import ColorItem from './ColorItem'
 export default {
   components: {
-    StopItem
+    ColorItem
   },
   props: {
     stops: {
@@ -35,13 +36,12 @@ export default {
 </script>
 
 <style lang="sass">
-.stop-list-wrapper
+.color-list-wrapper
   position: relative
-  max-height: 100px
+  max-height: 190px
   overflow-y: auto
-  grid-column: 1 / -1
 
-.stop-list
+.color-list
   list-style-type: none
   padding: 0
   margin: 0
