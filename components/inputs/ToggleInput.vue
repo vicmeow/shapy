@@ -8,11 +8,7 @@
       type="checkbox"
       @change="$emit('input', $event.target.checked)"
     />
-    <!-- <label :for="`${name}-toggle-switch`" class="label toggle-label">
-      <div class="circle">
-        <span v-text="defaultValue ? values[0] : values[1]" />
-      </div>
-    </label> -->
+    <label :for="`${name}-toggle-switch`">{{ name }}</label>
   </div>
 </template>
 

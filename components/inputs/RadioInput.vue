@@ -4,7 +4,7 @@
     class="radio-input"
   >
     <input
-      :id="`radio-${radio}`"
+      :id="`${group}-${radio}`"
       :disabled="!conicSupport && radio === 'conic'"
       :class="`radio-${radio} radio-input`"
       :checked="active === radio"

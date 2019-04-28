@@ -2,24 +2,14 @@
   <div class="control" role="group">
     <slot />
     <!-- CANVAS WIDTH & HEIGHT -->
-    <input-wrapper
-      v-model="width"
-      :field="width"
-      label="Width"
-      name="canvas-width"
-    />
-    <input-wrapper
-      v-model="height"
-      :field="height"
-      label="height"
-      name="canvas-height"
-    />
+    <number-input v-model="width" name="width" :field="width" />
+    <number-input v-model="height" name="height" :field="height" />
     <!-- TODO: Add custom canvas background color input -->
   </div>
 </template>
 
 <script>
-import InputWrapper from '@/components/inputs/InputWrapper'
+import NumberInput from '@/components/inputs/NumberInput'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
   getterType: 'gradientCanvas/getField',
@@ -28,7 +18,7 @@ const { mapFields } = createHelpers({
 export default {
   name: 'Canvas',
   components: {
-    InputWrapper
+    NumberInput
   },
   data: () => ({
     desc: 'Edit the size of your canvas.'

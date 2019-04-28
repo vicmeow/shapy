@@ -1,7 +1,7 @@
 <template>
   <div class="gradient-type">
-    <!-- Gradient type -->
-    <input-wrapper>
+    <div class="gradient-type-input">
+      <!-- Gradient type -->
       <radio-input
         v-for="radio in types"
         :key="radio.index"
@@ -10,44 +10,54 @@
         :radio="radio"
         group="gradient-type"
       />
-    </input-wrapper>
-    <!-- Repeating gradient -->
-    <input-wrapper>
-      <label>Repeating</label>
+      <!-- Repeating gradient -->
       <toggle-input
+        id="repeating-toggle"
         v-model="repeating"
         :default-value="repeating"
-        name="repeating-gradient"
+        name="repeating"
       ></toggle-input>
-    </input-wrapper>
+    </div>
+    <!-- Gradient direction -->
+    <radio-input
+      v-for="radio in angles"
+      :key="radio.index"
+      v-model.number="activeAngle"
+      :active="activeAngle"
+      :radio="radio"
+      group="gradient-angle"
+    />
   </div>
 </template>
 
 <script>
-import InputWrapper from '@/components/inputs/InputWrapper'
 import ToggleInput from '@/components/inputs/ToggleInput'
 import RadioInput from '@/components/inputs/RadioInput'
 import { mapFields } from 'vuex-map-fields'
 export default {
   components: {
-    InputWrapper,
     ToggleInput,
     RadioInput
   },
   computed: {
     ...mapFields({
       repeating: 'backgroundImage.repeating',
-      activeType: 'backgroundImage.type.active'
+      activeType: 'backgroundImage.type.active',
+      activeAngle: 'backgroundImage.angle.active'
     }),
     types() {
       return this.$store.state.backgroundImage.type.types
+    },
+    angles() {
+      return this.$store.state.backgroundImage.angle.types
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-
-.input-wrapper
-  display: unset
+.gradient-type-input
+  display: grid
+  grid-template-columns: 1fr 1fr
+  outline: 1px solid red
 </style>

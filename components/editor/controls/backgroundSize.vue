@@ -2,29 +2,18 @@
   <div class="control size-control">
     <h3 class="heading">Size</h3>
     <!-- BACKGROUND SIZE -->
-    <input-wrapper
-      v-model="width"
-      :label="'width'"
-      :name="'bg-size-width'"
-      :field="width"
-    />
-
-    <input-wrapper
-      v-model="height"
-      :label="'height'"
-      :name="'bg-size-height'"
-      :field="height"
-    />
+    <number-input v-model="width" name="width" :field="width" />
+    <number-input v-model="height" name="height" :field="height" />
   </div>
 </template>
 
 <script>
-import InputWrapper from '@/components/inputs/InputWrapper'
+import NumberInput from '@/components/inputs/NumberInput'
 import { mapFields } from 'vuex-map-fields'
 export default {
-  name: 'Position',
+  name: 'Size',
   components: {
-    InputWrapper
+    NumberInput
   },
   data: () => ({
     desc: 'The position of your gradient on the canvas.'

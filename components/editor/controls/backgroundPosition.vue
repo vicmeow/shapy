@@ -2,18 +2,15 @@
   <div class="control position-control">
     <h3 class="heading">Position</h3>
     <!-- GRADIENT POSITION -->
-    <input-wrapper
+    <number-input
       v-model="x"
-      :label="'x'"
-      :name="'bg-position-x'"
+      name="position-x"
       :field="x"
       :min="x.defaultUnit ? 0 : -width"
     />
-
-    <input-wrapper
+    <number-input
       v-model="y"
-      :label="'y'"
-      :name="'bg-position-y'"
+      name="position-y"
       :field="y"
       :min="y.defaultUnit ? 0 : -height"
     />
@@ -21,12 +18,12 @@
 </template>
 
 <script>
-import InputWrapper from '@/components/inputs/InputWrapper'
+import NumberInput from '@/components/inputs/NumberInput'
 import { mapFields } from 'vuex-map-fields'
 export default {
   name: 'Position',
   components: {
-    InputWrapper
+    NumberInput
   },
   data: () => ({
     desc: 'The position of your gradient on the canvas.'
