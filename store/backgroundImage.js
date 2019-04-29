@@ -11,14 +11,14 @@ export const state = () => ({
   comment: '',
   type: {
     active: 'linear',
-    types: ['linear', 'radial', 'conic']
+    values: ['linear', 'radial', 'conic']
   },
   repeating: false,
   angle: {
     active: 0,
-    defaultUnit: false,
+    defaultUnit: null,
     max: 360,
-    types: [0, 90, 180, 270]
+    values: [-45, 0, 45, 270, '', 90, 225, 180, 135]
   }
 })
 

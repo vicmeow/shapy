@@ -2,11 +2,12 @@
   <div class="control repeat-control">
     <h3 class="heading">Repeat</h3>
     <radio-input
-      v-for="radio in backgroundRepeat.types"
-      :key="radio.index"
+      v-for="value in backgroundRepeat.values"
+      :key="value.index"
       v-model="backgroundRepeat.active"
       :active="backgroundRepeat.active"
-      :radio="radio"
+      :radio-value="value"
+      :label="value"
       group="background-repeat"
     />
   </div>
@@ -28,6 +29,6 @@ export default {
 </script>
 
 <style lang="sass">
-.type-control
-  grid-column: 1/-1
+.repeat-control
+  display: flex
 </style>

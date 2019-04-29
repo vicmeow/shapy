@@ -2,11 +2,12 @@
   <div class="gradient-type">
     <!-- Gradient type -->
     <radio-input
-      v-for="radio in types"
-      :key="radio.index"
+      v-for="value in types"
+      :key="value.index"
       v-model="activeType"
       :active="activeType"
-      :radio="radio"
+      :label="value"
+      :radio-value="value"
       group="gradient-type"
     />
     <!-- Repeating gradient -->
@@ -38,7 +39,7 @@ export default {
       activeType: 'backgroundImage.type.active'
     }),
     types() {
-      return this.$store.state.backgroundImage.type.types
+      return this.$store.state.backgroundImage.type.values
     }
   }
 }
@@ -49,7 +50,4 @@ export default {
   grid-column: 1/-1
   display: flex
   flex-wrap: wrap
-
-.angle-input
-  flex-basis: 100%
 </style>

@@ -1,13 +1,15 @@
 <template>
   <div class="angle-input-wrapper">
-    <number-input v-model="angle" :field="angle" name="angle" />
-    <div class="presets">
+    <number-input v-model="angle" :field="angle" name="angle" :min="-360" />
+    <div class="angle-presets">
       <radio-input
-        v-for="radio in angles"
-        :key="radio.index"
+        v-for="(value, index) in angle.values"
+        :key="index"
         v-model.number="angleActive"
-        :active="angleActive"
-        :radio="radio"
+        :radio-value="value"
+        :active="angle.active"
+        :label="labels[index]"
+        :class="`angle-${labels[index]} angle-radio`"
         group="gradient-angle"
       />
     </div>
@@ -32,30 +34,34 @@ export default {
     ...mapGetters({
       active: 'backgroundImage/angle'
     }),
-    angles() {
-      return this.$store.state.backgroundImage.angle.types
+    values() {
+      return this.$store.state.backgroundImage.angle.values
     },
-    angleLabels() {
-      switch (this.angle.active) {
-        case 'to bottom':
-          return '⬇️'
-        case 'to right':
-          return '➡️'
-        case 'to top':
-          return '⬆️'
-        case 'to left':
-          return '⬅️'
-        default:
-          return this.angle.active
-      }
+    labels() {
+      return ['↖️', '⬆️', '↗️', '⬅️', '⏺', '➡️', '↙️', '⬇️', '↘️']
     }
   }
 }
 </script>
 
 <style lang="sass">
+
+.angle-input-wrapper
+  display: flex
+
 .presets
   display: flex
   flex-wrap: wrap
   justify-content: space-between
+
+.angle-presets
+  display: grid
+  width: 3rem
+  height: 3rem
+  flex-wrap: wrap
+  outline: 1px solid red
+  grid-template-columns: repeat(3, 1fr)
+
+.angle-radio .radio-input
+  display: none
 </style>
