@@ -1,22 +1,21 @@
 <template>
   <div
-    :class="{ 'conic-support': !conicSupport && radio === 'conic' }"
+    :class="{ 'conic-support': !conicSupport && radioValue === 'conic' }"
     class="radio-input"
   >
     <input
-      :id="`${group}-${radio}`"
-      :disabled="!conicSupport && radio === 'conic'"
-      :class="`radio-${radio} radio-input`"
-      :checked="active === radio"
-      :value="radio"
+      :id="`${group}-${label}`"
+      :class="`radio-${label} radio-input`"
+      :checked="active === radioValue"
+      :value="radioValue"
       :name="`${group}-radio-input`"
       type="radio"
       @change="$emit('input', $event.target.value)"
     />
     <label
-      :for="`${group}-${radio}`"
+      :for="`${group}-${label}`"
       :class="`label radio-label radio-${group}-label`"
-      >{{ radio === 'conic' ? 'conic*' : radio }}
+      >{{ label }}
     </label>
   </div>
 </template>
@@ -32,7 +31,11 @@ export default {
       type: String,
       required: true
     },
-    radio: {
+    label: {
+      type: [String, Number],
+      required: true
+    },
+    radioValue: {
       type: [String, Number],
       required: true
     }
