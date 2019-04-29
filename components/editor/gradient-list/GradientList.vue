@@ -4,15 +4,10 @@
       <span v-if="shorthand">X</span>
       <span v-if="!shorthand">Shorthand</span>
     </button>
-    <component
-      :is="cssType"
-      v-for="item in layers"
-      :key="item.id"
-      :item="item"
-    />
+    <list-item v-for="item in list" :key="item.id" :item="item" />
     <div v-if="!layers.length">
       You haven't added any gradients to the canvas yet.
-  </div>
+    </div>
   </div>
 </template>
 
@@ -20,7 +15,7 @@
 // REQUIREMENTS
 // - Open/close button
 // - List of gradients as shorthand
-// - List of gradients in properties
+// - List of gradients as background properties
 // - Toggle shorthand button
 // - Syntax highlighting
 // - Gradient preview
@@ -28,13 +23,10 @@
 // - Delete gradient
 // - Move gradient up or down
 // - Drag and drop gradient
-import ShorthandItem from '@/components/editor/gradient-list/ShorthandItem'
-import GradientItem from '@/components/editor/gradient-list/GradientItem'
-import { mapGetters } from 'vuex'
+import ListItem from '@/components/editor/gradient-list/ListItem'
 export default {
   components: {
-    ShorthandItem,
-    GradientItem
+    ListItem
   },
   data() {
     return {
@@ -42,14 +34,8 @@ export default {
     }
   },
   computed: {
-    cssType() {
-      return this.shorthand ? 'gradient-item' : 'shorthand-item'
-    },
-    ...mapGetters({
-      list: 'gradients/gradients'
-    }),
-    layers() {
-      return this.list.slice(0).reverse()
+    list() {
+      return this.$store.state.gradients.list.slice().reverse()
     }
   }
 }
@@ -57,9 +43,9 @@ export default {
 
 <style lang="sass">
 .gradient-list
-  flex-grow: 1
-  max-width: 600px
   width: 100%
+  padding: 1rem
+  color: $white
 
 code
   display: block

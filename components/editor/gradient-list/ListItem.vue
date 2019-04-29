@@ -1,14 +1,12 @@
 <template>
   <div class="gradient-item">
     <button @click="editGradient(item.id)">
-      edit
+      e
     </button>
     <div
       class="gradient-preview"
       :style="{
-        'background-image': item.image.join(''),
-        height: '1.5rem',
-        width: '1.5rem'
+        'background-image': item.processed.image.join('')
       }"
     ></div>
     <div class="gradient-string">
