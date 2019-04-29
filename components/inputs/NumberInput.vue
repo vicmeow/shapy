@@ -21,7 +21,7 @@
       />
       <!--Toggle for number unit, % or px -->
       <toggle-input
-        v-if="field.defaultUnit"
+        v-if="typeof field.defaultUnit === 'boolean'"
         :name="field.defaultUnit ? '%' : 'px'"
         class="toggle-input"
         @input="handleToggle"
