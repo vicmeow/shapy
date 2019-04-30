@@ -4,12 +4,19 @@
     <radio-input
       v-for="value in types"
       :key="value.index"
+      :disabled="activeType === 'conic'"
       v-model="activeType"
       :active="activeType"
       :label="value"
       :radio-value="value"
       group="gradient-type"
-    />
+    >
+      <component
+        :is="`icon-${value}`"
+        :active="activeType === value"
+        aria-hidden="true"
+      />
+    </radio-input>
     <!-- Repeating gradient -->
     <toggle-input
       id="repeating-toggle"
@@ -18,11 +25,14 @@
       name="repeating"
     ></toggle-input>
     <!-- Gradient direction -->
-    <angle-input v-if="activeType === 'linear'" class="angle-input" />
+    <!-- <angle-input v-if="activeType === 'linear'" class="angle-input" /> -->
   </div>
 </template>
 
 <script>
+import IconLinear from '@/components/icons/IconLinear'
+import IconRadial from '@/components/icons/IconRadial'
+import IconConic from '@/components/icons/IconConic'
 import ToggleInput from '@/components/inputs/ToggleInput'
 import RadioInput from '@/components/inputs/RadioInput'
 import AngleInput from '@/components/inputs/AngleInput'
@@ -31,7 +41,10 @@ export default {
   components: {
     ToggleInput,
     RadioInput,
-    AngleInput
+    AngleInput,
+    IconLinear,
+    IconRadial,
+    IconConic
   },
   computed: {
     ...mapFields({
