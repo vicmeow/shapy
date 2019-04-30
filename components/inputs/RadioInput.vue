@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="{ 'conic-support': !conicSupport && radioValue === 'conic' }"
-    class="radio-input"
-  >
+  <div class="radio-input-wrapper">
     <input
       :id="`${group}-${label}`"
       :class="`radio-${label} radio-input`"
@@ -15,8 +12,13 @@
     <label
       :for="`${group}-${label}`"
       :class="`label radio-label radio-${group}-label`"
-      >{{ label }}
+    >
+      <div class="radio-icon">
+        <slot />
+      </div>
+      {{ label }}
     </label>
+    <slot name="description" />
   </div>
 </template>
 
@@ -53,12 +55,20 @@ export default {
 
 <style lang="sass" scoped>
 
-.radio-input
-  display: flex
-  text-align: center
+.radio-input-wrapper
+  position: relative
+  min-width: 0
+  margin-right: 1rem
 
-.radio-angle-label::after
-  content: '\00b0'
+.radio-input
+  display: none
+
+.radio-label
+  display: flex
+  align-items: center
+
+.radio-icon
+  margin-right: .5rem
 
 .conic-support
   text-decoration: line-through
