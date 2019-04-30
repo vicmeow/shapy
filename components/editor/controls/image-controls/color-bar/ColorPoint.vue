@@ -11,7 +11,12 @@
       class="stop-color"
       :style="{ 'background-color': backgroundColor }"
     ></div>
-    <label class="point-label">{{ value }}%</label>
+    <label
+      class="point-label"
+      :class="{ 'move-left': value > 98, 'move-right': value < 5 }"
+    >
+      {{ value }}%
+    </label>
   </div>
 </template>
 
@@ -70,4 +75,12 @@ export default {
 .point-label
   position: absolute
   bottom: -1rem
+  font-size: .9rem
+  transition: transform .3s linear
+
+.move-left
+  transform: translateX(-1.4rem)
+
+.move-right
+  transform: translateX(.4rem)
 </style>
