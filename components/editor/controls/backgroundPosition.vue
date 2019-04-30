@@ -1,6 +1,7 @@
 <template>
   <div class="control position-control">
     <h3 class="heading">Position</h3>
+    <control-info />
     <!-- GRADIENT POSITION -->
     <number-input
       v-model="x"
@@ -18,12 +19,14 @@
 </template>
 
 <script>
-import NumberInput from '@/components/inputs/NumberInput'
 import { mapFields } from 'vuex-map-fields'
+import ControlInfo from './ControlInfo'
+import NumberInput from '@/components/inputs/NumberInput'
 export default {
   name: 'Position',
   components: {
-    NumberInput
+    NumberInput,
+    ControlInfo
   },
   data: () => ({
     desc: 'The position of your gradient on the canvas.'

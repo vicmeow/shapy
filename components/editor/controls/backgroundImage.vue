@@ -1,6 +1,7 @@
 <template>
   <div class="control image-control">
     <h2 class="heading">Gradient</h2>
+    <control-info />
     <!-- Type of gradient (linear, radial, conical) and angle -->
     <gradient-type />
     <!-- Color bar displaying the gradient and handling stop points -->
@@ -26,6 +27,7 @@
 import { mapFields } from 'vuex-map-fields'
 import { mapGetters } from 'vuex'
 import { Chrome } from 'vue-color'
+import ControlInfo from './ControlInfo'
 import ColorBar from './image-controls/color-bar/ColorBar'
 import GradientType from './image-controls/GradientType'
 import ColorList from './image-controls/color-list/ColorList'
@@ -34,7 +36,8 @@ export default {
     ColorPicker: Chrome,
     GradientType,
     ColorBar,
-    ColorList
+    ColorList,
+    ControlInfo
   },
   data() {
     return {
@@ -81,20 +84,15 @@ export default {
 
 <style lang="sass">
 
-.heading
-  grid-column: 1/-1
-
-.image-control
-  background: pink
-  display: grid
-  grid-template-columns: .5fr 1fr
-  gap: 0 1rem
-
 #color-picker
   box-shadow: none
   width: 100%
   max-width: 100%
   font-family: $monospace
+  grid-column: 1/-1
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 1rem
 
   .vc-chrome-saturation-wrap
     height: 100%
