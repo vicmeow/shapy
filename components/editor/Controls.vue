@@ -47,17 +47,17 @@ export default {
   grid-template-columns: 1fr 1fr
   gap: 1rem
   align-content: flex-start
-  padding: .5rem
+  padding-left: 1rem
   @media screen and (max-width: 768px)
     grid-template-areas: 'image' 'repeat' 'size' 'position'
     grid-template-columns: 1fr
 
 .control
+  position: relative
   background: $white
   padding: 1rem
   border-radius: $borderRadius
   min-width: 0
-  box-shadow: 3px 3px 3px #282f38
 
 .image-control
   grid-area: image
@@ -70,7 +70,4 @@ export default {
 
 .position-control
   grid-area: position
-
-.overflow
-  height: 1000px
 </style>
