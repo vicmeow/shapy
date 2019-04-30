@@ -1,22 +1,16 @@
 <template>
   <div class="gradient-type">
     <!-- Gradient type -->
+    <!-- TODO: Add info about conic only in chrome -->
     <radio-input
       v-for="value in types"
       :key="value.index"
-      :disabled="activeType === 'conic'"
       v-model="activeType"
       :active="activeType"
       :label="value"
       :radio-value="value"
       group="gradient-type"
-    >
-      <component
-        :is="`icon-${value}`"
-        :active="activeType === value"
-        aria-hidden="true"
-      />
-    </radio-input>
+    />
     <!-- Repeating gradient -->
     <toggle-input
       id="repeating-toggle"
@@ -30,21 +24,15 @@
 </template>
 
 <script>
-import IconLinear from '@/components/icons/IconLinear'
-import IconRadial from '@/components/icons/IconRadial'
-import IconConic from '@/components/icons/IconConic'
 import ToggleInput from '@/components/inputs/ToggleInput'
 import RadioInput from '@/components/inputs/RadioInput'
-import AngleInput from '@/components/inputs/AngleInput'
+// import AngleInput from '@/components/inputs/AngleInput'
 import { mapFields } from 'vuex-map-fields'
 export default {
   components: {
     ToggleInput,
-    RadioInput,
-    AngleInput,
-    IconLinear,
-    IconRadial,
-    IconConic
+    RadioInput
+    // AngleInput
   },
   computed: {
     ...mapFields({

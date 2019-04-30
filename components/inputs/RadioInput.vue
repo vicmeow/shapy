@@ -14,16 +14,39 @@
       :class="`label radio-label radio-${group}-label`"
     >
       <div class="radio-icon">
-        <slot />
+        <component
+          :is="`icon-${label}`"
+          :active="active === label"
+          aria-hidden="true"
+        />
       </div>
       {{ label }}
     </label>
-    <slot name="description" />
   </div>
 </template>
 
 <script>
+const IconLinear = () => import('@/components/icons/IconLinear')
+const IconRadial = () => import('@/components/icons/IconRadial')
+const IconConic = () => import('@/components/icons/IconConic')
+const IconRepeat = () => import('@/components/icons/IconRepeat')
+const IconNoRepeat = () => import('@/components/icons/IconNoRepeat')
+const IconRepeatX = () => import('@/components/icons/IconRepeatX')
+const IconRepeatY = () => import('@/components/icons/IconRepeatY')
+const IconSpace = () => import('@/components/icons/IconSpace')
+const IconRound = () => import('@/components/icons/IconRound')
 export default {
+  components: {
+    IconLinear,
+    IconRadial,
+    IconConic,
+    IconNoRepeat,
+    IconRepeat,
+    IconRepeatX,
+    IconRepeatY,
+    IconSpace,
+    IconRound
+  },
   props: {
     active: {
       type: [String, Number],
