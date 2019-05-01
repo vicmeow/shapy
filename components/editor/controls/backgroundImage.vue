@@ -93,6 +93,8 @@ export default {
   display: grid
   grid-template-columns: 1fr 1fr
   gap: 1rem
+  @media screen and (max-width: 320px)
+    grid-template-columns: 1fr
 
   .vc-chrome-saturation-wrap
     height: 100%

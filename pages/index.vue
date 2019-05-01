@@ -33,7 +33,10 @@ export default {
 
 .page-editor
   position: relative
-  display: flex
+  display: grid
+  grid-template-columns: minmax(200px, max-content) minmax(450px, 1fr)
+  @media screen and (max-width: 768px)
+    grid-template-columns: 1fr
 
 .fixed
   position: sticky
@@ -44,5 +47,7 @@ export default {
   display: grid
   grid-template-columns: 1fr
   grid-template-rows: 1fr 5rem
-  padding: 0 1rem
+  padding: 1rem
+  @media screen and (max-width: 768px)
+    position: static
 </style>
