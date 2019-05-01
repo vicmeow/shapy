@@ -10,7 +10,7 @@
       :radio-value="radio.value"
       :label="radio.value"
       group="background-repeat"
-      class="option"
+      class="repeat-option"
     />
   </div>
 </template>
@@ -38,12 +38,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.repeat-options
-  display: flex
-  flex-wrap: wrap
-  justify-content: space-between
-  min-width: 0
+.repeat-control
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr))
+  gap: .5rem 1rem
 
-.option
-  flex-basis: 25%
+.heading
+  grid-column: 1/-1
 </style>
