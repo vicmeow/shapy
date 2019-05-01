@@ -4,6 +4,8 @@ body, html
   color: $black
   background: $lightgrey
   margin: 0
+  @media screen and (max-width: 375px)
+    font-size: 16px
 
 *
   box-sizing: border-box
@@ -18,7 +20,6 @@ button
   font-weight: bold
   border-radius: $borderRadius
   margin: 0
-  box-shadow: $boxShadow
 
 a
   color: $black
@@ -45,6 +46,13 @@ input
   font-family: $monospace
   &:focus
     outline: 0
+
+input[type=text]
+  border-bottom: 1px solid $black
+  width: 100%
+  padding: .5rem 0
+  &:focus
+    border-bottom: 1px solid $darkpink
 
 .wrapper
   display: grid
