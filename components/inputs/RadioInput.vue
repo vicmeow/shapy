@@ -20,7 +20,7 @@
           aria-hidden="true"
         />
       </div>
-      {{ label }}
+      <span class="label-text">{{ label }}</span>
     </label>
   </div>
 </template>
@@ -84,11 +84,21 @@ export default {
   margin-right: 1rem
 
 .radio-input
-  display: none
+  opacity: 0
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  height: 100%
+  width: 100%
 
 .radio-label
   display: flex
   align-items: center
+
+.radio-input:focus + .radio-label .label-text
+  border-bottom: 1px solid $black
 
 .radio-icon
   margin-right: .5rem
