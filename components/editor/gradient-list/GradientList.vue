@@ -15,7 +15,7 @@
 // REQUIREMENTS
 // - Open/close button
 // - List of gradients as shorthand
-// - List of gradients as background properties
+// - List of gradients as full background properties
 // - Toggle shorthand button
 // - Syntax highlighting
 // - Gradient preview
@@ -23,6 +23,7 @@
 // - Delete gradient
 // - Move gradient up or down
 // - Drag and drop gradient
+// - Search gradients by name
 import ListItem from '@/components/editor/gradient-list/ListItem'
 export default {
   components: {
