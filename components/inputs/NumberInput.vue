@@ -162,7 +162,7 @@ export default {
   justify-content: flex-end
 
 .number-input
-  max-width: 80px
+  max-width: 50px
   text-align: right
 
 .toggle-wrapper
@@ -170,4 +170,83 @@ export default {
 
 .range-input
   width: 100%
+
+/* Slider style resets */
+input[type=range]
+  -webkit-appearance: none
+  width: 100%
+  background: transparent
+
+input[type=range]::-webkit-slider-thumb
+  -webkit-appearance: none
+
+input[type=range]:focus
+  outline: none
+
+input[type=range]::-ms-track
+  width: 100%
+  cursor: pointer
+  background: transparent
+  border-color: transparent
+  color: transparent
+
+/* THUMB STYLES */
+// Firefox styles
+input[type=range]::-moz-range-thumb
+  border: 1.5px solid $black
+  height: 20px
+  width: 5px
+  border-radius: 1rem
+  background: #ffffff
+  cursor: pointer
+
+// Webkit/blink styles
+input[type=range]::-webkit-slider-thumb
+  -webkit-appearance: none
+  border: 1px solid $black
+  height: 23px
+  width: 8px
+  border-radius: 1rem
+  background: #ffffff
+  cursor: pointer
+  margin-top: -12px
+  box-shadow: none
+
+// IE 🤢
+input[type=range]::-ms-thumb
+  border: 1.5px solid $black
+  height: 23px
+  width: 8px
+  border-radius: 1rem
+  background: #ffffff
+  cursor: pointer
+  box-shadow: none
+
+/* Track styles */
+// Webkit styles
+input[type=range]::-webkit-slider-runnable-track
+  width: 100%
+  height: 2px
+  cursor: pointer
+  background: $black
+  border-radius: 1rem
+  border: 1px solid $black
+  margin: 12px 0
+
+input[type=range]::-moz-range-track
+  width: 100%
+  height: 2px
+  cursor: pointer
+  background: $black
+  border-radius: 1rem
+
+input[type=range]::-moz-focus-outer
+  border: 0
+
+// Focus styles
+input[type=range]:focus::-webkit-slider-thumb
+  background: $darkpink
+
+input[type=range]:focus::-moz-range-thumb
+  background: $darkpink
 </style>
