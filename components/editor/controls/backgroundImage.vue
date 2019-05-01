@@ -116,6 +116,8 @@ export default {
     box-shadow: none
     border-bottom: 1px solid $mediumgrey
     border-radius: 0
+    &:focus
+      border-color: $darkpink
 
   .vc-input__label
     font-family: $font

@@ -19,13 +19,7 @@
         type="number"
         @input="handleInput($event.target.value)"
       />
-      <!--Toggle for number unit, % or px -->
-      <toggle-input
-        v-if="typeof field.defaultUnit === 'boolean'"
-        :name="field.defaultUnit ? '%' : 'px'"
-        class="toggle-input"
-        @input="handleToggle"
-      />
+      <!-- <span class="unit">{{ field.defaultUnit ? '%' : 'px' }}</span> -->
     </div>
     <!-- Number input as a range slider -->
     <input
@@ -37,6 +31,12 @@
       :max="field.defaultUnit ? 100 : field.max"
       type="range"
       @input="handleInput($event.target.value)"
+    />
+    <!--Toggle for number unit, % or px -->
+    <toggle-input
+      v-if="typeof field.defaultUnit === 'boolean'"
+      :name="name"
+      @input="handleToggle"
     />
   </div>
 </template>
@@ -165,11 +165,26 @@ export default {
   max-width: 50px
   text-align: right
 
+.unit
+  margin-left: .2rem
+
 .toggle-wrapper
   flex-shrink: 0
+  margin: auto
+  padding-bottom: .5rem
 
 .range-input
   width: 100%
+
+input[type=number]
+  -moz-appearance: textfield
+  appearance: textfield
+  margin: 0
+  &:focus
+    border-bottom: 1px solid $darkpink
+
+input[type=number]:invalid
+  box-shadow: none
 
 /* Slider style resets */
 input[type=range]
