@@ -5,6 +5,7 @@
       <background-repeat />
       <background-size />
       <background-position />
+      <background-name />
     </no-ssr>
     <button class="btn btn-action btn-add" @click="addGradient">
       Add to canvas
@@ -17,12 +18,14 @@ import BackgroundImage from '@/components/editor/controls/BackgroundImage'
 import BackgroundRepeat from '@/components/editor/controls/BackgroundRepeat'
 import BackgroundSize from '@/components/editor/controls/BackgroundSize'
 import BackgroundPosition from '@/components/editor/controls/BackgroundPosition'
+import BackgroundName from '@/components/editor/controls/BackgroundName'
 export default {
   components: {
     BackgroundImage,
     BackgroundRepeat,
     BackgroundSize,
-    BackgroundPosition
+    BackgroundPosition,
+    BackgroundName
   },
   computed: {
     max() {
@@ -47,7 +50,6 @@ export default {
   grid-template-columns: 1fr 1fr
   gap: 1rem
   align-content: flex-start
-  padding-left: 1rem
   @media screen and (max-width: 768px)
     grid-template-areas: 'image' 'repeat' 'size' 'position'
     grid-template-columns: 1fr
