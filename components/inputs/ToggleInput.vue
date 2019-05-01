@@ -4,15 +4,33 @@
       :id="`${name}-toggle-switch`"
       :name="name"
       :checked="defaultValue"
-      class="toggle-input"
+      :class="`toggle-input ${name}-toggle-input`"
       type="checkbox"
-      @change="$emit('input', $event.target.checked)"
+      @change="handleToggle($event.target.checked)"
     />
-    <label :for="`${name}-toggle-switch`">{{ name }}</label>
+    <label
+      :class="`label toggle-label ${name}-toggle-label`"
+      :for="`${name}-toggle-switch`"
+    >
+      <div
+        class="unit-toggle unit-toggle-first"
+        :class="{ 'active-unit': checked }"
+      >
+        {{ values[0] }}
+      </div>
+      <span>/</span>
+      <div
+        class="unit-toggle unit-toggle-second"
+        :class="{ 'active-unit': !checked }"
+      >
+        {{ values[1] }}
+      </div>
+    </label>
   </div>
 </template>
 
 <script>
+// TODO: fix toggle style for other types (than unit %/px) of toggles
 export default {
   props: {
     name: {
@@ -31,47 +49,47 @@ export default {
       required: false,
       default: true
     }
+  },
+  data() {
+    return {
+      checked: true
+    }
+  },
+  methods: {
+    handleToggle(checked) {
+      this.checked = checked
+      this.$emit('input', checked)
+    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
 
-// .toggle-wrapper
-//   position: relative
+.toggle-input
+  display: none
 
-// .toggle-wrapper input[type="checkbox"]
-//   display: none
+.toggle-label
+  position: relative
+  user-select: none
+  display: flex
+  justify-content: center
+  color: $black
+  border-radius: 1rem
+  padding: 0 .25rem
 
-// .toggle-label
-//   position: relative
-//   display: flex
-//   justify-content: space-between
-//   align-items: center
-//   align-content: center
-//   border: 1px solid #333
-//   font-size: .85rem
-//   padding: 0 .5em
-//   border-radius: 2em
-//   width: 3.5rem
-//   height: 1.75rem
+.unit-toggle
+  font-size: .8rem
+  margin: 0 .25rem
+  color: $darkgrey
 
-// .toggle-option
-//   display: flex
-//   align-items: center
-//   height: 100%
-//   margin: 0 .1em
+.unit-toggle-first
+  // padding-bottom: 5px
 
-// .circle
-//   position: absolute
-//   //background: #333
-//   left: 0
-//   height: 1.75rem
-//   width: 1.75rem
-//   border-radius: 2em
-//   z-index: 10
-//   transition: left .3s linear
+.number-wrapper:focus-within .label .active-unit
+  color: $darkpink
 
-// .toggle-input:checked + .label > .circle
-//   left: 1.75rem
+.active-unit
+  font-weight: bold
+  color: $black
 </style>
