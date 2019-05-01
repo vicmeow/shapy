@@ -1,45 +1,30 @@
 <template>
   <div class="page-editor">
-    <component :is="component" @showList="showList = !showList" />
+    <sidebar />
     <div class="fixed">
       <no-ssr>
         <Canvas />
       </no-ssr>
+      <div class="code">
+        Code
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+// TODO:
+//  - Show current gradient code snippet
+//  - Copy CSS code
+//  - Export to CodePen
+//  - Toggle shorthand view
+//  - Syntax highlighting
+import Sidebar from '@/components/editor/Sidebar'
 import Canvas from '@/components/editor/Canvas'
-import EditorControls from '@/components/editor/EditorControls'
-import GradientList from '@/components/editor/gradient-list/GradientList'
-import { mapState, mapGetters } from 'vuex'
 export default {
   components: {
-    Canvas,
-    EditorControls,
-    GradientList
-  },
-  data() {
-    return {
-      shorthand: false,
-      showList: false
-    }
-  },
-  computed: {
-    component() {
-      return this.showList ? 'gradient-list' : 'editor-controls'
-    },
-    ...mapState({
-      bgSize: 'backgroundSize'
-    }),
-    ...mapGetters({
-      background: 'background',
-      bgImage: 'backgroundImage',
-      bgSize: 'backgroundSize',
-      bgPosition: 'backgroundPosition',
-      bgRepeat: 'backgroundRepeat'
-    })
+    Sidebar,
+    Canvas
   }
 }
 </script>
@@ -54,9 +39,10 @@ export default {
   position: sticky
   top: 2.5rem
   right: 0
-  height: calc(100vh - 4.2rem)
-  display: flex
-  flex-direction: column
-  flex-grow: 1
+  height: calc(100vh - 5rem)
+  width: 100%
+  display: grid
+  grid-template-columns: 1fr
+  grid-template-rows: 1fr 5rem
   padding: 0 1rem
 </style>
