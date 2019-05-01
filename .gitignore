@@ -84,3 +84,4 @@ dist
 sw.*
 
 .DS_Store
+.vscode
