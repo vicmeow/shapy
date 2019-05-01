@@ -3,8 +3,8 @@
     <h2 id="gradient-name" class="heading">Gradient name</h2>
     <control-info />
     <input
-      class="input name-input"
       v-model="comment"
+      class="input name-input"
       aria-labelledby="gradient-name"
       placeholder="Name your gradient"
       type="text"
