@@ -62,8 +62,8 @@ export const getters = {
         // Combine color and stop position
         // Add comma after all stops except the last one
         return index >= length - 1
-          ? [`${color} ${stop.pct}%`]
-          : [`${color} ${stop.pct}%`, ',']
+          ? [color, ' ', `${stop.pct}%`]
+          : [color, ' ', `${stop.pct}%`, ',']
       })
     return colors
   }
