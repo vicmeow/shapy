@@ -49,16 +49,21 @@ export const getters = {
     return state.stops.slice(0).sort((a, b) => a.pct - b.pct)
   },
   // All color stops for the gradient
-  colorString(state) {
+  colors(state) {
+    const length = state.stops.length
     const colors = state.stops
       .sort((a, b) => a.pct - b.pct)
-      .map(stop => {
+      .flatMap((stop, index) => {
         const rgba = `rgba(${stop.color.rgba.r},${stop.color.rgba.g},${
           stop.color.rgba.b
         },${stop.color.rgba.a})`
         const hex = stop.color.hex
         const color = stop.color.a < 1 ? rgba : hex
-        return `${color} ${stop.pct}%`
+        // Combine color and stop position
+        // Add comma after all stops except the last one
+        return index >= length - 1
+          ? [`${color} ${stop.pct}%`]
+          : [`${color} ${stop.pct}%`, ',']
       })
     return colors
   }

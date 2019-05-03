@@ -5,9 +5,6 @@
       <no-ssr>
         <Canvas />
       </no-ssr>
-      <div class="code">
-        Code
-      </div>
     </div>
   </div>
 </template>
@@ -19,8 +16,8 @@
 //  - Export to CodePen
 //  - Toggle shorthand view
 //  - Syntax highlighting
-import Sidebar from '@/components/editor/Sidebar'
-import Canvas from '@/components/editor/Canvas'
+import Sidebar from '@/components/editor/sidebar/Sidebar'
+import Canvas from '@/components/editor/canvas/Canvas'
 export default {
   components: {
     Sidebar,
@@ -40,13 +37,10 @@ export default {
 
 .fixed
   position: sticky
-  top: 2.5rem
+  top: $navHeight
   right: 0
-  height: calc(100vh - 5rem)
+  height: calc(100vh - 2.5rem)
   width: 100%
-  display: grid
-  grid-template-columns: 1fr
-  grid-template-rows: 1fr 5rem
   padding: 1rem
   @media screen and (max-width: 768px)
     position: static

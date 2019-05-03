@@ -23,9 +23,11 @@ export const getters = {
       '(',
       angle,
       shape,
-      rootGetters['colorStops/colorString'].join(', '),
+      rootGetters['colorStops/colors'],
       ') '
-    ].filter(Boolean)
+    ]
+      .filter(Boolean)
+      .flat()
   },
   // CSS background-position property
   backgroundPosition(state) {
@@ -38,7 +40,7 @@ export const getters = {
       ? `${state.backgroundPosition.y.pct}% `
       : `${state.backgroundPosition.y.px}px `
     // Finished string for the gradient's coordinates and size
-    return [x, y]
+    return [x, ' ', y]
   },
   // CSS background-size property
   backgroundSize(state) {
@@ -51,7 +53,7 @@ export const getters = {
       ? `${state.backgroundSize.height.pct}% `
       : `${state.backgroundSize.height.px}px `
     // Finished string for the gradient's size
-    return [width, height]
+    return [width, ' ', height]
   },
   // CSS background-repeat property
   backgroundRepeat(state) {
