@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import RadioInput from '@/components/inputs/RadioInput'
+import RadioInput from '@/components/editor/inputs/RadioInput'
 import ControlInfo from './ControlInfo'
 import { mapFields } from 'vuex-map-fields'
 export default {

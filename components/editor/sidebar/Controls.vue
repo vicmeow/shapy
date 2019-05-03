@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import BackgroundImage from '@/components/editor/controls/BackgroundImage'
-import BackgroundRepeat from '@/components/editor/controls/BackgroundRepeat'
-import BackgroundSize from '@/components/editor/controls/BackgroundSize'
-import BackgroundPosition from '@/components/editor/controls/BackgroundPosition'
-import BackgroundName from '@/components/editor/controls/BackgroundName'
+import BackgroundImage from '@/components/editor/sidebar/BackgroundImage'
+import BackgroundRepeat from '@/components/editor/sidebar/BackgroundRepeat'
+import BackgroundSize from '@/components/editor/sidebar/BackgroundSize'
+import BackgroundPosition from '@/components/editor/sidebar/BackgroundPosition'
+import BackgroundName from '@/components/editor/sidebar/BackgroundName'
 export default {
   components: {
     BackgroundImage,

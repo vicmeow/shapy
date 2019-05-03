@@ -6,8 +6,8 @@
 
 <script>
 // TODO: Add open gradient list logic
-import Controls from '@/components/editor/Controls'
-import GradientList from '@/components/editor/gradient-list/GradientList'
+import Controls from '@/components/editor/sidebar/Controls'
+import GradientList from '@/components/editor/sidebar/gradient-list/GradientList'
 export default {
   components: {
     Controls,

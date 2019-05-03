@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import ToggleInput from '@/components/inputs/ToggleInput'
-import RadioInput from '@/components/inputs/RadioInput'
+import ToggleInput from '@/components/editor/inputs/ToggleInput'
+import RadioInput from '@/components/editor/inputs/RadioInput'
 // import AngleInput from '@/components/inputs/AngleInput'
 import { mapFields } from 'vuex-map-fields'
 export default {

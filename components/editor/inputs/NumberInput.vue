@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import ToggleInput from '@/components/inputs/ToggleInput'
+import ToggleInput from './ToggleInput'
 export default {
   components: {
     ToggleInput

@@ -11,7 +11,7 @@
 <script>
 import { mapFields } from 'vuex-map-fields'
 import ControlInfo from './ControlInfo'
-import NumberInput from '@/components/inputs/NumberInput'
+import NumberInput from '@/components/editor/inputs/NumberInput'
 export default {
   name: 'Size',
   components: {

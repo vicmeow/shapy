@@ -24,7 +24,7 @@
 // - Move gradient up or down
 // - Drag and drop gradient
 // - Search gradients by name
-import ListItem from '@/components/editor/gradient-list/ListItem'
+import ListItem from '@/components/editor/sidebar/gradient-list/ListItem'
 export default {
   components: {
     ListItem
@@ -65,6 +65,6 @@ code
   border-radius: 50%
   border: 1px solid grey
 
-.property-value:last-child::after
-  content: ', '
+// .property-value:last-child::after
+//   content: ', '
 </style>

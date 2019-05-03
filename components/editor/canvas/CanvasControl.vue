@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import NumberInput from '@/components/inputs/NumberInput'
+import NumberInput from '@/components/editor/inputs/NumberInput'
 import { createHelpers } from 'vuex-map-fields'
 const { mapFields } = createHelpers({
   getterType: 'gradientCanvas/getField',
