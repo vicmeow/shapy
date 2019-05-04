@@ -33,12 +33,12 @@ export const getters = {
   backgroundPosition(state) {
     // Which X coordinate unit to return based on defaultUnit
     const x = state.backgroundPosition.x.defaultUnit
-      ? `${state.backgroundPosition.x.pct}% `
-      : `${state.backgroundPosition.x.px}px `
+      ? `${state.backgroundPosition.x.pct}%`
+      : `${state.backgroundPosition.x.px}px`
     // Which Y coordinate unit to return based on defaultUnit
     const y = state.backgroundPosition.y.defaultUnit
-      ? `${state.backgroundPosition.y.pct}% `
-      : `${state.backgroundPosition.y.px}px `
+      ? `${state.backgroundPosition.y.pct}%`
+      : `${state.backgroundPosition.y.px}px`
     // Finished string for the gradient's coordinates and size
     return [x, ' ', y]
   },
