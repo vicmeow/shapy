@@ -1,30 +1,43 @@
 <template>
   <div class="canvas-info">
-    <div class="code-snippet">
+    <div class="code-wrapper">
       <code>
-        <property-item
+        <code-snippet
           v-for="value in image"
+          :key="value.index"
+          :value="value"
+        />
+        <code-snippet
+          v-for="value in repeat"
+          :key="value.index"
+          :value="value"
+        />
+        <code-snippet v-for="value in size" :key="value.index" :value="value" />
+        <span>/</span>
+        <code-snippet
+          v-for="value in position"
           :key="value.index"
           :value="value"
         />
       </code>
     </div>
-    <div class="canvas-control">
-      Canvas
-    </div>
   </div>
 </template>
 
 <script>
-import PropertyItem from '@/components/editor/canvas/PropertyItem'
+import { mapGetters } from 'vuex'
+import CodeSnippet from '@/components/editor/canvas/CodeSnippet'
 export default {
   components: {
-    PropertyItem
+    CodeSnippet
   },
   computed: {
-    image() {
-      return this.$store.getters.backgroundImage
-    }
+    ...mapGetters({
+      image: 'backgroundImage',
+      repeat: 'backgroundRepeat',
+      size: 'backgroundSize',
+      position: 'backgroundPosition'
+    })
   }
 }
 </script>
@@ -33,7 +46,9 @@ export default {
 .canvas-info
   position: relative
   display: flex
+  align-items: center
+  height: 3rem
 
 .code-snippet
-  padding: .5rem 0
+  // padding: .5rem 0
 </style>

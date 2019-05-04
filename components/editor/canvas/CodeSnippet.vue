@@ -1,11 +1,12 @@
 <template>
-  <span class="property-item" :class="{ 'property-active': isActive }">
+  <span class="code-snippet" :class="{ 'active-snippet': isActive }">
     <div v-if="color" class="color-preview" :style="{ background: color }" />
     {{ value }}
   </span>
 </template>
 
 <script>
+import debounce from 'lodash.debounce'
 export default {
   props: {
     value: {
@@ -23,33 +24,44 @@ export default {
     color() {
       // Regex to match valid CSS colors
       const checkColor = /^(#[0-9a-f]{3}|#(?:[0-9a-f]{2}){2,4}|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d.]+%?\))$/gi
-      const color = this.value.substring(0, this.value.indexOf(' '))
-      if (color.match(checkColor)) {
-        return color
+      if (this.value.match(checkColor)) {
+        return this.value
       }
       return false
     }
   },
   watch: {
-    value(before, after) {
+    value() {
       this.isActive = true
       // eslint-disable-next-line
-      // console.log('changing')
+      console.log('start hightlight')
+      this.resetActive()
     }
+  },
+  methods: {
+    resetActive: debounce(function() {
+      this.isActive = false
+    }, 500)
   }
 }
 </script>
 
 <style lang="sass" scoped>
 
+.code-snippet
+  display: inline-block
+  min-width: 1vh
+
 .color-preview
   display: inline-block
-  height: 1rem
-  width: 1rem
+  height: .8rem
+  width: .8rem
   border-radius: 50%
+  margin-left: .2rem
+  margin-right: -.2rem
 
-.property-active
-  display: inline-block
-  background: $darkpink
-  color: $white
+.active-snippet
+  // display: inline-block
+  text-decoration: underline
+  font-weight: bold
 </style>
