@@ -1,7 +1,7 @@
 <template>
   <div class="canvas">
     <div class="canvas-wrapper">
-      <div id="canvas-max" class="canvas-max">
+      <div ref="canvas" class="canvas-max">
         <div
           class="gradients"
           :style="{
@@ -63,15 +63,15 @@ export default {
   },
   mounted() {
     // Update the max values (canvas => box => shape)
-    setTimeout(() => {
-      this.updateMax()
-    }, 1)
+    // setTimeout(() => {
+    this.updateMax()
+    // }, 1)
   },
   methods: {
     updateMax() {
       // Get the size of the div that is our canvas in max
-      const width = document.getElementById('canvas-max').offsetWidth
-      const height = document.getElementById('canvas-max').offsetHeight
+      const width = this.$refs.canvas.offsetWidth
+      const height = this.$refs.canvas.offsetHeight
       // Update canvas maxes
       this.$store.dispatch('gradientCanvas/updateMax', { width, height })
     }
@@ -87,12 +87,13 @@ export default {
   background: $white
   height: 100%
   width: 100%
-  padding: 1rem
+  padding: 1rem 1rem 0
   border-radius: 3px
+  min-height: 0
 
 .canvas-wrapper
   position: relative
-  height: 100%
+  height: calc(100% - 2rem)
   width: 100%
   flex-grow: 1
 
