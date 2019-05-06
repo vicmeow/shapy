@@ -1,7 +1,7 @@
 <template>
   <div class="number-wrapper">
     <label
-      id="`${name}-label`"
+      :id="`${name}-label`"
       :class="`label number-label ${name}-label`"
       :for="`${name}-label`"
     >
@@ -13,13 +13,12 @@
         :id="`${name}-input-number`"
         v-model.number="input"
         class="number-input"
-        aria-labelledby=""
+        :aria-labelledby="`${name}-label`"
         :min="field.defaultUnit ? 0 : min / 2"
         :max="field.defaultUnit ? 100 : field.max"
         type="number"
         @input="handleInput($event.target.value)"
       />
-      <!-- <span class="unit">{{ field.defaultUnit ? '%' : 'px' }}</span> -->
     </div>
     <!-- Number input as a range slider -->
     <input
@@ -27,7 +26,7 @@
       v-model.number="input"
       class="range-input"
       :aria-labelledby="`${name}-label`"
-      :min="min"
+      :min="field.defaultUnit ? 0 : min / 2"
       :max="field.defaultUnit ? 100 : field.max"
       type="range"
       @input="handleInput($event.target.value)"
@@ -50,7 +49,8 @@ export default {
   props: {
     name: {
       type: String,
-      required: false
+      required: false,
+      default: 'Name'
     },
     field: {
       type: Object,
@@ -70,26 +70,20 @@ export default {
     }
   },
   computed: {
+    // min() {
+    //   // TODO: Compute min value based on unit if there is no min
+    // },
     synced() {
       // Sync the % and px values to match each other
       return this.field.defaultUnit
         ? Math.round((this.input * this.field.max) / 100)
         : Math.round((this.input / this.field.max) * 100)
-    },
-    active() {
-      if (this.field.active) return this.field.active
-      return false
     }
   },
   watch: {
     input() {
       // Make sure the input value isn't over its max value
       this.checkMax()
-    },
-    active() {
-      if (this.field.active) {
-        this.input = this.field.active
-      }
     }
   },
   mounted() {
@@ -97,8 +91,6 @@ export default {
       // Set the input as the default value from the store
       // based on default unit
       this.input = this.field.defaultUnit ? this.field.pct : this.field.px
-    } else {
-      this.input = this.field.active
     }
   },
   methods: {
@@ -122,24 +114,17 @@ export default {
       }
     },
     handleInput(value) {
-      if (this.field.pct || this.field.px) {
-        this.field.defaultUnit
-          ? this.$emit('input', {
-              ...this.field,
-              pct: this.input,
-              px: this.synced
-            })
-          : this.$emit('input', {
-              ...this.field,
-              pct: this.synced,
-              px: this.input
-            })
-      } else {
-        this.$emit('input', {
-          ...this.field,
-          active: this.input
-        })
-      }
+      this.field.defaultUnit
+        ? this.$emit('input', {
+            ...this.field,
+            pct: this.input,
+            px: this.synced
+          })
+        : this.$emit('input', {
+            ...this.field,
+            pct: this.synced,
+            px: this.input
+          })
     }
   }
 }
