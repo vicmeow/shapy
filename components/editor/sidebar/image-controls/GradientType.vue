@@ -16,6 +16,7 @@
       id="repeating-toggle"
       v-model="repeating"
       :default-value="repeating"
+      :custom-toggle="['on', 'off']"
       name="repeating"
     ></toggle-input>
     <!-- Gradient direction -->

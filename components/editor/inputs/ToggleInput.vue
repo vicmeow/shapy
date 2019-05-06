@@ -16,14 +16,14 @@
         class="unit-toggle unit-toggle-first"
         :class="{ 'active-unit': checked }"
       >
-        {{ values[0] }}
+        {{ customToggle ? customToggle[0] : '%' }}
       </div>
       <span>/</span>
       <div
         class="unit-toggle unit-toggle-second"
         :class="{ 'active-unit': !checked }"
       >
-        {{ values[1] }}
+        {{ customToggle ? customToggle[1] : 'px' }}
       </div>
     </label>
   </div>
@@ -33,29 +33,32 @@
 // TODO: fix toggle style for other types (than unit %/px) of toggles
 export default {
   props: {
+    // Name of the toggle for our label
     name: {
       type: String,
       required: true
     },
-    values: {
-      type: Array,
-      required: false,
-      default: () => {
-        return ['%', 'px']
-      }
-    },
+    // Whether default value is used (%) or not (px)
     defaultValue: {
       type: Boolean,
       required: false,
       default: true
+    },
+    // Whether to use default toggle or not
+    customToggle: {
+      type: [Boolean, Array],
+      required: false,
+      default: false
     }
   },
   data() {
     return {
+      // Value used for v-model
       checked: true
     }
   },
   methods: {
+    // Toggle handler that emits new value to parent
     handleToggle(checked) {
       this.checked = checked
       this.$emit('input', checked)
