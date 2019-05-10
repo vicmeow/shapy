@@ -9,7 +9,7 @@
             'max-width': max.width,
             height: canvas.height,
             'max-height': max.height,
-            background: gradientString
+            background: canvasString
           }"
         >
           <div
@@ -34,7 +34,7 @@ export default {
   computed: {
     ...mapGetters({
       canvas: 'gradientCanvas/size',
-      gradientString: 'gradients/string'
+      canvasString: 'gradients/canvasString'
     }),
     gradientPreview() {
       return this.$store.getters.background.join('')

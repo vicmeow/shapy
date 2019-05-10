@@ -7,11 +7,11 @@ export const getters = {
   gradients(state) {
     return state.list.map(gradient => gradient.processed)
   },
-  string(state) {
+  canvasString(state) {
     return state.list
-      .map(gradient => gradient.processed.background)
+      .map(gradient => gradient.processed.background.join(''))
       .reverse()
-      .join(', ')
+      .join(' ')
   }
 }
 
