@@ -1,6 +1,6 @@
 <template>
   <div class="control image-control">
-    <h2 class="heading">Gradient</h2>
+    <h2 class="control-heading">Gradient</h2>
     <control-info />
     <!-- Type of gradient (linear, radial, conical) and angle -->
     <gradient-type />

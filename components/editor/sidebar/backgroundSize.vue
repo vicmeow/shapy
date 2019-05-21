@@ -1,6 +1,6 @@
 <template>
   <div class="control size-control">
-    <h3 class="heading">Size</h3>
+    <h3 class="control-heading">Size</h3>
     <control-info />
     <!-- BACKGROUND SIZE -->
     <number-input v-model="width" name="width" :field="width" />

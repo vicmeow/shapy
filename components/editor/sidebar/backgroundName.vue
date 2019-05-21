@@ -1,6 +1,6 @@
 <template>
   <div class="control name-control">
-    <h2 id="gradient-name" class="heading">Gradient name</h2>
+    <h2 id="gradient-name" class="control-heading">Gradient name</h2>
     <control-info />
     <input
       v-model="comment"

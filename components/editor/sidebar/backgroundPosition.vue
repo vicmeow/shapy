@@ -1,6 +1,6 @@
 <template>
   <div class="control position-control">
-    <h3 class="heading">Position</h3>
+    <h3 class="control-heading">Position</h3>
     <control-info />
     <!-- GRADIENT POSITION -->
     <number-input

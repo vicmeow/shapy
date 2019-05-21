@@ -1,6 +1,6 @@
 <template>
   <div class="control repeat-control">
-    <h2 class="heading">Repeat</h2>
+    <h2 class="control-heading">Repeat</h2>
     <control-info />
     <radio-input
       v-for="(radio, index) in backgroundRepeat.values"
