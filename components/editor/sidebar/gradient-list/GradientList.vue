@@ -1,12 +1,8 @@
 <template>
-  <div class="gradient-list">
-    <button @click="shorthand = !shorthand">
-      <span v-if="shorthand">X</span>
-      <span v-if="!shorthand">Shorthand</span>
-    </button>
+  <div class="gradient-list" :class="{ 'empty-list': !list.length }">
     <list-item v-for="item in list" :key="item.id" :item="item" />
-    <div v-if="!layers.length">
-      You haven't added any gradients to the canvas yet.
+    <div v-if="!list.length" class="empty-message">
+      No layers available. You haven't added any gradients to the canvas yet!
     </div>
   </div>
 </template>
@@ -44,9 +40,11 @@ export default {
 
 <style lang="sass">
 .gradient-list
-  width: 100%
-  padding: 1rem
+  min-width: 100%
   color: $white
+
+.empty-list
+  margin: 2rem 0
 
 code
   display: block
@@ -65,6 +63,7 @@ code
   border-radius: 50%
   border: 1px solid grey
 
-// .property-value:last-child::after
-//   content: ', '
+.empty-message
+  text-align: center
+  color: $black
 </style>
