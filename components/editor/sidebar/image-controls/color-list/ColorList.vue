@@ -1,6 +1,6 @@
 <template>
   <div class="color-list-wrapper">
-    <ul class="color-list">
+    <div class="color-list">
       <color-item
         v-for="(stop, index) in stops"
         :key="stop.id"
@@ -10,7 +10,7 @@
       >
         <span>{{ index + 1 }}</span>
       </color-item>
-    </ul>
+    </div>
   </div>
 </template>
 
@@ -38,11 +38,8 @@ export default {
 <style lang="sass">
 .color-list-wrapper
   position: relative
-  max-height: 190px
+  max-height: 10rem
   overflow-y: auto
-
-.color-list
-  list-style-type: none
-  padding: 0
-  margin: 0
+  margin: 0 -1rem
+  padding: 0 1rem
 </style>
