@@ -5,6 +5,7 @@
       <no-ssr>
         <Canvas />
       </no-ssr>
+      <canvas-info />
     </div>
   </div>
 </template>
@@ -18,10 +19,12 @@
 //  - Syntax highlighting
 import Sidebar from '@/components/editor/sidebar/Sidebar'
 import Canvas from '@/components/editor/canvas/Canvas'
+import CanvasInfo from '@/components/editor/canvas/CanvasInfo'
 export default {
   components: {
     Sidebar,
-    Canvas
+    Canvas,
+    CanvasInfo
   }
 }
 </script>
@@ -36,12 +39,19 @@ export default {
     grid-template-columns: 1fr
 
 .fixed
-  position: sticky
+  position: fixed
   top: $navHeight
   right: 0
-  height: calc(100vh - 2.5rem)
-  width: 100%
+  left: $sidebarWidth
+  display: flex
+  flex-direction: column
+  height: 100vh
   padding: 1rem
   @media screen and (max-width: 768px)
     position: static
+
+.code
+  flex-grow: 1
+  width: 100%
+  background: red
 </style>
