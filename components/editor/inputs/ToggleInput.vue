@@ -86,9 +86,6 @@ export default {
   margin: 0 .25rem
   color: $darkgrey
 
-.unit-toggle-first
-  // padding-bottom: 5px
-
 .number-wrapper:focus-within .label .active-unit
   color: $darkpink
 
