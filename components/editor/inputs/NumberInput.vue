@@ -130,7 +130,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 
 .number-wrapper
   display: flex
