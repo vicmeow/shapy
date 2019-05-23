@@ -7,7 +7,8 @@ import {
   faMinusCircle,
   faTrashAlt,
   faPencilAlt,
-  faCopy
+  faCopy,
+  faSyncAlt
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faTwitter,
@@ -31,7 +32,8 @@ library.add(
   faTrashAlt,
   faPencilAlt,
   faCodepen,
-  faCopy
+  faCopy,
+  faSyncAlt
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

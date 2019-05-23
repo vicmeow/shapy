@@ -45,6 +45,14 @@
               />
               <div class="hover">Add</div>
             </button>
+            <button class="icon-btn icon-reverse" @click="reverseColors(stop)">
+              <font-awesome-icon
+                :icon="['fas', 'sync-alt']"
+                aria-hidden="true"
+                class="btn-icon"
+              />
+              <div class="hover">Reverse</div>
+            </button>
             <button class="icon-btn icon-remove" @click="removeStop(stop.id)">
               <font-awesome-icon
                 :icon="['fas', 'minus-circle']"
@@ -143,6 +151,15 @@ export default {
       setTimeout(() => {
         this.removeError = false
       }, 3000)
+    },
+    reverseColors(stop) {
+      if (stop) {
+        const currentStart = stop.start.color
+        const currentStop = stop.stop.color
+
+        stop.stop.color = currentStart
+        stop.start.color = currentStop
+      }
     }
   }
 }
@@ -199,11 +216,23 @@ export default {
   right: -65px
   transform: translateX(-5px)
 
+.icon-reverse .hover
+  right: -22px
+  bottom: -22px
+  transform: translateY(-5px)
+
 .btn-icon
   font-size: 1.1em
 
 .icon-remove
   color: $black
+
+.icon-reverse
+  color: $black
+  &:hover
+    & > svg
+      transition: transform .5s ease-out
+      transform: rotate(180deg)
 
 .icon-add
   color: $green
@@ -224,7 +253,7 @@ export default {
 .remove-error
   font-size: .8em
   animation: error .3s ease-in-out 1
-  margin-top: .5em
+  margin-top: 1.5em
 
 @keyframes error
   0%,100%
