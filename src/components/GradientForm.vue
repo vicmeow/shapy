@@ -18,6 +18,7 @@
           v-clipboard:copy="gradientStrings"
           v-clipboard:success="copyCode"
           :key="'copy'"
+          :disabled="!gradientStrings"
           class="btn btn-copy btn-shadow"
         >
           <transition name="copy" mode="out-in">
